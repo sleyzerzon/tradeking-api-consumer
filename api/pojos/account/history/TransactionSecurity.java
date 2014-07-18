@@ -1,21 +1,24 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 
 public class TransactionSecurity extends TKObject {
 
   private String cusip;
-
   private String id;
-
-  @JsonProperty("sectyp")
   private String securityType;
-
-  @JsonProperty("sym")
   private String symbol;
 
+  public TransactionSecurity() {
+  }
+
+  public TransactionSecurity(String cusip, String id, String securityType, String symbol) {
+    this.cusip = cusip;
+    this.id = id;
+    this.securityType = securityType;
+    this.symbol = symbol;
+  }
 
   public String getCusip() {
     return cusip;

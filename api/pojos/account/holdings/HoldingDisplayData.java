@@ -1,38 +1,36 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 public class HoldingDisplayData extends TKObject {
 
-  @JsonProperty("accounttype")
   private String accountType;
-
-  @JsonProperty("assetclass")
   private String assetClass;
-
   private String change;
-
-  @JsonProperty("costbasis")
   private String costBasis;
-
-  @JsonProperty("desc")
   private String description;
-
-  @JsonProperty("lastprice")
   private String lastPrice;
-
-  @JsonProperty("marketvalue")
   private String marketValue;
-
-  @JsonProperty("marketvaluechange")
   private String marketValueChange;
-
-  @JsonProperty("qty")
   private int quantity;
-
   private String symbol;
+
+  public HoldingDisplayData() {
+  }
+
+  public HoldingDisplayData(String accountType, String assetClass, String change, String costBasis, String description, String lastPrice, String marketValue, String marketValueChange, int quantity, String symbol) {
+    this.accountType = accountType;
+    this.assetClass = assetClass;
+    this.change = change;
+    this.costBasis = costBasis;
+    this.description = description;
+    this.lastPrice = lastPrice;
+    this.marketValue = marketValue;
+    this.marketValueChange = marketValueChange;
+    this.quantity = quantity;
+    this.symbol = symbol;
+  }
 
   public String getAccountType() {
     return accountType;

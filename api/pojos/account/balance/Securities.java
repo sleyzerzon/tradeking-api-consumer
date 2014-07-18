@@ -1,26 +1,30 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.balance;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 
 public class Securities extends TKObject {
 
-  @JsonProperty("longoptions")
   private double longOptions;
-
-  @JsonProperty("longstocks")
   private double longStocks;
-
-  @JsonProperty("shortoptions")
   private double shortOptions;
-
-  @JsonProperty("shortstocks")
   private double shortStocks;
-
   private double options;
   private double stocks;
   private double total;
+
+  public Securities() {
+  }
+
+  public Securities(double longOptions, double longStocks, double shortOptions, double shortStocks, double options, double stocks, double total) {
+    this.longOptions = longOptions;
+    this.longStocks = longStocks;
+    this.shortOptions = shortOptions;
+    this.shortStocks = shortStocks;
+    this.options = options;
+    this.stocks = stocks;
+    this.total = total;
+  }
 
   public double getLongOptions() {
     return longOptions;

@@ -1,7 +1,5 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 public class AccountHoldingEntry extends TKObject {
@@ -10,43 +8,41 @@ public class AccountHoldingEntry extends TKObject {
   public static final int ACCOUNT_TYPE_MARGIN_LONG = 2;
   public static final int ACCOUNT_TYPE_MARGIN_SHORT = 5;
 
-  @JsonProperty("accounttype")
-  private int accounType;
-
-  @JsonProperty("costbasis")
+  private int accountType;
   private double costBasis;
-
-  @JsonProperty("displaydata")
   private HoldingDisplayData displayData;
-
-  @JsonProperty("gainloss")
   private double gainLoss;
-
   private FinancialInstrument instrument;
-
-  @JsonProperty("marketvalue")
   private double marketValue;
-
-  @JsonProperty("marketvaluechange")
   private double marketValueChange;
-
   private double price;
-
-  @JsonProperty("purchaseprice")
   private double purchasePrice;
-
-  @JsonProperty("qty")
   private double quantity;
-
-  private Quote quote;
-
-  @JsonProperty("sodcostbasis")
+  private HoldingsQuote holdingsQuote;
   private double SODCostBasis;
-
   private String underlying;
 
-  public int getAccounType() {
-    return accounType;
+  public AccountHoldingEntry() {
+  }
+
+  public AccountHoldingEntry(int accountType, double costBasis, HoldingDisplayData displayData, double gainLoss, FinancialInstrument instrument, double marketValue, double marketValueChange, double price, double purchasePrice, double quantity, HoldingsQuote holdingsQuote, double SODCostBasis, String underlying) {
+    this.accountType = accountType;
+    this.costBasis = costBasis;
+    this.displayData = displayData;
+    this.gainLoss = gainLoss;
+    this.instrument = instrument;
+    this.marketValue = marketValue;
+    this.marketValueChange = marketValueChange;
+    this.price = price;
+    this.purchasePrice = purchasePrice;
+    this.quantity = quantity;
+    this.holdingsQuote = holdingsQuote;
+    this.SODCostBasis = SODCostBasis;
+    this.underlying = underlying;
+  }
+
+  public int getAccountType() {
+    return accountType;
   }
 
   public double getCostBasis() {
@@ -85,8 +81,8 @@ public class AccountHoldingEntry extends TKObject {
     return quantity;
   }
 
-  public Quote getQuote() {
-    return quote;
+  public HoldingsQuote getQuote() {
+    return holdingsQuote;
   }
 
   /**

@@ -1,34 +1,34 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.balance;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
-
+//todo : something does not get mapped
 
 public class Cash extends TKObject {
 
-  @JsonProperty("accruedinterest")
   private double accruedInterest;
-
   private double cash;
-
-  @JsonProperty("marginbalance")
-  private double marginbalance;
-
-  @JsonProperty("cashavailable")
+  private double marginBalance;
   private double cashAvailable;
-
-  @JsonProperty("mmf")
-  private double moneMarketFund;
-
+  private double moneyMarketFund;
   private double total;
-
-  @JsonProperty("uncleareddeposits")
   private double unclearedDeposits;
-
-  @JsonProperty("unsettledfunds")
   private double unsettledFunds;
-
   private double yield;
+
+  public Cash() {
+  }
+
+  public Cash(double accruedInterest, double cash, double marginBalance, double cashAvailable, double moneyMarketFund, double total, double unclearedDeposits, double unsettledFunds, double yield) {
+    this.accruedInterest = accruedInterest;
+    this.cash = cash;
+    this.marginBalance = marginBalance;
+    this.cashAvailable = cashAvailable;
+    this.moneyMarketFund = moneyMarketFund;
+    this.total = total;
+    this.unclearedDeposits = unclearedDeposits;
+    this.unsettledFunds = unsettledFunds;
+    this.yield = yield;
+  }
 
   public double getAccruedInterest() {
     return accruedInterest;
@@ -38,16 +38,16 @@ public class Cash extends TKObject {
     return cash;
   }
 
-  public double getMarginbalance() {
-    return marginbalance;
+  public double getMarginBalance() {
+    return marginBalance;
   }
 
   public double getCashAvailable() {
     return cashAvailable;
   }
 
-  public double getMoneMarketFund() {
-    return moneMarketFund;
+  public double getMoneyMarketFund() {
+    return moneyMarketFund;
   }
 
   public double getTotal() {

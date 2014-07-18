@@ -1,12 +1,13 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miserablemind.twtbeat.domain.service.traderking.api.TraderKingOperations;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.balance.AccountBalance;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history.TKTransactionHistoryEntry;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history.TransactionHistory;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings.AccountHoldings;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.summary.TKAllAccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.market.StockQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member.TKUser;
 import com.miserablemind.twtbeat.domain.service.traderking.api.response_entities.*;
 import com.miserablemind.twtbeat.domain.service.traderking.connect.TraderKingServiceProvider;
@@ -19,6 +20,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements TraderKingOperations {
 
@@ -26,9 +30,6 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
-    //todo: a little fishy number two
-    MappingJackson2HttpMessageConverter converter = (MappingJackson2HttpMessageConverter) this.getRestTemplate().getMessageConverters().get(2);
-    converter.getObjectMapper().configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
   }
 
   @Override
@@ -37,18 +38,19 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     if (response.getBody().getError().equals("success"))
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getUserdata();
+    return response.getBody().getUserData();
+
   }
 
   @Override
-  public TKAllAccountsSummary getAccount() {
+  public AccountsSummary[] getAccount() {
 
     ResponseEntity<TKAllAccountsResponse> response = this.getRestTemplate().getForEntity(this.buildUri("accounts.json"), TKAllAccountsResponse.class);
 
     if (response.getBody().getError() != null)
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getAccounts().getAccountSummary();
+    return response.getBody().getAccounts();
 
   }
 
@@ -69,25 +71,52 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   }
 
   @Override
-  public TransactionHistory getAllHistory(String accountId) {
+  public TKTransactionHistoryEntry[] getAllHistory(String accountId) {
 
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("range", TKTransactionHistoryEntry.TRANSACTION_RANGE_ALL);
     parameters.set("transactions", TKTransactionHistoryEntry.TRANSACTION_TYPE_ALL.toLowerCase());
 
-    // ResponseEntity<String> response = this.getRestTemplate().getForEntity(this.buildUri("accounts/" + accountId + "/history.json", parameters), String.class);
     ResponseEntity<TKHistoryResponse> response = this.getRestTemplate().getForEntity(this.buildUri("accounts/" + accountId + "/history.json", parameters), TKHistoryResponse.class);
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
     return response.getBody().getTransactionHistory();
 
-    //return null;
   }
 
 
   @Override
   public void updateStatus() {
     //void
+  }
+
+  @Override
+  public StockQuote getQuoteForStock(String ticker) {
+    StockQuote[] quotes = this.getQuoteForStocks(new String[]{ticker});
+    return quotes[0];
+  }
+
+  @Override
+  public StockQuote[] getQuoteForStocks(String[] tickers) {
+
+    StringBuilder builder = new StringBuilder();
+    List<String> tickerList = new ArrayList<String>(Arrays.asList(tickers));
+    builder.append(tickerList.remove(0));
+    for (String ticker : tickerList) {
+      builder.append(",");
+      builder.append(ticker);
+    }
+    String tickersParamString = builder.toString();
+
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    parameters.set("symbols", tickersParamString);
+
+    ResponseEntity<TKStockQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/ext/quotes.json", parameters), TKStockQuoteResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getQuotes();
   }
 
 
@@ -106,4 +135,16 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   }
 
   private static final LinkedMultiValueMap<String, String> EMPTY_PARAMETERS = new LinkedMultiValueMap<String, String>();
+
+  @Override
+  protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
+    MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+
+    mapper.registerModule(new TraderKingModule());
+    converter.setObjectMapper(mapper);
+    return converter;
+  }
+
 }

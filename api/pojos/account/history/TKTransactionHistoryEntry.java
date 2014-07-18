@@ -1,6 +1,5 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 import java.util.Date;
@@ -19,18 +18,24 @@ public class TKTransactionHistoryEntry extends TKObject {
   public static final String TRANSACTION_RANGE_CURRENT_MONTH = "current_month";
   public static final String TRANSACTION_RANGE_LAST_MONTH = "last_month";
 
-
   private String activity;
   private double amount;
   private Date date;
-
-  @JsonProperty("desc")
   private String description;
-
   private String symbol;
-
-  @JsonProperty("transaction")
   private TransactionDetails transactionDetails;
+
+  public TKTransactionHistoryEntry() {
+  }
+
+  public TKTransactionHistoryEntry(String activity, double amount, Date date, String description, String symbol, TransactionDetails transactionDetails) {
+    this.activity = activity;
+    this.amount = amount;
+    this.date = date;
+    this.description = description;
+    this.symbol = symbol;
+    this.transactionDetails = transactionDetails;
+  }
 
   public String getActivity() {
     return activity;

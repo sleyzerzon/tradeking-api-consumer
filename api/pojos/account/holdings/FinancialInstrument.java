@@ -1,23 +1,26 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 public class FinancialInstrument extends TKObject {
 
   private String cusip;
-
-  @JsonProperty("desc")
   private String description;
-
   private double factor;
-
-  @JsonProperty("sectyp")
   private String securityType;
-
-  @JsonProperty("sym")
   private String symbol;
+
+  public FinancialInstrument() {
+  }
+
+  public FinancialInstrument(String cusip, String description, double factor, String securityType, String symbol) {
+    this.cusip = cusip;
+    this.description = description;
+    this.factor = factor;
+    this.securityType = securityType;
+    this.symbol = symbol;
+  }
 
   public String getCusip() {
     return cusip;

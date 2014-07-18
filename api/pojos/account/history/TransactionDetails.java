@@ -1,6 +1,5 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
@@ -17,27 +16,33 @@ public class TransactionDetails extends TKObject {
   private double quantity;
   private String source;
   private int side;
-
-  @JsonProperty("accounttype")
-  private int accounTtype;
-
-  @JsonProperty("secfee")
+  private int accountType;
   private double SECFee;
-
-  @JsonProperty("security")
   private TransactionSecurity transactionSecurity;
-
-  @JsonProperty("tradedate")
   private Date tradeDate;
-
-  @JsonProperty("settlementdate")
   private Date settlementDate;
-
-  @JsonProperty("transactionid")
   private int transactionId;
-
-  @JsonProperty("transactiontype")
   private String transacTiontype;
+
+  public TransactionDetails() {
+  }
+
+  public TransactionDetails(double commission, ArrayList<String> description, double fee, double price, double quantity, String source, int side, int accountType, double SECFee, TransactionSecurity transactionSecurity, Date tradeDate, Date settlementDate, int transactionId, String transacTiontype) {
+    this.commission = commission;
+    this.description = description;
+    this.fee = fee;
+    this.price = price;
+    this.quantity = quantity;
+    this.source = source;
+    this.side = side;
+    this.accountType = accountType;
+    this.SECFee = SECFee;
+    this.transactionSecurity = transactionSecurity;
+    this.tradeDate = tradeDate;
+    this.settlementDate = settlementDate;
+    this.transactionId = transactionId;
+    this.transacTiontype = transacTiontype;
+  }
 
   public double getCommission() {
     return commission;
@@ -50,13 +55,12 @@ public class TransactionDetails extends TKObject {
   @JsonSetter("description")
   public void setDescription(Object description) {
     if (description.getClass() == String.class) {
-      ArrayList<String> decriptionHolder = new ArrayList<String>();
-      decriptionHolder.add((String) description);
-      this.description = decriptionHolder;
+      ArrayList<String> descriptionHolder = new ArrayList<String>();
+      descriptionHolder.add((String) description);
+      this.description = descriptionHolder;
     } else {
       this.description = (ArrayList<String>) description;
     }
-
   }
 
   public double getFee() {
@@ -103,7 +107,7 @@ public class TransactionDetails extends TKObject {
     return side;
   }
 
-  public int getAccounTtype() {
-    return accounTtype;
+  public int getAccountType() {
+    return accountType;
   }
 }

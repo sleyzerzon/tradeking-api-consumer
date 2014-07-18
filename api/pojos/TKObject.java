@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TKObject {
+abstract public class TKObject {
 
   private Map<String, Object> extraData = new HashMap<String, Object>();
 

@@ -1,5 +1,6 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member;
 
+//todo revisit this
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -9,6 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+/**
+ * For User Profile TraderKing returns an array instead of some sensible normal object
+ * The getter methods get it from the List that is turned into hash map for faster access.
+ */
 public class UserProfile extends TKObject {
 
   @JsonIgnore
@@ -25,7 +30,6 @@ public class UserProfile extends TKObject {
     this.entry = entry;
     for (LinkedHashMap<String, String> data : entry) this.data.put(data.get("name"), data.get("value"));
   }
-
 
   public String getUUID() {
     return this.data.get("UUID");

@@ -1,16 +1,20 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 import java.util.List;
 
 public class AccountHoldings extends TKObject {
 
-  @JsonProperty("holding")
-  private List<AccountHoldingEntry> holdingsList;
+  public AccountHoldings() {
+  }
 
-  @JsonProperty("totalsecurities")
+  public AccountHoldings(List<AccountHoldingEntry> holdingsList, double totalSecurities) {
+    this.holdingsList = holdingsList;
+    this.totalSecurities = totalSecurities;
+  }
+
+  private List<AccountHoldingEntry> holdingsList;
   private double totalSecurities;
 
   public List<AccountHoldingEntry> getHoldingsList() {

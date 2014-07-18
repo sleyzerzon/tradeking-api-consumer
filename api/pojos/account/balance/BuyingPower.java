@@ -5,31 +5,43 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.TKObject;
 
 public class BuyingPower extends TKObject {
 
-  private double cashavailableforwithdrawal;
-  private double equitypercentage;
+  private double cashAvailableForWithdrawal;
+  private double equityPercentage;
   private double options;
-  private double sodoptions;
-  private double sodstock;
+  private double sodOptions;
+  private double sodStock;
   private double stock;
 
-  public double getCashavailableforwithdrawal() {
-    return cashavailableforwithdrawal;
+  public BuyingPower() {
   }
 
-  public double getEquitypercentage() {
-    return equitypercentage;
+  public BuyingPower(double cashAvailableForWithdrawal, double equityPercentage, double options, double sodOptions, double sodStock, double stock) {
+    this.cashAvailableForWithdrawal = cashAvailableForWithdrawal;
+    this.equityPercentage = equityPercentage;
+    this.options = options;
+    this.sodOptions = sodOptions;
+    this.sodStock = sodStock;
+    this.stock = stock;
+  }
+
+  public double getCashAvailableForWithdrawal() {
+    return cashAvailableForWithdrawal;
+  }
+
+  public double getEquityPercentage() {
+    return equityPercentage;
   }
 
   public double getOptions() {
     return options;
   }
 
-  public double getSodoptions() {
-    return sodoptions;
+  public double getSodOptions() {
+    return sodOptions;
   }
 
-  public double getSodstock() {
-    return sodstock;
+  public double getSodStock() {
+    return sodStock;
   }
 
   public double getStock() {
