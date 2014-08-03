@@ -1,8 +1,8 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member.UserAccount;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member.UserProfile;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.UserAccount;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.UserProfile;
 
 public class TKUserMixIn extends TKObjectMixIn {
 

@@ -1,7 +1,7 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings.AccountHoldingEntry;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldingEntry;
 
 import java.util.List;
 

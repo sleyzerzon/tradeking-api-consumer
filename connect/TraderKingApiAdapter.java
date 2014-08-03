@@ -1,7 +1,7 @@
 package com.miserablemind.twtbeat.domain.service.traderking.connect;
 
 import com.miserablemind.twtbeat.domain.service.traderking.api.TraderKingOperations;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member.UserProfile;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.UserProfile;
 import org.springframework.social.ApiException;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;

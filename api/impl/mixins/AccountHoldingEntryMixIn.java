@@ -1,9 +1,9 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings.FinancialInstrument;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings.HoldingDisplayData;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings.HoldingsQuote;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.FinancialInstrument;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.HoldingDisplayData;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.HoldingsQuote;
 
 public class AccountHoldingEntryMixIn extends TKObjectMixIn {
 

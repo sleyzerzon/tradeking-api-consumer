@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
-public class OptionQuoteMixIn extends DetailedQuoteMixIn {
+public class OptionQuoteMixIn extends QuoteMixIn {
 
   @JsonProperty("contract_size")
   int contract_size;
@@ -57,9 +57,6 @@ public class OptionQuoteMixIn extends DetailedQuoteMixIn {
 
   @JsonProperty("put_call")
   String optionType;
-
-  @JsonProperty("qcond")
-  String quoteConditionCode;
 
   @JsonProperty("rootsymbol")
   String optionRootSymbol;

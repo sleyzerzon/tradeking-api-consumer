@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 //@JsonRootName("quote")
-public class StockQuoteMixin extends DetailedQuoteMixIn {
+public class StockQuoteMixin extends QuoteMixIn {
 
 
   @JsonProperty("adp_100")
@@ -77,5 +77,8 @@ public class StockQuoteMixin extends DetailedQuoteMixIn {
 
   @JsonProperty("yield")
   double dividendYield;
+
+  @JsonProperty("pe")
+  double priceEarning;
 
 }

@@ -1,11 +1,11 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api;
 
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.balance.AccountBalance;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history.TKTransactionHistoryEntry;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings.AccountHoldings;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.summary.AccountsSummary;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.market.StockQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member.TKUser;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.AccountBalance;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
 
 public interface TraderKingOperations {
 

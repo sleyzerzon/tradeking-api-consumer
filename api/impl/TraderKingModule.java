@@ -2,19 +2,20 @@ package com.miserablemind.twtbeat.domain.service.traderking.api.impl;
 
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.AccountBalance;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.BuyingPower;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.Cash;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.Securities;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TransactionDetails;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TransactionSecurity;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.*;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.UserAccount;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins.*;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.balance.AccountBalance;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.balance.BuyingPower;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.balance.Securities;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history.TKTransactionHistoryEntry;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history.TransactionDetails;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.history.TransactionSecurity;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.holdings.*;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.account.summary.AccountsSummary;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.market.OptionQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.market.StockQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member.TKUser;
-import com.miserablemind.twtbeat.domain.service.traderking.api.pojos.member.UserAccount;
 
 public class TraderKingModule extends SimpleModule {
 
@@ -40,6 +41,7 @@ public class TraderKingModule extends SimpleModule {
     context.setMixInAnnotations(TransactionDetails.class, TransactionDetailsMixIn.class);
     context.setMixInAnnotations(TransactionSecurity.class, TransactionSecurityMixIn.class);
     context.setMixInAnnotations(UserAccount.class, UserAccountMixIn.class);
+    context.setMixInAnnotations(Cash.class, CashMixIn.class);
   }
 
 
