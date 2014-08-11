@@ -22,7 +22,7 @@ public class TraderKingApiAdapter implements ApiAdapter<TraderKingOperations> {
   public void setConnectionValues(TraderKingOperations api, ConnectionValues values) {
     UserProfile profile = api.getCurrentUser().getUserProfile();
     values.setProviderUserId(profile.getUUID());
-    values.setDisplayName("@" + profile.getPrimaryFirstName());
+    values.setDisplayName("@" + profile.getFirstName());
     values.setProfileUrl("");
     values.setImageUrl("");
   }
@@ -30,8 +30,8 @@ public class TraderKingApiAdapter implements ApiAdapter<TraderKingOperations> {
   @Override
   public org.springframework.social.connect.UserProfile fetchUserProfile(TraderKingOperations api) {
     UserProfile profile = api.getCurrentUser().getUserProfile();
-    return new UserProfileBuilder().setName(profile.getPrimaryFirstName()).setUsername(
-            profile.getPrimaryFirstName()).build();
+    return new UserProfileBuilder().setName(profile.getFirstName()).setUsername(
+            profile.getFirstName()).build();
   }
 
   @Override

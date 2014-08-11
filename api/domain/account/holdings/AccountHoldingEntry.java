@@ -4,11 +4,21 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.TKObject;
 
 public class AccountHoldingEntry extends TKObject {
 
-  public static final int ACCOUNT_TYPE_CACHE = 1;
-  public static final int ACCOUNT_TYPE_MARGIN_LONG = 2;
-  public static final int ACCOUNT_TYPE_MARGIN_SHORT = 5;
+  public enum HoldingType {
+    CACHE(1), LONG(2), SHORT(5);
+    private final Integer value;
 
-  private int accountType;
+    HoldingType(int i) {
+      this.value = i;
+    }
+
+    @Override
+    public String toString() {
+      return this.value.toString();
+    }
+  }
+
+  private HoldingType holdingType;
   private double costBasis;
   private HoldingDisplayData displayData;
   private double gainLoss;
@@ -25,8 +35,8 @@ public class AccountHoldingEntry extends TKObject {
   public AccountHoldingEntry() {
   }
 
-  public AccountHoldingEntry(int accountType, double costBasis, HoldingDisplayData displayData, double gainLoss, FinancialInstrument instrument, double marketValue, double marketValueChange, double price, double purchasePrice, double quantity, HoldingsQuote holdingsQuote, double SODCostBasis, String underlying) {
-    this.accountType = accountType;
+  public AccountHoldingEntry(HoldingType holdingType, double costBasis, HoldingDisplayData displayData, double gainLoss, FinancialInstrument instrument, double marketValue, double marketValueChange, double price, double purchasePrice, double quantity, HoldingsQuote holdingsQuote, double SODCostBasis, String underlying) {
+    this.holdingType = holdingType;
     this.costBasis = costBasis;
     this.displayData = displayData;
     this.gainLoss = gainLoss;
@@ -41,8 +51,8 @@ public class AccountHoldingEntry extends TKObject {
     this.underlying = underlying;
   }
 
-  public int getAccountType() {
-    return accountType;
+  public HoldingType getHoldingType() {
+    return holdingType;
   }
 
   public double getCostBasis() {

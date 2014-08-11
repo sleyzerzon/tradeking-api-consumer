@@ -1,77 +1,127 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.domain.member;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.TKObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 
-/**
- * For User Profile TraderKing returns an array instead of some sensible normal object
- * The getter methods get it from the List that is turned into hash map for faster access.
- */
 public class UserProfile extends TKObject {
 
-  @JsonIgnore
-  private HashMap<String, String> data = new HashMap<String, String>();
+  private String UUID;
+  private String accountSummaryDashboardCollapsed;
+  private String firstName;
+  private String lasName;
+  private boolean hasMewMessage;
+  private boolean realTimeStockQuote;
+  private String emailAddress;
+  private String FDICPaper;
+  private boolean isGainsKeeper;
+  private boolean isTradingPasswordUsed;
+  private String FDICAgreement;
 
-  private ArrayList<LinkedHashMap<String, String>> entry;
+  public UserProfile() {
 
-  private ArrayList<LinkedHashMap<String, String>> getEntry() {
-    return entry;
   }
 
-  @JsonSetter("entry")
-  public void setEntry(ArrayList<LinkedHashMap<String, String>> entry) {
-    this.entry = entry;
-    for (LinkedHashMap<String, String> data : entry) this.data.put(data.get("name"), data.get("value"));
+  public UserProfile(String UUID, String accountSummaryDashboardCollapsed, String firstName, String lasName, boolean hasMewMessage, boolean realTimeStockQuote, String emailAddress, String FDICPaper, boolean isGainsKeeper, boolean isTradingPasswordUsed, String FDICAgreement) {
+    this.UUID = UUID;
+    this.accountSummaryDashboardCollapsed = accountSummaryDashboardCollapsed;
+    this.firstName = firstName;
+    this.lasName = lasName;
+    this.hasMewMessage = hasMewMessage;
+    this.realTimeStockQuote = realTimeStockQuote;
+    this.emailAddress = emailAddress;
+    this.FDICPaper = FDICPaper;
+    this.isGainsKeeper = isGainsKeeper;
+    this.isTradingPasswordUsed = isTradingPasswordUsed;
+    this.FDICAgreement = FDICAgreement;
   }
 
   public String getUUID() {
-    return this.data.get("UUID");
+    return UUID;
+  }
+
+  public void setUUID(String UUID) {
+    this.UUID = UUID;
   }
 
   public String getAccountSummaryDashboardCollapsed() {
-    return this.data.get("accountSummaryDashboardCollapsed");
+    return accountSummaryDashboardCollapsed;
   }
 
-  public String getPrimaryFirstName() {
-    return this.data.get("primaryFirstName");
+  public void setAccountSummaryDashboardCollapsed(String accountSummaryDashboardCollapsed) {
+    this.accountSummaryDashboardCollapsed = accountSummaryDashboardCollapsed;
   }
 
-  public String getPrimaryLastName() {
-    return this.data.get("primaryLastName");
+  public String getFirstName() {
+    return firstName;
   }
 
-  public boolean hasNewMessages() {
-    return (this.data.get("NewMsg").equals("Y"));
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLasName() {
+    return lasName;
+  }
+
+  public void setLasName(String lasName) {
+    this.lasName = lasName;
+  }
+
+  public boolean isHasMewMessage() {
+    return hasMewMessage;
+  }
+
+  public void setHasMewMessage(boolean hasMewMessage) {
+    this.hasMewMessage = hasMewMessage;
   }
 
   public boolean isRealTimeStockQuote() {
-    return (this.data.get("rtq").equals("Y"));
+    return realTimeStockQuote;
   }
 
-  public String getEmailAddress() {
-    return this.data.get("emailAddress1");
+  public void setRealTimeStockQuote(boolean realTimeStockQuote) {
+    this.realTimeStockQuote = realTimeStockQuote;
   }
 
   public String getFDICPaper() {
-    return this.data.get("fdicPaper");
+    return FDICPaper;
+  }
+
+  public void setFDICPaper(String FDICPaper) {
+    this.FDICPaper = FDICPaper;
   }
 
   public boolean isGainsKeeper() {
-    return (this.data.get("gainsKeeper").equals("Y"));
+    return isGainsKeeper;
   }
 
-  public boolean IsTradingPasswordUsed() {
-    return (this.data.get("useTradingPassword").equals("Y"));
+  public void setGainsKeeper(boolean isGainsKeeper) {
+    this.isGainsKeeper = isGainsKeeper;
+  }
+
+  public boolean isTradingPasswordUsed() {
+    return isTradingPasswordUsed;
+  }
+
+  public void setTradingPasswordUsed(boolean isTradingPasswordUsed) {
+    this.isTradingPasswordUsed = isTradingPasswordUsed;
   }
 
   public String getFDICAgreement() {
-    return this.data.get("AGREEMENT_FDIC");
+    return FDICAgreement;
   }
 
+  public void setFDICAgreement(String FDICAgreement) {
+    this.FDICAgreement = FDICAgreement;
+  }
+
+
+  public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
+  }
+
+  public String getEmailAddress() {
+    return emailAddress;
+  }
 
 }

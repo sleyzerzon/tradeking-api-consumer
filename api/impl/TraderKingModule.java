@@ -2,6 +2,7 @@ package com.miserablemind.twtbeat.domain.service.traderking.api.impl;
 
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.TKObject;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.AccountBalance;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.BuyingPower;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.Cash;
@@ -13,7 +14,6 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ho
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.UserAccount;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins.*;
 
@@ -25,6 +25,7 @@ public class TraderKingModule extends SimpleModule {
 
   @Override
   public void setupModule(SetupContext context) {
+    context.setMixInAnnotations(TKObject.class, TKObjectMixIn.class);
     context.setMixInAnnotations(AccountBalance.class, AccountBalanceMixIn.class);
     context.setMixInAnnotations(AccountHoldingEntry.class, AccountHoldingEntryMixIn.class);
     context.setMixInAnnotations(AccountHoldings.class, AccountHoldingsMixIn.class);
@@ -37,7 +38,6 @@ public class TraderKingModule extends SimpleModule {
     context.setMixInAnnotations(StockQuote.class, StockQuoteMixin.class);
     context.setMixInAnnotations(AccountsSummary.class, TKAllAccountsSummaryMixIn.class);
     context.setMixInAnnotations(TKTransactionHistoryEntry.class, TKTransactionHistoryEntryMixIn.class);
-    context.setMixInAnnotations(TKUser.class, TKUserMixIn.class);
     context.setMixInAnnotations(TransactionDetails.class, TransactionDetailsMixIn.class);
     context.setMixInAnnotations(TransactionSecurity.class, TransactionSecurityMixIn.class);
     context.setMixInAnnotations(UserAccount.class, UserAccountMixIn.class);

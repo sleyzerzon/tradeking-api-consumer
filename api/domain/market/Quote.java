@@ -6,20 +6,6 @@ import java.util.Date;
 
 abstract public class Quote extends TKObject {
 
-  public static final char CHANGE_SIGN_UP = 'u';
-  public static final char CHANGE_SIGN_DOWN = 'd';
-  public static final char CHANGE_SIGN_EQUAL = 'e';
-
-  public static final int SECURITY_CLASS_STOCK = 0;
-  public static final int SECURITY_CLASS_OPTION = 1;
-
-  public static final char TRADE_CONDITION_HALTED = 'H';
-  public static final char TRADE_CONDITION_RESUMED = 'R';
-
-  public static final String TRADING_SESSION_REGULAR = "regular";
-  public static final String TRADING_SESSION_PRE = "pre";
-  public static final String TRADING_SESSION_POST = "post";
-
   private double ask;
   private String askTime;
   private int askLatestSize;
@@ -28,7 +14,7 @@ abstract public class Quote extends TKObject {
   private String bidTime;
   private int bidLatestSize;
   private double change;
-  private char changeSign;
+  private ChangeSign changeSign;
   private String changeText;
   private double previousClose;
   private Date dateLastTrade;
@@ -51,10 +37,10 @@ abstract public class Quote extends TKObject {
   private Date dateOfPriorTradeDay;
   private double priorDayChange;
   private int priodDayVolume;
-  private int securityClass;
-  private String tradingSession;
+  private SecurityClass securityClass;
+  private TradingSession tradingSession;
   private String symbol;
-  private char tradeCondition;
+  private TradeCondition tradeCondition;
   private Date timeStamp;
   private int tradeCountSinceOpen;
   private char tradeDirection;
@@ -101,7 +87,7 @@ abstract public class Quote extends TKObject {
     return change;
   }
 
-  public char getChangeSign() {
+  public ChangeSign getChangeSign() {
     return changeSign;
   }
 
@@ -193,11 +179,11 @@ abstract public class Quote extends TKObject {
     return priodDayVolume;
   }
 
-  public int getSecurityClass() {
+  public SecurityClass getSecurityClass() {
     return securityClass;
   }
 
-  public String getTradingSession() {
+  public TradingSession getTradingSession() {
     return tradingSession;
   }
 
@@ -205,7 +191,7 @@ abstract public class Quote extends TKObject {
     return symbol;
   }
 
-  public char getTradeCondition() {
+  public TradeCondition getTradeCondition() {
     return tradeCondition;
   }
 
@@ -251,4 +237,62 @@ abstract public class Quote extends TKObject {
   public Date getWeek52lowDate() {
     return week52lowDate;
   }
+
+
+  public enum ChangeSign {
+    UP("u"), DOWN("d"), EQUAL("e");
+    private String value;
+
+    ChangeSign(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
+  public enum SecurityClass {
+    STOCK("0"), OPTION("1");
+    private String value;
+
+    SecurityClass(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
+  public enum TradeCondition {
+    HALTED("H"), RESUMED("R");
+    private String value;
+
+    TradeCondition(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
+  public enum TradingSession {
+    MARKET("regular"), PRE_MARKET("pre"), POST_MARKET("post");
+    private String value;
+
+    TradingSession(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
 }

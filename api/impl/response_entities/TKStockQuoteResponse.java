@@ -3,7 +3,9 @@ package com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_en
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.TKObject;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.TraderKingModule;
@@ -11,6 +13,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.impl.TraderKingMo
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+//todo: use different parent
 @JsonRootName("response")
 public class TKStockQuoteResponse extends TKObject {
 
@@ -25,6 +28,8 @@ public class TKStockQuoteResponse extends TKObject {
 
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new TraderKingModule());
+    mapper.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true);
+    mapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
 
     Object quotesContainer = quotesResponse.get("quote");
     String jsonArray = mapper.writeValueAsString(quotesContainer);

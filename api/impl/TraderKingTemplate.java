@@ -2,6 +2,7 @@ package com.miserablemind.twtbeat.domain.service.traderking.api.impl;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.miserablemind.twtbeat.domain.service.traderking.api.TraderKingOperations;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.balance.AccountBalance;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
@@ -51,7 +52,6 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
     return response.getBody().getAccounts();
-
   }
 
   @Override
@@ -81,7 +81,6 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
     return response.getBody().getTransactionHistory();
-
   }
 
 
@@ -139,10 +138,13 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   @Override
   protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
     MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
 
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true);
+    mapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
+    mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
     mapper.registerModule(new TraderKingModule());
+
     converter.setObjectMapper(mapper);
     return converter;
   }
