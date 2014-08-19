@@ -1,12 +1,9 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.TKObject;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 
-@JsonRootName("response")
-public class TKAccountHoldingsResponse extends TKObject {
+public class TKAccountHoldingsResponse extends TKResponse {
 
   private String error;
 

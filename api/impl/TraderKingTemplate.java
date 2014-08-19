@@ -8,6 +8,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_entities.*;
@@ -23,6 +24,7 @@ import org.springframework.util.MultiValueMap;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements TraderKingOperations {
@@ -98,14 +100,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   @Override
   public StockQuote[] getQuoteForStocks(String[] tickers) {
 
-    StringBuilder builder = new StringBuilder();
-    List<String> tickerList = new ArrayList<String>(Arrays.asList(tickers));
-    builder.append(tickerList.remove(0));
-    for (String ticker : tickerList) {
-      builder.append(",");
-      builder.append(ticker);
-    }
-    String tickersParamString = builder.toString();
+    String tickersParamString = this.buildQuoteParams(tickers);
 
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
@@ -118,6 +113,35 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     return response.getBody().getQuotes();
   }
 
+
+  @Override
+  public OptionQuote getQuoteForOption(String ticker, Date expirationDate, double strikePrice) {
+
+    String tickersParamString = this.buildQuoteParams(new String[]{"AAPL140816C00096000"});
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    parameters.set("symbols", tickersParamString);
+
+
+    ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/ext/quotes.json", parameters), TKOptionQuoteResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getQuotes()[0];
+
+  }
+
+
+  private String buildQuoteParams(String[] tickers) {
+    StringBuilder builder = new StringBuilder();
+    List<String> tickerList = new ArrayList<String>(Arrays.asList(tickers));
+    builder.append(tickerList.remove(0));
+    for (String ticker : tickerList) {
+      builder.append(",");
+      builder.append(ticker);
+    }
+    return builder.toString();
+  }
 
   protected URI buildUri(String path) {
     return buildUri(path, EMPTY_PARAMETERS);

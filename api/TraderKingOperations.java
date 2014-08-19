@@ -4,8 +4,11 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
+
+import java.util.Date;
 
 public interface TraderKingOperations {
 
@@ -24,5 +27,7 @@ public interface TraderKingOperations {
   public StockQuote getQuoteForStock(String ticker);
 
   public StockQuote[] getQuoteForStocks(String[] tickers);
+
+  public OptionQuote getQuoteForOption(String ticker, Date expirationDate, double strikePrice);
 
 }

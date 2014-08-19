@@ -1,20 +1,17 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_entities;
 
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.TKObject;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.TraderKingModule;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-@JsonRootName("response")
-public class TKAllAccountsResponse extends TKObject {
+public class TKAllAccountsResponse extends TKResponse {
 
 
   private String error;
