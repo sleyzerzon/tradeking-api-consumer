@@ -22,9 +22,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements TraderKingOperations {
@@ -113,26 +114,63 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     return response.getBody().getQuotes();
   }
 
-
   @Override
-  public OptionQuote getQuoteForOption(String ticker, Date expirationDate, double strikePrice) {
+  public OptionQuote getQuoteForOption(String ticker, Calendar expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException {
 
-    String tickersParamString = this.buildQuoteParams(new String[]{"AAPL140816C00096000"});
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+
+    String optionType = (type == OptionQuote.OptionType.CALL) ? "C" : "P";
+    String timeString = dateFormat.format(expirationDate.getTime());
+    String paddedPrice = String.format("%08d", (int) (strikePrice * 1000));
+
+    String optionSymbol = ticker + timeString + optionType + paddedPrice;
+
+    String tickersParamString = this.buildQuoteParams(new String[]{optionSymbol});
+
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
 
+    try {
+      ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/ext/quotes.json", parameters), TKOptionQuoteResponse.class);
+      if (null != response.getBody().getError())
+        throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+      return response.getBody().getQuotes()[0];
+    } catch (Exception e) {
+      throw new OptionQuoteNotFoundException();
+    }
 
-    ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/ext/quotes.json", parameters), TKOptionQuoteResponse.class);
+  }
+
+  @Override
+  public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate) {
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    String queryString = "put_call-eq:" + type;
+
+    //Strike Prices
+    if (null != minStrikePrice) queryString += " AND strikeprice-gte:" + minStrikePrice;
+    if (null != maxStrikePrice) queryString += " AND strikeprice-lte:" + maxStrikePrice;
+
+    //Dates
+    if (null != startDate) queryString += " AND xdate-gte:" + dateFormat.format(startDate.getTime());
+    if (null != endDate) queryString += " AND xdate-lte:" + dateFormat.format(endDate.getTime());
+
+    parameters.set("symbol", ticker);
+    parameters.set("query", queryString);
+
+    ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/options/search.json", parameters), TKOptionQuoteResponse.class);
 
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getQuotes()[0];
+    return response.getBody().getQuotes();
 
   }
 
 
-  private String buildQuoteParams(String[] tickers) {
+  protected String buildQuoteParams(String[] tickers) {
     StringBuilder builder = new StringBuilder();
     List<String> tickerList = new ArrayList<String>(Arrays.asList(tickers));
     builder.append(tickerList.remove(0));
@@ -144,13 +182,13 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   }
 
   protected URI buildUri(String path) {
-    return buildUri(path, EMPTY_PARAMETERS);
+    return this.buildUri(path, EMPTY_PARAMETERS);
   }
 
   protected URI buildUri(String path, String parameterName, String parameterValue) {
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set(parameterName, parameterValue);
-    return buildUri(path, parameters);
+    return this.buildUri(path, parameters);
   }
 
   protected URI buildUri(String path, MultiValueMap<String, String> parameters) {

@@ -4,31 +4,18 @@ import java.util.Date;
 
 public class OptionQuote extends Quote {
 
-  public static final char OPTION_DELIVERY_STANDARD = 'S';
-  public static final char OPTION_DELIVERY_NON_STANDARD = 'N';
-  public static final char OPTION_DELIVERY_UNSPECIFIED = 'X';
-
-  public static final char OPTION_STYLE_AMERICAN = 'A';
-  public static final char OPTION_STYLE_EUROPEAN = 'E';
-
-  public static final int OPTION_CLASS_STANDARD = 0;
-  public static final int OPTION_CLASS_LEAP = 1;
-  public static final int OPTION_CLASS_SHORT_TERM = 2;
-
-  public static final String OPTION_TYPE_PUT = "put";
-  public static final String OPTION_TYPE_CALL = "call";
-
   private int contractSize;
-  private int daysToExpiration;
+  private short daysToExpiration;
   private String fullDescription;
-  private char optionDelivery;
-  private char optionStyle;
-  private int optionClass;
+  private OptionDelivery optionDelivery;
+  private OptionStyle optionStyle;
+  private double impliedVolatility;
+  private OptionClass optionClass;
   private String openInterest;
   private double optionValueCalculation;
   private String priorDayOpenInterest;
   private double optionPremiumMultiplier;
-  private String optionType;
+  private OptionType optionType;
   private String optionRootSymbol;
   private double strikePrice;
   private String underlyingCusip;
@@ -37,16 +24,23 @@ public class OptionQuote extends Quote {
   private String expirationDay;
   private String expirationMonth;
   private String expirationYear;
+  private double iRho;
+  private double iDelta;
+  private double iTheta;
+  private double iGamma;
+  private double iVega;
+
 
   public OptionQuote() {
   }
 
-  public OptionQuote(int contractSize, int daysToExpiration, String fullDescription, char optionDelivery, char optionStyle, int optionClass, String openInterest, double optionValueCalculation, String priorDayOpenInterest, double optionPremiumMultiplier, String optionType, String optionRootSymbol, double strikePrice, String underlyingCusip, String underlyingSymbol, Date expirationDate, String expirationDay, String expirationMonth, String expirationYear) {
+  public OptionQuote(int contractSize, short daysToExpiration, String fullDescription, OptionDelivery optionDelivery, OptionStyle optionStyle, double impliedVolatility, OptionClass optionClass, String openInterest, double optionValueCalculation, String priorDayOpenInterest, double optionPremiumMultiplier, OptionType optionType, String optionRootSymbol, double strikePrice, String underlyingCusip, String underlyingSymbol, Date expirationDate, String expirationDay, String expirationMonth, String expirationYear, double iRho, double iDelta, double iTheta, double iGamma, double iVega) {
     this.contractSize = contractSize;
     this.daysToExpiration = daysToExpiration;
     this.fullDescription = fullDescription;
     this.optionDelivery = optionDelivery;
     this.optionStyle = optionStyle;
+    this.impliedVolatility = impliedVolatility;
     this.optionClass = optionClass;
     this.openInterest = openInterest;
     this.optionValueCalculation = optionValueCalculation;
@@ -61,13 +55,18 @@ public class OptionQuote extends Quote {
     this.expirationDay = expirationDay;
     this.expirationMonth = expirationMonth;
     this.expirationYear = expirationYear;
+    this.iRho = iRho;
+    this.iDelta = iDelta;
+    this.iTheta = iTheta;
+    this.iGamma = iGamma;
+    this.iVega = iVega;
   }
 
   public int getContractSize() {
     return contractSize;
   }
 
-  public int getDaysToExpiration() {
+  public short getDaysToExpiration() {
     return daysToExpiration;
   }
 
@@ -75,15 +74,15 @@ public class OptionQuote extends Quote {
     return fullDescription;
   }
 
-  public char getOptionDelivery() {
+  public OptionDelivery getOptionDelivery() {
     return optionDelivery;
   }
 
-  public char getOptionStyle() {
+  public OptionStyle getOptionStyle() {
     return optionStyle;
   }
 
-  public int getOptionClass() {
+  public OptionClass getOptionClass() {
     return optionClass;
   }
 
@@ -103,7 +102,7 @@ public class OptionQuote extends Quote {
     return optionPremiumMultiplier;
   }
 
-  public String getOptionType() {
+  public OptionType getOptionType() {
     return optionType;
   }
 
@@ -138,5 +137,87 @@ public class OptionQuote extends Quote {
   public String getExpirationYear() {
     return expirationYear;
   }
+
+  public double getImpliedVolatility() {
+    return impliedVolatility;
+  }
+
+  public double getiRho() {
+    return iRho;
+  }
+
+  public double getiDelta() {
+    return iDelta;
+  }
+
+  public double getiTheta() {
+    return iTheta;
+  }
+
+  public double getiGamma() {
+    return iGamma;
+  }
+
+  public double getiVega() {
+    return iVega;
+  }
+
+  public enum OptionType {
+    CALL("call"), PUT("put");
+    private String value;
+
+    OptionType(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
+  public enum OptionStyle {
+    AMERICAN("A"), EUROPEAN("E");
+    private String value;
+
+    OptionStyle(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
+
+  public enum OptionClass {
+    STANDARD("0"), LEAP("1"), SHORT_TERM("2");
+    private String value;
+
+    OptionClass(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
+  public enum OptionDelivery {
+    STANDARD("S"), NON_STANDARD("N"), UNSPECIFIED("X");
+    private String value;
+
+    OptionDelivery(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
 }
 

@@ -7,8 +7,9 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.su
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
+import com.miserablemind.twtbeat.domain.service.traderking.api.impl.OptionQuoteNotFoundException;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public interface TraderKingOperations {
 
@@ -28,6 +29,8 @@ public interface TraderKingOperations {
 
   public StockQuote[] getQuoteForStocks(String[] tickers);
 
-  public OptionQuote getQuoteForOption(String ticker, Date expirationDate, double strikePrice);
+  public OptionQuote getQuoteForOption(String ticker, Calendar expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException;
+
+  public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate);
 
 }

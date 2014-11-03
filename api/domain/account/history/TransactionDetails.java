@@ -22,12 +22,12 @@ public class TransactionDetails extends TKObject {
   private Date tradeDate;
   private Date settlementDate;
   private int transactionId;
-  private String transacTiontype;
+  private String transactionType;
 
   public TransactionDetails() {
   }
 
-  public TransactionDetails(double commission, ArrayList<String> description, double fee, double price, double quantity, String source, int side, int accountType, double SECFee, TransactionSecurity transactionSecurity, Date tradeDate, Date settlementDate, int transactionId, String transacTiontype) {
+  public TransactionDetails(double commission, ArrayList<String> description, double fee, double price, double quantity, String source, int side, int accountType, double SECFee, TransactionSecurity transactionSecurity, Date tradeDate, Date settlementDate, int transactionId, String transactionType) {
     this.commission = commission;
     this.description = description;
     this.fee = fee;
@@ -41,7 +41,7 @@ public class TransactionDetails extends TKObject {
     this.tradeDate = tradeDate;
     this.settlementDate = settlementDate;
     this.transactionId = transactionId;
-    this.transacTiontype = transacTiontype;
+    this.transactionType = transactionType;
   }
 
   public double getCommission() {
@@ -99,8 +99,8 @@ public class TransactionDetails extends TKObject {
     return transactionId;
   }
 
-  public String getTransacTiontype() {
-    return transacTiontype;
+  public String getTransactionType() {
+    return transactionType;
   }
 
   public int getSide() {

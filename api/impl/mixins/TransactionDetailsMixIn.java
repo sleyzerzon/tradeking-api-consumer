@@ -48,6 +48,6 @@ public class TransactionDetailsMixIn extends TKObjectMixIn {
   int transactionId;
 
   @JsonProperty("transactiontype")
-  String transacTiontype;
+  String transactionType;
 
 }

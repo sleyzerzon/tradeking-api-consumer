@@ -1,17 +1,17 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 
 import java.util.Date;
 
 public class OptionQuoteMixIn extends QuoteMixIn {
 
   @JsonProperty("contract_size")
-  int contract_size;
+  int contractSize;
 
   @JsonProperty("days_to_expiration")
-  int daystToExparation;
-
+  int daysToExpiration;
 
   @JsonProperty("imp_volatility")
   private double impliedVolatility;
@@ -35,13 +35,13 @@ public class OptionQuoteMixIn extends QuoteMixIn {
   String fullDescription;
 
   @JsonProperty("op_delivery")
-  char optionDelivery;
+  OptionQuote.OptionDelivery optionDelivery;
 
   @JsonProperty("op_style")
-  char optionStyle;
+  OptionQuote.OptionStyle optionStyle;
 
   @JsonProperty("op_subclass")
-  int optionClass;
+  OptionQuote.OptionClass optionClass;
 
   @JsonProperty("openinterest")
   String openInterest;
@@ -56,7 +56,7 @@ public class OptionQuoteMixIn extends QuoteMixIn {
   double optionPremiumMultiplier;
 
   @JsonProperty("put_call")
-  String optionType;
+  OptionQuote.OptionType optionType;
 
   @JsonProperty("rootsymbol")
   String optionRootSymbol;
