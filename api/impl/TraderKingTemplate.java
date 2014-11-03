@@ -32,13 +32,24 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   private static final String API_URL_BASE = "https://api.tradeking.com/v1/";
 
+  private static final String API_URL_PROFILE = "member/profile.json";
+  private static final String API_URL_ACCOUNTS = "accounts.json";
+  private static final String API_URL_QUOTES = "market/ext/quotes.json";
+  private static final String API_URL_SEARCH_OPTIONS = "market/options/search.json";
+  private static final String API_URL_SEARCH_OPTION_STRIKES = "market/options/strikes.json";
+  private static final String API_URL_ACCOUNT_BALANCES = "accounts/%s/balances.json";
+  private static final String API_URL_ACCOUNT_HOLDINGS = "accounts/%s/holdings.json";
+  private static final String API_URL_ACCOUNT_HISTORY = "accounts/%s/history.json";
+  private static final String API_URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
+
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
   }
 
   @Override
   public TKUser getCurrentUser() {
-    ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(this.buildUri("member/profile.json"), TKUserResponse.class);
+    URI url = this.buildUri(API_URL_PROFILE);
+    ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
     if (response.getBody().getError().equals("success"))
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
@@ -49,7 +60,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   @Override
   public AccountsSummary[] getAccount() {
 
-    ResponseEntity<TKAllAccountsResponse> response = this.getRestTemplate().getForEntity(this.buildUri("accounts.json"), TKAllAccountsResponse.class);
+    URI url = this.buildUri(API_URL_ACCOUNTS);
+    ResponseEntity<TKAllAccountsResponse> response = this.getRestTemplate().getForEntity(url, TKAllAccountsResponse.class);
 
     if (response.getBody().getError() != null)
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -59,7 +71,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public AccountBalance getAccountBalance(String accountId) {
-    ResponseEntity<TKAccountBalanceResponse> response = this.getRestTemplate().getForEntity(this.buildUri("accounts/" + accountId + "/balances.json"), TKAccountBalanceResponse.class);
+    URI url = this.buildUri(String.format(API_URL_ACCOUNT_BALANCES, accountId));
+    ResponseEntity<TKAccountBalanceResponse> response = this.getRestTemplate().getForEntity(url, TKAccountBalanceResponse.class);
     if (!response.getBody().getError().equals("Success"))
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
     return response.getBody().getAccountBalance();
@@ -67,7 +80,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public AccountHoldings getAccountHoldings(String accountId) {
-    ResponseEntity<TKAccountHoldingsResponse> response = this.getRestTemplate().getForEntity(this.buildUri("accounts/" + accountId + "/holdings.json"), TKAccountHoldingsResponse.class);
+    URI url = this.buildUri(String.format(API_URL_ACCOUNT_HOLDINGS, accountId));
+    ResponseEntity<TKAccountHoldingsResponse> response = this.getRestTemplate().getForEntity(url, TKAccountHoldingsResponse.class);
     if (!response.getBody().getError().equals("Success"))
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
     return response.getBody().getAccountHoldings();
@@ -80,7 +94,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     parameters.set("range", TKTransactionHistoryEntry.TRANSACTION_RANGE_ALL);
     parameters.set("transactions", TKTransactionHistoryEntry.TRANSACTION_TYPE_ALL.toLowerCase());
 
-    ResponseEntity<TKHistoryResponse> response = this.getRestTemplate().getForEntity(this.buildUri("accounts/" + accountId + "/history.json", parameters), TKHistoryResponse.class);
+    URI url = this.buildUri(String.format(API_URL_ACCOUNT_HISTORY, accountId), parameters);
+    ResponseEntity<TKHistoryResponse> response = this.getRestTemplate().getForEntity(url, TKHistoryResponse.class);
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
     return response.getBody().getTransactionHistory();
@@ -106,7 +121,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
 
-    ResponseEntity<TKStockQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/ext/quotes.json", parameters), TKStockQuoteResponse.class);
+    URI url = this.buildUri(API_URL_QUOTES, parameters);
+    ResponseEntity<TKStockQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKStockQuoteResponse.class);
 
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -131,7 +147,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     parameters.set("symbols", tickersParamString);
 
     try {
-      ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/ext/quotes.json", parameters), TKOptionQuoteResponse.class);
+      URI url = this.buildUri(API_URL_QUOTES, parameters);
+      ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
       if (null != response.getBody().getError())
         throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
       return response.getBody().getQuotes()[0];
@@ -160,7 +177,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     parameters.set("symbol", ticker);
     parameters.set("query", queryString);
 
-    ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(this.buildUri("market/options/search.json", parameters), TKOptionQuoteResponse.class);
+    URI url = this.buildUri(API_URL_SEARCH_OPTIONS, parameters);
+    ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
 
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -169,6 +187,29 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   }
 
+  @Override
+  public double[] getStrikePrices(String ticker) {
+    URI url = this.buildUri(API_URL_SEARCH_OPTION_STRIKES, "symbol", ticker);
+    ResponseEntity<TKOptionStrikesResponse> response = this.getRestTemplate().getForEntity(url, TKOptionStrikesResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getPrices();
+
+  }
+
+  @Override
+  public Calendar[] getOptionExpirationDates(String ticker) {
+    URI url = this.buildUri(API_URL_SEARCH_OPTION_DATES, "symbol", ticker);
+    ResponseEntity<TKOptionExpirationsResponse> response = this.getRestTemplate().getForEntity(url, TKOptionExpirationsResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getDates();
+
+  }
 
   protected String buildQuoteParams(String[] tickers) {
     StringBuilder builder = new StringBuilder();

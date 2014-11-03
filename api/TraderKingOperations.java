@@ -33,4 +33,8 @@ public interface TraderKingOperations {
 
   public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate);
 
+  public double[] getStrikePrices(String ticker);
+
+  public Calendar[] getOptionExpirationDates(String ticker);
+
 }
