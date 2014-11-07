@@ -10,7 +10,6 @@ import java.util.LinkedHashMap;
 
 public class TKOptionExpirationsResponse extends TKResponse {
 
-
   private String error;
 
   private Calendar[] dates;

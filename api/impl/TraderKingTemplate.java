@@ -8,6 +8,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.NewsArticle;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
@@ -23,10 +24,7 @@ import org.springframework.util.MultiValueMap;
 
 import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements TraderKingOperations {
 
@@ -41,6 +39,8 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   private static final String API_URL_ACCOUNT_HOLDINGS = "accounts/%s/holdings.json";
   private static final String API_URL_ACCOUNT_HISTORY = "accounts/%s/history.json";
   private static final String API_URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
+  private static final String API_URL_SEARCH_NEWS = "market/news/search.json";
+  private static final String API_URL_GET_NEWS = "market/news/%s.json";
 
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
@@ -116,7 +116,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   @Override
   public StockQuote[] getQuoteForStocks(String[] tickers) {
 
-    String tickersParamString = this.buildQuoteParams(tickers);
+    String tickersParamString = this.buildURIFromParamList(tickers);
 
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
@@ -141,7 +141,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
     String optionSymbol = ticker + timeString + optionType + paddedPrice;
 
-    String tickersParamString = this.buildQuoteParams(new String[]{optionSymbol});
+    String tickersParamString = this.buildURIFromParamList(new String[]{optionSymbol});
 
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
@@ -211,13 +211,71 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   }
 
-  protected String buildQuoteParams(String[] tickers) {
+  @Override
+  public NewsArticle[] getLatestCompanyNews(String ticker, int limit) {
+    return this.getNewsList(new String[]{ticker}, limit, null, null, null);
+  }
+
+  @Override
+  public NewsArticle[] getNewsByKeywords(String[] keywords, int limit) {
+    return this.getNewsList(null, limit, keywords, null, null);
+  }
+
+
+  protected NewsArticle[] getNewsList(String[] tickers, Integer limit, String[] keywords, Calendar startDate, Calendar endDate) {
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+
+
+    if (null != tickers) parameters.set("symbols", this.buildURIFromParamList(tickers));
+    if (null != limit) parameters.set("maxhits", String.valueOf(limit));
+
+    if (null != keywords) parameters.set("keywords", this.buildURIFromParamList(keywords));
+
+    //todo: dates do not work, figure out the format
+    if (null != startDate) {
+      parameters.set("startdate", dateFormat.format(startDate.getTime()));
+
+      if (null != endDate) {
+        parameters.set("enddate", dateFormat.format(endDate.getTime()));
+      } else {
+        parameters.set("enddate", dateFormat.format(new Date()));
+      }
+
+    }
+
+    URI url = this.buildUri(API_URL_SEARCH_NEWS, parameters);
+    ResponseEntity<TKNewsArticlesSearchResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticlesSearchResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getArticles();
+
+  }
+
+  @Override
+  public NewsArticle getNewsById(String newsId) {
+    URI url = this.buildUri(String.format(API_URL_GET_NEWS, newsId));
+
+    ResponseEntity<TKNewsArticleGetResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticleGetResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getArticle();
+
+  }
+
+  protected String buildURIFromParamList(String[] parametersList) {
     StringBuilder builder = new StringBuilder();
-    List<String> tickerList = new ArrayList<String>(Arrays.asList(tickers));
-    builder.append(tickerList.remove(0));
-    for (String ticker : tickerList) {
+    List<String> parameters = new ArrayList<String>(Arrays.asList(parametersList));
+    builder.append(parameters.remove(0));
+    for (String parameter : parameters) {
       builder.append(",");
-      builder.append(ticker);
+      builder.append(parameter);
     }
     return builder.toString();
   }

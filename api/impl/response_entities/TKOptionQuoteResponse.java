@@ -1,7 +1,6 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_entities;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,11 +13,9 @@ import java.util.LinkedHashMap;
 
 public class TKOptionQuoteResponse extends TKResponse {
 
-  @JsonProperty("error")
   private String error;
 
   private OptionQuote[] quotes;
-
 
   @JsonSetter("quotes")
   public void setQuote(LinkedHashMap quotesResponse) throws Exception {

@@ -4,6 +4,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.NewsArticle;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
@@ -36,5 +37,11 @@ public interface TraderKingOperations {
   public double[] getStrikePrices(String ticker);
 
   public Calendar[] getOptionExpirationDates(String ticker);
+
+  public NewsArticle[] getLatestCompanyNews(String ticker, int limit);
+
+  public NewsArticle[] getNewsByKeywords(String[] keywords, int limit);
+
+  public NewsArticle getNewsById(String newsId);
 
 }
