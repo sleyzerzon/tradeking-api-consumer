@@ -4,10 +4,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.MarketStatus;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.NewsArticle;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.*;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.OptionQuoteNotFoundException;
 
@@ -46,5 +43,7 @@ public interface TraderKingOperations {
   public NewsArticle getNewsById(String newsId);
 
   public MarketStatus getMarketStatus();
+
+  public TopListEntry[] getTopList(TopListEntry.ListType listType);
 
 }

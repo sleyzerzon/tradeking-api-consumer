@@ -1,6 +1,7 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.ChangeSign;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.Quote;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ abstract public class QuoteMixIn extends TKObjectMixIn {
   double change;
 
   @JsonProperty("chg_sign")
-  Quote.ChangeSign changeSign;
+  ChangeSign changeSign;
 
   @JsonProperty("chg_t")
   String changeText;

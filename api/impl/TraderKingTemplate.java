@@ -8,10 +8,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.MarketStatus;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.NewsArticle;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.*;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.TKUser;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_entities.*;
 import com.miserablemind.twtbeat.domain.service.traderking.connect.TraderKingServiceProvider;
@@ -43,6 +40,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   private static final String API_URL_SEARCH_NEWS = "market/news/search.json";
   private static final String API_URL_GET_NEWS = "market/news/%s.json";
   private static final java.lang.String API_URL_MARKET_STATUS = "market/clock.json";
+  private static final java.lang.String API_URL_TOP_LIST = "market/toplists/%s.json";
 
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
@@ -280,6 +278,18 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
     return response.getBody().getMarketStatus();
+
+  }
+
+  @Override
+  public TopListEntry[] getTopList(TopListEntry.ListType listType) {
+    URI url = this.buildUri(String.format(API_URL_TOP_LIST, listType));
+    ResponseEntity<TKTopListResponse> response = this.getRestTemplate().getForEntity(url, TKTopListResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getTopList();
 
   }
 

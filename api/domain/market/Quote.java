@@ -238,21 +238,6 @@ abstract public class Quote extends TKObject {
     return week52lowDate;
   }
 
-
-  public enum ChangeSign {
-    UP("u"), DOWN("d"), EQUAL("e");
-    private String value;
-
-    ChangeSign(String value) {
-      this.value = value;
-    }
-
-    @Override
-    public String toString() {
-      return this.value;
-    }
-  }
-
   public enum SecurityClass {
     STOCK("0"), OPTION("1");
     private String value;

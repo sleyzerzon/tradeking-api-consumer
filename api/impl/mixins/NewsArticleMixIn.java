@@ -4,11 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Calendar;
 
-/**
- * Miserable Mind
- * http://www.butter.miserablemind.com
- * GNU GENERAL PUBLIC LICENSE Version 2
- */
+
 public class NewsArticleMixIn {
 
   @JsonProperty("id")
