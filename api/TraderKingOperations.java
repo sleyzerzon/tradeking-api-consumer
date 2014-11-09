@@ -4,6 +4,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.MarketStatus;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.NewsArticle;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
@@ -43,5 +44,7 @@ public interface TraderKingOperations {
   public NewsArticle[] getNewsByKeywords(String[] keywords, int limit);
 
   public NewsArticle getNewsById(String newsId);
+
+  public MarketStatus getMarketStatus();
 
 }

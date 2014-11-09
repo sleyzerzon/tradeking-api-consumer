@@ -8,6 +8,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.ba
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TKTransactionHistoryEntry;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.MarketStatus;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.NewsArticle;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
@@ -41,6 +42,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   private static final String API_URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
   private static final String API_URL_SEARCH_NEWS = "market/news/search.json";
   private static final String API_URL_GET_NEWS = "market/news/%s.json";
+  private static final java.lang.String API_URL_MARKET_STATUS = "market/clock.json";
 
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
@@ -266,6 +268,18 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
     return response.getBody().getArticle();
+
+  }
+
+  public MarketStatus getMarketStatus() {
+    URI url = this.buildUri(API_URL_MARKET_STATUS);
+
+    ResponseEntity<TKMarketStatusResponse> response = this.getRestTemplate().getForEntity(url, TKMarketStatusResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getMarketStatus();
 
   }
 
