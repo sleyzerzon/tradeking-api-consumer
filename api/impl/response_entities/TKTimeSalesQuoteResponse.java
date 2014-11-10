@@ -1,26 +1,28 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_entities;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.TimeSalesQuote;
 
 import java.util.LinkedHashMap;
 
-public class TKStockQuoteResponse extends TKResponse {
+public class TKTimeSalesQuoteResponse extends TKResponse {
 
   private String error;
 
-  private StockQuote[] quotes;
+  private TimeSalesQuote[] quotes;
 
   @JsonSetter("quotes")
   public void setQuote(LinkedHashMap quotesResponse) throws Exception {
-    this.quotes = (StockQuote[]) this.extractArray(StockQuote[].class, quotesResponse, "quote", null);
+    this.quotes = (TimeSalesQuote[]) this.extractArray(TimeSalesQuote[].class, quotesResponse, "quote", null);
   }
 
   public String getError() {
     return error;
   }
 
-  public StockQuote[] getQuotes() {
+  public TimeSalesQuote[] getQuotes() {
     return quotes;
   }
+
+
 }

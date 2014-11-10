@@ -39,8 +39,9 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   private static final String API_URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
   private static final String API_URL_SEARCH_NEWS = "market/news/search.json";
   private static final String API_URL_GET_NEWS = "market/news/%s.json";
-  private static final java.lang.String API_URL_MARKET_STATUS = "market/clock.json";
-  private static final java.lang.String API_URL_TOP_LIST = "market/toplists/%s.json";
+  private static final String API_URL_MARKET_STATUS = "market/clock.json";
+  private static final String API_URL_TOP_LIST = "market/toplists/%s.json";
+  private static final String API_URL_DATA_POINTS = "market/timesales.json";
 
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
@@ -188,7 +189,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   }
 
   @Override
-  public double[] getStrikePrices(String ticker) {
+  public Double[] getStrikePrices(String ticker) {
     URI url = this.buildUri(API_URL_SEARCH_OPTION_STRIKES, "symbol", ticker);
     ResponseEntity<TKOptionStrikesResponse> response = this.getRestTemplate().getForEntity(url, TKOptionStrikesResponse.class);
 
@@ -269,6 +270,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   }
 
+  @Override
   public MarketStatus getMarketStatus() {
     URI url = this.buildUri(API_URL_MARKET_STATUS);
 
@@ -290,6 +292,40 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
     return response.getBody().getTopList();
+
+  }
+
+  @Override
+  public TimeSalesQuote[] getDataPoints(String ticker, TimeSalesQuote.Interval interval, Integer countPerPage, Integer offset, Calendar startDate, Calendar endDate, Calendar startTime) {
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+
+    parameters.set("symbols", ticker);
+
+    if (null != interval) {
+      parameters.set("interval", String.valueOf(interval));
+      if (interval == TimeSalesQuote.Interval.TICKER) {
+
+        if (null != countPerPage) {
+          parameters.set("rpp", String.valueOf(countPerPage));
+          if (null != offset) parameters.set("index", String.valueOf(countPerPage));
+        }
+      }
+    }
+    parameters.set("startdate", dateFormat.format(startDate.getTime()));
+    parameters.set("enddate", dateFormat.format(endDate.getTime()));
+
+    URI url = this.buildUri(API_URL_DATA_POINTS, parameters);
+
+    ResponseEntity<TKTimeSalesQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKTimeSalesQuoteResponse.class);
+
+    if (null != response.getBody().getError())
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    //  return response.getBody().getQuotes();
+    return null;
 
   }
 

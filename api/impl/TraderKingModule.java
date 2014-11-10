@@ -12,10 +12,7 @@ import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.hi
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.history.TransactionSecurity;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.holdings.*;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.account.summary.AccountsSummary;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.NewsArticle;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.OptionQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.StockQuote;
-import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.TopListEntry;
+import com.miserablemind.twtbeat.domain.service.traderking.api.domain.market.*;
 import com.miserablemind.twtbeat.domain.service.traderking.api.domain.member.UserAccount;
 import com.miserablemind.twtbeat.domain.service.traderking.api.impl.mixins.*;
 
@@ -46,6 +43,7 @@ public class TraderKingModule extends SimpleModule {
     context.setMixInAnnotations(Cash.class, CashMixIn.class);
     context.setMixInAnnotations(NewsArticle.class, NewsArticleMixIn.class);
     context.setMixInAnnotations(TopListEntry.class, TopListEntryMixIn.class);
+    context.setMixInAnnotations(TimeSalesQuote.class, TimeSalesQuoteMixIn.class);
   }
 
 

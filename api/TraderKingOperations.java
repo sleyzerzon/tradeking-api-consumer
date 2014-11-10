@@ -32,7 +32,7 @@ public interface TraderKingOperations {
 
   public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate);
 
-  public double[] getStrikePrices(String ticker);
+  public Double[] getStrikePrices(String ticker);
 
   public Calendar[] getOptionExpirationDates(String ticker);
 
@@ -45,5 +45,7 @@ public interface TraderKingOperations {
   public MarketStatus getMarketStatus();
 
   public TopListEntry[] getTopList(TopListEntry.ListType listType);
+
+  public TimeSalesQuote[] getDataPoints(String ticker, TimeSalesQuote.Interval interval, Integer countPerPage, Integer offset, Calendar startDate, Calendar endDate, Calendar startTime);
 
 }

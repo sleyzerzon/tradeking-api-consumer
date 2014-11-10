@@ -1,9 +1,7 @@
 package com.miserablemind.twtbeat.domain.service.traderking.api.impl.response_entities;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
@@ -15,27 +13,18 @@ public class TKOptionStrikesResponse extends TKResponse {
 
   private String error;
 
-  private double[] prices;
+  private Double[] prices;
 
   @JsonSetter("prices")
   public void setPrices(LinkedHashMap pricesResponse) throws Exception {
-
-    ObjectMapper mapper = new ObjectMapper();
-    Object pricesContainer = pricesResponse.get("price");
-
-    String jsonArray = mapper.writeValueAsString(pricesContainer);
-
-    if (pricesContainer.getClass() == ArrayList.class)
-      this.prices = mapper.readValue(jsonArray, double[].class);
-    else this.prices = new double[]{mapper.readValue(jsonArray, double.class)};
-
+    this.prices = (Double[]) this.extractArray(Double[].class, pricesResponse, "price", null);
   }
 
   public String getError() {
     return error;
   }
 
-  public double[] getPrices() {
+  public Double[] getPrices() {
     return prices;
   }
 
