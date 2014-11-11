@@ -1,5 +1,16 @@
-package com.miserablemind.api.consumer.traderking.api.impl;
+/*
+ * Miserable Mind
+ * http://www.miserablemind.com
+ * The MIT License (MIT)
+ */
 
+/*
+ * Miserable Mind
+ * http://www.miserablemind.com
+ * The MIT License (MIT)
+ */
+
+package com.miserablemind.api.consumer.traderking.api.impl;
 
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
