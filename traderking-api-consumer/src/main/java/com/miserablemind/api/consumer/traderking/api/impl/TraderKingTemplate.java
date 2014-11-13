@@ -332,8 +332,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    //  return response.getBody().getQuotes();
-    return null;
+    return response.getBody().getQuotes();
 
   }
 
