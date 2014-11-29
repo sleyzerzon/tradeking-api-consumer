@@ -76,7 +76,7 @@ public class TimeSalesQuote extends TKObject {
   }
 
   public enum Interval {
-    MINUTES_1("1min"), MINUTES_5("5min"), TICKER("ticker");
+    MINUTES_1("1min"), MINUTES_5("5min"), TICK("tick");
     private final String name;
 
     Interval(String name) {

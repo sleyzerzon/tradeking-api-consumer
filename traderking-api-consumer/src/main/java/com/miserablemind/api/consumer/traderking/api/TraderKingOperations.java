@@ -43,9 +43,9 @@ public interface TraderKingOperations {
 
   public Calendar[] getOptionExpirationDates(String ticker);
 
-  public NewsArticle[] getLatestCompanyNews(String ticker, int limit);
+  public NewsArticle[] getNewsList(String ticker, int limit);
 
-  public NewsArticle[] getNewsByKeywords(String[] keywords, int limit);
+  public NewsArticle[] getNewsList(String[] keywords, int limit);
 
   public NewsArticle getNewsById(String newsId);
 
@@ -53,6 +53,10 @@ public interface TraderKingOperations {
 
   public TopListEntry[] getTopList(TopListEntry.ListType listType);
 
-  public TimeSalesQuote[] getDataPoints(String ticker, TimeSalesQuote.Interval interval, Integer countPerPage, Integer offset, Calendar startDate, Calendar endDate, Calendar startTime);
+  public TimeSalesQuote[] getDataPoints(String ticker, int pageNumber, int perPage);
+
+  public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesQuote.Interval interval);
+
+
 
 }

@@ -221,12 +221,12 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   }
 
   @Override
-  public NewsArticle[] getLatestCompanyNews(String ticker, int limit) {
+  public NewsArticle[] getNewsList(String ticker, int limit) {
     return this.getNewsList(new String[]{ticker}, limit, null, null, null);
   }
 
   @Override
-  public NewsArticle[] getNewsByKeywords(String[] keywords, int limit) {
+  public NewsArticle[] getNewsList(String[] keywords, int limit) {
     return this.getNewsList(null, limit, keywords, null, null);
   }
 
@@ -243,7 +243,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
     if (null != keywords) parameters.set("keywords", this.buildURIFromParamList(keywords));
 
-    //todo: dates do not work, figure out the format
+    //todo: dates do not work, figure out the format, TK does not like anything
     if (null != startDate) {
       parameters.set("startdate", dateFormat.format(startDate.getTime()));
 
@@ -303,8 +303,23 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   }
 
+
+  //intraday
   @Override
-  public TimeSalesQuote[] getDataPoints(String ticker, TimeSalesQuote.Interval interval, Integer countPerPage, Integer offset, Calendar startDate, Calendar endDate, Calendar startTime) {
+  public TimeSalesQuote[] getDataPoints(String ticker, int pageNumber, int perPage) {
+    int offset = (pageNumber - 1) * perPage + 1;
+    return this.getDataPoints(ticker, TimeSalesQuote.Interval.TICK, perPage, offset, null, null);
+  }
+
+  //multiday
+  @Override
+  public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesQuote.Interval interval) {
+    return this.getDataPoints(ticker, interval, null, null, startDate, endDate);
+  }
+
+  // there is no universal usage of this one, see overloaded methods
+  protected TimeSalesQuote[] getDataPoints(String ticker, TimeSalesQuote.Interval interval, Integer countPerPage,
+                                           Integer offset, Calendar startDate, Calendar endDate) {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -314,16 +329,18 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
     if (null != interval) {
       parameters.set("interval", String.valueOf(interval));
-      if (interval == TimeSalesQuote.Interval.TICKER) {
+      if (interval == TimeSalesQuote.Interval.TICK) {
 
         if (null != countPerPage) {
           parameters.set("rpp", String.valueOf(countPerPage));
-          if (null != offset) parameters.set("index", String.valueOf(countPerPage));
+          if (null != offset) parameters.set("index", String.valueOf(offset));
         }
       }
     }
-    parameters.set("startdate", dateFormat.format(startDate.getTime()));
-    parameters.set("enddate", dateFormat.format(endDate.getTime()));
+
+    if (null != startDate) parameters.set("startdate", dateFormat.format(startDate.getTime()));
+    if (null != endDate) parameters.set("enddate", dateFormat.format(endDate.getTime()));
+
 
     URI url = this.buildUri(API_URL_DATA_POINTS, parameters);
 
