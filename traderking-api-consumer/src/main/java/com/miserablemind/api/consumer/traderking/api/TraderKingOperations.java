@@ -13,6 +13,7 @@ import com.miserablemind.api.consumer.traderking.api.domain.account.holdings.Acc
 import com.miserablemind.api.consumer.traderking.api.domain.account.summary.AccountsSummary;
 import com.miserablemind.api.consumer.traderking.api.domain.market.*;
 import com.miserablemind.api.consumer.traderking.api.domain.member.TKUser;
+import com.miserablemind.api.consumer.traderking.api.domain.watchlist.WatchlistItem;
 import com.miserablemind.api.consumer.traderking.api.impl.OptionQuoteNotFoundException;
 
 import java.util.Calendar;
@@ -57,6 +58,15 @@ public interface TraderKingOperations {
 
   public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesQuote.Interval interval);
 
+  public String[] getAllWatchLists();
 
+  public String[] addWatchList(String watchlistName, String[] tickers) throws Exception;
 
+  public void deleteWatchlistById(String watchlistName);
+
+  public String[] addSymbolsToWatchList(String watchlistName, String[] tickers);
+
+  public void deleteSymbolFromWatchlist(String watchlistName, String[] tickers);
+
+  public WatchlistItem[] getWatchListItems(String watchlistName);
 }

@@ -18,6 +18,7 @@ import com.miserablemind.api.consumer.traderking.api.domain.account.holdings.Acc
 import com.miserablemind.api.consumer.traderking.api.domain.account.summary.AccountsSummary;
 import com.miserablemind.api.consumer.traderking.api.domain.market.*;
 import com.miserablemind.api.consumer.traderking.api.domain.member.TKUser;
+import com.miserablemind.api.consumer.traderking.api.domain.watchlist.WatchlistItem;
 import com.miserablemind.api.consumer.traderking.api.impl.response_entities.*;
 import com.miserablemind.api.consumer.traderking.connect.TraderKingServiceProvider;
 import org.springframework.http.ResponseEntity;
@@ -34,22 +35,28 @@ import java.util.*;
 
 public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements TraderKingOperations {
 
-  private static final String API_URL_BASE = "https://api.tradeking.com/v1/";
+  private static final String URL_BASE = "https://api.tradeking.com/v1/";
 
-  private static final String API_URL_PROFILE = "member/profile.json";
-  private static final String API_URL_ACCOUNTS = "accounts.json";
-  private static final String API_URL_QUOTES = "market/ext/quotes.json";
-  private static final String API_URL_SEARCH_OPTIONS = "market/options/search.json";
-  private static final String API_URL_SEARCH_OPTION_STRIKES = "market/options/strikes.json";
-  private static final String API_URL_ACCOUNT_BALANCES = "accounts/%s/balances.json";
-  private static final String API_URL_ACCOUNT_HOLDINGS = "accounts/%s/holdings.json";
-  private static final String API_URL_ACCOUNT_HISTORY = "accounts/%s/history.json";
-  private static final String API_URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
-  private static final String API_URL_SEARCH_NEWS = "market/news/search.json";
-  private static final String API_URL_GET_NEWS = "market/news/%s.json";
-  private static final String API_URL_MARKET_STATUS = "market/clock.json";
-  private static final String API_URL_TOP_LIST = "market/toplists/%s.json";
-  private static final String API_URL_DATA_POINTS = "market/timesales.json";
+  private static final String URL_PROFILE = "member/profile.json";
+  private static final String URL_ACCOUNTS = "accounts.json";
+  private static final String URL_QUOTES = "market/ext/quotes.json";
+  private static final String URL_SEARCH_OPTIONS = "market/options/search.json";
+  private static final String URL_SEARCH_OPTION_STRIKES = "market/options/strikes.json";
+  private static final String URL_ACCOUNT_BALANCES = "accounts/%s/balances.json";
+  private static final String URL_ACCOUNT_HOLDINGS = "accounts/%s/holdings.json";
+  private static final String URL_ACCOUNT_HISTORY = "accounts/%s/history.json";
+  private static final String URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
+  private static final String URL_SEARCH_NEWS = "market/news/search.json";
+  private static final String URL_GET_NEWS = "market/news/%s.json";
+  private static final String URL_MARKET_STATUS = "market/clock.json";
+  private static final String URL_TOP_LIST = "market/toplists/%s.json";
+  private static final String URL_DATA_POINTS = "market/timesales.json";
+  private static final String URL_WATCHLIST_LIST = "watchlists.json";
+  private static final String URL_WATCHLIST_LIST_DELETE = "watchlists/%s.json";
+  private static final String URL_WATCHLIST_LIST_EDIT = "watchlists/%s/symbols.json";
+  private static final String URL_WATCHLIST_LIST_DELETE_TICKERS = "watchlists/%s/symbols/%s.json";
+  private static final String URL_WATCHLIST_GET_ITEMS = "watchlists/%s.json";
+
 
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
@@ -57,7 +64,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public TKUser getCurrentUser() {
-    URI url = this.buildUri(API_URL_PROFILE);
+    URI url = this.buildUri(URL_PROFILE);
     ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
     if (response.getBody().getError().equals("success"))
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -69,7 +76,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   @Override
   public AccountsSummary[] getAccount() {
 
-    URI url = this.buildUri(API_URL_ACCOUNTS);
+    URI url = this.buildUri(URL_ACCOUNTS);
     ResponseEntity<TKAllAccountsResponse> response = this.getRestTemplate().getForEntity(url, TKAllAccountsResponse.class);
 
     if (response.getBody().getError() != null)
@@ -80,7 +87,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public AccountBalance getAccountBalance(String accountId) {
-    URI url = this.buildUri(String.format(API_URL_ACCOUNT_BALANCES, accountId));
+    URI url = this.buildUri(String.format(URL_ACCOUNT_BALANCES, accountId));
     ResponseEntity<TKAccountBalanceResponse> response = this.getRestTemplate().getForEntity(url, TKAccountBalanceResponse.class);
     if (!response.getBody().getError().equals("Success"))
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -89,7 +96,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public AccountHoldings getAccountHoldings(String accountId) {
-    URI url = this.buildUri(String.format(API_URL_ACCOUNT_HOLDINGS, accountId));
+    URI url = this.buildUri(String.format(URL_ACCOUNT_HOLDINGS, accountId));
     ResponseEntity<TKAccountHoldingsResponse> response = this.getRestTemplate().getForEntity(url, TKAccountHoldingsResponse.class);
     if (!response.getBody().getError().equals("Success"))
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -103,7 +110,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     parameters.set("range", TKTransactionHistoryEntry.TRANSACTION_RANGE_ALL);
     parameters.set("transactions", TKTransactionHistoryEntry.TRANSACTION_TYPE_ALL.toLowerCase());
 
-    URI url = this.buildUri(String.format(API_URL_ACCOUNT_HISTORY, accountId), parameters);
+    URI url = this.buildUri(String.format(URL_ACCOUNT_HISTORY, accountId), parameters);
     ResponseEntity<TKHistoryResponse> response = this.getRestTemplate().getForEntity(url, TKHistoryResponse.class);
     if (null != response.getBody().getError())
       throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -130,7 +137,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
 
-    URI url = this.buildUri(API_URL_QUOTES, parameters);
+    URI url = this.buildUri(URL_QUOTES, parameters);
     ResponseEntity<TKStockQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKStockQuoteResponse.class);
 
     if (null != response.getBody().getError())
@@ -156,7 +163,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     parameters.set("symbols", tickersParamString);
 
     try {
-      URI url = this.buildUri(API_URL_QUOTES, parameters);
+      URI url = this.buildUri(URL_QUOTES, parameters);
       ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
       if (null != response.getBody().getError())
         throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -186,7 +193,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     parameters.set("symbol", ticker);
     parameters.set("query", queryString);
 
-    URI url = this.buildUri(API_URL_SEARCH_OPTIONS, parameters);
+    URI url = this.buildUri(URL_SEARCH_OPTIONS, parameters);
     ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
 
     if (null != response.getBody().getError())
@@ -198,7 +205,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public Double[] getStrikePrices(String ticker) {
-    URI url = this.buildUri(API_URL_SEARCH_OPTION_STRIKES, "symbol", ticker);
+    URI url = this.buildUri(URL_SEARCH_OPTION_STRIKES, "symbol", ticker);
     ResponseEntity<TKOptionStrikesResponse> response = this.getRestTemplate().getForEntity(url, TKOptionStrikesResponse.class);
 
     if (null != response.getBody().getError())
@@ -210,7 +217,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public Calendar[] getOptionExpirationDates(String ticker) {
-    URI url = this.buildUri(API_URL_SEARCH_OPTION_DATES, "symbol", ticker);
+    URI url = this.buildUri(URL_SEARCH_OPTION_DATES, "symbol", ticker);
     ResponseEntity<TKOptionExpirationsResponse> response = this.getRestTemplate().getForEntity(url, TKOptionExpirationsResponse.class);
 
     if (null != response.getBody().getError())
@@ -255,7 +262,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
     }
 
-    URI url = this.buildUri(API_URL_SEARCH_NEWS, parameters);
+    URI url = this.buildUri(URL_SEARCH_NEWS, parameters);
     ResponseEntity<TKNewsArticlesSearchResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticlesSearchResponse.class);
 
     if (null != response.getBody().getError())
@@ -267,7 +274,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public NewsArticle getNewsById(String newsId) {
-    URI url = this.buildUri(String.format(API_URL_GET_NEWS, newsId));
+    URI url = this.buildUri(String.format(URL_GET_NEWS, newsId));
 
     ResponseEntity<TKNewsArticleGetResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticleGetResponse.class);
 
@@ -280,7 +287,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public MarketStatus getMarketStatus() {
-    URI url = this.buildUri(API_URL_MARKET_STATUS);
+    URI url = this.buildUri(URL_MARKET_STATUS);
 
     ResponseEntity<TKMarketStatusResponse> response = this.getRestTemplate().getForEntity(url, TKMarketStatusResponse.class);
 
@@ -293,7 +300,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
 
   @Override
   public TopListEntry[] getTopList(TopListEntry.ListType listType) {
-    URI url = this.buildUri(String.format(API_URL_TOP_LIST, listType));
+    URI url = this.buildUri(String.format(URL_TOP_LIST, listType));
     ResponseEntity<TKTopListResponse> response = this.getRestTemplate().getForEntity(url, TKTopListResponse.class);
 
     if (null != response.getBody().getError())
@@ -302,7 +309,6 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     return response.getBody().getTopList();
 
   }
-
 
   //intraday
   @Override
@@ -315,6 +321,77 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   @Override
   public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesQuote.Interval interval) {
     return this.getDataPoints(ticker, interval, null, null, startDate, endDate);
+  }
+
+  @Override
+  public String[] getAllWatchLists() {
+
+    URI url = this.buildUri(URL_WATCHLIST_LIST);
+    ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().getForEntity(url, TKAllWatchListsResponse.class);
+
+    if (response.getBody().getError() != null)
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getWatchLists();
+
+  }
+
+  @Override
+  public String[] addWatchList(String watchlistName, String[] tickers) throws Exception {
+
+    if (null == tickers) throw new Exception("Cannot create empty list");
+    URI url = this.buildUri(URL_WATCHLIST_LIST);
+    MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
+    requestObject.add("id", watchlistName);
+    requestObject.add("symbols", this.buildURIFromParamList(tickers));
+
+    ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
+
+    if (response.getBody().getError() != null)
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getWatchLists();
+  }
+
+  @Override
+  public void deleteWatchlistById(String watchlistName) {
+    URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_DELETE, watchlistName));
+    this.getRestTemplate().delete(url);
+  }
+
+  @Override
+  public String[] addSymbolsToWatchList(String watchlistName, String[] tickers) {
+    URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_EDIT, watchlistName));
+    MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
+    requestObject.add("symbols", this.buildURIFromParamList(tickers));
+
+    ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
+
+    if (response.getBody().getError() != null)
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getWatchLists();
+  }
+
+  @Override
+  public void deleteSymbolFromWatchlist(String watchlistName, String[] tickers) {
+    String tickersString = this.buildURIFromParamList(tickers);
+    URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_DELETE_TICKERS, watchlistName, tickersString));
+    this.getRestTemplate().delete(url);
+  }
+
+  @Override
+  public WatchlistItem[] getWatchListItems(String watchlistName) {
+
+    URI url = this.buildUri(String.format(URL_WATCHLIST_GET_ITEMS, watchlistName));
+
+    ResponseEntity<TKWatchlistItemsResponse> response = this.getRestTemplate().getForEntity(url, TKWatchlistItemsResponse.class);
+
+    if (response.getBody().getError() != null && !response.getBody().getError().equals("Success"))
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getWatchListItems();
+
   }
 
   // there is no universal usage of this one, see overloaded methods
@@ -341,8 +418,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
     if (null != startDate) parameters.set("startdate", dateFormat.format(startDate.getTime()));
     if (null != endDate) parameters.set("enddate", dateFormat.format(endDate.getTime()));
 
-
-    URI url = this.buildUri(API_URL_DATA_POINTS, parameters);
+    URI url = this.buildUri(URL_DATA_POINTS, parameters);
 
     ResponseEntity<TKTimeSalesQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKTimeSalesQuoteResponse.class);
 
@@ -354,6 +430,9 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   }
 
   protected String buildURIFromParamList(String[] parametersList) {
+
+    if (null == parametersList) return "";
+
     StringBuilder builder = new StringBuilder();
     List<String> parameters = new ArrayList<String>(Arrays.asList(parametersList));
     builder.append(parameters.remove(0));
@@ -375,7 +454,7 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   }
 
   protected URI buildUri(String path, MultiValueMap<String, String> parameters) {
-    return URIBuilder.fromUri(API_URL_BASE + path).queryParams(parameters).build();
+    return URIBuilder.fromUri(URL_BASE + path).queryParams(parameters).build();
   }
 
   private static final LinkedMultiValueMap<String, String> EMPTY_PARAMETERS = new LinkedMultiValueMap<String, String>();
