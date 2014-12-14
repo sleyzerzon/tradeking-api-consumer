@@ -56,10 +56,23 @@ public class TraderKingTemplate extends AbstractOAuth1ApiBinding implements Trad
   private static final String URL_WATCHLIST_LIST_EDIT = "watchlists/%s/symbols.json";
   private static final String URL_WATCHLIST_LIST_DELETE_TICKERS = "watchlists/%s/symbols/%s.json";
   private static final String URL_WATCHLIST_GET_ITEMS = "watchlists/%s.json";
+  private static final String URL_API_VERSION = "utility/version.json";
 
 
   public TraderKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
+  }
+
+  @Override
+  public String getAPIVersion() {
+    URI url = this.buildUri(URL_API_VERSION);
+
+    ResponseEntity<TKApiVersionResponse> response = this.getRestTemplate().getForEntity(url, TKApiVersionResponse.class);
+
+    if (response.getBody().getError() != null)
+      throw new ApiException(TraderKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getVersion();
   }
 
   @Override

@@ -20,6 +20,8 @@ import java.util.Calendar;
 
 public interface TraderKingOperations {
 
+  public String getAPIVersion();
+
   public TKUser getCurrentUser();
 
   public AccountsSummary[] getAccount();
