@@ -1,4 +1,4 @@
-traderking-api-consumer
+tradeking-api-consumer
 =======================
 
-TraderKing API Consumer. Not finished yet.
+TradeKing API Consumer. Not finished yet.
