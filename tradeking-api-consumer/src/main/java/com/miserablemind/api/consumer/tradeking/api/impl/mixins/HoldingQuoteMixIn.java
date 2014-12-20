@@ -1,0 +1,23 @@
+/*
+ * Miserable Mind
+ * http://www.miserablemind.com
+ * The MIT License (MIT)
+ */
+
+
+package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class HoldingQuoteMixIn extends TKObjectMixIn {
+
+  @JsonProperty("change")
+  private double change;
+
+  @JsonProperty("format")
+  private String format;
+
+  @JsonProperty("lastprice")
+  private double lastPrice;
+
+}
