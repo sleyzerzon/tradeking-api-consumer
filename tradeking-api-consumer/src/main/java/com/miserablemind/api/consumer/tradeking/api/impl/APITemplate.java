@@ -1,0 +1,51 @@
+/*
+ * Miserable Mind
+ * http://www.miserablemind.com
+ * The MIT License (MIT)
+ */
+
+package com.miserablemind.api.consumer.tradeking.api.impl;
+
+import com.miserablemind.api.consumer.tradeking.api.APIOperations;
+import com.miserablemind.api.consumer.tradeking.api.domain.member.TKUser;
+import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKApiVersionResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKUserResponse;
+import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
+import org.springframework.http.ResponseEntity;
+import org.springframework.social.ApiException;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
+
+public class APITemplate extends BaseTemplate implements APIOperations {
+
+  private static final String URL_PROFILE = "member/profile.json";
+  private static final String URL_API_VERSION = "utility/version.json";
+
+  APITemplate(RestTemplate restTemplate) {
+    super(restTemplate);
+  }
+
+  @Override
+  public String getAPIVersion() {
+    URI url = this.buildUri(URL_API_VERSION);
+
+    ResponseEntity<TKApiVersionResponse> response = this.getRestTemplate().getForEntity(url, TKApiVersionResponse.class);
+
+    if (response.getBody().getError() != null)
+      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getVersion();
+  }
+
+  @Override
+  public TKUser getCurrentUser() {
+    URI url = this.buildUri(URL_PROFILE);
+    ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
+    if (response.getBody().getError().equals("success"))
+      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+    return response.getBody().getUserData();
+
+  }
+}

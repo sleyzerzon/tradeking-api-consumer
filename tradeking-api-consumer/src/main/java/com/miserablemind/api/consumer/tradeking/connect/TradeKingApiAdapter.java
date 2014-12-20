@@ -18,7 +18,7 @@ public class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
   @Override
   public boolean test(TradeKingOperations api) {
     try {
-      api.getCurrentUser();
+      api.getAPIOperations().getCurrentUser();
       return true;
     } catch (ApiException e) {
       return false;
@@ -27,7 +27,7 @@ public class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
 
   @Override
   public void setConnectionValues(TradeKingOperations api, ConnectionValues values) {
-    UserProfile profile = api.getCurrentUser().getUserProfile();
+    UserProfile profile = api.getAPIOperations().getCurrentUser().getUserProfile();
     values.setProviderUserId(profile.getUUID());
     values.setDisplayName("@" + profile.getFirstName());
     values.setProfileUrl("");
@@ -36,13 +36,13 @@ public class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
 
   @Override
   public org.springframework.social.connect.UserProfile fetchUserProfile(TradeKingOperations api) {
-    UserProfile profile = api.getCurrentUser().getUserProfile();
+    UserProfile profile = api.getAPIOperations().getCurrentUser().getUserProfile();
     return new UserProfileBuilder().setName(profile.getFirstName()).setUsername(
             profile.getFirstName()).build();
   }
 
   @Override
   public void updateStatus(TradeKingOperations api, String message) {
-    api.updateStatus();
+    api.getAccountOperations().updateStatus();
   }
 }
