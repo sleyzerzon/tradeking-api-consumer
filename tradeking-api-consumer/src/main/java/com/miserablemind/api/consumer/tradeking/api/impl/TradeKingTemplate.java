@@ -10,56 +10,51 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.miserablemind.api.consumer.tradeking.api.TradeKingOperations;
+import com.miserablemind.api.consumer.tradeking.api.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 
 public class TradeKingTemplate extends AbstractOAuth1ApiBinding implements TradeKingOperations {
 
-
-  private AccountTemplate accountOperations;
-  private WatchlistTemplate watchlistOperations;
-  private MarketTemplate marketOperations;
-  private StreamingTemplate streamingOperations;
-  private APITemplate apiOperations;
+  private AccountOperations accountOperations;
+  private WatchlistOperations watchlistOperations;
+  private MarketOperations marketOperations;
+  private StreamingOperations streamingOperations;
+  private APIOperations apiOperations;
 
 
   public TradeKingTemplate(String consumerKey, String consumerSecret, String accessToken, String secret) {
     super(consumerKey, consumerSecret, accessToken, secret);
-    initSubAPIs();
-  }
-
-  private void initSubAPIs() {
-    this.accountOperations = new AccountTemplate(getRestTemplate());
-    this.watchlistOperations = new WatchlistTemplate(getRestTemplate());
-    this.marketOperations = new MarketTemplate(getRestTemplate());
-    this.streamingOperations = new StreamingTemplate(getRestTemplate());
-    this.apiOperations = new APITemplate(getRestTemplate());
   }
 
   @Override
-  public AccountTemplate getAccountOperations() {
-    return accountOperations;
+  public AccountOperations getAccountOperations() {
+    if (null != this.accountOperations) this.accountOperations = new AccountTemplate(this.getRestTemplate());
+    return this.accountOperations;
   }
 
   @Override
-  public WatchlistTemplate getWatchlistOperations() {
-    return watchlistOperations;
+  public WatchlistOperations getWatchlistOperations() {
+    if (null != this.watchlistOperations) this.watchlistOperations = new WatchlistTemplate(this.getRestTemplate());
+    return this.watchlistOperations;
   }
 
   @Override
-  public MarketTemplate getMarketOperations() {
-    return marketOperations;
+  public MarketOperations getMarketOperations() {
+    if (null != this.marketOperations) this.marketOperations = new MarketTemplate(this.getRestTemplate());
+    return this.marketOperations;
   }
 
   @Override
-  public StreamingTemplate getStreamingOperations() {
-    return streamingOperations;
+  public StreamingOperations getStreamingOperations() {
+    if (null != this.streamingOperations) this.streamingOperations = new StreamingTemplate(this.getRestTemplate());
+    return this.streamingOperations;
   }
 
   @Override
-  public APITemplate getAPIOperations() {
-    return apiOperations;
+  public APIOperations getAPIOperations() {
+    if (null != this.apiOperations) this.apiOperations = new APITemplate(this.getRestTemplate());
+    return this.apiOperations;
   }
 
   @Override

@@ -52,7 +52,7 @@ public class WatchlistTemplate extends BaseTemplate implements WatchlistOperatio
     URI url = this.buildUri(URL_WATCHLIST_LIST);
     MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
     requestObject.add("id", watchlistName);
-    requestObject.add("symbols", this.buildURIFromParamList(tickers));
+    requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
 
     ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
 
@@ -72,7 +72,7 @@ public class WatchlistTemplate extends BaseTemplate implements WatchlistOperatio
   public String[] addSymbolsToList(String watchlistName, String[] tickers) {
     URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_EDIT, watchlistName));
     MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
-    requestObject.add("symbols", this.buildURIFromParamList(tickers));
+    requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
 
     ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
 
@@ -84,7 +84,7 @@ public class WatchlistTemplate extends BaseTemplate implements WatchlistOperatio
 
   @Override
   public void deleteSymbolFromList(String watchlistName, String[] tickers) {
-    String tickersString = this.buildURIFromParamList(tickers);
+    String tickersString = this.buildCommaSeparatedParameterValue(tickers);
     URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_DELETE_TICKERS, watchlistName, tickersString));
     this.getRestTemplate().delete(url);
   }

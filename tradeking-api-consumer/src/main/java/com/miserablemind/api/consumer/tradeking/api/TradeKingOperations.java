@@ -6,17 +6,15 @@
 
 package com.miserablemind.api.consumer.tradeking.api;
 
-import com.miserablemind.api.consumer.tradeking.api.impl.*;
-
 public interface TradeKingOperations {
 
-  AccountTemplate getAccountOperations();
+  AccountOperations getAccountOperations();
 
-  WatchlistTemplate getWatchlistOperations();
+  WatchlistOperations getWatchlistOperations();
 
-  MarketTemplate getMarketOperations();
+  MarketOperations getMarketOperations();
 
-  StreamingTemplate getStreamingOperations();
+  StreamingOperations getStreamingOperations();
 
-  APITemplate getAPIOperations();
+  APIOperations getAPIOperations();
 }

@@ -47,7 +47,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
   @Override
   public StockQuote[] getQuoteForStocks(String[] tickers) {
 
-    String tickersParamString = this.buildURIFromParamList(tickers);
+    String tickersParamString = this.buildCommaSeparatedParameterValue(tickers);
 
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
@@ -72,7 +72,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
     String optionSymbol = ticker + timeString + optionType + paddedPrice;
 
-    String tickersParamString = this.buildURIFromParamList(new String[]{optionSymbol});
+    String tickersParamString = this.buildCommaSeparatedParameterValue(new String[]{optionSymbol});
 
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("symbols", tickersParamString);
@@ -84,7 +84,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
         throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
       return response.getBody().getQuotes()[0];
     } catch (Exception e) {
-      throw new OptionQuoteNotFoundException();
+      throw new OptionQuoteNotFoundException("Ticker: " + ticker, e);
     }
 
   }
@@ -160,10 +160,10 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 
 
-    if (null != tickers) parameters.set("symbols", this.buildURIFromParamList(tickers));
+    if (null != tickers) parameters.set("symbols", this.buildCommaSeparatedParameterValue(tickers));
     if (null != limit) parameters.set("maxhits", String.valueOf(limit));
 
-    if (null != keywords) parameters.set("keywords", this.buildURIFromParamList(keywords));
+    if (null != keywords) parameters.set("keywords", this.buildCommaSeparatedParameterValue(keywords));
 
     //todo: dates do not work, figure out the format, TK does not like anything
     if (null != startDate) {

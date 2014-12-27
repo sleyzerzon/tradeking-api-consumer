@@ -31,12 +31,12 @@ public class BaseTemplate {
     return this.restTemplate;
   }
 
-  protected String buildURIFromParamList(String[] parametersList) {
+  protected String buildCommaSeparatedParameterValue(String[] parameterValueList) {
 
-    if (null == parametersList) return "";
+    if (null == parameterValueList) return "";
 
     StringBuilder builder = new StringBuilder();
-    List<String> parameters = new ArrayList<String>(Arrays.asList(parametersList));
+    List<String> parameters = new ArrayList<String>(Arrays.asList(parameterValueList));
     builder.append(parameters.remove(0));
     for (String parameter : parameters) {
       builder.append(",");
