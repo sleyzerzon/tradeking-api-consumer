@@ -12,18 +12,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
 import java.util.Date;
 
 
-public class TKTransactionHistoryEntry extends TKObject {
-
-  public static final String TRANSACTION_TYPE_ALL = "All";
-  public static final String TRANSACTION_TYPE_TRADE = "Trade";
-  public static final String TRANSACTION_TYPE_DIVIDEND = "Dividend";
-  public static final String TRANSACTION_TYPE_BOOK_KEEPING = "Bookkeeping";
-
-  public static final String TRANSACTION_RANGE_ALL = "all";
-  public static final String TRANSACTION_RANGE_TODAY = "today";
-  public static final String TRANSACTION_RANGE_CURRENT_WEEK = "current_week";
-  public static final String TRANSACTION_RANGE_CURRENT_MONTH = "current_month";
-  public static final String TRANSACTION_RANGE_LAST_MONTH = "last_month";
+public class TKTransaction extends TKObject {
 
   private String activity;
   private double amount;
@@ -32,10 +21,10 @@ public class TKTransactionHistoryEntry extends TKObject {
   private String symbol;
   private TransactionDetails transactionDetails;
 
-  public TKTransactionHistoryEntry() {
+  public TKTransaction() {
   }
 
-  public TKTransactionHistoryEntry(String activity, double amount, Date date, String description, String symbol, TransactionDetails transactionDetails) {
+  public TKTransaction(String activity, double amount, Date date, String description, String symbol, TransactionDetails transactionDetails) {
     this.activity = activity;
     this.amount = amount;
     this.date = date;
@@ -67,4 +56,33 @@ public class TKTransactionHistoryEntry extends TKObject {
   public TransactionDetails getTransactionDetails() {
     return transactionDetails;
   }
+
+  public enum Type {
+    ALL("all"), TRADE("trade"), DIVIDEND("dividend"), BOOK_KEEPING("bookkeeping");
+    private String value;
+
+    Type(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
+  public enum Range {
+    ALL("all"), TODAY("today"), CURRENT_WEEK("current_week"), CURRENT_MONTH("current_month"), LAST_MONTH("last_month");
+    private String value;
+
+    Range(String value) {
+      this.value = value;
+    }
+
+    @Override
+    public String toString() {
+      return this.value;
+    }
+  }
+
 }

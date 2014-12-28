@@ -14,7 +14,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Accou
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.BuyingPower;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Cash;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Securities;
-import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TKTransactionHistoryEntry;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TKTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionDetails;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionSecurity;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.*;
@@ -44,7 +44,7 @@ public class TradeKingModule extends SimpleModule {
     context.setMixInAnnotations(Securities.class, SecuritiesMixIn.class);
     context.setMixInAnnotations(StockQuote.class, StockQuoteMixin.class);
     context.setMixInAnnotations(AccountsSummary.class, TKAllAccountsSummaryMixIn.class);
-    context.setMixInAnnotations(TKTransactionHistoryEntry.class, TKTransactionHistoryEntryMixIn.class);
+    context.setMixInAnnotations(TKTransaction.class, TKTransactionMixIn.class);
     context.setMixInAnnotations(TransactionDetails.class, TransactionDetailsMixIn.class);
     context.setMixInAnnotations(TransactionSecurity.class, TransactionSecurityMixIn.class);
     context.setMixInAnnotations(UserAccount.class, UserAccountMixIn.class);
