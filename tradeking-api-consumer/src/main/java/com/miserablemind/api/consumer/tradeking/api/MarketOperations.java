@@ -138,7 +138,7 @@ public interface MarketOperations {
    * @param startDate start date to get the points for
    * @param endDate   end date to get the points for. If null, now will be assumed.
    * @param interval  time interval between 2 data points
-   * @return data points for the stockDocu
+   * @return data points for the stock
    */
   public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesQuote.Interval interval);
 
