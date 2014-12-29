@@ -24,6 +24,10 @@ import com.miserablemind.api.consumer.tradeking.api.domain.member.UserAccount;
 import com.miserablemind.api.consumer.tradeking.api.impl.mixins.*;
 
 
+/**
+ * The module to register all mix ins, so they can be registered in places where the object mapper is created from scratch
+ * easily as well as the main JsonMessageConverter
+ */
 public class TradeKingModule extends SimpleModule {
 
   public TradeKingModule() {

@@ -45,6 +45,7 @@ class StreamReaderImpl implements StreamReader {
     this.open = new AtomicBoolean(true);
   }
 
+  @Override
   public void next() {
     try {
       StringBuilder stringBuilder = new StringBuilder();
@@ -78,6 +79,7 @@ class StreamReaderImpl implements StreamReader {
     }
   }
 
+  @Override
   public void close() {
     try {
       this.open.set(false);

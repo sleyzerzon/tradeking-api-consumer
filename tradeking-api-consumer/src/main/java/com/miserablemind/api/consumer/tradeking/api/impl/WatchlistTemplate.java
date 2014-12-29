@@ -13,6 +13,7 @@ import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKWat
 import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ApiException;
+import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -46,9 +47,10 @@ public class WatchlistTemplate extends BaseTemplate implements WatchlistOperatio
   }
 
   @Override
-  public String[] addList(String watchlistName, String[] tickers) throws Exception {
+  public String[] addList(String watchlistName, String[] tickers) {
 
-    if (null == tickers) throw new Exception("Cannot create empty list");
+    Assert.notNull(tickers);
+
     URI url = this.buildUri(URL_WATCHLIST_LIST);
     MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
     requestObject.add("id", watchlistName);

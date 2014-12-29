@@ -28,5 +28,4 @@ public interface APIOperations {
    */
   public TKUser getCurrentUser();
 
-
 }

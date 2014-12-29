@@ -55,5 +55,4 @@ public interface AccountOperations {
    */
   public void updateStatus();
 
-
 }

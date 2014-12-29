@@ -24,6 +24,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
+/**
+ * Dispatcher polls queue in a loop and dispatches it to listeners once a recognizable entry is found
+ * It uses a pool of threads to run process paralleled
+ */
 class StreamDispatcher implements Runnable {
 
   private final List<StreamListener> listeners;
@@ -51,6 +55,10 @@ class StreamDispatcher implements Runnable {
     active = new AtomicBoolean(true);
   }
 
+  /**
+   * Keeps polling the queue. If it finds something,
+   * it tries to figure out the type of the entry and dispatches it for processing
+   */
   public void run() {
     while (active.get()) {
 
@@ -69,16 +77,33 @@ class StreamDispatcher implements Runnable {
     }
   }
 
+  /**
+   * Stops the dispatcher.
+   */
   public void stop() {
     active.set(false);
     pool.shutdown();
   }
 
+  /**
+   * Takes a String json entry, converts it to a stream quote object and passes it to listeners provided to execute in
+   * thread pool
+   *
+   * @param jsonEntry json format quote
+   * @throws IOException exception if could not map json to object
+   */
   private void handleQuote(String jsonEntry) throws IOException {
     StreamQuoteEvent quoteEvent = objectMapper.readValue(jsonEntry, StreamQuoteEvent.class);
     for (final StreamListener listener : listeners) pool.submit((() -> listener.onQuote(quoteEvent)));
   }
 
+  /**
+   * Takes a String json entry, converts it to a stream trade object and passes it to listeners provided to execute in
+   * thread pool
+   *
+   * @param jsonEntry json format trade entry
+   * @throws IOException exception if could not map json to object
+   */
   private void handleTrade(String jsonEntry) throws IOException {
     StreamTradeEvent tradeEvent = objectMapper.readValue(jsonEntry, StreamTradeEvent.class);
     for (StreamListener listener : listeners) pool.submit((() -> listener.onTrade(tradeEvent)));

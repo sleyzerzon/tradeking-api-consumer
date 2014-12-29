@@ -10,6 +10,10 @@ import com.miserablemind.api.consumer.tradeking.api.StreamingException;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * Abstract Stream Consumer class that has unimplemented getStreamReader()
+ * The class runs in its own thread and runs stream reader in a loop to read data from stream
+ */
 abstract class ThreadedStreamConsumer extends Thread implements Stream {
 
   private AtomicBoolean open;
@@ -57,10 +61,12 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
     }
   }
 
+  @Override
   public void open() {
     this.start();
   }
 
+  @Override
   public void close() {
     open.set(false);
     if (streamReader != null) {
@@ -73,7 +79,8 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
   protected void sleepBeforeRetry(long timeToSleep) {
     try {
       Thread.sleep(timeToSleep);
-    } catch (InterruptedException e1) {
+    } catch (InterruptedException e) {
+      //thread got interrupted
     }
   }
 
