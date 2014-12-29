@@ -7,7 +7,7 @@
 package com.miserablemind.api.consumer.tradeking.api;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
-import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TKTransaction;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.AccountsSummary;
 
@@ -45,7 +45,7 @@ public interface AccountOperations {
    * @param accountId id of the account the history is retrieved for
    * @return a list of transaction objects
    */
-  public TKTransaction[] getTransactionsHistory(String accountId, TKTransaction.Range range, TKTransaction.Type type);
+  public TradeKingTransaction[] getTransactionsHistory(String accountId, TradeKingTransaction.Range range, TradeKingTransaction.Type type);
 
   /**
    * Spring Social requires updateStatus(). In this case this is a no-op method

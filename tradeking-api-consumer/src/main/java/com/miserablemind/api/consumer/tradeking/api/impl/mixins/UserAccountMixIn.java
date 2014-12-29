@@ -9,10 +9,10 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UserAccountMixIn extends TKObjectMixIn {
+public class UserAccountMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("account")
-  private String account;
+  private String accountId;
 
   @JsonProperty("fundtrading")
   private boolean fundTrading;

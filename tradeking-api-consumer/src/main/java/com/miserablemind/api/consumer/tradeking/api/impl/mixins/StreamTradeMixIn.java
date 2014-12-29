@@ -13,7 +13,7 @@ import java.util.Calendar;
  */
 
 @JsonRootName("trade")
-public class StreamTradeMixIn extends TKObjectMixIn {
+public class StreamTradeMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("symbol")
   String symbol;

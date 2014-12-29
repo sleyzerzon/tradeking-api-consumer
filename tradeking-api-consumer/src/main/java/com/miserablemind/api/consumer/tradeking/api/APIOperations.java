@@ -7,7 +7,7 @@
 package com.miserablemind.api.consumer.tradeking.api;
 
 
-import com.miserablemind.api.consumer.tradeking.api.domain.member.TKUser;
+import com.miserablemind.api.consumer.tradeking.api.domain.member.TradeKingUser;
 
 /**
  * Sub-api that proves data about API itself
@@ -26,6 +26,6 @@ public interface APIOperations {
    *
    * @return User object
    */
-  public TKUser getCurrentUser();
+  public TradeKingUser getCurrentUser();
 
 }

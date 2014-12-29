@@ -8,7 +8,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 import com.miserablemind.api.consumer.tradeking.api.AccountOperations;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
-import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TKTransaction;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.AccountsSummary;
 import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKAccountBalanceResponse;
@@ -67,7 +67,7 @@ public class AccountTemplate extends BaseTemplate implements AccountOperations {
   }
 
   @Override
-  public TKTransaction[] getTransactionsHistory(String accountId, TKTransaction.Range range, TKTransaction.Type type) {
+  public TradeKingTransaction[] getTransactionsHistory(String accountId, TradeKingTransaction.Range range, TradeKingTransaction.Type type) {
     MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
     parameters.set("range", range.toString());
     parameters.set("transactions", type.toString());

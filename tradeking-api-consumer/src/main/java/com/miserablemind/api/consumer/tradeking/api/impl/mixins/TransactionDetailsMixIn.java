@@ -13,7 +13,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.history.Trans
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TransactionDetailsMixIn extends TKObjectMixIn {
+public class TransactionDetailsMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("commission")
   double commission;

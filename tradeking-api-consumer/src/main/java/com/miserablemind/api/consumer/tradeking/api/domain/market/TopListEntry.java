@@ -7,10 +7,10 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 
-public class TopListEntry extends TKObject {
+public class TopListEntry extends TradeKingObject {
 
   public enum ListType {
 

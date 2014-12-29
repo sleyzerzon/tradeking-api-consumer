@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SecuritiesMixIn extends TKObjectMixIn {
+public class SecuritiesMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("longoptions")
   double longOptions;

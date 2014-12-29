@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.balance;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class BuyingPower extends TKObject {
+public class BuyingPower extends TradeKingObject {
 
   private double cashAvailableForWithdrawal;
   private double equityPercentage;

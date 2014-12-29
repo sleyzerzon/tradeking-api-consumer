@@ -29,31 +29,31 @@ public class TradeKingTemplate extends AbstractOAuth1ApiBinding implements Trade
 
   @Override
   public AccountOperations getAccountOperations() {
-    if (null != this.accountOperations) this.accountOperations = new AccountTemplate(this.getRestTemplate());
+    if (null == this.accountOperations) this.accountOperations = new AccountTemplate(this.getRestTemplate());
     return this.accountOperations;
   }
 
   @Override
   public WatchlistOperations getWatchlistOperations() {
-    if (null != this.watchlistOperations) this.watchlistOperations = new WatchlistTemplate(this.getRestTemplate());
+    if (null == this.watchlistOperations) this.watchlistOperations = new WatchlistTemplate(this.getRestTemplate());
     return this.watchlistOperations;
   }
 
   @Override
   public MarketOperations getMarketOperations() {
-    if (null != this.marketOperations) this.marketOperations = new MarketTemplate(this.getRestTemplate());
+    if (null == this.marketOperations) this.marketOperations = new MarketTemplate(this.getRestTemplate());
     return this.marketOperations;
   }
 
   @Override
   public StreamingOperations getStreamingOperations() {
-    if (null != this.streamingOperations) this.streamingOperations = new StreamingTemplate(this.getRestTemplate());
+    if (null == this.streamingOperations) this.streamingOperations = new StreamingTemplate(this.getRestTemplate());
     return this.streamingOperations;
   }
 
   @Override
   public APIOperations getAPIOperations() {
-    if (null != this.apiOperations) this.apiOperations = new APITemplate(this.getRestTemplate());
+    if (null == this.apiOperations) this.apiOperations = new APITemplate(this.getRestTemplate());
     return this.apiOperations;
   }
 

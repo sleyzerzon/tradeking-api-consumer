@@ -8,13 +8,13 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 
-public class TransactionDetails extends TKObject {
+public class TransactionDetails extends TradeKingObject {
 
   private double commission;
   private ArrayList<String> description;

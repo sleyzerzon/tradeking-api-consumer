@@ -7,11 +7,11 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Calendar;
 
-public class StreamTradeEvent extends TKObject {
+public class StreamTradeEvent extends TradeKingObject {
 
   private String symbol;
   private String exchangeCode;

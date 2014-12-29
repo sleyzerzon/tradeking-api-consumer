@@ -11,7 +11,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.ChangeSign;
 
-public class TopListEntryMixIn extends TKObjectMixIn {
+public class TopListEntryMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("chg")
   double change;

@@ -12,7 +12,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Buyin
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Cash;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Securities;
 
-public class AccountBalanceMixIn extends TKObjectMixIn {
+public class AccountBalanceMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("account")
   int accountId;

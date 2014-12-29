@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class BuyingPowerMixIn extends TKObjectMixIn {
+public class BuyingPowerMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("cashavailableforwithdrawal")
   double cashAvailableForWithdrawal;

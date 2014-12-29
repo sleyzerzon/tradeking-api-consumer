@@ -7,7 +7,7 @@
 package com.miserablemind.api.consumer.tradeking.api.impl;
 
 import com.miserablemind.api.consumer.tradeking.api.APIOperations;
-import com.miserablemind.api.consumer.tradeking.api.domain.member.TKUser;
+import com.miserablemind.api.consumer.tradeking.api.domain.member.TradeKingUser;
 import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKApiVersionResponse;
 import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKUserResponse;
 import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
@@ -39,7 +39,7 @@ public class APITemplate extends BaseTemplate implements APIOperations {
   }
 
   @Override
-  public TKUser getCurrentUser() {
+  public TradeKingUser getCurrentUser() {
     URI url = this.buildUri(URL_PROFILE);
     ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
     if (response.getBody().getError().equals("success"))

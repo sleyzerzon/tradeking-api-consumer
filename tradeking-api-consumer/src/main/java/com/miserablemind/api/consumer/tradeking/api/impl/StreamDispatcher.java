@@ -9,12 +9,12 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miserablemind.api.consumer.tradeking.api.StreamListener;
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.StreamQuoteEvent;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.StreamTradeEvent;
 import com.miserablemind.api.consumer.tradeking.api.impl.mixins.StreamQuoteMixIn;
 import com.miserablemind.api.consumer.tradeking.api.impl.mixins.StreamTradeMixIn;
-import com.miserablemind.api.consumer.tradeking.api.impl.mixins.TKObjectMixIn;
+import com.miserablemind.api.consumer.tradeking.api.impl.mixins.TradeKingKObjectMixIn;
 
 import java.io.IOException;
 import java.util.List;
@@ -47,7 +47,7 @@ class StreamDispatcher implements Runnable {
     pool = Executors.newCachedThreadPool();
     objectMapper = new ObjectMapper();
 
-    objectMapper.addMixInAnnotations(TKObject.class, TKObjectMixIn.class);
+    objectMapper.addMixInAnnotations(TradeKingObject.class, TradeKingKObjectMixIn.class);
     objectMapper.addMixInAnnotations(StreamQuoteEvent.class, StreamQuoteMixIn.class);
     objectMapper.addMixInAnnotations(StreamTradeEvent.class, StreamTradeMixIn.class);
     objectMapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);

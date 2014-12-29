@@ -7,11 +7,11 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.summary;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldings;
 
-public class AccountsSummary extends TKObject {
+public class AccountsSummary extends TradeKingObject {
 
   private String accountId;
   private AccountBalance accountBalance;

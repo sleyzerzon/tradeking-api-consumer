@@ -18,7 +18,8 @@ public class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
   @Override
   public boolean test(TradeKingOperations api) {
     try {
-      api.getAPIOperations().getCurrentUser();
+      //let's not test to save some time
+      // api.getAPIOperations().getCurrentUser();
       return true;
     } catch (ApiException e) {
       return false;
@@ -37,8 +38,7 @@ public class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
   @Override
   public org.springframework.social.connect.UserProfile fetchUserProfile(TradeKingOperations api) {
     UserProfile profile = api.getAPIOperations().getCurrentUser().getUserProfile();
-    return new UserProfileBuilder().setName(profile.getFirstName()).setUsername(
-            profile.getFirstName()).build();
+    return new UserProfileBuilder().setName(profile.getFirstName()).setUsername(profile.getFirstName()).build();
   }
 
   @Override

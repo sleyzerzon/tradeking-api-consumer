@@ -7,14 +7,14 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class MarketStatus extends TKObject {
+public class MarketStatus extends TradeKingObject {
 
   private Calendar date;
   private MarketCondition currentStatus;

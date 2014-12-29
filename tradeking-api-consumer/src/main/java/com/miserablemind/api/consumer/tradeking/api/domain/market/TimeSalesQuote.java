@@ -7,11 +7,11 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Calendar;
 
-public class TimeSalesQuote extends TKObject {
+public class TimeSalesQuote extends TradeKingObject {
 
   private Calendar date;
   private Calendar intervalStartTime;

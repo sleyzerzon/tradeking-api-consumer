@@ -13,7 +13,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.market.Quote;
 
 import java.util.Date;
 
-abstract public class QuoteMixIn extends TKObjectMixIn {
+abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("ask_time")
   String askTime;

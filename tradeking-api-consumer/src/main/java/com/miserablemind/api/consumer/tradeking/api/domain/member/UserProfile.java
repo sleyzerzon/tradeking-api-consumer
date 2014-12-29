@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.member;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class UserProfile extends TKObject {
+public class UserProfile extends TradeKingObject {
 
   private String UUID;
   private String accountSummaryDashboardCollapsed;
@@ -41,93 +41,135 @@ public class UserProfile extends TKObject {
     this.FDICAgreement = FDICAgreement;
   }
 
+  /**
+   * Unique User ID. It could be an int, however, just to be future proof, in case TK decided to add a letter somewhere
+   * it is String.
+   *
+   * @return returns String User Id.
+   */
   public String getUUID() {
     return UUID;
   }
 
-  public void setUUID(String UUID) {
-    this.UUID = UUID;
-  }
-
+  /**
+   * @return {@code True} if Summary dashboard is collapsed , otherwise{@code False}
+   */
   public String getAccountSummaryDashboardCollapsed() {
     return accountSummaryDashboardCollapsed;
+  }
+
+  /**
+   * @return String First Name of a user
+   */
+  public String getFirstName() {
+    return firstName;
+  }
+
+  /**
+   * @return String Last Name of a user
+   */
+  public String getLasName() {
+    return lasName;
+  }
+
+  /**
+   * @return {@code True} if user has an unread message, otherwise {@code False}
+   */
+  public boolean isHasMewMessage() {
+    return hasMewMessage;
+  }
+
+  /**
+   * @return {@code True} if user has real time stock quotes, otherwise {@code False}
+   */
+  public boolean isRealTimeStockQuote() {
+    return realTimeStockQuote;
+  }
+
+  /**
+   * @return String user's e-mail address
+   */
+  public String getEmailAddress() {
+    return emailAddress;
+  }
+
+  /**
+   * Federal Deposit Insurance Corporation Paper.
+   *
+   * @return good question. In some cases even when it is signed, it returns "0"
+   */
+  public String getFDICPaper() {
+    return FDICPaper;
+  }
+
+  /**
+   * @return {@code True} if user is gains keeper, otherwise {@code False}
+   */
+  public boolean isGainsKeeper() {
+    return isGainsKeeper;
+  }
+
+  /**
+   * @return {@code True} if user a special password for trading, otherwise {@code False}
+   */
+  public boolean isTradingPasswordUsed() {
+    return isTradingPasswordUsed;
+  }
+
+  /**
+   * Federal Deposit Insurance Corporation Agreement. It consists of account number and date signed, i.e.  4ZXXXXX=01/01/2013
+   *
+   * @return String agreement "signature", i.e. "4ZXXXXX=01/01/2013"
+   */
+  public String getFDICAgreement() {
+    return FDICAgreement;
+  }
+
+
+  /*
+      SETTERS
+   */
+  public void setUUID(String UUID) {
+    this.UUID = UUID;
   }
 
   public void setAccountSummaryDashboardCollapsed(String accountSummaryDashboardCollapsed) {
     this.accountSummaryDashboardCollapsed = accountSummaryDashboardCollapsed;
   }
 
-  public String getFirstName() {
-    return firstName;
-  }
-
   public void setFirstName(String firstName) {
     this.firstName = firstName;
-  }
-
-  public String getLasName() {
-    return lasName;
   }
 
   public void setLasName(String lasName) {
     this.lasName = lasName;
   }
 
-  public boolean isHasMewMessage() {
-    return hasMewMessage;
-  }
-
   public void setHasMewMessage(boolean hasMewMessage) {
     this.hasMewMessage = hasMewMessage;
-  }
-
-  public boolean isRealTimeStockQuote() {
-    return realTimeStockQuote;
   }
 
   public void setRealTimeStockQuote(boolean realTimeStockQuote) {
     this.realTimeStockQuote = realTimeStockQuote;
   }
 
-  public String getFDICPaper() {
-    return FDICPaper;
+  public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
   }
 
   public void setFDICPaper(String FDICPaper) {
     this.FDICPaper = FDICPaper;
   }
 
-  public boolean isGainsKeeper() {
-    return isGainsKeeper;
-  }
-
   public void setGainsKeeper(boolean isGainsKeeper) {
     this.isGainsKeeper = isGainsKeeper;
-  }
-
-  public boolean isTradingPasswordUsed() {
-    return isTradingPasswordUsed;
   }
 
   public void setTradingPasswordUsed(boolean isTradingPasswordUsed) {
     this.isTradingPasswordUsed = isTradingPasswordUsed;
   }
 
-  public String getFDICAgreement() {
-    return FDICAgreement;
-  }
-
   public void setFDICAgreement(String FDICAgreement) {
     this.FDICAgreement = FDICAgreement;
   }
-
-
-  public void setEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
-  }
-
-  public String getEmailAddress() {
-    return emailAddress;
-  }
-
 }

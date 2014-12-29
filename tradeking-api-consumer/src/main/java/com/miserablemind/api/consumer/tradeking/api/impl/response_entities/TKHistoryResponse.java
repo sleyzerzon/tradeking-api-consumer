@@ -8,7 +8,7 @@
 package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TKTransaction;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 
 import java.util.LinkedHashMap;
 
@@ -16,18 +16,18 @@ public class TKHistoryResponse extends TKResponse {
 
   private String error;
 
-  private TKTransaction[] transactionHistory;
+  private TradeKingTransaction[] transactionHistory;
 
   public String getError() {
     return error;
   }
 
-  public TKTransaction[] getTransactionHistory() {
+  public TradeKingTransaction[] getTransactionHistory() {
     return transactionHistory;
   }
 
   @JsonSetter("transactions")
   public void setTransactionHistory(LinkedHashMap historyResponse) throws Exception {
-    this.transactionHistory = (TKTransaction[]) this.extractArray(TKTransaction[].class, historyResponse, "transaction", null);
+    this.transactionHistory = (TradeKingTransaction[]) this.extractArray(TradeKingTransaction[].class, historyResponse, "transaction", null);
   }
 }

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldings;
 
-public class TKAllAccountsSummaryMixIn extends TKObjectMixIn {
+public class TKAllAccountsSummaryMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("account")
   String accountId;

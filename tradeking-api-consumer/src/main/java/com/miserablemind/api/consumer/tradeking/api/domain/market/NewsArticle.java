@@ -7,12 +7,12 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Calendar;
 
 
-public class NewsArticle extends TKObject {
+public class NewsArticle extends TradeKingObject {
   private String id;
   private String headline;
   private String story;

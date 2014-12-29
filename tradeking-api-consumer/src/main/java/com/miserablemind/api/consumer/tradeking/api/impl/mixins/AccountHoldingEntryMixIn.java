@@ -13,7 +13,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.Fina
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.HoldingDisplayData;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.HoldingsQuote;
 
-public class AccountHoldingEntryMixIn extends TKObjectMixIn {
+public class AccountHoldingEntryMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("accounttype")
   AccountHoldingEntry.HoldingType holdingType;

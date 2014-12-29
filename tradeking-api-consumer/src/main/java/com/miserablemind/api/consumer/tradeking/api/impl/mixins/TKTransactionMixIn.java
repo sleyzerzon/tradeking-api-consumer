@@ -12,7 +12,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.history.Trans
 
 import java.util.Date;
 
-public class TKTransactionMixIn extends TKObjectMixIn {
+public class TKTransactionMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("activity")
   String activity;

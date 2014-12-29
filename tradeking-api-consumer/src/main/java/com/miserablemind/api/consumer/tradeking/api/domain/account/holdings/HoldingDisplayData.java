@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.holdings;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class HoldingDisplayData extends TKObject {
+public class HoldingDisplayData extends TradeKingObject {
 
   private String accountType;
   private String assetClass;

@@ -7,11 +7,15 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.member;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class UserAccount extends TKObject {
+/**
+ * This is a part of TradeKingUser object that holds data about a trading account. There can ca be multiple trading
+ * accounts for user, so UserAccount objects usually go in a list
+ */
+public class UserAccount extends TradeKingObject {
 
-  private String account;
+  private String accountId;
   private boolean fundTrading;
   private boolean ira;
   private boolean marginTrading;
@@ -23,8 +27,8 @@ public class UserAccount extends TKObject {
   public UserAccount() {
   }
 
-  public UserAccount(String account, boolean fundTrading, boolean ira, boolean marginTrading, String nickName, int optionLevel, boolean shared, boolean stockTrading) {
-    this.account = account;
+  public UserAccount(String accountId, boolean fundTrading, boolean ira, boolean marginTrading, String nickName, int optionLevel, boolean shared, boolean stockTrading) {
+    this.accountId = accountId;
     this.fundTrading = fundTrading;
     this.ira = ira;
     this.marginTrading = marginTrading;
@@ -34,34 +38,62 @@ public class UserAccount extends TKObject {
     this.stockTrading = stockTrading;
   }
 
-  public String getAccount() {
-    return account;
+  /**
+   * @return String Id for account
+   */
+  public String getAccountId() {
+    return accountId;
   }
 
+  /**
+   * Gets Fund Trading flag for an account.
+   *
+   * @return {@code True} if account is Fund Trading, otherwise {@code False}
+   */
   public boolean isFundTrading() {
     return fundTrading;
   }
 
+  /**
+   * @return {@code True} if account is IRA, otherwise {@code False}
+   */
   public boolean isIra() {
     return ira;
   }
 
+  /**
+   * @return {@code True} if account Margin Trading is enabled, otherwise {@code False}
+   */
   public boolean isMarginTrading() {
     return marginTrading;
   }
 
+  /**
+   * Account Nick Name. By default it is First name Last name
+   *
+   * @return account nick name
+   */
   public String getNickName() {
     return nickName;
   }
 
+  /**
+   * @return Option level available for the account
+   */
   public int getOptionLevel() {
     return optionLevel;
   }
 
+  /**
+   * @return {@code True} if account is shared, otherwise {@code False}
+   */
   public boolean isShared() {
     return shared;
   }
 
+  /**
+   * @return {@code True} if account is stock trading, otherwise {@code False}
+   */
   public boolean isStockTrading() {
     return stockTrading;
   }

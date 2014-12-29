@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.holdings;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class AccountHoldingEntry extends TKObject {
+public class AccountHoldingEntry extends TradeKingObject {
 
   public enum HoldingType {
     CACHE(1), LONG(2), SHORT(5);

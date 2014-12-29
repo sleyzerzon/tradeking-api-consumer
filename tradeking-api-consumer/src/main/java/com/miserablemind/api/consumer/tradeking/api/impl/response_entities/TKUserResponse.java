@@ -10,7 +10,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.miserablemind.api.consumer.tradeking.api.domain.member.TKUser;
+import com.miserablemind.api.consumer.tradeking.api.domain.member.TradeKingUser;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserAccount;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserProfile;
 import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
@@ -55,7 +55,7 @@ public class TKUserResponse extends TKResponse {
   private String error;
 
   @JsonIgnore
-  private TKUser user;
+  private TradeKingUser user;
 
   /**
    * For User Profile TradeKing returns an array instead of some sensible normal object
@@ -71,8 +71,7 @@ public class TKUserResponse extends TKResponse {
     boolean resetPassword = userData.get("resetpassword").equals("true");
     boolean resetTradingPassword = userData.get("resettradingpassword").equals("true");
 
-    String jsonArray = mapper.writeValueAsString(userData.get("account"));
-    UserAccount account = mapper.readValue(jsonArray, UserAccount.class);
+    UserAccount[] accounts = (UserAccount[]) this.extractArray(UserAccount[].class, userData, "account", null);
 
     //User Profile Object
     UserProfile userProfile = new UserProfile();
@@ -128,11 +127,11 @@ public class TKUserResponse extends TKResponse {
       }
     }
 
-    this.user = new TKUser(isDisabled, resetPassword, resetTradingPassword, account, userProfile);
+    this.user = new TradeKingUser(isDisabled, resetPassword, resetTradingPassword, accounts, userProfile);
 
   }
 
-  public TKUser getUserData() {
+  public TradeKingUser getUserData() {
     return user;
   }
 

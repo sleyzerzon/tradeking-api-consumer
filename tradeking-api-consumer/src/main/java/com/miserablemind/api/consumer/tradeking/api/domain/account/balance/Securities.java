@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.balance;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class Securities extends TKObject {
+public class Securities extends TradeKingObject {
 
   private double longOptions;
   private double longStocks;

@@ -7,11 +7,11 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Date;
 
-abstract public class Quote extends TKObject {
+abstract public class Quote extends TradeKingObject {
 
   private double ask;
   private String askTime;

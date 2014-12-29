@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class TransactionSecurity extends TKObject {
+public class TransactionSecurity extends TradeKingObject {
 
   private String cusip;
   private String id;

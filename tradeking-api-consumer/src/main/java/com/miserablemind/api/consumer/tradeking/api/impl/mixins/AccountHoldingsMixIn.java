@@ -12,7 +12,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.Acco
 
 import java.util.List;
 
-public class AccountHoldingsMixIn extends TKObjectMixIn {
+public class AccountHoldingsMixIn extends TradeKingKObjectMixIn {
   @JsonProperty("holding")
   List<AccountHoldingEntry> holdingsList;
 

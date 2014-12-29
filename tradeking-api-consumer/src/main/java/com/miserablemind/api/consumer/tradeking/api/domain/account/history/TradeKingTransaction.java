@@ -7,12 +7,12 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Date;
 
 
-public class TKTransaction extends TKObject {
+public class TradeKingTransaction extends TradeKingObject {
 
   private String activity;
   private double amount;
@@ -21,10 +21,10 @@ public class TKTransaction extends TKObject {
   private String symbol;
   private TransactionDetails transactionDetails;
 
-  public TKTransaction() {
+  public TradeKingTransaction() {
   }
 
-  public TKTransaction(String activity, double amount, Date date, String description, String symbol, TransactionDetails transactionDetails) {
+  public TradeKingTransaction(String activity, double amount, Date date, String description, String symbol, TransactionDetails transactionDetails) {
     this.activity = activity;
     this.amount = amount;
     this.date = date;

@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TransactionSecurityMixIn extends TKObjectMixIn {
+public class TransactionSecurityMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("cusip")
   String cusip;

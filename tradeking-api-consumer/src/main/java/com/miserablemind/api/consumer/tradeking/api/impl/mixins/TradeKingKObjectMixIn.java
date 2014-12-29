@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 
-abstract public class TKObjectMixIn {
+abstract public class TradeKingKObjectMixIn {
 
   @JsonAnySetter
   protected void add(String key, Object value) {

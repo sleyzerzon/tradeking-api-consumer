@@ -7,11 +7,11 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.holdings;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.List;
 
-public class AccountHoldings extends TKObject {
+public class AccountHoldings extends TradeKingObject {
 
   public AccountHoldings() {
   }

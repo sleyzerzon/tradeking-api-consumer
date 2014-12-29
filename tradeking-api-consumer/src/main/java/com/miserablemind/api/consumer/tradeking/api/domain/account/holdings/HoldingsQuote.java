@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.holdings;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class HoldingsQuote extends TKObject {
+public class HoldingsQuote extends TradeKingObject {
 
   private double change;
   private String format;

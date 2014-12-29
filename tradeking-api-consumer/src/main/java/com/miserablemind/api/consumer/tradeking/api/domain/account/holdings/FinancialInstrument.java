@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.holdings;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class FinancialInstrument extends TKObject {
+public class FinancialInstrument extends TradeKingObject {
 
   private String cusip;
   private String description;

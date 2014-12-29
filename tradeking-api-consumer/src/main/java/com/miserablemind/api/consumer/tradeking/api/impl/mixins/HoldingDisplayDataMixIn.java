@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class HoldingDisplayDataMixIn extends TKObjectMixIn {
+public class HoldingDisplayDataMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("accounttype")
   String accountType;

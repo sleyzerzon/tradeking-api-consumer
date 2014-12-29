@@ -7,9 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.account.balance;
 
-import com.miserablemind.api.consumer.tradeking.api.domain.TKObject;
+import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-public class AccountBalance extends TKObject {
+public class AccountBalance extends TradeKingObject {
 
   private String accountId;
   private double accountValue;
