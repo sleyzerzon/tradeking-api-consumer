@@ -21,7 +21,7 @@ public class StockQuote extends Quote {
   private double averageDailyPrice90;
   private double beta;
   private int tickDirectionSinceLastBid;
-  private String cusip;
+  private String CUSIP;
   private double lastDividend;
   private Date exDividendDate;
   private char dividendFrequency;
@@ -43,7 +43,7 @@ public class StockQuote extends Quote {
   public StockQuote() {
   }
 
-  public StockQuote(double averageDailyPrice100, double averageDailyPrice200, double averageDailyPrice50, double averageDailyPrice21, double averageDailyPrice30, double averageDailyPrice90, double beta, int tickDirectionSinceLastBid, String cusip, double lastDividend, Date exDividendDate, char dividendFrequency, Date lastDividendPayDate, double earningsPerShare, double indicatedAnnualDividend, int hasOptions, double priorAverageDailyPrice100, double priorAverageDailyPrice200, double priorAverageDailyPrice50, double bookValuePrice, String sharesOutstanding, double oneYearVolatility, double dividendYield, double priceEarning, int sessionVolume) {
+  public StockQuote(double averageDailyPrice100, double averageDailyPrice200, double averageDailyPrice50, double averageDailyPrice21, double averageDailyPrice30, double averageDailyPrice90, double beta, int tickDirectionSinceLastBid, String CUSIP, double lastDividend, Date exDividendDate, char dividendFrequency, Date lastDividendPayDate, double earningsPerShare, double indicatedAnnualDividend, int hasOptions, double priorAverageDailyPrice100, double priorAverageDailyPrice200, double priorAverageDailyPrice50, double bookValuePrice, String sharesOutstanding, double oneYearVolatility, double dividendYield, double priceEarning, int sessionVolume) {
     this.averageDailyPrice100 = averageDailyPrice100;
     this.averageDailyPrice200 = averageDailyPrice200;
     this.averageDailyPrice50 = averageDailyPrice50;
@@ -52,7 +52,7 @@ public class StockQuote extends Quote {
     this.averageDailyPrice90 = averageDailyPrice90;
     this.beta = beta;
     this.tickDirectionSinceLastBid = tickDirectionSinceLastBid;
-    this.cusip = cusip;
+    this.CUSIP = CUSIP;
     this.lastDividend = lastDividend;
     this.exDividendDate = exDividendDate;
     this.dividendFrequency = dividendFrequency;
@@ -103,8 +103,8 @@ public class StockQuote extends Quote {
     return tickDirectionSinceLastBid;
   }
 
-  public String getCusip() {
-    return cusip;
+  public String getCUSIP() {
+    return CUSIP;
   }
 
   public double getLastDividend() {

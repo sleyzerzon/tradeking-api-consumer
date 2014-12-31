@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class FinancialInstrumentMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("cusip")
-  String cusip;
+  String CUSIP;
 
   @JsonProperty("desc")
   String description;

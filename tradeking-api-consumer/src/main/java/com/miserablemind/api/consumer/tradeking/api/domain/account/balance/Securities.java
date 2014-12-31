@@ -9,6 +9,9 @@ package com.miserablemind.api.consumer.tradeking.api.domain.account.balance;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
+/**
+ * Detailed info about securities hold in the account
+ */
 public class Securities extends TradeKingObject {
 
   private double longOptions;
@@ -32,30 +35,65 @@ public class Securities extends TradeKingObject {
     this.total = total;
   }
 
+  /**
+   * Total long options market value.
+   *
+   * @return dollar figure
+   */
   public double getLongOptions() {
     return longOptions;
   }
 
+  /**
+   * Long stock market value
+   *
+   * @return dollar figure
+   */
   public double getLongStocks() {
     return longStocks;
   }
 
+  /**
+   * Short option market value
+   *
+   * @return dollar figure
+   */
   public double getShortOptions() {
     return shortOptions;
   }
 
+  /**
+   * Short stock market value
+   *
+   * @return dollar figure
+   */
   public double getShortStocks() {
     return shortStocks;
   }
 
+  /**
+   * Total options market value
+   *
+   * @return dollar figure
+   */
   public double getOptions() {
     return options;
   }
 
+  /**
+   * Total stock market value
+   *
+   * @return dollar figure
+   */
   public double getStocks() {
     return stocks;
   }
 
+  /**
+   * Total market value (stock & option)
+   *
+   * @return dollar figure
+   */
   public double getTotal() {
     return total;
   }

@@ -12,23 +12,6 @@ import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 public class TopListEntry extends TradeKingObject {
 
-  public enum ListType {
-
-    LOSERS_DOLLARS("toplosers"), LOSERS_PERCENTAGE("toppctlosers"), VOLUME("topvolume"), ACTIVE("topactive"), GAINERS_DOLLARS("topgainers"),
-    GAINERS_PERCENTAGE("toppctgainers"), GAINERS_ACTIVE_DOLLARS("topactivegainersbydollarvalue");
-
-    private final String name;
-
-    ListType(String name) {
-      this.name = name;
-    }
-
-    @Override
-    public String toString() {
-      return this.name;
-    }
-  }
-
   private double change;
   private ChangeSign changeDirection;
   private double lastTradePrice;
@@ -89,4 +72,22 @@ public class TopListEntry extends TradeKingObject {
   public int getVolume() {
     return volume;
   }
+
+  public enum ListType {
+
+    LOSERS_DOLLARS("toplosers"), LOSERS_PERCENTAGE("toppctlosers"), VOLUME("topvolume"), ACTIVE("topactive"), GAINERS_DOLLARS("topgainers"),
+    GAINERS_PERCENTAGE("toppctgainers"), GAINERS_ACTIVE_DOLLARS("topactivegainersbydollarvalue");
+
+    private final String name;
+
+    ListType(String name) {
+      this.name = name;
+    }
+
+    @Override
+    public String toString() {
+      return this.name;
+    }
+  }
+
 }

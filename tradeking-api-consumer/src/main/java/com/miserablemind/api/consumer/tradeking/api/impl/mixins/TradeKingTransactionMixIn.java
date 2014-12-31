@@ -8,14 +8,15 @@
 package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionDetails;
 
 import java.util.Date;
 
-public class TKTransactionMixIn extends TradeKingKObjectMixIn {
+public class TradeKingTransactionMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("activity")
-  String activity;
+  TradeKingTransaction.Type activityType;
 
   @JsonProperty("amount")
   double amount;

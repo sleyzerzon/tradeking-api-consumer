@@ -8,18 +8,15 @@
 package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionSecurity;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class TransactionDetailsMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("commission")
   double commission;
-
-  @JsonProperty("description")
-  ArrayList<String> description;
 
   @JsonProperty("fee")
   double fee;
@@ -56,5 +53,10 @@ public class TransactionDetailsMixIn extends TradeKingKObjectMixIn {
 
   @JsonProperty("transactiontype")
   String transactionType;
+
+  @JsonSetter("description")
+  void setDescription(Object description) {
+  }
+
 
 }

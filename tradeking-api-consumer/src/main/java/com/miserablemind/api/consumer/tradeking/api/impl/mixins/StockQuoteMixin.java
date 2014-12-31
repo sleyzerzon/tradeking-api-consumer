@@ -40,7 +40,7 @@ public class StockQuoteMixin extends QuoteMixIn {
   int tickDirectionSinceLastBid;
 
   @JsonProperty("cusip")
-  private String cusip;
+  private String CUSIP;
 
   @JsonProperty("div")
   double lastDividend;

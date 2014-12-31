@@ -9,29 +9,36 @@ package com.miserablemind.api.consumer.tradeking.api.domain.account.holdings;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
+/**
+ * A very brief quote object that is returned within Holdings entry
+ */
 public class HoldingsQuote extends TradeKingObject {
 
   private double change;
-  private String format;
   private double lastPrice;
 
   public HoldingsQuote() {
   }
 
-  public HoldingsQuote(double change, String format, double lastPrice) {
+  public HoldingsQuote(double change, double lastPrice) {
     this.change = change;
-    this.format = format;
     this.lastPrice = lastPrice;
   }
 
+  /**
+   * Holding asset change for the day
+   *
+   * @return dollar amount change
+   */
   public double getChange() {
     return change;
   }
 
-  public String getFormat() {
-    return format;
-  }
-
+  /**
+   * Last Price of instrument
+   *
+   * @return dollar amount of last price
+   */
   public double getLastPrice() {
     return lastPrice;
   }

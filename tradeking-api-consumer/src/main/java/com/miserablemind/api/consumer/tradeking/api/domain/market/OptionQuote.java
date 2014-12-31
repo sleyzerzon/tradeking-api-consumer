@@ -25,7 +25,7 @@ public class OptionQuote extends Quote {
   private OptionType optionType;
   private String optionRootSymbol;
   private double strikePrice;
-  private String underlyingCusip;
+  private String underlyingCUSIP;
   private String underlyingSymbol;
   private Date expirationDate;
   private String expirationDay;
@@ -41,7 +41,7 @@ public class OptionQuote extends Quote {
   public OptionQuote() {
   }
 
-  public OptionQuote(int contractSize, short daysToExpiration, String fullDescription, OptionDelivery optionDelivery, OptionStyle optionStyle, double impliedVolatility, OptionClass optionClass, String openInterest, double optionValueCalculation, String priorDayOpenInterest, double optionPremiumMultiplier, OptionType optionType, String optionRootSymbol, double strikePrice, String underlyingCusip, String underlyingSymbol, Date expirationDate, String expirationDay, String expirationMonth, String expirationYear, double iRho, double iDelta, double iTheta, double iGamma, double iVega) {
+  public OptionQuote(int contractSize, short daysToExpiration, String fullDescription, OptionDelivery optionDelivery, OptionStyle optionStyle, double impliedVolatility, OptionClass optionClass, String openInterest, double optionValueCalculation, String priorDayOpenInterest, double optionPremiumMultiplier, OptionType optionType, String optionRootSymbol, double strikePrice, String underlyingCUSIP, String underlyingSymbol, Date expirationDate, String expirationDay, String expirationMonth, String expirationYear, double iRho, double iDelta, double iTheta, double iGamma, double iVega) {
     this.contractSize = contractSize;
     this.daysToExpiration = daysToExpiration;
     this.fullDescription = fullDescription;
@@ -56,7 +56,7 @@ public class OptionQuote extends Quote {
     this.optionType = optionType;
     this.optionRootSymbol = optionRootSymbol;
     this.strikePrice = strikePrice;
-    this.underlyingCusip = underlyingCusip;
+    this.underlyingCUSIP = underlyingCUSIP;
     this.underlyingSymbol = underlyingSymbol;
     this.expirationDate = expirationDate;
     this.expirationDay = expirationDay;
@@ -121,8 +121,8 @@ public class OptionQuote extends Quote {
     return strikePrice;
   }
 
-  public String getUnderlyingCusip() {
-    return underlyingCusip;
+  public String getUnderlyingCUSIP() {
+    return underlyingCUSIP;
   }
 
   public String getUnderlyingSymbol() {

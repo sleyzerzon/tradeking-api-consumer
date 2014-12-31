@@ -9,6 +9,9 @@ package com.miserablemind.api.consumer.tradeking.api.domain.account.balance;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
+/**
+ * Holds data about cash in the account
+ */
 public class Cash extends TradeKingObject {
 
   private double accruedInterest;
@@ -36,38 +39,83 @@ public class Cash extends TradeKingObject {
     this.yield = yield;
   }
 
+  /**
+   * Amount of any accrued interest on the account
+   *
+   * @return dollar figure
+   */
   public double getAccruedInterest() {
     return accruedInterest;
   }
 
+  /**
+   * Cash
+   *
+   * @return dollar figure
+   */
   public double getCash() {
     return cash;
   }
 
+  /**
+   * Margin balance (- indicates debit balance, + indicates credit balance)
+   *
+   * @return dollar figure
+   */
   public double getMarginBalance() {
     return marginBalance;
   }
 
+  /**
+   * Cash available
+   *
+   * @return dollar figure
+   */
   public double getCashAvailable() {
     return cashAvailable;
   }
 
+  /**
+   * Money market fund (mmf)
+   *
+   * @return dollar figure
+   */
   public double getMoneyMarketFund() {
     return moneyMarketFund;
   }
 
+  /**
+   * Total cash balance
+   *
+   * @return dollar figure
+   */
   public double getTotal() {
     return total;
   }
 
+  /**
+   * Uncleared deposits.
+   *
+   * @return dollar figure
+   */
   public double getUnclearedDeposits() {
     return unclearedDeposits;
   }
 
+  /**
+   * Unsettled Funds
+   *
+   * @return dollar figure
+   */
   public double getUnsettledFunds() {
     return unsettledFunds;
   }
 
+  /**
+   * Yield
+   *
+   * @return dollar figure (?)
+   */
   public double getYield() {
     return yield;
   }

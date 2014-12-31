@@ -14,9 +14,6 @@ public class HoldingQuoteMixIn extends TradeKingKObjectMixIn {
   @JsonProperty("change")
   private double change;
 
-  @JsonProperty("format")
-  private String format;
-
   @JsonProperty("lastprice")
   private double lastPrice;
 

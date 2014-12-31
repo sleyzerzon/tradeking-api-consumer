@@ -72,7 +72,7 @@ public class OptionQuoteMixIn extends QuoteMixIn {
   double strikePrice;
 
   @JsonProperty("under_cusip")
-  String underlyingCusip;
+  String underlyingCUSIP;
 
   @JsonProperty("undersymbol")
   String underlyingSymbol;
