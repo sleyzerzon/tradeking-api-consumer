@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+/**
+ * Information about current market status
+ */
 public class MarketStatus extends TradeKingObject {
 
   private Calendar date;
@@ -23,6 +26,77 @@ public class MarketStatus extends TradeKingObject {
   private String statusMessage;
   private int serverUnixTimeStamp;
 
+
+  public MarketStatus() {
+
+  }
+
+  public MarketStatus(Calendar date, MarketCondition currentStatus, MarketCondition nextStatus, String nextMarketStatusTime, String statusMessage, int serverUnixTimeStamp) {
+    this.date = date;
+    this.currentStatus = currentStatus;
+    this.nextStatus = nextStatus;
+    this.nextMarketStatusTime = nextMarketStatusTime;
+    this.statusMessage = statusMessage;
+    this.serverUnixTimeStamp = serverUnixTimeStamp;
+  }
+
+  /**
+   * Current market date
+   *
+   * @return Calendar Object
+   */
+  public Calendar getDate() {
+    return date;
+  }
+
+  /**
+   * Current market status as “pre”, “open”, “after”, or “closed”.
+   *
+   * @return MarketCondition enum value
+   */
+  public MarketCondition getCurrentStatus() {
+    return currentStatus;
+  }
+
+  /**
+   * Next market status as “pre”, “open”, “after”, or “closed”.
+   *
+   * @return MarketCondition enum value
+   */
+  public MarketCondition getNextStatus() {
+    return nextStatus;
+  }
+
+  /**
+   * Timestamp of next market session change.
+   *
+   * @return String time, like "16:00:00"
+   */
+  public String getNextMarketStatusTime() {
+    return nextMarketStatusTime;
+  }
+
+  /**
+   * Message of market status as either open or closed.
+   *
+   * @return String message, like "Market is open"
+   */
+  public String getStatusMessage() {
+    return statusMessage;
+  }
+
+  /**
+   * Unix Time Stamp. Could be good for calibrating your server with TK
+   *
+   * @return integer timestamp
+   */
+  public int getServerUnixTimeStamp() {
+    return serverUnixTimeStamp;
+  }
+
+  /**
+   * Market condition
+   */
   public enum MarketCondition {
 
     PRE_OPEN("pre"), OPEN("open"), AFTER_MARKET("after"), CLOSED("closed");
@@ -52,42 +126,5 @@ public class MarketStatus extends TradeKingObject {
       throw new NoSuchElementException(name + "not found");
     }
 
-  }
-
-  public MarketStatus() {
-
-  }
-
-  public MarketStatus(Calendar date, MarketCondition currentStatus, MarketCondition nextStatus, String nextMarketStatusTime, String statusMessage, int serverUnixTimeStamp) {
-    this.date = date;
-    this.currentStatus = currentStatus;
-    this.nextStatus = nextStatus;
-    this.nextMarketStatusTime = nextMarketStatusTime;
-    this.statusMessage = statusMessage;
-    this.serverUnixTimeStamp = serverUnixTimeStamp;
-  }
-
-  public Calendar getDate() {
-    return date;
-  }
-
-  public MarketCondition getCurrentStatus() {
-    return currentStatus;
-  }
-
-  public MarketCondition getNextStatus() {
-    return nextStatus;
-  }
-
-  public String getNextMarketStatusTime() {
-    return nextMarketStatusTime;
-  }
-
-  public String getStatusMessage() {
-    return statusMessage;
-  }
-
-  public int getServerUnixTimeStamp() {
-    return serverUnixTimeStamp;
   }
 }
