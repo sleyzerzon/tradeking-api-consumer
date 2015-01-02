@@ -49,7 +49,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
     String tickersParamString = this.buildCommaSeparatedParameterValue(tickers);
 
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
     parameters.set("symbols", tickersParamString);
 
     URI url = this.buildUri(URL_QUOTES, parameters);
@@ -74,7 +74,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
     String tickersParamString = this.buildCommaSeparatedParameterValue(new String[]{optionSymbol});
 
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
     parameters.set("symbols", tickersParamString);
 
     try {
@@ -94,7 +94,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
     String queryString = "put_call-eq:" + type;
 
     //Strike Prices
@@ -143,21 +143,21 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
   }
 
   @Override
-  public NewsArticle[] getNewsList(String ticker, int limit) {
+  public NewsHeadline[] getNewsList(String ticker, int limit) {
     return this.getNewsList(new String[]{ticker}, limit, null, null, null);
   }
 
   @Override
-  public NewsArticle[] getNewsList(String[] keywords, int limit) {
+  public NewsHeadline[] getNewsList(String[] keywords, int limit) {
     return this.getNewsList(null, limit, keywords, null, null);
   }
 
 
-  protected NewsArticle[] getNewsList(String[] tickers, Integer limit, String[] keywords, Calendar startDate, Calendar endDate) {
+  protected NewsHeadline[] getNewsList(String[] tickers, Integer limit, String[] keywords, Calendar startDate, Calendar endDate) {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 
 
     if (null != tickers) parameters.set("symbols", this.buildCommaSeparatedParameterValue(tickers));
@@ -188,10 +188,10 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
   }
 
   @Override
-  public NewsArticle getNewsById(String newsId) {
+  public NewsStory getNewsById(String newsId) {
     URI url = this.buildUri(String.format(URL_GET_NEWS, newsId));
 
-    ResponseEntity<TKNewsArticleGetResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticleGetResponse.class);
+    ResponseEntity<TKNewsArticleStoryResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticleStoryResponse.class);
 
     if (null != response.getBody().getError())
       throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
@@ -214,7 +214,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
   }
 
   @Override
-  public TopListEntry[] getTopList(TopListEntry.ListType listType) {
+  public TopListEntry[] getTopList(TopListType listType) {
     URI url = this.buildUri(String.format(URL_TOP_LIST, listType));
     ResponseEntity<TKTopListResponse> response = this.getRestTemplate().getForEntity(url, TKTopListResponse.class);
 
@@ -229,29 +229,29 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
   @Override
   public TimeSalesQuote[] getDataPoints(String ticker, int pageNumber, int perPage) {
     int offset = (pageNumber - 1) * perPage + 1;
-    return this.getDataPoints(ticker, TimeSalesQuote.Interval.TICK, perPage, offset, null, null);
+    return this.getDataPoints(ticker, TimeSalesInterval.TICK, perPage, offset, null, null);
   }
 
   //multiday
   @Override
-  public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesQuote.Interval interval) {
+  public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesInterval interval) {
     return this.getDataPoints(ticker, interval, null, null, startDate, endDate);
   }
 
 
   // there is no universal usage of this one, see overloaded methods
-  protected TimeSalesQuote[] getDataPoints(String ticker, TimeSalesQuote.Interval interval, Integer countPerPage,
+  protected TimeSalesQuote[] getDataPoints(String ticker, TimeSalesInterval interval, Integer countPerPage,
                                            Integer offset, Calendar startDate, Calendar endDate) {
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 
     parameters.set("symbols", ticker);
 
     if (null != interval) {
       parameters.set("interval", String.valueOf(interval));
-      if (interval == TimeSalesQuote.Interval.TICK) {
+      if (interval == TimeSalesInterval.TICK) {
 
         if (null != countPerPage) {
           parameters.set("rpp", String.valueOf(countPerPage));

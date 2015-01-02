@@ -11,6 +11,9 @@ import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Calendar;
 
+/**
+ * Time and sales quote data. This is a point at a time that shows momentum of the stock.
+ */
 public class TimeSalesQuote extends TradeKingObject {
 
   private Calendar date;
@@ -39,55 +42,85 @@ public class TimeSalesQuote extends TradeKingObject {
     this.cumulativeVolume = cumulativeVolume;
   }
 
+  /**
+   * Date and time
+   *
+   * @return Calendar object
+   */
   public Calendar getIntervalStartTime() {
     return intervalStartTime;
   }
 
+  /**
+   * High Trade Price
+   *
+   * @return dollar figure
+   */
   public double getHighPrice() {
     return highPrice;
   }
 
+  /**
+   * Low Trade Price
+   *
+   * @return dollar figure
+   */
   public double getLowPrice() {
     return lowPrice;
   }
 
+  /**
+   * Volume of trades
+   *
+   * @return volume number
+   */
   public int getVolume() {
     return volume;
   }
 
+  /**
+   * Last trade price
+   *
+   * @return dollar figure
+   */
   public double getLastPrice() {
     return lastPrice;
   }
 
+  /**
+   * Open trade price
+   *
+   * @return dollar figure
+   */
   public double getOpenTradePrice() {
     return openTradePrice;
   }
 
+  /**
+   * Timestamp
+   *
+   * @return integer timestamp
+   */
   public int getTimestamp() {
     return timestamp;
   }
 
+  /**
+   * Cumulative volume
+   *
+   * @return volume number
+   */
   public int getCumulativeVolume() {
     return cumulativeVolume;
   }
 
+  /**
+   * Date
+   *
+   * @return Date object
+   */
   public Calendar getDate() {
     return date;
   }
 
-  public enum Interval {
-    MINUTES_1("1min"), MINUTES_5("5min"), TICK("tick");
-    private final String name;
-
-    Interval(String name) {
-      this.name = name;
-    }
-
-    @Override
-    public String toString() {
-      return this.name;
-    }
-
-
-  }
 }

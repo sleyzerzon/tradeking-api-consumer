@@ -10,6 +10,8 @@ package com.miserablemind.api.consumer.tradeking.api;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
 import com.miserablemind.api.consumer.tradeking.api.impl.OptionQuoteNotFoundException;
+import com.miserablemind.api.consumer.tradeking.api.impl.TimeSalesInterval;
+import com.miserablemind.api.consumer.tradeking.api.impl.TopListType;
 
 import java.util.Calendar;
 
@@ -83,7 +85,7 @@ public interface MarketOperations {
    * @param limit  limit how many to return
    * @return a list of news article objects, it will not have the story in it. For story see MarketOperations#getNewsById
    */
-  public NewsArticle[] getNewsList(String ticker, int limit);
+  public NewsHeadline[] getNewsList(String ticker, int limit);
 
   /**
    * This call will return a listing of the newest news headlines based on the current keyword search.
@@ -93,7 +95,7 @@ public interface MarketOperations {
    * @return a list of news article objects, it will not have the story in it. For story see MarketOperations#getNewsById
    */
   //todo: newsheadline object
-  public NewsArticle[] getNewsList(String[] keywords, int limit);
+  public NewsHeadline[] getNewsList(String[] keywords, int limit);
 
   /**
    * Gets a news article by newsId with a full story in it
@@ -101,7 +103,7 @@ public interface MarketOperations {
    * @param newsId id of the news article retrieved by news search methods above
    * @return news article object with full story populated in them
    */
-  public NewsArticle getNewsById(String newsId);
+  public NewsHeadline getNewsById(String newsId);
 
   /**
    * This call will return the current state of the market, the time of the next state change (if the market is open),
@@ -117,7 +119,7 @@ public interface MarketOperations {
    * @param listType List type
    * @return list of top stocks for the type
    */
-  public TopListEntry[] getTopList(TopListEntry.ListType listType);
+  public TopListEntry[] getTopList(TopListType listType);
 
   /**
    * This call will return time and sales quote data based on a symbol passed as a  parameter. It assumes the interval
@@ -140,6 +142,6 @@ public interface MarketOperations {
    * @param interval  time interval between 2 data points
    * @return data points for the stock
    */
-  public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesQuote.Interval interval);
+  public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesInterval interval);
 
 }

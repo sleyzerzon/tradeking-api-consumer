@@ -9,7 +9,9 @@ package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-
+/**
+ * Top list entry. Top List are "biggest volumes today", "biggest gainers, losers", etc.
+ */
 public class TopListEntry extends TradeKingObject {
 
   private double change;
@@ -37,57 +39,85 @@ public class TopListEntry extends TradeKingObject {
     this.volume = volume;
   }
 
+  /**
+   * Change since prior day close (cl)
+   *
+   * @return dollar figure
+   */
   public double getChange() {
     return change;
   }
 
+  /**
+   * Change sign: up, down, did not change.
+   *
+   * @return enum with a change value
+   */
   public ChangeSign getChangeDirection() {
     return changeDirection;
   }
 
+  /**
+   * Last trade price
+   *
+   * @return dollar figure
+   */
   public double getLastTradePrice() {
     return lastTradePrice;
   }
 
+  /**
+   * Company name
+   *
+   * @return String company name
+   */
   public String getCompanyName() {
     return companyName;
   }
 
+  /**
+   * Percentage change from prior day close
+   *
+   * @return percent String todo://perhaps double is better
+   */
   public String getPercentageChange() {
     return percentageChange;
   }
 
+  /**
+   * Prior day close
+   *
+   * @return dollar figure
+   */
   public double getPriorDayClosePrice() {
     return priorDayClosePrice;
   }
 
+  /**
+   * Rank within list returned
+   *
+   * @return integer rank number
+   */
   public int getRankInTheList() {
     return rankInTheList;
   }
 
+  /**
+   * Ticker symbol
+   *
+   * @return String ticker symbol
+   */
   public String getTicker() {
     return ticker;
   }
 
+  /**
+   * Today's cumulative volume
+   *
+   * @return integer volume number
+   */
   public int getVolume() {
     return volume;
-  }
-
-  public enum ListType {
-
-    LOSERS_DOLLARS("toplosers"), LOSERS_PERCENTAGE("toppctlosers"), VOLUME("topvolume"), ACTIVE("topactive"), GAINERS_DOLLARS("topgainers"),
-    GAINERS_PERCENTAGE("toppctgainers"), GAINERS_ACTIVE_DOLLARS("topactivegainersbydollarvalue");
-
-    private final String name;
-
-    ListType(String name) {
-      this.name = name;
-    }
-
-    @Override
-    public String toString() {
-      return this.name;
-    }
   }
 
 }

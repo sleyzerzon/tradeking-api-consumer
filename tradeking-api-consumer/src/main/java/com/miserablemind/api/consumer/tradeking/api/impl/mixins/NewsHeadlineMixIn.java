@@ -12,16 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Calendar;
 
 
-public class NewsArticleMixIn {
+public class NewsHeadlineMixIn {
 
   @JsonProperty("id")
   private double id;
 
   @JsonProperty("headline")
   private String headline;
-
-  @JsonProperty("story")
-  private String story;
 
   @JsonProperty("date")
   private Calendar date;

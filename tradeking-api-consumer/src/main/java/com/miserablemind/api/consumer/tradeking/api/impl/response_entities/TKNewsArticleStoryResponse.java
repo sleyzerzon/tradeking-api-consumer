@@ -9,17 +9,17 @@ package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.miserablemind.api.consumer.tradeking.api.domain.market.NewsArticle;
+import com.miserablemind.api.consumer.tradeking.api.domain.market.NewsStory;
 import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
 
 import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 
-public class TKNewsArticleGetResponse extends TKResponse {
+public class TKNewsArticleStoryResponse extends TKResponse {
 
   private String error;
 
-  private NewsArticle article;
+  private NewsStory article;
 
   @JsonSetter("article")
   public void setArticle(LinkedHashMap articlesResponse) throws Exception {
@@ -32,14 +32,14 @@ public class TKNewsArticleGetResponse extends TKResponse {
     mapper.setDateFormat(dateFormat);
     mapper.registerModule(new TradeKingModule());
 
-    this.article = mapper.readValue(mapper.writeValueAsString(articlesResponse), NewsArticle.class);
+    this.article = mapper.readValue(mapper.writeValueAsString(articlesResponse), NewsStory.class);
   }
 
   public String getError() {
     return error;
   }
 
-  public NewsArticle getArticle() {
+  public NewsStory getArticle() {
     return article;
   }
 

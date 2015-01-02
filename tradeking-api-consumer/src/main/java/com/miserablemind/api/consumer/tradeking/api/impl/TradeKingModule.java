@@ -53,7 +53,8 @@ public class TradeKingModule extends SimpleModule {
     context.setMixInAnnotations(TransactionSecurity.class, TransactionSecurityMixIn.class);
     context.setMixInAnnotations(UserAccount.class, UserAccountMixIn.class);
     context.setMixInAnnotations(Cash.class, CashMixIn.class);
-    context.setMixInAnnotations(NewsArticle.class, NewsArticleMixIn.class);
+    context.setMixInAnnotations(NewsHeadline.class, NewsHeadlineMixIn.class);
+    context.setMixInAnnotations(NewsStory.class, NewsStoryMixIn.class);
     context.setMixInAnnotations(TopListEntry.class, TopListEntryMixIn.class);
     context.setMixInAnnotations(TimeSalesQuote.class, TimeSalesQuoteMixIn.class);
   }

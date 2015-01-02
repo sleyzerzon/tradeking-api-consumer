@@ -18,13 +18,13 @@ public class StreamQuoteMixIn {
   double askPrice;
 
   @JsonProperty("asksz")
-  int askLatestSizeHundreds;
+  long askLatestSizeHundreds;
 
   @JsonProperty("bid")
-  double bidPriceHundreds;
+  double bidPrice;
 
   @JsonProperty("bidsz")
-  int bidLatestSize;
+  long bidLatestSize;
 
   @JsonProperty("bidtick")
   int bidTick;
