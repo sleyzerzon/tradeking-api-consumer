@@ -21,7 +21,7 @@ public class StreamQuoteEvent extends TradeKingObject {
   private long askLatestSizeHundreds;
   private double bidPrice;
   private long bidLatestSizeHundreds;
-  private int bidTick;
+  private Integer bidTick;
   private Calendar dateTime;
   private String exchangeCode;
   private String conditionCode;
@@ -31,7 +31,7 @@ public class StreamQuoteEvent extends TradeKingObject {
   public StreamQuoteEvent() {
   }
 
-  public StreamQuoteEvent(double askPrice, long askLatestSizeHundreds, double bidPrice, long bidLatestSize, int bidTick, Calendar dateTime, String exchangeCode, String conditionCode, String symbol, int timeStamp) {
+  public StreamQuoteEvent(double askPrice, long askLatestSizeHundreds, double bidPrice, long bidLatestSize, Integer bidTick, Calendar dateTime, String exchangeCode, String conditionCode, String symbol, int timeStamp) {
     this.askPrice = askPrice;
     this.askLatestSizeHundreds = askLatestSizeHundreds;
     this.bidPrice = bidPrice;
@@ -81,11 +81,12 @@ public class StreamQuoteEvent extends TradeKingObject {
   }
 
   /**
-   * todo: whats that
+   * "An indication of whether the latest bid price is higher, lower or the same as the previous bid"
+   * TK returns 1, 3 or null. No documentation provided. Seems like 1 is down, 3 is up
    *
-   * @return
+   * @return bid tick id if provided, otherwise {@code null}
    */
-  public int getBidTick() {
+  public Integer getBidTick() {
     return bidTick;
   }
 
@@ -108,7 +109,7 @@ public class StreamQuoteEvent extends TradeKingObject {
   }
 
   /**
-   * Condition code of quote
+   * Condition of quote, i.e. "Regular, two-sided open quote automated"
    *
    * @return String condition description
    */

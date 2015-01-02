@@ -10,7 +10,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.OptionQuote;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class OptionQuoteMixIn extends QuoteMixIn {
 
@@ -78,7 +78,7 @@ public class OptionQuoteMixIn extends QuoteMixIn {
   String underlyingSymbol;
 
   @JsonProperty("xdate")
-  Date expirationDate;
+  Calendar expirationDate;
 
   @JsonProperty("xday")
   String expirationDay;

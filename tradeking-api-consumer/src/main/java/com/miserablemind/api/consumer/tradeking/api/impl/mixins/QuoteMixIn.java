@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.ChangeSign;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.Quote;
 
-import java.util.Date;
+import java.util.Calendar;
 
 abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
@@ -40,13 +40,13 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
   double previousClose;
 
   @JsonProperty("date")
-  Date dateLastTrade;
+  Calendar dateLastTrade;
 
   @JsonProperty("date_time")
-  Date timeLastTrade;
+  Calendar timeLastTrade;
 
   @JsonProperty("dollar_value")
-  double volumeToday;
+  double dollarValue;
 
   @JsonProperty("exch")
   String exchangeCode;
@@ -79,7 +79,7 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
   String changePercentage;
 
   @JsonProperty("pchg_sign")
-  String changePercentageSign;
+  ChangeSign changePercentageSign;
 
   @JsonProperty("pcls")
   double priorDayClose;
@@ -91,7 +91,7 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
   double priorDayLow;
 
   @JsonProperty("pr_date")
-  Date dateOfPriorTradeDay;
+  Calendar dateOfPriorTradeDay;
 
   @JsonProperty("popn")
   double priorDayOpen;
@@ -100,7 +100,7 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
   double priorDayChange;
 
   @JsonProperty("pvol")
-  int priodDayVolume;
+  int priorDayVolume;
 
   @JsonProperty("secclass")
   Quote.SecurityClass securityClass;
@@ -115,7 +115,7 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
   Quote.TradeCondition tradeCondition;
 
   @JsonProperty("timestamp")
-  Date timeStamp;
+  Calendar timeStamp;
 
   @JsonProperty("tr_num")
   int tradeCountSinceOpen;
@@ -136,16 +136,16 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
   double week52high;
 
   @JsonProperty("wk52hidate")
-  Date week52highDate;
+  Calendar week52highDate;
 
   @JsonProperty("wk52lodate")
-  Date week52lowDate;
+  Calendar week52lowDate;
 
   @JsonProperty("wk52lo")
   double week52low;
 
   @JsonProperty("datetime")
-  Date dateTime;
+  Calendar dateTime;
 
   @JsonProperty("sesn_vl")
   int sessionVolume;

@@ -24,10 +24,10 @@ public class StreamQuoteMixIn {
   double bidPrice;
 
   @JsonProperty("bidsz")
-  long bidLatestSize;
+  long bidLatestSizeHundreds;
 
   @JsonProperty("bidtick")
-  int bidTick;
+  Integer bidTick;
 
   @JsonProperty("datetime")
   Calendar dateTime;

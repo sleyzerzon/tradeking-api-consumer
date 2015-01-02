@@ -10,10 +10,9 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class StockQuoteMixin extends QuoteMixIn {
-
 
   @JsonProperty("adp_100")
   double averageDailyPrice100;
@@ -25,19 +24,19 @@ public class StockQuoteMixin extends QuoteMixIn {
   double averageDailyPrice50;
 
   @JsonProperty("adv_21")
-  double averageDailyPrice21;
+  long averageDailyVolume21;
 
   @JsonProperty("adv_30")
-  double averageDailyPrice30;
+  long averageDailyVolume30;
 
   @JsonProperty("adv_90")
-  double averageDailyPrice90;
+  long averageDailyVolume90;
 
   @JsonProperty("beta")
   double beta;
 
   @JsonProperty("bidtick")
-  int tickDirectionSinceLastBid;
+  Integer tickDirectionSinceLastBid;
 
   @JsonProperty("cusip")
   private String CUSIP;
@@ -46,13 +45,13 @@ public class StockQuoteMixin extends QuoteMixIn {
   double lastDividend;
 
   @JsonProperty("divexdate")
-  Date exDividendDate;
+  Calendar exDividendDate;
 
   @JsonProperty("divfreq")
   char dividendFrequency;
 
   @JsonProperty("divpaydt")
-  Date lastDividendPayDate;
+  Calendar lastDividendPayDate;
 
   @JsonProperty("eps")
   double earningsPerShare;
@@ -82,9 +81,12 @@ public class StockQuoteMixin extends QuoteMixIn {
   double oneYearVolatility;
 
   @JsonProperty("yield")
-  double dividendYield;
+  Double dividendYield;
 
   @JsonProperty("pe")
   double priceEarning;
+
+  @JsonProperty("sessionVolume")
+  long sessionVolume;
 
 }
