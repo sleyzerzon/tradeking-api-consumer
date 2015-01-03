@@ -25,7 +25,7 @@ public class BaseTemplate {
     this.restTemplate = restTemplate;
   }
 
-  private static final String URL_BASE = "https://api.tradeking.com/v1/";
+  public static final String URL_BASE = "https://api.tradeking.com/v1/";
 
   protected RestTemplate getRestTemplate() {
     return this.restTemplate;

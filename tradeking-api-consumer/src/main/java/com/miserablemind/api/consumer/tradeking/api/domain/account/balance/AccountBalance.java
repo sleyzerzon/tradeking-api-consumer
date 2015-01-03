@@ -121,4 +121,45 @@ public class AccountBalance extends TradeKingObject {
   public Securities getSecuritiesSummary() {
     return securitiesSummary;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AccountBalance)) return false;
+
+    AccountBalance that = (AccountBalance) o;
+
+    if (Double.compare(that.accountValue, accountValue) != 0) return false;
+    if (Double.compare(that.backOfficeHouseExcess, backOfficeHouseExcess) != 0) return false;
+    if (Double.compare(that.fedCall, fedCall) != 0) return false;
+    if (Double.compare(that.houseCall, houseCall) != 0) return false;
+    if (Double.compare(that.maintenanceExcess, maintenanceExcess) != 0) return false;
+    if (!accountId.equals(that.accountId)) return false;
+    if (!buyingPowerSummary.equals(that.buyingPowerSummary)) return false;
+    if (!cashSummary.equals(that.cashSummary)) return false;
+    if (!securitiesSummary.equals(that.securitiesSummary)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    result = accountId.hashCode();
+    temp = Double.doubleToLongBits(accountValue);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(backOfficeHouseExcess);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + buyingPowerSummary.hashCode();
+    temp = Double.doubleToLongBits(fedCall);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(houseCall);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(maintenanceExcess);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + cashSummary.hashCode();
+    result = 31 * result + securitiesSummary.hashCode();
+    return result;
+  }
 }

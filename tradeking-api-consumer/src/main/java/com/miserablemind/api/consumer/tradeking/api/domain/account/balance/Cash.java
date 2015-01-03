@@ -119,4 +119,49 @@ public class Cash extends TradeKingObject {
   public double getYield() {
     return yield;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Cash)) return false;
+
+    Cash cash1 = (Cash) o;
+
+    if (Double.compare(cash1.accruedInterest, accruedInterest) != 0) return false;
+    if (Double.compare(cash1.cash, cash) != 0) return false;
+    if (Double.compare(cash1.cashAvailable, cashAvailable) != 0) return false;
+    if (Double.compare(cash1.marginBalance, marginBalance) != 0) return false;
+    if (Double.compare(cash1.moneyMarketFund, moneyMarketFund) != 0) return false;
+    if (Double.compare(cash1.total, total) != 0) return false;
+    if (Double.compare(cash1.unclearedDeposits, unclearedDeposits) != 0) return false;
+    if (Double.compare(cash1.unsettledFunds, unsettledFunds) != 0) return false;
+    if (Double.compare(cash1.yield, yield) != 0) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    temp = Double.doubleToLongBits(accruedInterest);
+    result = (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(cash);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(marginBalance);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(cashAvailable);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(moneyMarketFund);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(total);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(unclearedDeposits);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(unsettledFunds);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(yield);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    return result;
+  }
 }

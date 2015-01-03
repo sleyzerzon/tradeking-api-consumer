@@ -97,4 +97,43 @@ public class Securities extends TradeKingObject {
   public double getTotal() {
     return total;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Securities)) return false;
+
+    Securities that = (Securities) o;
+
+    if (Double.compare(that.longOptions, longOptions) != 0) return false;
+    if (Double.compare(that.longStocks, longStocks) != 0) return false;
+    if (Double.compare(that.options, options) != 0) return false;
+    if (Double.compare(that.shortOptions, shortOptions) != 0) return false;
+    if (Double.compare(that.shortStocks, shortStocks) != 0) return false;
+    if (Double.compare(that.stocks, stocks) != 0) return false;
+    if (Double.compare(that.total, total) != 0) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    temp = Double.doubleToLongBits(longOptions);
+    result = (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(longStocks);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(shortOptions);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(shortStocks);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(options);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(stocks);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(total);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    return result;
+  }
 }
