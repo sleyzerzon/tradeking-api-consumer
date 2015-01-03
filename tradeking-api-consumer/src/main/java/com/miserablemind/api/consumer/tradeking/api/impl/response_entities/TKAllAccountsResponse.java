@@ -15,7 +15,6 @@ import java.util.LinkedHashMap;
 
 public class TKAllAccountsResponse extends TKResponse {
 
-
   private String error;
 
   private AccountsSummary[] accounts;

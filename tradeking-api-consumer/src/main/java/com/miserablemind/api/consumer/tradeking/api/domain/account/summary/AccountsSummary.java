@@ -54,4 +54,26 @@ public class AccountsSummary extends TradeKingObject {
   public AccountHoldings getAccountHoldings() {
     return accountHoldings;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AccountsSummary)) return false;
+
+    AccountsSummary that = (AccountsSummary) o;
+
+    if (!accountBalance.equals(that.accountBalance)) return false;
+    if (!accountHoldings.equals(that.accountHoldings)) return false;
+    if (!accountId.equals(that.accountId)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = accountId.hashCode();
+    result = 31 * result + accountBalance.hashCode();
+    result = 31 * result + accountHoldings.hashCode();
+    return result;
+  }
 }

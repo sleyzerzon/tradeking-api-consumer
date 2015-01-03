@@ -167,4 +167,54 @@ public class AccountHoldingEntry extends TradeKingObject {
       return this.value.toString();
     }
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AccountHoldingEntry)) return false;
+
+    AccountHoldingEntry that = (AccountHoldingEntry) o;
+
+    if (Double.compare(that.SODCostBasis, SODCostBasis) != 0) return false;
+    if (Double.compare(that.costBasis, costBasis) != 0) return false;
+    if (Double.compare(that.gainLoss, gainLoss) != 0) return false;
+    if (Double.compare(that.marketValue, marketValue) != 0) return false;
+    if (Double.compare(that.marketValueChange, marketValueChange) != 0) return false;
+    if (Double.compare(that.price, price) != 0) return false;
+    if (Double.compare(that.purchasePrice, purchasePrice) != 0) return false;
+    if (Double.compare(that.quantity, quantity) != 0) return false;
+    if (!displayData.equals(that.displayData)) return false;
+    if (holdingType != that.holdingType) return false;
+    if (!holdingsQuote.equals(that.holdingsQuote)) return false;
+    if (!instrument.equals(that.instrument)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    result = holdingType.hashCode();
+    temp = Double.doubleToLongBits(costBasis);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + displayData.hashCode();
+    temp = Double.doubleToLongBits(gainLoss);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + instrument.hashCode();
+    temp = Double.doubleToLongBits(marketValue);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(marketValueChange);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(price);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(purchasePrice);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(quantity);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + holdingsQuote.hashCode();
+    temp = Double.doubleToLongBits(SODCostBasis);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    return result;
+  }
 }

@@ -12,7 +12,8 @@ public class BaseTemplateTest {
 
   protected TradeKingTemplate tradeKing;
 
-  protected String accountId = "TestAccount1";
+  protected TestObjectsRepository mockData = new TestObjectsRepository();
+
 
   @Before
   public void setup() {

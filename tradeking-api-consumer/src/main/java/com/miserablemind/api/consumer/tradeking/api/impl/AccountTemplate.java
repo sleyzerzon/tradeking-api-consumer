@@ -37,7 +37,7 @@ public class AccountTemplate extends BaseTemplate implements AccountOperations {
   }
 
   @Override
-  public AccountsSummary[] getAccount() {
+  public AccountsSummary[] getAccounts() {
 
     URI url = this.buildUri(URL_ACCOUNTS);
     ResponseEntity<TKAllAccountsResponse> response = this.getRestTemplate().getForEntity(url, TKAllAccountsResponse.class);

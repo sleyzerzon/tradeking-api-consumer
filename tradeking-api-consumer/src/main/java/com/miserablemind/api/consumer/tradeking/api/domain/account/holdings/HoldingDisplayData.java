@@ -131,4 +131,40 @@ public class HoldingDisplayData extends TradeKingObject {
   public String getSymbol() {
     return symbol;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof HoldingDisplayData)) return false;
+
+    HoldingDisplayData that = (HoldingDisplayData) o;
+
+    if (quantity != that.quantity) return false;
+    if (!accountType.equals(that.accountType)) return false;
+    if (!assetClass.equals(that.assetClass)) return false;
+    if (!change.equals(that.change)) return false;
+    if (!costBasis.equals(that.costBasis)) return false;
+    if (!description.equals(that.description)) return false;
+    if (!lastPrice.equals(that.lastPrice)) return false;
+    if (!marketValue.equals(that.marketValue)) return false;
+    if (!marketValueChange.equals(that.marketValueChange)) return false;
+    if (!symbol.equals(that.symbol)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = accountType.hashCode();
+    result = 31 * result + assetClass.hashCode();
+    result = 31 * result + change.hashCode();
+    result = 31 * result + costBasis.hashCode();
+    result = 31 * result + description.hashCode();
+    result = 31 * result + lastPrice.hashCode();
+    result = 31 * result + marketValue.hashCode();
+    result = 31 * result + marketValueChange.hashCode();
+    result = 31 * result + quantity;
+    result = 31 * result + symbol.hashCode();
+    return result;
+  }
 }

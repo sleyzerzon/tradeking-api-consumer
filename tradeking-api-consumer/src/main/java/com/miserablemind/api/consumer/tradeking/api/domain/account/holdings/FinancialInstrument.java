@@ -76,4 +76,33 @@ public class FinancialInstrument extends TradeKingObject {
   public String getSymbol() {
     return symbol;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof FinancialInstrument)) return false;
+
+    FinancialInstrument that = (FinancialInstrument) o;
+
+    if (Double.compare(that.factor, factor) != 0) return false;
+    if (!CUSIP.equals(that.CUSIP)) return false;
+    if (!description.equals(that.description)) return false;
+    if (!securityType.equals(that.securityType)) return false;
+    if (!symbol.equals(that.symbol)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    result = CUSIP.hashCode();
+    result = 31 * result + description.hashCode();
+    temp = Double.doubleToLongBits(factor);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + securityType.hashCode();
+    result = 31 * result + symbol.hashCode();
+    return result;
+  }
 }

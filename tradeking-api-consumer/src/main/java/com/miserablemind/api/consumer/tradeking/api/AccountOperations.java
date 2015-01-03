@@ -21,7 +21,7 @@ public interface AccountOperations {
    *
    * @return summary object
    */
-  public AccountsSummary[] getAccount();
+  public AccountsSummary[] getAccounts();
 
   /**
    * This call will return detailed balance information for the accountId

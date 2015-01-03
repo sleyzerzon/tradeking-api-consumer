@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.domain.account.holdings;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * This class contains a list of the holding entries and a field that has a total
@@ -19,18 +19,18 @@ public class AccountHoldings extends TradeKingObject {
   public AccountHoldings() {
   }
 
-  public AccountHoldings(List<AccountHoldingEntry> holdingsList, double totalSecurities) {
+  public AccountHoldings(AccountHoldingEntry[] holdingsList, double totalSecurities) {
     this.holdingsList = holdingsList;
     this.totalSecurities = totalSecurities;
   }
 
-  private List<AccountHoldingEntry> holdingsList;
+  private AccountHoldingEntry[] holdingsList;
   private double totalSecurities;
 
   /**
    * @return list of holding entry objects
    */
-  public List<AccountHoldingEntry> getHoldingsList() {
+  public AccountHoldingEntry[] getHoldingsList() {
     return holdingsList;
   }
 
@@ -41,5 +41,28 @@ public class AccountHoldings extends TradeKingObject {
    */
   public double getTotalSecurities() {
     return totalSecurities;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AccountHoldings)) return false;
+
+    AccountHoldings that = (AccountHoldings) o;
+
+    if (Double.compare(that.totalSecurities, totalSecurities) != 0) return false;
+    if (!Arrays.equals(holdingsList, that.holdingsList)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    result = Arrays.hashCode(holdingsList);
+    temp = Double.doubleToLongBits(totalSecurities);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    return result;
   }
 }
