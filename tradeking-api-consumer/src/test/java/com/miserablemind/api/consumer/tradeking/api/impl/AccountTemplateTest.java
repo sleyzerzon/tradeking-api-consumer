@@ -2,6 +2,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.AccountsSummary;
 import org.junit.Test;
 import org.springframework.http.MediaType;
@@ -20,7 +21,7 @@ public class AccountTemplateTest extends BaseTemplateTest {
   public void getAccount_singleAccount() {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts.json"))
       .andExpect(method(GET))
-      .andRespond(withSuccess(jsonResource("account/account_summary_single"), MediaType.APPLICATION_JSON));
+      .andRespond(withSuccess(jsonResource("account/summary_single"), MediaType.APPLICATION_JSON));
     AccountsSummary[] accounts = tradeKing.getAccountOperations().getAccounts();
     AccountsSummary account = accounts[0];
 
@@ -38,10 +39,21 @@ public class AccountTemplateTest extends BaseTemplateTest {
   }
 
   @Test
+  public void getAccount_multiple() {
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts.json"))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("account/summary_multiple"), MediaType.APPLICATION_JSON));
+    AccountsSummary[] accounts = tradeKing.getAccountOperations().getAccounts();
+
+    assertEquals("Summary 1 Objects are not equal", accounts[0], mockData.accountsSummary1);
+    assertEquals("Summary 2 Objects are not equal", accounts[1], mockData.accountsSummary2);
+  }
+
+  @Test
   public void getAccountBalance() {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/balances.json"))
       .andExpect(method(GET))
-      .andRespond(withSuccess(jsonResource("account/account_balance"), MediaType.APPLICATION_JSON));
+      .andRespond(withSuccess(jsonResource("account/balance"), MediaType.APPLICATION_JSON));
     AccountBalance jsonBalance = tradeKing.getAccountOperations().getAccountBalance(mockData.accountId);
 
     assertEquals("Cash Objects are not equal", jsonBalance.getCashSummary(), mockData.cash);
@@ -56,6 +68,16 @@ public class AccountTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
     AccountBalance jsonBalance = tradeKing.getAccountOperations().getAccountBalance(mockData.accountId);
+  }
+
+  @Test
+  public void getAccountHoldings_multiple() {
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/holdings.json"))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("account/holding_multiple"), MediaType.APPLICATION_JSON));
+    AccountHoldings jsonHoldings = tradeKing.getAccountOperations().getAccountHoldings(mockData.accountId);
+
+    assertEquals("AccountHoldings Objects are not equal", jsonHoldings, mockData.holdings);
   }
 
 

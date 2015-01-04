@@ -38,11 +38,15 @@ public class TestObjectsRepository {
     new HoldingsQuote(0, 348.94), 0
   );
 
-  AccountHoldingEntry[] holdingsList = new AccountHoldingEntry[]{accountHoldingEntry1, accountHoldingEntry2};
-
-  AccountBalance balance = new AccountBalance(accountId, 36.46, 0.0, buyingPower, 0.0, 0.0, 26.63, cash, securities);
   //todo: figure out if only one holding
+  AccountHoldingEntry[] holdingsList = new AccountHoldingEntry[]{accountHoldingEntry1, accountHoldingEntry2};
+  AccountBalance balance = new AccountBalance(accountId, 36.46, 0.0, buyingPower, 0.0, 0.0, 26.63, cash, securities);
   AccountHoldings holdings = new AccountHoldings(holdingsList, 26.48);
   AccountsSummary accountsSummary1 = new AccountsSummary(accountId, balance, holdings);
+
+  // Need additional account for testing pulling multiple accounts
+  String accountId2 = "TestAccount2";
+  AccountBalance balance2 = new AccountBalance(accountId2, 36.46, 0.0, buyingPower, 0.0, 0.0, 26.63, cash, securities);
+  AccountsSummary accountsSummary2 = new AccountsSummary(accountId2, balance2, holdings);
 
 }
