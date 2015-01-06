@@ -172,4 +172,42 @@ public class UserProfile extends TradeKingObject {
   public void setFDICAgreement(String FDICAgreement) {
     this.FDICAgreement = FDICAgreement;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof UserProfile)) return false;
+
+    UserProfile that = (UserProfile) o;
+
+    if (hasMewMessage != that.hasMewMessage) return false;
+    if (isGainsKeeper != that.isGainsKeeper) return false;
+    if (isTradingPasswordUsed != that.isTradingPasswordUsed) return false;
+    if (realTimeStockQuote != that.realTimeStockQuote) return false;
+    if (!FDICAgreement.equals(that.FDICAgreement)) return false;
+    if (!FDICPaper.equals(that.FDICPaper)) return false;
+    if (!UUID.equals(that.UUID)) return false;
+    if (!accountSummaryDashboardCollapsed.equals(that.accountSummaryDashboardCollapsed)) return false;
+    if (!emailAddress.equals(that.emailAddress)) return false;
+    if (!firstName.equals(that.firstName)) return false;
+    if (!lasName.equals(that.lasName)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = UUID.hashCode();
+    result = 31 * result + accountSummaryDashboardCollapsed.hashCode();
+    result = 31 * result + firstName.hashCode();
+    result = 31 * result + lasName.hashCode();
+    result = 31 * result + (hasMewMessage ? 1 : 0);
+    result = 31 * result + (realTimeStockQuote ? 1 : 0);
+    result = 31 * result + emailAddress.hashCode();
+    result = 31 * result + FDICPaper.hashCode();
+    result = 31 * result + (isGainsKeeper ? 1 : 0);
+    result = 31 * result + (isTradingPasswordUsed ? 1 : 0);
+    result = 31 * result + FDICAgreement.hashCode();
+    return result;
+  }
 }

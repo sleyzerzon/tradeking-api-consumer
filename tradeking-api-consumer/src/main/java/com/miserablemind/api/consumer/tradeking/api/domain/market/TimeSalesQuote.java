@@ -123,4 +123,43 @@ public class TimeSalesQuote extends TradeKingObject {
     return date;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof TimeSalesQuote)) return false;
+
+    TimeSalesQuote that = (TimeSalesQuote) o;
+
+    if (cumulativeVolume != that.cumulativeVolume) return false;
+    if (Double.compare(that.highPrice, highPrice) != 0) return false;
+    if (Double.compare(that.lastPrice, lastPrice) != 0) return false;
+    if (Double.compare(that.lowPrice, lowPrice) != 0) return false;
+    if (Double.compare(that.openTradePrice, openTradePrice) != 0) return false;
+    if (timestamp != that.timestamp) return false;
+    if (volume != that.volume) return false;
+    if (!date.equals(that.date)) return false;
+    if (!intervalStartTime.equals(that.intervalStartTime)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    result = date.hashCode();
+    result = 31 * result + intervalStartTime.hashCode();
+    temp = Double.doubleToLongBits(highPrice);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(lowPrice);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + volume;
+    temp = Double.doubleToLongBits(lastPrice);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(openTradePrice);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + timestamp;
+    result = 31 * result + cumulativeVolume;
+    return result;
+  }
 }

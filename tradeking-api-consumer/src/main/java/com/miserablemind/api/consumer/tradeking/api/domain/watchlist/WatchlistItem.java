@@ -52,4 +52,30 @@ public class WatchlistItem extends TradeKingObject {
   public String getSymbol() {
     return symbol;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof WatchlistItem)) return false;
+
+    WatchlistItem that = (WatchlistItem) o;
+
+    if (Double.compare(that.costBasis, costBasis) != 0) return false;
+    if (Double.compare(that.quantity, quantity) != 0) return false;
+    if (!symbol.equals(that.symbol)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    temp = Double.doubleToLongBits(costBasis);
+    result = (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(quantity);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + symbol.hashCode();
+    return result;
+  }
 }

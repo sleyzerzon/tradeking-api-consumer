@@ -9,6 +9,8 @@ package com.miserablemind.api.consumer.tradeking.api.domain.member;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
+import java.util.Arrays;
+
 //todo: remove spring bs for retrieving user info right away
 
 /**
@@ -80,4 +82,29 @@ public class TradeKingUser extends TradeKingObject {
     return userProfile;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof TradeKingUser)) return false;
+
+    TradeKingUser that = (TradeKingUser) o;
+
+    if (disabled != that.disabled) return false;
+    if (resetPassword != that.resetPassword) return false;
+    if (resetTradingPassword != that.resetTradingPassword) return false;
+    if (!Arrays.equals(accounts, that.accounts)) return false;
+    if (!userProfile.equals(that.userProfile)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = (disabled ? 1 : 0);
+    result = 31 * result + (resetPassword ? 1 : 0);
+    result = 31 * result + (resetTradingPassword ? 1 : 0);
+    result = 31 * result + Arrays.hashCode(accounts);
+    result = 31 * result + userProfile.hashCode();
+    return result;
+  }
 }

@@ -42,7 +42,7 @@ public class APITemplate extends BaseTemplate implements APIOperations {
   public TradeKingUser getCurrentUser() {
     URI url = this.buildUri(URL_PROFILE);
     ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
-    if (response.getBody().getError().equals("success"))
+    if (!response.getBody().getError().equals("Success"))
       throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
     return response.getBody().getUserData();

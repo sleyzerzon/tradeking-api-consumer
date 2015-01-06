@@ -10,7 +10,7 @@ package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Details about transaction including price, fees, quantities
@@ -27,15 +27,15 @@ public class TransactionDetails extends TradeKingObject {
   private int accountType;
   private double SECFee;
   private TransactionSecurity transactionSecurity;
-  private Date tradeDate;
-  private Date settlementDate;
+  private Calendar tradeDate;
+  private Calendar settlementDate;
   private int transactionId;
   private String transactionType;
 
   public TransactionDetails() {
   }
 
-  public TransactionDetails(double commission, String description, double fee, double price, double quantity, String source, int side, int accountType, double SECFee, TransactionSecurity transactionSecurity, Date tradeDate, Date settlementDate, int transactionId, String transactionType) {
+  public TransactionDetails(double commission, String description, double fee, double price, double quantity, String source, int side, int accountType, double SECFee, TransactionSecurity transactionSecurity, Calendar tradeDate, Calendar settlementDate, int transactionId, String transactionType) {
     this.commission = commission;
     this.description = description;
     this.fee = fee;
@@ -129,7 +129,7 @@ public class TransactionDetails extends TradeKingObject {
    *
    * @return Date object. Accurate to the day, which means hours are midnight -05:00
    */
-  public Date getTradeDate() {
+  public Calendar getTradeDate() {
     return tradeDate;
   }
 
@@ -138,7 +138,7 @@ public class TransactionDetails extends TradeKingObject {
    *
    * @return Date object. Accurate to the day, which means hours are midnight -05:00
    */
-  public Date getSettlementDate() {
+  public Calendar getSettlementDate() {
     return settlementDate;
   }
 
@@ -197,5 +197,58 @@ public class TransactionDetails extends TradeKingObject {
       }
       this.description = stringDescription.toString();
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof TransactionDetails)) return false;
+
+    TransactionDetails that = (TransactionDetails) o;
+
+    if (Double.compare(that.SECFee, SECFee) != 0) return false;
+    if (accountType != that.accountType) return false;
+    if (Double.compare(that.commission, commission) != 0) return false;
+    if (Double.compare(that.fee, fee) != 0) return false;
+    if (Double.compare(that.price, price) != 0) return false;
+    if (Double.compare(that.quantity, quantity) != 0) return false;
+    if (side != that.side) return false;
+    if (transactionId != that.transactionId) return false;
+    if (!description.equals(that.description)) return false;
+    if (settlementDate != null ? !settlementDate.equals(that.settlementDate) : that.settlementDate != null)
+      return false;
+    if (!source.equals(that.source)) return false;
+    if (!tradeDate.equals(that.tradeDate)) return false;
+    if (!transactionSecurity.equals(that.transactionSecurity)) return false;
+    if (transactionType != null ? !transactionType.equals(that.transactionType) : that.transactionType != null)
+      return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    temp = Double.doubleToLongBits(commission);
+    result = (int) (temp ^ (temp >>> 32));
+    result = 31 * result + description.hashCode();
+    temp = Double.doubleToLongBits(fee);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(price);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    temp = Double.doubleToLongBits(quantity);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + source.hashCode();
+    result = 31 * result + side;
+    result = 31 * result + accountType;
+    temp = Double.doubleToLongBits(SECFee);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + transactionSecurity.hashCode();
+    result = 31 * result + tradeDate.hashCode();
+    result = 31 * result + (settlementDate != null ? settlementDate.hashCode() : 0);
+    result = 31 * result + transactionId;
+    result = 31 * result + (transactionType != null ? transactionType.hashCode() : 0);
+    return result;
   }
 }

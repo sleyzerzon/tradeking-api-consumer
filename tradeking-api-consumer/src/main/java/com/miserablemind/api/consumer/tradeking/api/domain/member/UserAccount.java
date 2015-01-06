@@ -97,4 +97,36 @@ public class UserAccount extends TradeKingObject {
   public boolean isStockTrading() {
     return stockTrading;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof UserAccount)) return false;
+
+    UserAccount that = (UserAccount) o;
+
+    if (fundTrading != that.fundTrading) return false;
+    if (ira != that.ira) return false;
+    if (marginTrading != that.marginTrading) return false;
+    if (optionLevel != that.optionLevel) return false;
+    if (shared != that.shared) return false;
+    if (stockTrading != that.stockTrading) return false;
+    if (!accountId.equals(that.accountId)) return false;
+    if (!nickName.equals(that.nickName)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = accountId.hashCode();
+    result = 31 * result + (fundTrading ? 1 : 0);
+    result = 31 * result + (ira ? 1 : 0);
+    result = 31 * result + (marginTrading ? 1 : 0);
+    result = 31 * result + nickName.hashCode();
+    result = 31 * result + optionLevel;
+    result = 31 * result + (shared ? 1 : 0);
+    result = 31 * result + (stockTrading ? 1 : 0);
+    return result;
+  }
 }

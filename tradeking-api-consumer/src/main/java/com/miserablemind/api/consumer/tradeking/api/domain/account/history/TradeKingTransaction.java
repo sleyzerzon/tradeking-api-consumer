@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
-import java.util.Date;
+import java.util.Calendar;
 
 
 /**
@@ -19,7 +19,7 @@ public class TradeKingTransaction extends TradeKingObject {
 
   private Type activityType;
   private double amount;
-  private Date date;
+  private Calendar date;
   private String description;
   private String symbol;
   private TransactionDetails transactionDetails;
@@ -27,7 +27,7 @@ public class TradeKingTransaction extends TradeKingObject {
   public TradeKingTransaction() {
   }
 
-  public TradeKingTransaction(Type activity, double amount, Date date, String description, String symbol, TransactionDetails transactionDetails) {
+  public TradeKingTransaction(Type activity, double amount, Calendar date, String description, String symbol, TransactionDetails transactionDetails) {
     this.activityType = activity;
     this.amount = amount;
     this.date = date;
@@ -59,7 +59,7 @@ public class TradeKingTransaction extends TradeKingObject {
    *
    * @return transaction date
    */
-  public Date getDate() {
+  public Calendar getDate() {
     return date;
   }
 
@@ -124,4 +124,35 @@ public class TradeKingTransaction extends TradeKingObject {
     }
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof TradeKingTransaction)) return false;
+
+    TradeKingTransaction that = (TradeKingTransaction) o;
+
+    if (Double.compare(that.amount, amount) != 0) return false;
+    if (activityType != that.activityType) return false;
+    if (date != null ? !date.equals(that.date) : that.date != null) return false;
+    if (description != null ? !description.equals(that.description) : that.description != null) return false;
+    if (symbol != null ? !symbol.equals(that.symbol) : that.symbol != null) return false;
+    if (transactionDetails != null ? !transactionDetails.equals(that.transactionDetails) : that.transactionDetails != null)
+      return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result;
+    long temp;
+    result = activityType != null ? activityType.hashCode() : 0;
+    temp = Double.doubleToLongBits(amount);
+    result = 31 * result + (int) (temp ^ (temp >>> 32));
+    result = 31 * result + (date != null ? date.hashCode() : 0);
+    result = 31 * result + (description != null ? description.hashCode() : 0);
+    result = 31 * result + (symbol != null ? symbol.hashCode() : 0);
+    result = 31 * result + (transactionDetails != null ? transactionDetails.hashCode() : 0);
+    return result;
+  }
 }

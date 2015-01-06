@@ -66,4 +66,28 @@ public class TransactionSecurity extends TradeKingObject {
   public String getSymbol() {
     return symbol;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof TransactionSecurity)) return false;
+
+    TransactionSecurity that = (TransactionSecurity) o;
+
+    if (!CUSIP.equals(that.CUSIP)) return false;
+    if (!id.equals(that.id)) return false;
+    if (!securityType.equals(that.securityType)) return false;
+    if (!symbol.equals(that.symbol)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = CUSIP.hashCode();
+    result = 31 * result + id.hashCode();
+    result = 31 * result + securityType.hashCode();
+    result = 31 * result + symbol.hashCode();
+    return result;
+  }
 }

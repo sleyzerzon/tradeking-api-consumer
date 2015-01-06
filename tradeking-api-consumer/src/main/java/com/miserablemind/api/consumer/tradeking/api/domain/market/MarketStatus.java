@@ -127,4 +127,32 @@ public class MarketStatus extends TradeKingObject {
     }
 
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof MarketStatus)) return false;
+
+    MarketStatus that = (MarketStatus) o;
+
+    if (serverUnixTimeStamp != that.serverUnixTimeStamp) return false;
+    if (currentStatus != that.currentStatus) return false;
+    if (!date.equals(that.date)) return false;
+    if (!nextMarketStatusTime.equals(that.nextMarketStatusTime)) return false;
+    if (nextStatus != that.nextStatus) return false;
+    if (!statusMessage.equals(that.statusMessage)) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = date.hashCode();
+    result = 31 * result + currentStatus.hashCode();
+    result = 31 * result + nextStatus.hashCode();
+    result = 31 * result + nextMarketStatusTime.hashCode();
+    result = 31 * result + statusMessage.hashCode();
+    result = 31 * result + serverUnixTimeStamp;
+    return result;
+  }
 }

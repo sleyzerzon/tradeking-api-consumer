@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionDetails;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class TradeKingTransactionMixIn extends TradeKingKObjectMixIn {
 
@@ -22,7 +22,7 @@ public class TradeKingTransactionMixIn extends TradeKingKObjectMixIn {
   double amount;
 
   @JsonProperty("date")
-  Date date;
+  Calendar date;
 
   @JsonProperty("desc")
   String description;

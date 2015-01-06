@@ -2,6 +2,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.AccountsSummary;
 import org.junit.Test;
@@ -80,5 +81,46 @@ public class AccountTemplateTest extends BaseTemplateTest {
     assertEquals("AccountHoldings Objects are not equal", jsonHoldings, mockData.holdings);
   }
 
+  @Test(expected = ApiException.class)
+  public void getAccountHoldings_errorResponse() {
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/holdings.json"))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+    AccountHoldings jsonHoldings = tradeKing.getAccountOperations().getAccountHoldings(mockData.accountId);
+  }
+
+  @Test
+  public void getTransactionsHistory() {
+    TradeKingTransaction.Range range = TradeKingTransaction.Range.LAST_MONTH;
+    TradeKingTransaction.Type type = TradeKingTransaction.Type.ALL;
+
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/history.json?range=" + range + "&transactions=" + type))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("account/transactions"), MediaType.APPLICATION_JSON));
+    TradeKingTransaction[] jsonTransactions = tradeKing.getAccountOperations().getTransactionsHistory(mockData.accountId, range, type);
+
+    assertEquals("First TransactionDetails don not match", jsonTransactions[0].getTransactionDetails(), mockData.transaction1.getTransactionDetails());
+    assertEquals("First Transaction Objects do not match", jsonTransactions[0], mockData.transaction1);
+
+    assertEquals("Second TransactionDetails do not match", jsonTransactions[1].getTransactionDetails(), mockData.transaction2.getTransactionDetails());
+    assertEquals("Second Transaction Objects do not match", jsonTransactions[1], mockData.transaction2);
+
+  }
+
+  @Test(expected = ApiException.class)
+  public void getTransactionsHistory_errorResponse() {
+    TradeKingTransaction.Range range = TradeKingTransaction.Range.LAST_MONTH;
+    TradeKingTransaction.Type type = TradeKingTransaction.Type.ALL;
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/history.json?range=" + range + "&transactions=" + type))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+    TradeKingTransaction[] jsonTransactions = tradeKing.getAccountOperations().getTransactionsHistory(mockData.accountId, range, type);
+  }
+
+  @Test
+  public void updateUser_doNothing() {
+
+    tradeKing.getAccountOperations().updateStatus();
+  }
 
 }
