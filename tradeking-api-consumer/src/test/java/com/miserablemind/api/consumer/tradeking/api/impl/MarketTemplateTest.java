@@ -22,6 +22,7 @@ public class MarketTemplateTest extends BaseTemplateTest {
       .andRespond(withSuccess(jsonResource("market/market_status"), MediaType.APPLICATION_JSON));
 
     MarketStatus status = tradeKing.getMarketOperations().getMarketStatus();
+    mockServer.verify();
 
     assertEquals("MarketStatus Dates are not equal", status.getDate(), mockData.marketStatus.getDate());
     assertEquals("MarketStatus objects are not equal", status, mockData.marketStatus);
@@ -33,10 +34,10 @@ public class MarketTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
 
-    MarketStatus status = tradeKing.getMarketOperations().getMarketStatus();
+    tradeKing.getMarketOperations().getMarketStatus();
+    mockServer.verify();
   }
 
-  //todo: make sure only one quote works too
   @Test
   public void getDataPoints_Tick() {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/timesales.json?symbols=TCKR&interval=tick&rpp=20&index=21"))
@@ -44,10 +45,24 @@ public class MarketTemplateTest extends BaseTemplateTest {
       .andRespond(withSuccess(jsonResource("market/time_sales_quotes"), MediaType.APPLICATION_JSON));
 
     TimeSalesQuote[] points = tradeKing.getMarketOperations().getDataPoints("TCKR", 2, 20);
+    mockServer.verify();
 
     assertEquals("First Quote Interval Start Time is Not Equal to mock's", points[0].getIntervalStartTime(), mockData.timeSalesQuote1.getIntervalStartTime());
     assertEquals("First Quote is Not Equal to mock", points[0], mockData.timeSalesQuote1);
     assertEquals("Second Quote is Not Equal to mock", points[1], mockData.timeSalesQuote2);
+  }
+
+  @Test
+  public void getDataPoints_SinglePoint() {
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/timesales.json?symbols=TCKR&interval=tick&rpp=20&index=21"))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("market/time_sales_quote_single"), MediaType.APPLICATION_JSON));
+
+    TimeSalesQuote[] points = tradeKing.getMarketOperations().getDataPoints("TCKR", 2, 20);
+    mockServer.verify();
+
+    assertEquals("First Quote Interval Start Time is Not Equal to mock's", points[0].getIntervalStartTime(), mockData.timeSalesQuote1.getIntervalStartTime());
+    assertEquals("First Quote is Not Equal to mock", points[0], mockData.timeSalesQuote1);
   }
 
 

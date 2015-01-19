@@ -22,6 +22,7 @@ public class ApiTemplateTest extends BaseTemplateTest {
       .andRespond(withSuccess(jsonResource("api/version"), MediaType.APPLICATION_JSON));
 
     String apiVersion = tradeKing.getAPIOperations().getAPIVersion();
+    mockServer.verify();
     assertEquals("API Versions Differ", apiVersion, mockData.apiVersion);
   }
 
@@ -30,7 +31,7 @@ public class ApiTemplateTest extends BaseTemplateTest {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "utility/version.json"))
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
-    String apiVersion = tradeKing.getAPIOperations().getAPIVersion();
+    tradeKing.getAPIOperations().getAPIVersion();
   }
 
   @Test
@@ -40,6 +41,7 @@ public class ApiTemplateTest extends BaseTemplateTest {
       .andRespond(withSuccess(jsonResource("api/user"), MediaType.APPLICATION_JSON));
 
     TradeKingUser user = tradeKing.getAPIOperations().getCurrentUser();
+    mockServer.verify();
 
     assertEquals("User Profile Objects Do not match", user.getUserProfile(), mockData.user.getUserProfile());
     assertArrayEquals("User Accounts Objects Do not match", user.getAccounts(), mockData.user.getAccounts());
@@ -53,6 +55,7 @@ public class ApiTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
 
-    TradeKingUser user = tradeKing.getAPIOperations().getCurrentUser();
+    tradeKing.getAPIOperations().getCurrentUser();
+    mockServer.verify();
   }
 }

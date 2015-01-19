@@ -24,6 +24,7 @@ public class AccountTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("account/summary_single"), MediaType.APPLICATION_JSON));
     AccountsSummary[] accounts = tradeKing.getAccountOperations().getAccounts();
+    mockServer.verify();
     AccountsSummary account = accounts[0];
 
     assertEquals("Balance objects are not equal", account.getAccountBalance(), mockData.accountsSummary1.getAccountBalance());
@@ -36,7 +37,8 @@ public class AccountTemplateTest extends BaseTemplateTest {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts.json"))
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
-    AccountsSummary[] accounts = tradeKing.getAccountOperations().getAccounts();
+    tradeKing.getAccountOperations().getAccounts();
+    mockServer.verify();
   }
 
   @Test
@@ -45,6 +47,7 @@ public class AccountTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("account/summary_multiple"), MediaType.APPLICATION_JSON));
     AccountsSummary[] accounts = tradeKing.getAccountOperations().getAccounts();
+    mockServer.verify();
 
     assertEquals("Summary 1 Objects are not equal", accounts[0], mockData.accountsSummary1);
     assertEquals("Summary 2 Objects are not equal", accounts[1], mockData.accountsSummary2);
@@ -56,6 +59,7 @@ public class AccountTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("account/balance"), MediaType.APPLICATION_JSON));
     AccountBalance jsonBalance = tradeKing.getAccountOperations().getAccountBalance(mockData.accountId);
+    mockServer.verify();
 
     assertEquals("Cash Objects are not equal", jsonBalance.getCashSummary(), mockData.cash);
     assertEquals("Buying Power Objects are not equal", jsonBalance.getBuyingPowerSummary(), mockData.buyingPower);
@@ -68,7 +72,8 @@ public class AccountTemplateTest extends BaseTemplateTest {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/balances.json"))
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
-    AccountBalance jsonBalance = tradeKing.getAccountOperations().getAccountBalance(mockData.accountId);
+    tradeKing.getAccountOperations().getAccountBalance(mockData.accountId);
+    mockServer.verify();
   }
 
   @Test
@@ -77,8 +82,20 @@ public class AccountTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("account/holding_multiple"), MediaType.APPLICATION_JSON));
     AccountHoldings jsonHoldings = tradeKing.getAccountOperations().getAccountHoldings(mockData.accountId);
+    mockServer.verify();
 
     assertEquals("AccountHoldings Objects are not equal", jsonHoldings, mockData.holdings);
+  }
+
+  @Test
+  public void getAccountHoldings_Single() {
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/holdings.json"))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("account/holding_single"), MediaType.APPLICATION_JSON));
+    AccountHoldings jsonHoldings = tradeKing.getAccountOperations().getAccountHoldings(mockData.accountId);
+    mockServer.verify();
+
+    assertEquals("AccountHoldings Objects are not equal", jsonHoldings, mockData.holdingSingle);
   }
 
   @Test(expected = ApiException.class)
@@ -86,7 +103,8 @@ public class AccountTemplateTest extends BaseTemplateTest {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/holdings.json"))
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
-    AccountHoldings jsonHoldings = tradeKing.getAccountOperations().getAccountHoldings(mockData.accountId);
+    tradeKing.getAccountOperations().getAccountHoldings(mockData.accountId);
+    mockServer.verify();
   }
 
   @Test
@@ -98,12 +116,29 @@ public class AccountTemplateTest extends BaseTemplateTest {
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("account/transactions"), MediaType.APPLICATION_JSON));
     TradeKingTransaction[] jsonTransactions = tradeKing.getAccountOperations().getTransactionsHistory(mockData.accountId, range, type);
+    mockServer.verify();
 
     assertEquals("First TransactionDetails don not match", jsonTransactions[0].getTransactionDetails(), mockData.transaction1.getTransactionDetails());
     assertEquals("First Transaction Objects do not match", jsonTransactions[0], mockData.transaction1);
 
     assertEquals("Second TransactionDetails do not match", jsonTransactions[1].getTransactionDetails(), mockData.transaction2.getTransactionDetails());
     assertEquals("Second Transaction Objects do not match", jsonTransactions[1], mockData.transaction2);
+
+  }
+
+  @Test
+  public void getTransactionsHistory_Single() {
+    TradeKingTransaction.Range range = TradeKingTransaction.Range.LAST_MONTH;
+    TradeKingTransaction.Type type = TradeKingTransaction.Type.ALL;
+
+    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/history.json?range=" + range + "&transactions=" + type))
+      .andExpect(method(GET))
+      .andRespond(withSuccess(jsonResource("account/transaction_single"), MediaType.APPLICATION_JSON));
+    TradeKingTransaction[] jsonTransactions = tradeKing.getAccountOperations().getTransactionsHistory(mockData.accountId, range, type);
+    mockServer.verify();
+
+    assertEquals("First TransactionDetails don not match", jsonTransactions[0].getTransactionDetails(), mockData.transaction1.getTransactionDetails());
+    assertEquals("First Transaction Objects do not match", jsonTransactions[0], mockData.transaction1);
 
   }
 
@@ -114,13 +149,14 @@ public class AccountTemplateTest extends BaseTemplateTest {
     mockServer.expect(requestTo(BaseTemplate.URL_BASE + "accounts/" + mockData.accountId + "/history.json?range=" + range + "&transactions=" + type))
       .andExpect(method(GET))
       .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
-    TradeKingTransaction[] jsonTransactions = tradeKing.getAccountOperations().getTransactionsHistory(mockData.accountId, range, type);
+    tradeKing.getAccountOperations().getTransactionsHistory(mockData.accountId, range, type);
+    mockServer.verify();
   }
 
   @Test
   public void updateUser_doNothing() {
-
     tradeKing.getAccountOperations().updateStatus();
+    mockServer.verify();
   }
 
 }
