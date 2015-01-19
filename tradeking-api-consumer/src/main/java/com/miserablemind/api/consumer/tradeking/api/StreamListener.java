@@ -15,18 +15,18 @@ import com.miserablemind.api.consumer.tradeking.api.domain.market.StreamTradeEve
  */
 public interface StreamListener {
 
-  /**
-   * Method that gets executed once Trade event happens
-   *
-   * @param tradeEvent Trade Event object.
-   */
-  void onTrade(StreamTradeEvent tradeEvent);
+    /**
+     * Method that gets executed once Trade event happens
+     *
+     * @param tradeEvent Trade Event object.
+     */
+    void onTrade(StreamTradeEvent tradeEvent);
 
-  /**
-   * Method that gets executed once Quote event happens
-   *
-   * @param quoteEvent Quote Event object. It is a very brief version of a detailed quote.
-   *                   If more information is needed, a full quote should be retrieved via market sub-api
-   */
-  void onQuote(StreamQuoteEvent quoteEvent);
+    /**
+     * Method that gets executed once Quote event happens
+     *
+     * @param quoteEvent Quote Event object. It is a very brief version of a detailed quote.
+     *                   If more information is needed, a full quote should be retrieved via market sub-api
+     */
+    void onQuote(StreamQuoteEvent quoteEvent);
 }

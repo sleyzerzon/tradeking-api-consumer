@@ -16,17 +16,17 @@ import java.util.Map;
  */
 abstract public class TradeKingObject {
 
-  private Map<String, Object> extraData = new HashMap<String, Object>();
+    private Map<String, Object> extraData = new HashMap<String, Object>();
 
-  /**
-   * Adds all the additional values to an extraData instance var that do not have a field in the class.
-   * Mostly used for Jackson to put all the extra data found in JSON
-   *
-   * @param key   key of the extra property
-   * @param value extra property value
-   */
-  public void add(String key, Object value) {
-    extraData.put(key, value);
-  }
+    /**
+     * Adds all the additional values to an extraData instance var that do not have a field in the class.
+     * Mostly used for Jackson to put all the extra data found in JSON
+     *
+     * @param key   key of the extra property
+     * @param value extra property value
+     */
+    public void add(String key, Object value) {
+        extraData.put(key, value);
+    }
 
 }

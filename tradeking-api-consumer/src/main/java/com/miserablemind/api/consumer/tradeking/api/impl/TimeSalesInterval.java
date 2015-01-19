@@ -11,19 +11,19 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
  * Tick means that it queries for every point of sale.
  */
 public enum TimeSalesInterval {
-  MINUTES_1("1min"),
-  MINUTES_5("5min"),
-  TICK("tick");
-  private final String name;
+    MINUTES_1("1min"),
+    MINUTES_5("5min"),
+    TICK("tick");
+    private final String name;
 
-  TimeSalesInterval(String name) {
-    this.name = name;
-  }
+    TimeSalesInterval(String name) {
+        this.name = name;
+    }
 
-  @Override
-  public String toString() {
-    return this.name;
-  }
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 }
 

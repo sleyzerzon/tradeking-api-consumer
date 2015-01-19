@@ -11,8 +11,8 @@ import org.springframework.social.SocialException;
 @SuppressWarnings("serial")
 public class StreamingException extends SocialException {
 
-  public StreamingException(String message, Throwable cause) {
-    super(message, cause);
-  }
+    public StreamingException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }

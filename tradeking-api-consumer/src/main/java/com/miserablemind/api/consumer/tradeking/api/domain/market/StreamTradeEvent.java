@@ -17,110 +17,110 @@ import java.util.Calendar;
  */
 public class StreamTradeEvent extends TradeKingObject {
 
-  private String symbol;
-  private String exchangeCode;
-  private double lastPrice;
-  private int volume;
-  private int cumulativeVolume;
-  private double volumeWeightedAveragePrice;
-  private Calendar dateTime;
-  private int timeStamp;
-  private String tradeCondition;
+    private String symbol;
+    private String exchangeCode;
+    private double lastPrice;
+    private int volume;
+    private int cumulativeVolume;
+    private double volumeWeightedAveragePrice;
+    private Calendar dateTime;
+    private int timeStamp;
+    private String tradeCondition;
 
-  public StreamTradeEvent() {
-  }
+    public StreamTradeEvent() {
+    }
 
-  public StreamTradeEvent(String symbol, String exchangeCode, double lastPrice, int volume, int cumulativeVolume, double volumeWeightedAveragePrice, Calendar dateTime, int timeStamp, String tradeCondition) {
-    this.symbol = symbol;
-    this.exchangeCode = exchangeCode;
-    this.lastPrice = lastPrice;
-    this.volume = volume;
-    this.cumulativeVolume = cumulativeVolume;
-    this.volumeWeightedAveragePrice = volumeWeightedAveragePrice;
-    this.dateTime = dateTime;
-    this.timeStamp = timeStamp;
-    this.tradeCondition = tradeCondition;
-  }
+    public StreamTradeEvent(String symbol, String exchangeCode, double lastPrice, int volume, int cumulativeVolume, double volumeWeightedAveragePrice, Calendar dateTime, int timeStamp, String tradeCondition) {
+        this.symbol = symbol;
+        this.exchangeCode = exchangeCode;
+        this.lastPrice = lastPrice;
+        this.volume = volume;
+        this.cumulativeVolume = cumulativeVolume;
+        this.volumeWeightedAveragePrice = volumeWeightedAveragePrice;
+        this.dateTime = dateTime;
+        this.timeStamp = timeStamp;
+        this.tradeCondition = tradeCondition;
+    }
 
-  /**
-   * Symbol from data provider
-   *
-   * @return string instrument symbol
-   */
-  public String getSymbol() {
-    return symbol;
-  }
+    /**
+     * Symbol from data provider
+     *
+     * @return string instrument symbol
+     */
+    public String getSymbol() {
+        return symbol;
+    }
 
-  /**
-   * eExchange code
-   *
-   * @return String exchange code description
-   */
-  public String getExchangeCode() {
-    return exchangeCode;
-  }
+    /**
+     * eExchange code
+     *
+     * @return String exchange code description
+     */
+    public String getExchangeCode() {
+        return exchangeCode;
+    }
 
-  /**
-   * Last trade price
-   *
-   * @return dollar figure
-   */
-  public double getLastPrice() {
-    return lastPrice;
-  }
+    /**
+     * Last trade price
+     *
+     * @return dollar figure
+     */
+    public double getLastPrice() {
+        return lastPrice;
+    }
 
-  /**
-   * Volume
-   *
-   * @return volume number
-   */
-  public int getVolume() {
-    return volume;
-  }
+    /**
+     * Volume
+     *
+     * @return volume number
+     */
+    public int getVolume() {
+        return volume;
+    }
 
-  /**
-   * Cumulative volume
-   *
-   * @return volume number
-   */
-  public int getCumulativeVolume() {
-    return cumulativeVolume;
-  }
+    /**
+     * Cumulative volume
+     *
+     * @return volume number
+     */
+    public int getCumulativeVolume() {
+        return cumulativeVolume;
+    }
 
-  /**
-   * Volume weighted average price
-   *
-   * @return dollar figure
-   */
-  public double getVolumeWeightedAveragePrice() {
-    return volumeWeightedAveragePrice;
-  }
+    /**
+     * Volume weighted average price
+     *
+     * @return dollar figure
+     */
+    public double getVolumeWeightedAveragePrice() {
+        return volumeWeightedAveragePrice;
+    }
 
-  /**
-   * Date and time
-   *
-   * @return Calendar object
-   */
-  public Calendar getDateTime() {
-    return dateTime;
-  }
+    /**
+     * Date and time
+     *
+     * @return Calendar object
+     */
+    public Calendar getDateTime() {
+        return dateTime;
+    }
 
-  /**
-   * Timestamp
-   *
-   * @return integer timestamp
-   */
-  public int getTimeStamp() {
-    return timeStamp;
-  }
+    /**
+     * Timestamp
+     *
+     * @return integer timestamp
+     */
+    public int getTimeStamp() {
+        return timeStamp;
+    }
 
-  /**
-   * Trade condition code – (H) halted or (R) resumed. (docs)
-   * However, returns integers for now that are not documented
-   *
-   * @return String trade condition
-   */
-  public String getTradeCondition() {
-    return tradeCondition;
-  }
+    /**
+     * Trade condition code – (H) halted or (R) resumed. (docs)
+     * However, returns integers for now that are not documented
+     *
+     * @return String trade condition
+     */
+    public String getTradeCondition() {
+        return tradeCondition;
+    }
 }

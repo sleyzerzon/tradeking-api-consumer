@@ -11,17 +11,17 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
  */
 public enum TopListType {
 
-  LOSERS_DOLLARS("toplosers"), LOSERS_PERCENTAGE("toppctlosers"), VOLUME("topvolume"), ACTIVE("topactive"), GAINERS_DOLLARS("topgainers"),
-  GAINERS_PERCENTAGE("toppctgainers"), GAINERS_ACTIVE_DOLLARS("topactivegainersbydollarvalue");
+    LOSERS_DOLLARS("toplosers"), LOSERS_PERCENTAGE("toppctlosers"), VOLUME("topvolume"), ACTIVE("topactive"), GAINERS_DOLLARS("topgainers"),
+    GAINERS_PERCENTAGE("toppctgainers"), GAINERS_ACTIVE_DOLLARS("topactivegainersbydollarvalue");
 
-  private final String name;
+    private final String name;
 
-  TopListType(String name) {
-    this.name = name;
-  }
+    TopListType(String name) {
+        this.name = name;
+    }
 
-  @Override
-  public String toString() {
-    return this.name;
-  }
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

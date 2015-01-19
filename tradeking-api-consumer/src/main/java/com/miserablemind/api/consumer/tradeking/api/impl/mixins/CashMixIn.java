@@ -11,31 +11,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CashMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("accruedinterest")
-  double accruedInterest;
+    @JsonProperty("accruedinterest")
+    double accruedInterest;
 
-  @JsonProperty("cash")
-  double cash;
+    @JsonProperty("cash")
+    double cash;
 
-  @JsonProperty("marginbalance")
-  double marginBalance;
+    @JsonProperty("marginbalance")
+    double marginBalance;
 
-  @JsonProperty("cashavailable")
-  double cashAvailable;
+    @JsonProperty("cashavailable")
+    double cashAvailable;
 
-  @JsonProperty("mmf")
-  double moneyMarketFund;
+    @JsonProperty("mmf")
+    double moneyMarketFund;
 
-  @JsonProperty("total")
-  double total;
+    @JsonProperty("total")
+    double total;
 
-  @JsonProperty("uncleareddeposits")
-  double unclearedDeposits;
+    @JsonProperty("uncleareddeposits")
+    double unclearedDeposits;
 
-  @JsonProperty("unsettledfunds")
-  double unsettledFunds;
+    @JsonProperty("unsettledfunds")
+    double unsettledFunds;
 
-  @JsonProperty("yield")
-  double yield;
+    @JsonProperty("yield")
+    double yield;
 
 }

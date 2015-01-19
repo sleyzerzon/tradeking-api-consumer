@@ -14,20 +14,20 @@ import java.util.LinkedHashMap;
 
 public class TKHistoryResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  private TradeKingTransaction[] transactionHistory;
+    private TradeKingTransaction[] transactionHistory;
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public TradeKingTransaction[] getTransactionHistory() {
-    return transactionHistory;
-  }
+    public TradeKingTransaction[] getTransactionHistory() {
+        return transactionHistory;
+    }
 
-  @JsonSetter("transactions")
-  public void setTransactionHistory(LinkedHashMap historyResponse) throws Exception {
-    this.transactionHistory = (TradeKingTransaction[]) this.extractArray(TradeKingTransaction[].class, historyResponse, "transaction", null);
-  }
+    @JsonSetter("transactions")
+    public void setTransactionHistory(LinkedHashMap historyResponse) throws Exception {
+        this.transactionHistory = (TradeKingTransaction[]) this.extractArray(TradeKingTransaction[].class, historyResponse, "transaction", null);
+    }
 }

@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 
 abstract public class TradeKingKObjectMixIn {
 
-  @JsonAnySetter
-  protected void add(String key, Object value) {
-  }
+    @JsonAnySetter
+    protected void add(String key, Object value) {
+    }
 
 }

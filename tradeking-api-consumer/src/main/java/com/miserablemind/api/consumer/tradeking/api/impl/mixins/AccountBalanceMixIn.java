@@ -14,31 +14,31 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Secur
 
 public class AccountBalanceMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("account")
-  int accountId;
+    @JsonProperty("account")
+    int accountId;
 
-  @JsonProperty("accountvalue")
-  double accountValue;
+    @JsonProperty("accountvalue")
+    double accountValue;
 
-  @JsonProperty("backofficehouseexcess")
-  double backOfficeHouseExcess;
+    @JsonProperty("backofficehouseexcess")
+    double backOfficeHouseExcess;
 
-  @JsonProperty("buyingpower")
-  BuyingPower buyingPowerSummary;
+    @JsonProperty("buyingpower")
+    BuyingPower buyingPowerSummary;
 
-  @JsonProperty("fedcall")
-  double fedCall;
+    @JsonProperty("fedcall")
+    double fedCall;
 
-  @JsonProperty("housecall")
-  double houseCall;
+    @JsonProperty("housecall")
+    double houseCall;
 
-  @JsonProperty("maintenanceexcess")
-  double maintenanceExcess;
+    @JsonProperty("maintenanceexcess")
+    double maintenanceExcess;
 
-  @JsonProperty("money")
-  Cash cashSummary;
+    @JsonProperty("money")
+    Cash cashSummary;
 
-  @JsonProperty("securities")
-  Securities securitiesSummary;
+    @JsonProperty("securities")
+    Securities securitiesSummary;
 
 }

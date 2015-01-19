@@ -15,20 +15,20 @@ import java.util.LinkedHashMap;
 
 public class TKOptionExpirationsResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  private Calendar[] dates;
+    private Calendar[] dates;
 
-  @JsonSetter("expirationdates")
-  public void setDates(LinkedHashMap datesResponse) throws Exception {
-    this.dates = (Calendar[]) this.extractArray(Calendar[].class, datesResponse, "date", null);
-  }
+    @JsonSetter("expirationdates")
+    public void setDates(LinkedHashMap datesResponse) throws Exception {
+        this.dates = (Calendar[]) this.extractArray(Calendar[].class, datesResponse, "date", null);
+    }
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public Calendar[] getDates() {
-    return dates;
-  }
+    public Calendar[] getDates() {
+        return dates;
+    }
 }

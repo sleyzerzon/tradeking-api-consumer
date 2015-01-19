@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class HoldingQuoteMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("change")
-  private double change;
+    @JsonProperty("change")
+    private double change;
 
-  @JsonProperty("lastprice")
-  private double lastPrice;
+    @JsonProperty("lastprice")
+    private double lastPrice;
 
 }

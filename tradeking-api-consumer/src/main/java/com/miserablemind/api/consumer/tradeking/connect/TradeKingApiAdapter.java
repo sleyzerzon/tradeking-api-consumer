@@ -15,34 +15,34 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfileBuilder;
 
 public class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
-  @Override
-  public boolean test(TradeKingOperations api) {
-    try {
-      //let's not test to save some time
-      // api.getAPIOperations().getCurrentUser();
-      return true;
-    } catch (ApiException e) {
-      return false;
+    @Override
+    public boolean test(TradeKingOperations api) {
+        try {
+            //let's not test to save some time
+            // api.getAPIOperations().getCurrentUser();
+            return true;
+        } catch (ApiException e) {
+            return false;
+        }
     }
-  }
 
-  @Override
-  public void setConnectionValues(TradeKingOperations api, ConnectionValues values) {
-    UserProfile profile = api.getAPIOperations().getCurrentUser().getUserProfile();
-    values.setProviderUserId(profile.getUUID());
-    values.setDisplayName("@" + profile.getFirstName());
-    values.setProfileUrl("");
-    values.setImageUrl("");
-  }
+    @Override
+    public void setConnectionValues(TradeKingOperations api, ConnectionValues values) {
+        UserProfile profile = api.getAPIOperations().getCurrentUser().getUserProfile();
+        values.setProviderUserId(profile.getUUID());
+        values.setDisplayName("@" + profile.getFirstName());
+        values.setProfileUrl("");
+        values.setImageUrl("");
+    }
 
-  @Override
-  public org.springframework.social.connect.UserProfile fetchUserProfile(TradeKingOperations api) {
-    UserProfile profile = api.getAPIOperations().getCurrentUser().getUserProfile();
-    return new UserProfileBuilder().setName(profile.getFirstName()).setUsername(profile.getFirstName()).build();
-  }
+    @Override
+    public org.springframework.social.connect.UserProfile fetchUserProfile(TradeKingOperations api) {
+        UserProfile profile = api.getAPIOperations().getCurrentUser().getUserProfile();
+        return new UserProfileBuilder().setName(profile.getFirstName()).setUsername(profile.getFirstName()).build();
+    }
 
-  @Override
-  public void updateStatus(TradeKingOperations api, String message) {
-    api.getAccountOperations().updateStatus();
-  }
+    @Override
+    public void updateStatus(TradeKingOperations api, String message) {
+        api.getAccountOperations().updateStatus();
+    }
 }

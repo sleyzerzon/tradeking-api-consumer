@@ -8,14 +8,14 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 interface StreamReader {
 
-  /**
-   * iterate to the next item in the stream. This is usually used in the while loop to keep going till conditions are correct.
-   */
-  void next();
+    /**
+     * iterate to the next item in the stream. This is usually used in the while loop to keep going till conditions are correct.
+     */
+    void next();
 
-  /**
-   * Closes the stream and takes care of closing all other objects serving the streaming process
-   */
-  void close();
+    /**
+     * Closes the stream and takes care of closing all other objects serving the streaming process
+     */
+    void close();
 
 }

@@ -16,53 +16,53 @@ import java.util.Arrays;
  */
 public class AccountHoldings extends TradeKingObject {
 
-  public AccountHoldings() {
-  }
+    public AccountHoldings() {
+    }
 
-  public AccountHoldings(AccountHoldingEntry[] holdingsList, double totalSecurities) {
-    this.holdingsList = holdingsList;
-    this.totalSecurities = totalSecurities;
-  }
+    public AccountHoldings(AccountHoldingEntry[] holdingsList, double totalSecurities) {
+        this.holdingsList = holdingsList;
+        this.totalSecurities = totalSecurities;
+    }
 
-  private AccountHoldingEntry[] holdingsList;
-  private double totalSecurities;
+    private AccountHoldingEntry[] holdingsList;
+    private double totalSecurities;
 
-  /**
-   * @return list of holding entry objects
-   */
-  public AccountHoldingEntry[] getHoldingsList() {
-    return holdingsList;
-  }
+    /**
+     * @return list of holding entry objects
+     */
+    public AccountHoldingEntry[] getHoldingsList() {
+        return holdingsList;
+    }
 
-  /**
-   * Total of all securities. This is calculated by TK, not this library
-   *
-   * @return dollar figure
-   */
-  public double getTotalSecurities() {
-    return totalSecurities;
-  }
+    /**
+     * Total of all securities. This is calculated by TK, not this library
+     *
+     * @return dollar figure
+     */
+    public double getTotalSecurities() {
+        return totalSecurities;
+    }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof AccountHoldings)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AccountHoldings)) return false;
 
-    AccountHoldings that = (AccountHoldings) o;
+        AccountHoldings that = (AccountHoldings) o;
 
-    if (Double.compare(that.totalSecurities, totalSecurities) != 0) return false;
-    if (!Arrays.equals(holdingsList, that.holdingsList)) return false;
+        if (Double.compare(that.totalSecurities, totalSecurities) != 0) return false;
+        if (!Arrays.equals(holdingsList, that.holdingsList)) return false;
 
-    return true;
-  }
+        return true;
+    }
 
-  @Override
-  public int hashCode() {
-    int result;
-    long temp;
-    result = Arrays.hashCode(holdingsList);
-    temp = Double.doubleToLongBits(totalSecurities);
-    result = 31 * result + (int) (temp ^ (temp >>> 32));
-    return result;
-  }
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = Arrays.hashCode(holdingsList);
+        temp = Double.doubleToLongBits(totalSecurities);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

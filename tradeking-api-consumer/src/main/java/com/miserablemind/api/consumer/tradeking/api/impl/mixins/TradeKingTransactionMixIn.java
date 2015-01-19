@@ -15,23 +15,23 @@ import java.util.Calendar;
 
 public class TradeKingTransactionMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("activity")
-  TradeKingTransaction.Type activityType;
+    @JsonProperty("activity")
+    TradeKingTransaction.Type activityType;
 
-  @JsonProperty("amount")
-  double amount;
+    @JsonProperty("amount")
+    double amount;
 
-  @JsonProperty("date")
-  Calendar date;
+    @JsonProperty("date")
+    Calendar date;
 
-  @JsonProperty("desc")
-  String description;
+    @JsonProperty("desc")
+    String description;
 
-  @JsonProperty("symbol")
-  String symbol;
+    @JsonProperty("symbol")
+    String symbol;
 
-  @JsonProperty("transaction")
-  TransactionDetails transactionDetails;
+    @JsonProperty("transaction")
+    TransactionDetails transactionDetails;
 
 
 }

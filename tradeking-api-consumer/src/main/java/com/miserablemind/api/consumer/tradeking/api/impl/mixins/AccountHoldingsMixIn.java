@@ -12,11 +12,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldingEntry;
 
 public class AccountHoldingsMixIn extends TradeKingKObjectMixIn {
-  @JsonProperty("holding")
-  @JsonDeserialize(using = AccountHoldingsEntryDeserializer.class)
-  AccountHoldingEntry[] holdingsList;
+    @JsonProperty("holding")
+    @JsonDeserialize(using = AccountHoldingsEntryDeserializer.class)
+    AccountHoldingEntry[] holdingsList;
 
-  @JsonProperty("totalsecurities")
-  double totalSecurities;
+    @JsonProperty("totalsecurities")
+    double totalSecurities;
 
 }

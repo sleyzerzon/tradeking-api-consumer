@@ -15,47 +15,47 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 public class ApiTemplateTest extends BaseTemplateTest {
 
-  @Test
-  public void getAPIVersion() {
-    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "utility/version.json"))
-      .andExpect(method(GET))
-      .andRespond(withSuccess(jsonResource("api/version"), MediaType.APPLICATION_JSON));
+    @Test
+    public void getAPIVersion() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "utility/version.json"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("api/version"), MediaType.APPLICATION_JSON));
 
-    String apiVersion = tradeKing.getAPIOperations().getAPIVersion();
-    mockServer.verify();
-    assertEquals("API Versions Differ", apiVersion, mockData.apiVersion);
-  }
+        String apiVersion = tradeKing.getAPIOperations().getAPIVersion();
+        mockServer.verify();
+        assertEquals("API Versions Differ", apiVersion, mockData.apiVersion);
+    }
 
-  @Test(expected = ApiException.class)
-  public void getAPIVersion_errorResponse() {
-    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "utility/version.json"))
-      .andExpect(method(GET))
-      .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
-    tradeKing.getAPIOperations().getAPIVersion();
-  }
+    @Test(expected = ApiException.class)
+    public void getAPIVersion_errorResponse() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "utility/version.json"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+        tradeKing.getAPIOperations().getAPIVersion();
+    }
 
-  @Test
-  public void getCurrentUser() {
-    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "member/profile.json"))
-      .andExpect(method(GET))
-      .andRespond(withSuccess(jsonResource("api/user"), MediaType.APPLICATION_JSON));
+    @Test
+    public void getCurrentUser() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "member/profile.json"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("api/user"), MediaType.APPLICATION_JSON));
 
-    TradeKingUser user = tradeKing.getAPIOperations().getCurrentUser();
-    mockServer.verify();
+        TradeKingUser user = tradeKing.getAPIOperations().getCurrentUser();
+        mockServer.verify();
 
-    assertEquals("User Profile Objects Do not match", user.getUserProfile(), mockData.user.getUserProfile());
-    assertArrayEquals("User Accounts Objects Do not match", user.getAccounts(), mockData.user.getAccounts());
-    assertEquals("User Objects Do not match", user, mockData.user);
+        assertEquals("User Profile Objects Do not match", user.getUserProfile(), mockData.user.getUserProfile());
+        assertArrayEquals("User Accounts Objects Do not match", user.getAccounts(), mockData.user.getAccounts());
+        assertEquals("User Objects Do not match", user, mockData.user);
 
-  }
+    }
 
-  @Test(expected = ApiException.class)
-  public void getCurrentUser_errorResponse() {
-    mockServer.expect(requestTo(BaseTemplate.URL_BASE + "member/profile.json"))
-      .andExpect(method(GET))
-      .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+    @Test(expected = ApiException.class)
+    public void getCurrentUser_errorResponse() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "member/profile.json"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
 
-    tradeKing.getAPIOperations().getCurrentUser();
-    mockServer.verify();
-  }
+        tradeKing.getAPIOperations().getCurrentUser();
+        mockServer.verify();
+    }
 }

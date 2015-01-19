@@ -14,56 +14,56 @@ import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
  */
 public class HoldingsQuote extends TradeKingObject {
 
-  private double change;
-  private double lastPrice;
+    private double change;
+    private double lastPrice;
 
-  public HoldingsQuote() {
-  }
+    public HoldingsQuote() {
+    }
 
-  public HoldingsQuote(double change, double lastPrice) {
-    this.change = change;
-    this.lastPrice = lastPrice;
-  }
+    public HoldingsQuote(double change, double lastPrice) {
+        this.change = change;
+        this.lastPrice = lastPrice;
+    }
 
-  /**
-   * Holding asset change for the day
-   *
-   * @return dollar amount change
-   */
-  public double getChange() {
-    return change;
-  }
+    /**
+     * Holding asset change for the day
+     *
+     * @return dollar amount change
+     */
+    public double getChange() {
+        return change;
+    }
 
-  /**
-   * Last Price of instrument
-   *
-   * @return dollar amount of last price
-   */
-  public double getLastPrice() {
-    return lastPrice;
-  }
+    /**
+     * Last Price of instrument
+     *
+     * @return dollar amount of last price
+     */
+    public double getLastPrice() {
+        return lastPrice;
+    }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof HoldingsQuote)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HoldingsQuote)) return false;
 
-    HoldingsQuote that = (HoldingsQuote) o;
+        HoldingsQuote that = (HoldingsQuote) o;
 
-    if (Double.compare(that.change, change) != 0) return false;
-    if (Double.compare(that.lastPrice, lastPrice) != 0) return false;
+        if (Double.compare(that.change, change) != 0) return false;
+        if (Double.compare(that.lastPrice, lastPrice) != 0) return false;
 
-    return true;
-  }
+        return true;
+    }
 
-  @Override
-  public int hashCode() {
-    int result;
-    long temp;
-    temp = Double.doubleToLongBits(change);
-    result = (int) (temp ^ (temp >>> 32));
-    temp = Double.doubleToLongBits(lastPrice);
-    result = 31 * result + (int) (temp ^ (temp >>> 32));
-    return result;
-  }
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(change);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(lastPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

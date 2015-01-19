@@ -14,33 +14,33 @@ import java.util.Calendar;
 @JsonRootName("quote")
 public class StreamQuoteMixIn {
 
-  @JsonProperty("ask")
-  double askPrice;
+    @JsonProperty("ask")
+    double askPrice;
 
-  @JsonProperty("asksz")
-  long askLatestSizeHundreds;
+    @JsonProperty("asksz")
+    long askLatestSizeHundreds;
 
-  @JsonProperty("bid")
-  double bidPrice;
+    @JsonProperty("bid")
+    double bidPrice;
 
-  @JsonProperty("bidsz")
-  long bidLatestSizeHundreds;
+    @JsonProperty("bidsz")
+    long bidLatestSizeHundreds;
 
-  @JsonProperty("bidtick")
-  Integer bidTick;
+    @JsonProperty("bidtick")
+    Integer bidTick;
 
-  @JsonProperty("datetime")
-  Calendar dateTime;
+    @JsonProperty("datetime")
+    Calendar dateTime;
 
-  @JsonProperty("exch")
-  String exchangeCode;
+    @JsonProperty("exch")
+    String exchangeCode;
 
-  @JsonProperty("qcond")
-  String conditionCode;
+    @JsonProperty("qcond")
+    String conditionCode;
 
-  @JsonProperty("symbol")
-  String symbol;
+    @JsonProperty("symbol")
+    String symbol;
 
-  @JsonProperty("timestamp")
-  int timeStamp;
+    @JsonProperty("timestamp")
+    int timeStamp;
 }

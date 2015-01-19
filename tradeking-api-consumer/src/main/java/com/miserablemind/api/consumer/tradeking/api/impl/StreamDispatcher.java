@@ -30,84 +30,84 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 class StreamDispatcher implements Runnable {
 
-  private final List<StreamListener> listeners;
+    private final List<StreamListener> listeners;
 
-  private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
-  private AtomicBoolean active;
+    private AtomicBoolean active;
 
-  private final Queue<String> queue;
+    private final Queue<String> queue;
 
-  private final ExecutorService pool;
+    private final ExecutorService pool;
 
 
-  public StreamDispatcher(Queue<String> queue, List<StreamListener> listeners) {
-    this.queue = queue;
-    this.listeners = listeners;
-    pool = Executors.newCachedThreadPool();
-    objectMapper = new ObjectMapper();
+    public StreamDispatcher(Queue<String> queue, List<StreamListener> listeners) {
+        this.queue = queue;
+        this.listeners = listeners;
+        pool = Executors.newCachedThreadPool();
+        objectMapper = new ObjectMapper();
 
-    objectMapper.addMixInAnnotations(TradeKingObject.class, TradeKingKObjectMixIn.class);
-    objectMapper.addMixInAnnotations(StreamQuoteEvent.class, StreamQuoteMixIn.class);
-    objectMapper.addMixInAnnotations(StreamTradeEvent.class, StreamTradeMixIn.class);
-    objectMapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+        objectMapper.addMixInAnnotations(TradeKingObject.class, TradeKingKObjectMixIn.class);
+        objectMapper.addMixInAnnotations(StreamQuoteEvent.class, StreamQuoteMixIn.class);
+        objectMapper.addMixInAnnotations(StreamTradeEvent.class, StreamTradeMixIn.class);
+        objectMapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
 
-    active = new AtomicBoolean(true);
-  }
-
-  /**
-   * Keeps polling the queue. If it finds something,
-   * it tries to figure out the type of the entry and dispatches it for processing
-   */
-  public void run() {
-    while (active.get()) {
-
-      String jsonEntry = queue.poll();
-      if (jsonEntry == null || jsonEntry.length() == 0) return;
-
-      try {
-        if (jsonEntry.contains("{\"quote")) {
-          handleQuote(jsonEntry);
-        } else if (jsonEntry.startsWith("{\"trade")) {
-          handleTrade(jsonEntry);
-        }
-      } catch (IOException e) {
-        // could not map the line, will skip for now
-      }
+        active = new AtomicBoolean(true);
     }
-  }
 
-  /**
-   * Stops the dispatcher.
-   */
-  public void stop() {
-    active.set(false);
-    pool.shutdown();
-  }
+    /**
+     * Keeps polling the queue. If it finds something,
+     * it tries to figure out the type of the entry and dispatches it for processing
+     */
+    public void run() {
+        while (active.get()) {
 
-  /**
-   * Takes a String json entry, converts it to a stream quote object and passes it to listeners provided to execute in
-   * thread pool
-   *
-   * @param jsonEntry json format quote
-   * @throws IOException exception if could not map json to object
-   */
-  private void handleQuote(String jsonEntry) throws IOException {
-    StreamQuoteEvent quoteEvent = objectMapper.readValue(jsonEntry, StreamQuoteEvent.class);
-    for (final StreamListener listener : listeners) pool.submit((() -> listener.onQuote(quoteEvent)));
-  }
+            String jsonEntry = queue.poll();
+            if (jsonEntry == null || jsonEntry.length() == 0) return;
 
-  /**
-   * Takes a String json entry, converts it to a stream trade object and passes it to listeners provided to execute in
-   * thread pool
-   *
-   * @param jsonEntry json format trade entry
-   * @throws IOException exception if could not map json to object
-   */
-  private void handleTrade(String jsonEntry) throws IOException {
-    StreamTradeEvent tradeEvent = objectMapper.readValue(jsonEntry, StreamTradeEvent.class);
-    for (StreamListener listener : listeners) pool.submit((() -> listener.onTrade(tradeEvent)));
-  }
+            try {
+                if (jsonEntry.contains("{\"quote")) {
+                    handleQuote(jsonEntry);
+                } else if (jsonEntry.startsWith("{\"trade")) {
+                    handleTrade(jsonEntry);
+                }
+            } catch (IOException e) {
+                // could not map the line, will skip for now
+            }
+        }
+    }
+
+    /**
+     * Stops the dispatcher.
+     */
+    public void stop() {
+        active.set(false);
+        pool.shutdown();
+    }
+
+    /**
+     * Takes a String json entry, converts it to a stream quote object and passes it to listeners provided to execute in
+     * thread pool
+     *
+     * @param jsonEntry json format quote
+     * @throws IOException exception if could not map json to object
+     */
+    private void handleQuote(String jsonEntry) throws IOException {
+        StreamQuoteEvent quoteEvent = objectMapper.readValue(jsonEntry, StreamQuoteEvent.class);
+        for (final StreamListener listener : listeners) pool.submit((() -> listener.onQuote(quoteEvent)));
+    }
+
+    /**
+     * Takes a String json entry, converts it to a stream trade object and passes it to listeners provided to execute in
+     * thread pool
+     *
+     * @param jsonEntry json format trade entry
+     * @throws IOException exception if could not map json to object
+     */
+    private void handleTrade(String jsonEntry) throws IOException {
+        StreamTradeEvent tradeEvent = objectMapper.readValue(jsonEntry, StreamTradeEvent.class);
+        for (StreamListener listener : listeners) pool.submit((() -> listener.onTrade(tradeEvent)));
+    }
 
 
 }

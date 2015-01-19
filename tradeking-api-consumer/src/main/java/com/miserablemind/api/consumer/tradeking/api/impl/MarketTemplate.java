@@ -24,254 +24,254 @@ import java.util.Date;
 
 public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
-  private static final String URL_QUOTES = "market/ext/quotes.json";
-  private static final String URL_SEARCH_OPTIONS = "market/options/search.json";
-  private static final String URL_SEARCH_OPTION_STRIKES = "market/options/strikes.json";
-  private static final String URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
-  private static final String URL_SEARCH_NEWS = "market/news/search.json";
-  private static final String URL_GET_NEWS = "market/news/%s.json";
-  private static final String URL_MARKET_STATUS = "market/clock.json";
-  private static final String URL_TOP_LIST = "market/toplists/%s.json";
-  private static final String URL_DATA_POINTS = "market/timesales.json";
+    private static final String URL_QUOTES = "market/ext/quotes.json";
+    private static final String URL_SEARCH_OPTIONS = "market/options/search.json";
+    private static final String URL_SEARCH_OPTION_STRIKES = "market/options/strikes.json";
+    private static final String URL_SEARCH_OPTION_DATES = "market/options/expirations.json";
+    private static final String URL_SEARCH_NEWS = "market/news/search.json";
+    private static final String URL_GET_NEWS = "market/news/%s.json";
+    private static final String URL_MARKET_STATUS = "market/clock.json";
+    private static final String URL_TOP_LIST = "market/toplists/%s.json";
+    private static final String URL_DATA_POINTS = "market/timesales.json";
 
-  MarketTemplate(RestTemplate restTemplate) {
-    super(restTemplate);
-  }
-
-  @Override
-  public StockQuote getQuoteForStock(String ticker) {
-    StockQuote[] quotes = this.getQuoteForStocks(new String[]{ticker});
-    return quotes[0];
-  }
-
-  @Override
-  public StockQuote[] getQuoteForStocks(String[] tickers) {
-
-    String tickersParamString = this.buildCommaSeparatedParameterValue(tickers);
-
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-    parameters.set("symbols", tickersParamString);
-
-    URI url = this.buildUri(URL_QUOTES, parameters);
-    ResponseEntity<TKStockQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKStockQuoteResponse.class);
-
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
-
-    return response.getBody().getQuotes();
-  }
-
-  @Override
-  public OptionQuote getQuoteForOption(String ticker, Calendar expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException {
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
-
-    String optionType = (type == OptionQuote.OptionType.CALL) ? "C" : "P";
-    String timeString = dateFormat.format(expirationDate.getTime());
-    String paddedPrice = String.format("%08d", (int) (strikePrice * 1000));
-
-    String optionSymbol = ticker + timeString + optionType + paddedPrice;
-
-    String tickersParamString = this.buildCommaSeparatedParameterValue(new String[]{optionSymbol});
-
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-    parameters.set("symbols", tickersParamString);
-
-    try {
-      URI url = this.buildUri(URL_QUOTES, parameters);
-      ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
-      if (null != response.getBody().getError())
-        throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
-      return response.getBody().getQuotes()[0];
-    } catch (Exception e) {
-      throw new OptionQuoteNotFoundException("Ticker: " + ticker, e);
+    MarketTemplate(RestTemplate restTemplate) {
+        super(restTemplate);
     }
 
-  }
-
-  @Override
-  public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate) {
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-    String queryString = "put_call-eq:" + type;
-
-    //Strike Prices
-    if (null != minStrikePrice) queryString += " AND strikeprice-gte:" + minStrikePrice;
-    if (null != maxStrikePrice) queryString += " AND strikeprice-lte:" + maxStrikePrice;
-
-    //Dates
-    if (null != startDate) queryString += " AND xdate-gte:" + dateFormat.format(startDate.getTime());
-    if (null != endDate) queryString += " AND xdate-lte:" + dateFormat.format(endDate.getTime());
-
-    parameters.set("symbol", ticker);
-    parameters.set("query", queryString);
-
-    URI url = this.buildUri(URL_SEARCH_OPTIONS, parameters);
-    ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
-
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
-
-    return response.getBody().getQuotes();
-
-  }
-
-  @Override
-  public Double[] getStrikePrices(String ticker) {
-    URI url = this.buildUri(URL_SEARCH_OPTION_STRIKES, "symbol", ticker);
-    ResponseEntity<TKOptionStrikesResponse> response = this.getRestTemplate().getForEntity(url, TKOptionStrikesResponse.class);
-
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
-
-    return response.getBody().getPrices();
-
-  }
-
-  @Override
-  public Calendar[] getOptionExpirationDates(String ticker) {
-    URI url = this.buildUri(URL_SEARCH_OPTION_DATES, "symbol", ticker);
-    ResponseEntity<TKOptionExpirationsResponse> response = this.getRestTemplate().getForEntity(url, TKOptionExpirationsResponse.class);
-
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
-
-    return response.getBody().getDates();
-
-  }
-
-  @Override
-  public NewsHeadline[] getNewsList(String ticker, int limit) {
-    return this.getNewsList(new String[]{ticker}, limit, null, null, null);
-  }
-
-  @Override
-  public NewsHeadline[] getNewsList(String[] keywords, int limit) {
-    return this.getNewsList(null, limit, keywords, null, null);
-  }
-
-
-  protected NewsHeadline[] getNewsList(String[] tickers, Integer limit, String[] keywords, Calendar startDate, Calendar endDate) {
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-
-
-    if (null != tickers) parameters.set("symbols", this.buildCommaSeparatedParameterValue(tickers));
-    if (null != limit) parameters.set("maxhits", String.valueOf(limit));
-
-    if (null != keywords) parameters.set("keywords", this.buildCommaSeparatedParameterValue(keywords));
-
-    //todo: dates do not work, figure out the format, TK does not like anything
-    if (null != startDate) {
-      parameters.set("startdate", dateFormat.format(startDate.getTime()));
-
-      if (null != endDate) {
-        parameters.set("enddate", dateFormat.format(endDate.getTime()));
-      } else {
-        parameters.set("enddate", dateFormat.format(new Date()));
-      }
-
+    @Override
+    public StockQuote getQuoteForStock(String ticker) {
+        StockQuote[] quotes = this.getQuoteForStocks(new String[]{ticker});
+        return quotes[0];
     }
 
-    URI url = this.buildUri(URL_SEARCH_NEWS, parameters);
-    ResponseEntity<TKNewsArticlesSearchResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticlesSearchResponse.class);
+    @Override
+    public StockQuote[] getQuoteForStocks(String[] tickers) {
 
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        String tickersParamString = this.buildCommaSeparatedParameterValue(tickers);
 
-    return response.getBody().getArticles();
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.set("symbols", tickersParamString);
 
-  }
+        URI url = this.buildUri(URL_QUOTES, parameters);
+        ResponseEntity<TKStockQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKStockQuoteResponse.class);
 
-  @Override
-  public NewsStory getNewsById(String newsId) {
-    URI url = this.buildUri(String.format(URL_GET_NEWS, newsId));
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    ResponseEntity<TKNewsArticleStoryResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticleStoryResponse.class);
+        return response.getBody().getQuotes();
+    }
 
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+    @Override
+    public OptionQuote getQuoteForOption(String ticker, Calendar expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException {
 
-    return response.getBody().getArticle();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
 
-  }
+        String optionType = (type == OptionQuote.OptionType.CALL) ? "C" : "P";
+        String timeString = dateFormat.format(expirationDate.getTime());
+        String paddedPrice = String.format("%08d", (int) (strikePrice * 1000));
 
-  @Override
-  public MarketStatus getMarketStatus() {
-    URI url = this.buildUri(URL_MARKET_STATUS);
+        String optionSymbol = ticker + timeString + optionType + paddedPrice;
 
-    ResponseEntity<TKMarketStatusResponse> response = this.getRestTemplate().getForEntity(url, TKMarketStatusResponse.class);
+        String tickersParamString = this.buildCommaSeparatedParameterValue(new String[]{optionSymbol});
 
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        parameters.set("symbols", tickersParamString);
 
-    return response.getBody().getMarketStatus();
-
-  }
-
-  @Override
-  public TopListEntry[] getTopList(TopListType listType) {
-    URI url = this.buildUri(String.format(URL_TOP_LIST, listType));
-    ResponseEntity<TKTopListResponse> response = this.getRestTemplate().getForEntity(url, TKTopListResponse.class);
-
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
-
-    return response.getBody().getTopList();
-
-  }
-
-  //intraday
-  @Override
-  public TimeSalesQuote[] getDataPoints(String ticker, int pageNumber, int perPage) {
-    int offset = (pageNumber - 1) * perPage + 1;
-    return this.getDataPoints(ticker, TimeSalesInterval.TICK, perPage, offset, null, null);
-  }
-
-  //multiday
-  @Override
-  public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesInterval interval) {
-    return this.getDataPoints(ticker, interval, null, null, startDate, endDate);
-  }
-
-
-  // there is no universal usage of this one, see overloaded methods
-  protected TimeSalesQuote[] getDataPoints(String ticker, TimeSalesInterval interval, Integer countPerPage,
-                                           Integer offset, Calendar startDate, Calendar endDate) {
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-
-    parameters.set("symbols", ticker);
-
-    if (null != interval) {
-      parameters.set("interval", String.valueOf(interval));
-      if (interval == TimeSalesInterval.TICK) {
-
-        if (null != countPerPage) {
-          parameters.set("rpp", String.valueOf(countPerPage));
-          if (null != offset) parameters.set("index", String.valueOf(offset));
+        try {
+            URI url = this.buildUri(URL_QUOTES, parameters);
+            ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
+            if (null != response.getBody().getError())
+                throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+            return response.getBody().getQuotes()[0];
+        } catch (Exception e) {
+            throw new OptionQuoteNotFoundException("Ticker: " + ticker, e);
         }
-      }
+
     }
 
-    if (null != startDate) parameters.set("startdate", dateFormat.format(startDate.getTime()));
-    if (null != endDate) parameters.set("enddate", dateFormat.format(endDate.getTime()));
+    @Override
+    public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate) {
 
-    URI url = this.buildUri(URL_DATA_POINTS, parameters);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
-    ResponseEntity<TKTimeSalesQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKTimeSalesQuoteResponse.class);
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+        String queryString = "put_call-eq:" + type;
 
-    if (null != response.getBody().getError())
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        //Strike Prices
+        if (null != minStrikePrice) queryString += " AND strikeprice-gte:" + minStrikePrice;
+        if (null != maxStrikePrice) queryString += " AND strikeprice-lte:" + maxStrikePrice;
 
-    return response.getBody().getQuotes();
+        //Dates
+        if (null != startDate) queryString += " AND xdate-gte:" + dateFormat.format(startDate.getTime());
+        if (null != endDate) queryString += " AND xdate-lte:" + dateFormat.format(endDate.getTime());
 
-  }
+        parameters.set("symbol", ticker);
+        parameters.set("query", queryString);
+
+        URI url = this.buildUri(URL_SEARCH_OPTIONS, parameters);
+        ResponseEntity<TKOptionQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKOptionQuoteResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getQuotes();
+
+    }
+
+    @Override
+    public Double[] getStrikePrices(String ticker) {
+        URI url = this.buildUri(URL_SEARCH_OPTION_STRIKES, "symbol", ticker);
+        ResponseEntity<TKOptionStrikesResponse> response = this.getRestTemplate().getForEntity(url, TKOptionStrikesResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getPrices();
+
+    }
+
+    @Override
+    public Calendar[] getOptionExpirationDates(String ticker) {
+        URI url = this.buildUri(URL_SEARCH_OPTION_DATES, "symbol", ticker);
+        ResponseEntity<TKOptionExpirationsResponse> response = this.getRestTemplate().getForEntity(url, TKOptionExpirationsResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getDates();
+
+    }
+
+    @Override
+    public NewsHeadline[] getNewsList(String ticker, int limit) {
+        return this.getNewsList(new String[]{ticker}, limit, null, null, null);
+    }
+
+    @Override
+    public NewsHeadline[] getNewsList(String[] keywords, int limit) {
+        return this.getNewsList(null, limit, keywords, null, null);
+    }
+
+
+    protected NewsHeadline[] getNewsList(String[] tickers, Integer limit, String[] keywords, Calendar startDate, Calendar endDate) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+
+
+        if (null != tickers) parameters.set("symbols", this.buildCommaSeparatedParameterValue(tickers));
+        if (null != limit) parameters.set("maxhits", String.valueOf(limit));
+
+        if (null != keywords) parameters.set("keywords", this.buildCommaSeparatedParameterValue(keywords));
+
+        //todo: dates do not work, figure out the format, TK does not like anything
+        if (null != startDate) {
+            parameters.set("startdate", dateFormat.format(startDate.getTime()));
+
+            if (null != endDate) {
+                parameters.set("enddate", dateFormat.format(endDate.getTime()));
+            } else {
+                parameters.set("enddate", dateFormat.format(new Date()));
+            }
+
+        }
+
+        URI url = this.buildUri(URL_SEARCH_NEWS, parameters);
+        ResponseEntity<TKNewsArticlesSearchResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticlesSearchResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getArticles();
+
+    }
+
+    @Override
+    public NewsStory getNewsById(String newsId) {
+        URI url = this.buildUri(String.format(URL_GET_NEWS, newsId));
+
+        ResponseEntity<TKNewsArticleStoryResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticleStoryResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getArticle();
+
+    }
+
+    @Override
+    public MarketStatus getMarketStatus() {
+        URI url = this.buildUri(URL_MARKET_STATUS);
+
+        ResponseEntity<TKMarketStatusResponse> response = this.getRestTemplate().getForEntity(url, TKMarketStatusResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getMarketStatus();
+
+    }
+
+    @Override
+    public TopListEntry[] getTopList(TopListType listType) {
+        URI url = this.buildUri(String.format(URL_TOP_LIST, listType));
+        ResponseEntity<TKTopListResponse> response = this.getRestTemplate().getForEntity(url, TKTopListResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getTopList();
+
+    }
+
+    //intraday
+    @Override
+    public TimeSalesQuote[] getDataPoints(String ticker, int pageNumber, int perPage) {
+        int offset = (pageNumber - 1) * perPage + 1;
+        return this.getDataPoints(ticker, TimeSalesInterval.TICK, perPage, offset, null, null);
+    }
+
+    //multiday
+    @Override
+    public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesInterval interval) {
+        return this.getDataPoints(ticker, interval, null, null, startDate, endDate);
+    }
+
+
+    // there is no universal usage of this one, see overloaded methods
+    protected TimeSalesQuote[] getDataPoints(String ticker, TimeSalesInterval interval, Integer countPerPage,
+                                             Integer offset, Calendar startDate, Calendar endDate) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
+
+        parameters.set("symbols", ticker);
+
+        if (null != interval) {
+            parameters.set("interval", String.valueOf(interval));
+            if (interval == TimeSalesInterval.TICK) {
+
+                if (null != countPerPage) {
+                    parameters.set("rpp", String.valueOf(countPerPage));
+                    if (null != offset) parameters.set("index", String.valueOf(offset));
+                }
+            }
+        }
+
+        if (null != startDate) parameters.set("startdate", dateFormat.format(startDate.getTime()));
+        if (null != endDate) parameters.set("enddate", dateFormat.format(endDate.getTime()));
+
+        URI url = this.buildUri(URL_DATA_POINTS, parameters);
+
+        ResponseEntity<TKTimeSalesQuoteResponse> response = this.getRestTemplate().getForEntity(url, TKTimeSalesQuoteResponse.class);
+
+        if (null != response.getBody().getError())
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+
+        return response.getBody().getQuotes();
+
+    }
 
 }

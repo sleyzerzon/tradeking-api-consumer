@@ -11,16 +11,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TransactionSecurityMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("cusip")
-  String CUSIP;
+    @JsonProperty("cusip")
+    String CUSIP;
 
-  @JsonProperty("id")
-  String id;
+    @JsonProperty("id")
+    String id;
 
-  @JsonProperty("sectyp")
-  String securityType;
+    @JsonProperty("sectyp")
+    String securityType;
 
-  @JsonProperty("sym")
-  String symbol;
+    @JsonProperty("sym")
+    String symbol;
 
 }

@@ -15,32 +15,32 @@ import java.util.Calendar;
 @JsonRootName("trade")
 public class StreamTradeMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("symbol")
-  String symbol;
+    @JsonProperty("symbol")
+    String symbol;
 
-  @JsonProperty("exch")
-  String exchangeCode;
+    @JsonProperty("exch")
+    String exchangeCode;
 
-  @JsonProperty("last")
-  double lastPrice;
+    @JsonProperty("last")
+    double lastPrice;
 
-  @JsonProperty("vl")
-  int volume;
+    @JsonProperty("vl")
+    int volume;
 
-  @JsonProperty("cvol")
-  int cumulativeVolume;
+    @JsonProperty("cvol")
+    int cumulativeVolume;
 
-  @JsonProperty("vwap")
-  double volumeWeightedAveragePrice;
+    @JsonProperty("vwap")
+    double volumeWeightedAveragePrice;
 
-  @JsonProperty("datetime")
-  Calendar dateTime;
+    @JsonProperty("datetime")
+    Calendar dateTime;
 
-  @JsonProperty("tcond")
-  String tradeCondition;
+    @JsonProperty("tcond")
+    String tradeCondition;
 
-  @JsonProperty("timestamp")
-  int timeStamp;
+    @JsonProperty("timestamp")
+    int timeStamp;
 
 
 }

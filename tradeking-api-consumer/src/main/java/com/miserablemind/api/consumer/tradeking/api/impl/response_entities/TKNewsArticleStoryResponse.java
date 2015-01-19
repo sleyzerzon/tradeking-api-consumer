@@ -17,30 +17,30 @@ import java.util.LinkedHashMap;
 
 public class TKNewsArticleStoryResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  private NewsStory article;
+    private NewsStory article;
 
-  @JsonSetter("article")
-  public void setArticle(LinkedHashMap articlesResponse) throws Exception {
+    @JsonSetter("article")
+    public void setArticle(LinkedHashMap articlesResponse) throws Exception {
 
-    ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
-    //messed up, all the news will be 1970 for now
-    SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
+        //messed up, all the news will be 1970 for now
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
 
-    mapper.setDateFormat(dateFormat);
-    mapper.registerModule(new TradeKingModule());
+        mapper.setDateFormat(dateFormat);
+        mapper.registerModule(new TradeKingModule());
 
-    this.article = mapper.readValue(mapper.writeValueAsString(articlesResponse), NewsStory.class);
-  }
+        this.article = mapper.readValue(mapper.writeValueAsString(articlesResponse), NewsStory.class);
+    }
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public NewsStory getArticle() {
-    return article;
-  }
+    public NewsStory getArticle() {
+        return article;
+    }
 
 }

@@ -15,40 +15,40 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.Hold
 
 public class AccountHoldingEntryMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("accounttype")
-  AccountHoldingEntry.HoldingType holdingType;
+    @JsonProperty("accounttype")
+    AccountHoldingEntry.HoldingType holdingType;
 
-  @JsonProperty("costbasis")
-  double costBasis;
+    @JsonProperty("costbasis")
+    double costBasis;
 
-  @JsonProperty("displaydata")
-  HoldingDisplayData displayData;
+    @JsonProperty("displaydata")
+    HoldingDisplayData displayData;
 
-  @JsonProperty("gainloss")
-  double gainLoss;
+    @JsonProperty("gainloss")
+    double gainLoss;
 
-  @JsonProperty("instrument")
-  FinancialInstrument instrument;
+    @JsonProperty("instrument")
+    FinancialInstrument instrument;
 
-  @JsonProperty("marketvalue")
-  double marketValue;
+    @JsonProperty("marketvalue")
+    double marketValue;
 
-  @JsonProperty("marketvaluechange")
-  double marketValueChange;
+    @JsonProperty("marketvaluechange")
+    double marketValueChange;
 
-  @JsonProperty("price")
-  double price;
+    @JsonProperty("price")
+    double price;
 
-  @JsonProperty("purchaseprice")
-  double purchasePrice;
+    @JsonProperty("purchaseprice")
+    double purchasePrice;
 
-  @JsonProperty("qty")
-  double quantity;
+    @JsonProperty("qty")
+    double quantity;
 
-  @JsonProperty("quote")
-  HoldingsQuote holdingsQuote;
+    @JsonProperty("quote")
+    HoldingsQuote holdingsQuote;
 
-  @JsonProperty("sodcostbasis")
-  double SODCostBasis;
+    @JsonProperty("sodcostbasis")
+    double SODCostBasis;
 
 }

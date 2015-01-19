@@ -15,21 +15,21 @@ import java.util.LinkedHashMap;
 
 public class TKNewsArticlesSearchResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  private NewsHeadline[] articles;
+    private NewsHeadline[] articles;
 
-  @JsonSetter("articles")
-  public void setArticles(LinkedHashMap articlesResponse) throws Exception {
-    this.articles = (NewsHeadline[]) this.extractArray(NewsHeadline[].class, articlesResponse, "article", "MM/dd HH:mm");
-  }
+    @JsonSetter("articles")
+    public void setArticles(LinkedHashMap articlesResponse) throws Exception {
+        this.articles = (NewsHeadline[]) this.extractArray(NewsHeadline[].class, articlesResponse, "article", "MM/dd HH:mm");
+    }
 
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public NewsHeadline[] getArticles() {
-    return articles;
-  }
+    public NewsHeadline[] getArticles() {
+        return articles;
+    }
 }

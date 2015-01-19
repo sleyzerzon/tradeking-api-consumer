@@ -13,9 +13,9 @@ import org.springframework.social.connect.support.OAuth1ConnectionFactory;
 
 public class TradeKingConnectionFactory extends OAuth1ConnectionFactory<TradeKingOperations> {
 
-  public TradeKingConnectionFactory(String consumerKey, String consumerSecret) {
-    super(TradeKingServiceProvider.PROVIDER_ID, new TradeKingServiceProvider(consumerKey, consumerSecret), new TradeKingApiAdapter());
-  }
+    public TradeKingConnectionFactory(String consumerKey, String consumerSecret) {
+        super(TradeKingServiceProvider.PROVIDER_ID, new TradeKingServiceProvider(consumerKey, consumerSecret), new TradeKingApiAdapter());
+    }
 
 
 }

@@ -15,48 +15,48 @@ import java.util.Calendar;
 
 public class TransactionDetailsMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("commission")
-  double commission;
+    @JsonProperty("commission")
+    double commission;
 
-  @JsonProperty("fee")
-  double fee;
+    @JsonProperty("fee")
+    double fee;
 
-  @JsonProperty("price")
-  double price;
+    @JsonProperty("price")
+    double price;
 
-  @JsonProperty("quantity")
-  double quantity;
+    @JsonProperty("quantity")
+    double quantity;
 
-  @JsonProperty("source")
-  String source;
+    @JsonProperty("source")
+    String source;
 
-  @JsonProperty("side")
-  int side;
+    @JsonProperty("side")
+    int side;
 
-  @JsonProperty("accounttype")
-  int accountType;
+    @JsonProperty("accounttype")
+    int accountType;
 
-  @JsonProperty("secfee")
-  double SECFee;
+    @JsonProperty("secfee")
+    double SECFee;
 
-  @JsonProperty("security")
-  TransactionSecurity transactionSecurity;
+    @JsonProperty("security")
+    TransactionSecurity transactionSecurity;
 
-  @JsonProperty("tradedate")
-  Calendar tradeDate;
+    @JsonProperty("tradedate")
+    Calendar tradeDate;
 
-  @JsonProperty("settlementdate")
-  Calendar settlementDate;
+    @JsonProperty("settlementdate")
+    Calendar settlementDate;
 
-  @JsonProperty("transactionid")
-  int transactionId;
+    @JsonProperty("transactionid")
+    int transactionId;
 
-  @JsonProperty("transactiontype")
-  String transactionType;
+    @JsonProperty("transactiontype")
+    String transactionType;
 
-  @JsonSetter("description")
-  void setDescription(Object description) {
-  }
+    @JsonSetter("description")
+    void setDescription(Object description) {
+    }
 
 
 }

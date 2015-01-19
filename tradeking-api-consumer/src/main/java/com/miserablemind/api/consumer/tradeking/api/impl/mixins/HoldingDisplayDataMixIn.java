@@ -11,34 +11,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class HoldingDisplayDataMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("accounttype")
-  String accountType;
+    @JsonProperty("accounttype")
+    String accountType;
 
-  @JsonProperty("assetclass")
-  String assetClass;
+    @JsonProperty("assetclass")
+    String assetClass;
 
-  @JsonProperty("change")
-  String change;
+    @JsonProperty("change")
+    String change;
 
-  @JsonProperty("costbasis")
-  String costBasis;
+    @JsonProperty("costbasis")
+    String costBasis;
 
-  @JsonProperty("desc")
-  String description;
+    @JsonProperty("desc")
+    String description;
 
-  @JsonProperty("lastprice")
-  String lastPrice;
+    @JsonProperty("lastprice")
+    String lastPrice;
 
-  @JsonProperty("marketvalue")
-  String marketValue;
+    @JsonProperty("marketvalue")
+    String marketValue;
 
-  @JsonProperty("marketvaluechange")
-  String marketValueChange;
+    @JsonProperty("marketvaluechange")
+    String marketValueChange;
 
-  @JsonProperty("qty")
-  int quantity;
+    @JsonProperty("qty")
+    int quantity;
 
-  @JsonProperty("symbol")
-  String symbol;
+    @JsonProperty("symbol")
+    String symbol;
 
 }

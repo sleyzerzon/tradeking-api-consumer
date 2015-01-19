@@ -11,22 +11,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BuyingPowerMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("cashavailableforwithdrawal")
-  double cashAvailableForWithdrawal;
+    @JsonProperty("cashavailableforwithdrawal")
+    double cashAvailableForWithdrawal;
 
-  @JsonProperty("equitypercentage")
-  double equityPercentage;
+    @JsonProperty("equitypercentage")
+    double equityPercentage;
 
-  @JsonProperty("options")
-  double options;
+    @JsonProperty("options")
+    double options;
 
-  @JsonProperty("sodoptions")
-  double sodOptions;
+    @JsonProperty("sodoptions")
+    double sodOptions;
 
-  @JsonProperty("sodstock")
-  double sodStock;
+    @JsonProperty("sodstock")
+    double sodStock;
 
-  @JsonProperty("stock")
-  double stock;
+    @JsonProperty("stock")
+    double stock;
 
 }

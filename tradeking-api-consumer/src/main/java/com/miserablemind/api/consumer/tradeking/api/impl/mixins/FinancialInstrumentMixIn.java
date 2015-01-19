@@ -11,18 +11,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FinancialInstrumentMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("cusip")
-  String CUSIP;
+    @JsonProperty("cusip")
+    String CUSIP;
 
-  @JsonProperty("desc")
-  String description;
+    @JsonProperty("desc")
+    String description;
 
-  @JsonProperty("factor")
-  double factor;
+    @JsonProperty("factor")
+    double factor;
 
-  @JsonProperty("sectyp")
-  String securityType;
+    @JsonProperty("sectyp")
+    String securityType;
 
-  @JsonProperty("sym")
-  String symbol;
+    @JsonProperty("sym")
+    String symbol;
 }

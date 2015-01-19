@@ -17,63 +17,63 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.Acco
  */
 public class AccountsSummary extends TradeKingObject {
 
-  private String accountId;
-  private AccountBalance accountBalance;
-  private AccountHoldings accountHoldings;
+    private String accountId;
+    private AccountBalance accountBalance;
+    private AccountHoldings accountHoldings;
 
-  public AccountsSummary() {
-  }
+    public AccountsSummary() {
+    }
 
-  public AccountsSummary(String accountId, AccountBalance accountBalance, AccountHoldings accountHoldings) {
-    this.accountId = accountId;
-    this.accountBalance = accountBalance;
-    this.accountHoldings = accountHoldings;
-  }
+    public AccountsSummary(String accountId, AccountBalance accountBalance, AccountHoldings accountHoldings) {
+        this.accountId = accountId;
+        this.accountBalance = accountBalance;
+        this.accountHoldings = accountHoldings;
+    }
 
-  /**
-   * @return String account id
-   */
-  public String getAccountId() {
-    return accountId;
-  }
+    /**
+     * @return String account id
+     */
+    public String getAccountId() {
+        return accountId;
+    }
 
-  /**
-   * Account Balance, data about account's cash, securities etc..
-   *
-   * @return Account Balance Object
-   */
-  public AccountBalance getAccountBalance() {
-    return accountBalance;
-  }
+    /**
+     * Account Balance, data about account's cash, securities etc..
+     *
+     * @return Account Balance Object
+     */
+    public AccountBalance getAccountBalance() {
+        return accountBalance;
+    }
 
-  /**
-   * Account Holdings that includes a list of the holdings and a total securities figure.
-   *
-   * @return Account Holdings Object
-   */
-  public AccountHoldings getAccountHoldings() {
-    return accountHoldings;
-  }
+    /**
+     * Account Holdings that includes a list of the holdings and a total securities figure.
+     *
+     * @return Account Holdings Object
+     */
+    public AccountHoldings getAccountHoldings() {
+        return accountHoldings;
+    }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof AccountsSummary)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AccountsSummary)) return false;
 
-    AccountsSummary that = (AccountsSummary) o;
+        AccountsSummary that = (AccountsSummary) o;
 
-    if (!accountBalance.equals(that.accountBalance)) return false;
-    if (!accountHoldings.equals(that.accountHoldings)) return false;
-    if (!accountId.equals(that.accountId)) return false;
+        if (!accountBalance.equals(that.accountBalance)) return false;
+        if (!accountHoldings.equals(that.accountHoldings)) return false;
+        if (!accountId.equals(that.accountId)) return false;
 
-    return true;
-  }
+        return true;
+    }
 
-  @Override
-  public int hashCode() {
-    int result = accountId.hashCode();
-    result = 31 * result + accountBalance.hashCode();
-    result = 31 * result + accountHoldings.hashCode();
-    return result;
-  }
+    @Override
+    public int hashCode() {
+        int result = accountId.hashCode();
+        result = 31 * result + accountBalance.hashCode();
+        result = 31 * result + accountHoldings.hashCode();
+        return result;
+    }
 }

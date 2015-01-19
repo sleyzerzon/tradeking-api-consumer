@@ -14,18 +14,18 @@ import com.miserablemind.api.consumer.tradeking.api.domain.member.TradeKingUser;
  */
 public interface APIOperations {
 
-  /**
-   * Gets API version for the api connected to
-   *
-   * @return a String with api version
-   */
-  public String getAPIVersion();
+    /**
+     * Gets API version for the api connected to
+     *
+     * @return a String with api version
+     */
+    public String getAPIVersion();
 
-  /**
-   * Gets the connected user that is authorized to use the api
-   *
-   * @return User object
-   */
-  public TradeKingUser getCurrentUser();
+    /**
+     * Gets the connected user that is authorized to use the api
+     *
+     * @return User object
+     */
+    public TradeKingUser getCurrentUser();
 
 }

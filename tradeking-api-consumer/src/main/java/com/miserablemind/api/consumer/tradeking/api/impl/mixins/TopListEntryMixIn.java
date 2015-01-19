@@ -13,31 +13,31 @@ import com.miserablemind.api.consumer.tradeking.api.domain.market.ChangeSign;
 
 public class TopListEntryMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("chg")
-  double change;
+    @JsonProperty("chg")
+    double change;
 
-  @JsonProperty("chg_sign")
-  ChangeSign changeDirection;
+    @JsonProperty("chg_sign")
+    ChangeSign changeDirection;
 
-  @JsonProperty("last")
-  double lastTradePrice;
+    @JsonProperty("last")
+    double lastTradePrice;
 
-  @JsonProperty("name")
-  String companyName;
+    @JsonProperty("name")
+    String companyName;
 
-  @JsonProperty("pchg")
-  String percentageChange;
+    @JsonProperty("pchg")
+    String percentageChange;
 
-  @JsonProperty("pcls")
-  double priorDayClosePrice;
+    @JsonProperty("pcls")
+    double priorDayClosePrice;
 
-  @JsonProperty("rank")
-  int rankInTheList;
+    @JsonProperty("rank")
+    int rankInTheList;
 
-  @JsonProperty("symbol")
-  String ticker;
+    @JsonProperty("symbol")
+    String ticker;
 
-  @JsonProperty("vl")
-  int volume;
+    @JsonProperty("vl")
+    int volume;
 
 }

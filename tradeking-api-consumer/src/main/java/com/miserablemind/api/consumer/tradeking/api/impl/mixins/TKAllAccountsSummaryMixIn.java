@@ -13,12 +13,12 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.Acco
 
 public class TKAllAccountsSummaryMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("account")
-  String accountId;
+    @JsonProperty("account")
+    String accountId;
 
-  @JsonProperty("accountbalance")
-  AccountBalance accountBalance;
+    @JsonProperty("accountbalance")
+    AccountBalance accountBalance;
 
-  @JsonProperty("accountholdings")
-  AccountHoldings accountHoldings;
+    @JsonProperty("accountholdings")
+    AccountHoldings accountHoldings;
 }

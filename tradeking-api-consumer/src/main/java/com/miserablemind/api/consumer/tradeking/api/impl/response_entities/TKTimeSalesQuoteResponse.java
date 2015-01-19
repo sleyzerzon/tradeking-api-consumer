@@ -14,22 +14,22 @@ import java.util.LinkedHashMap;
 
 public class TKTimeSalesQuoteResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  private TimeSalesQuote[] quotes;
+    private TimeSalesQuote[] quotes;
 
-  @JsonSetter("quotes")
-  public void setQuote(LinkedHashMap quotesResponse) throws Exception {
-    this.quotes = (TimeSalesQuote[]) this.extractArray(TimeSalesQuote[].class, quotesResponse, "quote", null);
-  }
+    @JsonSetter("quotes")
+    public void setQuote(LinkedHashMap quotesResponse) throws Exception {
+        this.quotes = (TimeSalesQuote[]) this.extractArray(TimeSalesQuote[].class, quotesResponse, "quote", null);
+    }
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public TimeSalesQuote[] getQuotes() {
-    return quotes;
-  }
+    public TimeSalesQuote[] getQuotes() {
+        return quotes;
+    }
 
 
 }

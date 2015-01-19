@@ -16,43 +16,43 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.Accou
  */
 public interface AccountOperations {
 
-  /**
-   * This call will return detailed balance and holding information for each account associated with a user.
-   *
-   * @return summary object
-   */
-  public AccountsSummary[] getAccounts();
+    /**
+     * This call will return detailed balance and holding information for each account associated with a user.
+     *
+     * @return summary object
+     */
+    public AccountsSummary[] getAccounts();
 
-  /**
-   * This call will return detailed balance information for the accountId
-   *
-   * @param accountId id of an account
-   * @return full account balance, including Securities, Cash, Buying Power etc..
-   */
-  public AccountBalance getAccountBalance(String accountId);
+    /**
+     * This call will return detailed balance information for the accountId
+     *
+     * @param accountId id of an account
+     * @return full account balance, including Securities, Cash, Buying Power etc..
+     */
+    public AccountBalance getAccountBalance(String accountId);
 
-  /**
-   * This call will return detail information about the holdings for an accountId
-   *
-   * @param accountId id of an account
-   * @return an object that contains the holding list and total securities value
-   */
-  public AccountHoldings getAccountHoldings(String accountId);
+    /**
+     * This call will return detail information about the holdings for an accountId
+     *
+     * @param accountId id of an account
+     * @return an object that contains the holding list and total securities value
+     */
+    public AccountHoldings getAccountHoldings(String accountId);
 
-  /**
-   * This call will return account activity for the accountId. This call supports optional date range or transaction type filters.
-   *
-   * @param accountId id of the account the history is retrieved for
-   * @return a list of transaction objects
-   */
-  public TradeKingTransaction[] getTransactionsHistory(String accountId, TradeKingTransaction.Range range, TradeKingTransaction.Type type);
+    /**
+     * This call will return account activity for the accountId. This call supports optional date range or transaction type filters.
+     *
+     * @param accountId id of the account the history is retrieved for
+     * @return a list of transaction objects
+     */
+    public TradeKingTransaction[] getTransactionsHistory(String accountId, TradeKingTransaction.Range range, TradeKingTransaction.Type type);
 
-  /**
-   * Spring Social requires updateStatus(). In this case this is a no-op method
-   * and does not do anything.
-   *
-   * @see org.springframework.social.connect.Connection#updateStatus(String)
-   */
-  public void updateStatus();
+    /**
+     * Spring Social requires updateStatus(). In this case this is a no-op method
+     * and does not do anything.
+     *
+     * @see org.springframework.social.connect.Connection#updateStatus(String)
+     */
+    public void updateStatus();
 
 }

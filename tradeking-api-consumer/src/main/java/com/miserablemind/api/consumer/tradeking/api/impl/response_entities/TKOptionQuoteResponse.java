@@ -15,21 +15,21 @@ import java.util.LinkedHashMap;
 
 public class TKOptionQuoteResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  private OptionQuote[] quotes;
+    private OptionQuote[] quotes;
 
-  @JsonSetter("quotes")
-  public void setQuote(LinkedHashMap quotesResponse) throws Exception {
-    this.quotes = (OptionQuote[]) this.extractArray(OptionQuote[].class, quotesResponse, "quote", null);
-  }
+    @JsonSetter("quotes")
+    public void setQuote(LinkedHashMap quotesResponse) throws Exception {
+        this.quotes = (OptionQuote[]) this.extractArray(OptionQuote[].class, quotesResponse, "quote", null);
+    }
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public OptionQuote[] getQuotes() {
-    return quotes;
-  }
+    public OptionQuote[] getQuotes() {
+        return quotes;
+    }
 
 }

@@ -19,33 +19,33 @@ import java.net.URI;
 
 public class APITemplate extends BaseTemplate implements APIOperations {
 
-  private static final String URL_PROFILE = "member/profile.json";
-  private static final String URL_API_VERSION = "utility/version.json";
+    private static final String URL_PROFILE = "member/profile.json";
+    private static final String URL_API_VERSION = "utility/version.json";
 
-  APITemplate(RestTemplate restTemplate) {
-    super(restTemplate);
-  }
+    APITemplate(RestTemplate restTemplate) {
+        super(restTemplate);
+    }
 
-  @Override
-  public String getAPIVersion() {
-    URI url = this.buildUri(URL_API_VERSION);
+    @Override
+    public String getAPIVersion() {
+        URI url = this.buildUri(URL_API_VERSION);
 
-    ResponseEntity<TKApiVersionResponse> response = this.getRestTemplate().getForEntity(url, TKApiVersionResponse.class);
+        ResponseEntity<TKApiVersionResponse> response = this.getRestTemplate().getForEntity(url, TKApiVersionResponse.class);
 
-    if (response.getBody().getError() != null)
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        if (response.getBody().getError() != null)
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getVersion();
-  }
+        return response.getBody().getVersion();
+    }
 
-  @Override
-  public TradeKingUser getCurrentUser() {
-    URI url = this.buildUri(URL_PROFILE);
-    ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
-    if (!response.getBody().getError().equals("Success"))
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+    @Override
+    public TradeKingUser getCurrentUser() {
+        URI url = this.buildUri(URL_PROFILE);
+        ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
+        if (!response.getBody().getError().equals("Success"))
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getUserData();
+        return response.getBody().getUserData();
 
-  }
+    }
 }

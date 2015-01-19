@@ -23,86 +23,86 @@ import java.net.URI;
 
 public class WatchlistTemplate extends BaseTemplate implements WatchlistOperations {
 
-  private static final String URL_WATCHLIST_LIST = "watchlists.json";
-  private static final String URL_WATCHLIST_LIST_DELETE = "watchlists/%s.json";
-  private static final String URL_WATCHLIST_LIST_EDIT = "watchlists/%s/symbols.json";
-  private static final String URL_WATCHLIST_LIST_DELETE_TICKERS = "watchlists/%s/symbols/%s.json";
-  private static final String URL_WATCHLIST_GET_ITEMS = "watchlists/%s.json";
+    private static final String URL_WATCHLIST_LIST = "watchlists.json";
+    private static final String URL_WATCHLIST_LIST_DELETE = "watchlists/%s.json";
+    private static final String URL_WATCHLIST_LIST_EDIT = "watchlists/%s/symbols.json";
+    private static final String URL_WATCHLIST_LIST_DELETE_TICKERS = "watchlists/%s/symbols/%s.json";
+    private static final String URL_WATCHLIST_GET_ITEMS = "watchlists/%s.json";
 
-  WatchlistTemplate(RestTemplate restTemplate) {
-    super(restTemplate);
-  }
+    WatchlistTemplate(RestTemplate restTemplate) {
+        super(restTemplate);
+    }
 
-  @Override
-  public String[] getAllLists() {
+    @Override
+    public String[] getAllLists() {
 
-    URI url = this.buildUri(URL_WATCHLIST_LIST);
-    ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().getForEntity(url, TKAllWatchListsResponse.class);
+        URI url = this.buildUri(URL_WATCHLIST_LIST);
+        ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().getForEntity(url, TKAllWatchListsResponse.class);
 
-    if (response.getBody().getError() != null)
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        if (response.getBody().getError() != null)
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getWatchLists();
+        return response.getBody().getWatchLists();
 
-  }
+    }
 
-  @Override
-  public String[] addList(String watchlistName, String[] tickers) {
+    @Override
+    public String[] addList(String watchlistName, String[] tickers) {
 
-    Assert.notNull(tickers);
+        Assert.notNull(tickers);
 
-    URI url = this.buildUri(URL_WATCHLIST_LIST);
-    MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
-    requestObject.add("id", watchlistName);
-    requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
+        URI url = this.buildUri(URL_WATCHLIST_LIST);
+        MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
+        requestObject.add("id", watchlistName);
+        requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
 
-    ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
+        ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
 
-    if (response.getBody().getError() != null)
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        if (response.getBody().getError() != null)
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getWatchLists();
-  }
+        return response.getBody().getWatchLists();
+    }
 
-  @Override
-  public void deleteListById(String watchlistName) {
-    URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_DELETE, watchlistName));
-    this.getRestTemplate().delete(url);
-  }
+    @Override
+    public void deleteListById(String watchlistName) {
+        URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_DELETE, watchlistName));
+        this.getRestTemplate().delete(url);
+    }
 
-  @Override
-  public String[] addSymbolsToList(String watchlistName, String[] tickers) {
-    URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_EDIT, watchlistName));
-    MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
-    requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
+    @Override
+    public String[] addSymbolsToList(String watchlistName, String[] tickers) {
+        URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_EDIT, watchlistName));
+        MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
+        requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
 
-    ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
+        ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);
 
-    if (response.getBody().getError() != null)
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        if (response.getBody().getError() != null)
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getWatchLists();
-  }
+        return response.getBody().getWatchLists();
+    }
 
-  @Override
-  public void deleteSymbolFromList(String watchlistName, String[] tickers) {
-    String tickersString = this.buildCommaSeparatedParameterValue(tickers);
-    URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_DELETE_TICKERS, watchlistName, tickersString));
-    this.getRestTemplate().delete(url);
-  }
+    @Override
+    public void deleteSymbolFromList(String watchlistName, String[] tickers) {
+        String tickersString = this.buildCommaSeparatedParameterValue(tickers);
+        URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_DELETE_TICKERS, watchlistName, tickersString));
+        this.getRestTemplate().delete(url);
+    }
 
-  @Override
-  public WatchlistItem[] getItems(String watchlistName) {
+    @Override
+    public WatchlistItem[] getItems(String watchlistName) {
 
-    URI url = this.buildUri(String.format(URL_WATCHLIST_GET_ITEMS, watchlistName));
+        URI url = this.buildUri(String.format(URL_WATCHLIST_GET_ITEMS, watchlistName));
 
-    ResponseEntity<TKWatchlistItemsResponse> response = this.getRestTemplate().getForEntity(url, TKWatchlistItemsResponse.class);
+        ResponseEntity<TKWatchlistItemsResponse> response = this.getRestTemplate().getForEntity(url, TKWatchlistItemsResponse.class);
 
-    if (response.getBody().getError() != null && !response.getBody().getError().equals("Success"))
-      throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
+        if (response.getBody().getError() != null && !response.getBody().getError().equals("Success"))
+            throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
-    return response.getBody().getWatchListItems();
+        return response.getBody().getWatchListItems();
 
-  }
+    }
 
 }

@@ -14,12 +14,12 @@ import java.util.Calendar;
 
 public class NewsHeadlineMixIn {
 
-  @JsonProperty("id")
-  private double id;
+    @JsonProperty("id")
+    private double id;
 
-  @JsonProperty("headline")
-  private String headline;
+    @JsonProperty("headline")
+    private String headline;
 
-  @JsonProperty("date")
-  private Calendar date;
+    @JsonProperty("date")
+    private Calendar date;
 }

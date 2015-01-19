@@ -15,142 +15,142 @@ import java.util.Calendar;
 
 abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
-  @JsonProperty("ask_time")
-  String askTime;
+    @JsonProperty("ask_time")
+    String askTime;
 
-  @JsonProperty("asksz")
-  int askLatestSize;
+    @JsonProperty("asksz")
+    int askLatestSize;
 
-  @JsonProperty("bid_time")
-  String bidTime;
+    @JsonProperty("bid_time")
+    String bidTime;
 
-  @JsonProperty("bidsz")
-  int bidLatestSize;
+    @JsonProperty("bidsz")
+    int bidLatestSize;
 
-  @JsonProperty("chg")
-  double change;
+    @JsonProperty("chg")
+    double change;
 
-  @JsonProperty("chg_sign")
-  ChangeSign changeSign;
+    @JsonProperty("chg_sign")
+    ChangeSign changeSign;
 
-  @JsonProperty("chg_t")
-  String changeText;
+    @JsonProperty("chg_t")
+    String changeText;
 
-  @JsonProperty("cl")
-  double previousClose;
+    @JsonProperty("cl")
+    double previousClose;
 
-  @JsonProperty("date")
-  Calendar dateLastTrade;
+    @JsonProperty("date")
+    Calendar dateLastTrade;
 
-  @JsonProperty("date_time")
-  Calendar timeLastTrade;
+    @JsonProperty("date_time")
+    Calendar timeLastTrade;
 
-  @JsonProperty("dollar_value")
-  double dollarValue;
+    @JsonProperty("dollar_value")
+    double dollarValue;
 
-  @JsonProperty("exch")
-  String exchangeCode;
+    @JsonProperty("exch")
+    String exchangeCode;
 
-  @JsonProperty("exch_desc")
-  String exchangeDescription;
+    @JsonProperty("exch_desc")
+    String exchangeDescription;
 
-  @JsonProperty("hi")
-  double dayHigh;
+    @JsonProperty("hi")
+    double dayHigh;
 
-  @JsonProperty("incr_vl")
-  int volumeLastTrade;
+    @JsonProperty("incr_vl")
+    int volumeLastTrade;
 
-  @JsonProperty("last")
-  double lastPrice;
+    @JsonProperty("last")
+    double lastPrice;
 
-  @JsonProperty("lo")
-  double dayLow;
+    @JsonProperty("lo")
+    double dayLow;
 
-  @JsonProperty("name")
-  String companyName;
+    @JsonProperty("name")
+    String companyName;
 
-  @JsonProperty("opn")
-  double openPrice;
+    @JsonProperty("opn")
+    double openPrice;
 
-  @JsonProperty("opn")
-  double openTradePrice;
+    @JsonProperty("opn")
+    double openTradePrice;
 
-  @JsonProperty("pchg")
-  String changePercentage;
+    @JsonProperty("pchg")
+    String changePercentage;
 
-  @JsonProperty("pchg_sign")
-  ChangeSign changePercentageSign;
+    @JsonProperty("pchg_sign")
+    ChangeSign changePercentageSign;
 
-  @JsonProperty("pcls")
-  double priorDayClose;
+    @JsonProperty("pcls")
+    double priorDayClose;
 
-  @JsonProperty("phi")
-  double priorDayHigh;
+    @JsonProperty("phi")
+    double priorDayHigh;
 
-  @JsonProperty("plo")
-  double priorDayLow;
+    @JsonProperty("plo")
+    double priorDayLow;
 
-  @JsonProperty("pr_date")
-  Calendar dateOfPriorTradeDay;
+    @JsonProperty("pr_date")
+    Calendar dateOfPriorTradeDay;
 
-  @JsonProperty("popn")
-  double priorDayOpen;
+    @JsonProperty("popn")
+    double priorDayOpen;
 
-  @JsonProperty("prchg")
-  double priorDayChange;
+    @JsonProperty("prchg")
+    double priorDayChange;
 
-  @JsonProperty("pvol")
-  int priorDayVolume;
+    @JsonProperty("pvol")
+    int priorDayVolume;
 
-  @JsonProperty("secclass")
-  Quote.SecurityClass securityClass;
+    @JsonProperty("secclass")
+    Quote.SecurityClass securityClass;
 
-  @JsonProperty("sesn")
-  Quote.TradingSession tradingSession;
+    @JsonProperty("sesn")
+    Quote.TradingSession tradingSession;
 
-  @JsonProperty("symbol")
-  String symbol;
+    @JsonProperty("symbol")
+    String symbol;
 
-  @JsonProperty("tcond")
-  Quote.TradeCondition tradeCondition;
+    @JsonProperty("tcond")
+    Quote.TradeCondition tradeCondition;
 
-  @JsonProperty("timestamp")
-  Calendar timeStamp;
+    @JsonProperty("timestamp")
+    Calendar timeStamp;
 
-  @JsonProperty("tr_num")
-  int tradeCountSinceOpen;
+    @JsonProperty("tr_num")
+    int tradeCountSinceOpen;
 
-  @JsonProperty("tradetick")
-  char tradeDirection;
+    @JsonProperty("tradetick")
+    char tradeDirection;
 
-  @JsonProperty("trend")
-  String trendOf10LastTicks;
+    @JsonProperty("trend")
+    String trendOf10LastTicks;
 
-  @JsonProperty("vl")
-  int cumulativeVolume;
+    @JsonProperty("vl")
+    int cumulativeVolume;
 
-  @JsonProperty("vwap")
-  double volumeWeightedAveragePrice;
+    @JsonProperty("vwap")
+    double volumeWeightedAveragePrice;
 
-  @JsonProperty("wk52hi")
-  double week52high;
+    @JsonProperty("wk52hi")
+    double week52high;
 
-  @JsonProperty("wk52hidate")
-  Calendar week52highDate;
+    @JsonProperty("wk52hidate")
+    Calendar week52highDate;
 
-  @JsonProperty("wk52lodate")
-  Calendar week52lowDate;
+    @JsonProperty("wk52lodate")
+    Calendar week52lowDate;
 
-  @JsonProperty("wk52lo")
-  double week52low;
+    @JsonProperty("wk52lo")
+    double week52low;
 
-  @JsonProperty("datetime")
-  Calendar dateTime;
+    @JsonProperty("datetime")
+    Calendar dateTime;
 
-  @JsonProperty("sesn_vl")
-  int sessionVolume;
+    @JsonProperty("sesn_vl")
+    int sessionVolume;
 
-  @JsonProperty("qcond")
-  String quoteConditionCode;
+    @JsonProperty("qcond")
+    String quoteConditionCode;
 
 }

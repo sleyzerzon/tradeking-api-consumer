@@ -12,16 +12,16 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.Acco
 
 public class TKAccountHoldingsResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  @JsonProperty("accountholdings")
-  private AccountHoldings accountHoldings;
+    @JsonProperty("accountholdings")
+    private AccountHoldings accountHoldings;
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public AccountHoldings getAccountHoldings() {
-    return accountHoldings;
-  }
+    public AccountHoldings getAccountHoldings() {
+        return accountHoldings;
+    }
 }

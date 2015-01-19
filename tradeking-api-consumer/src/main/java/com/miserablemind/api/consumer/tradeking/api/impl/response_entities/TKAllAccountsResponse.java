@@ -15,22 +15,22 @@ import java.util.LinkedHashMap;
 
 public class TKAllAccountsResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  private AccountsSummary[] accounts;
+    private AccountsSummary[] accounts;
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public AccountsSummary[] getAccounts() {
-    return accounts;
-  }
+    public AccountsSummary[] getAccounts() {
+        return accounts;
+    }
 
-  @JsonSetter("accounts")
-  public void setAccounts(LinkedHashMap accountsResponse) throws Exception {
-    this.accounts = (AccountsSummary[]) this.extractArray(AccountsSummary[].class, accountsResponse, "accountsummary", null);
-  }
+    @JsonSetter("accounts")
+    public void setAccounts(LinkedHashMap accountsResponse) throws Exception {
+        this.accounts = (AccountsSummary[]) this.extractArray(AccountsSummary[].class, accountsResponse, "accountsummary", null);
+    }
 
 }
 

@@ -13,16 +13,16 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Accou
 
 public class TKAccountBalanceResponse extends TKResponse {
 
-  private String error;
+    private String error;
 
-  @JsonProperty("accountbalance")
-  private AccountBalance accountBalance;
+    @JsonProperty("accountbalance")
+    private AccountBalance accountBalance;
 
-  public String getError() {
-    return error;
-  }
+    public String getError() {
+        return error;
+    }
 
-  public AccountBalance getAccountBalance() {
-    return accountBalance;
-  }
+    public AccountBalance getAccountBalance() {
+        return accountBalance;
+    }
 }
