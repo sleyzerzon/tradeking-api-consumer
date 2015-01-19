@@ -10,8 +10,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.history.Trans
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionSecurity;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.*;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.AccountsSummary;
-import com.miserablemind.api.consumer.tradeking.api.domain.market.MarketStatus;
-import com.miserablemind.api.consumer.tradeking.api.domain.market.TimeSalesQuote;
+import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.TradeKingUser;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserAccount;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserProfile;
@@ -129,4 +128,16 @@ public class TestObjectsRepository {
             .build();
     TimeSalesQuote timeSalesQuote2 = new TimeSalesQuote(quoteDate, startSalesQuoteTime2, 110.95, 110.95, 75, 110.95, 110.95, 1420191840, 75);
 
+    TopListEntry topListEntry1 = new TopListEntry(68.6600, ChangeSign.UP, 300.0100, "CORP 1", "29.6780 %", 231.3500, 1, "C1", 36744);
+    TopListEntry topListEntry2 = new TopListEntry(18.47, ChangeSign.UP, 215.52, "CORP 2", "9.3733 %", 197.05, 2, "C2", 251548);
+    TopListEntry[] topList = new TopListEntry[]{topListEntry1, topListEntry2};
+
+    Calendar newsDate = new Calendar.Builder()
+            .setDate(1970, 3, 9)
+            .setTimeZone(TimeZone.getTimeZone("GMT"))
+            .setFields(Calendar.AM_PM, 0)
+            .setTimeOfDay(19, 2, 0)
+            .build();
+
+    NewsStory newsStory = new NewsStory("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", newsDate, "This is some very long story");
 }

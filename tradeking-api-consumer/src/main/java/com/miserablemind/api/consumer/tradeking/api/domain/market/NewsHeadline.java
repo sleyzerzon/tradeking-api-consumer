@@ -55,4 +55,25 @@ public class NewsHeadline extends TradeKingObject {
         return date;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NewsHeadline)) return false;
+
+        NewsHeadline that = (NewsHeadline) o;
+
+        if (!date.equals(that.date)) return false;
+        if (!headline.equals(that.headline)) return false;
+        if (!id.equals(that.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + headline.hashCode();
+        result = 31 * result + date.hashCode();
+        return result;
+    }
 }

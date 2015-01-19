@@ -16,7 +16,10 @@ import java.util.Calendar;
 public class NewsStory extends NewsHeadline {
     private String story;
 
-    NewsStory(String id, String headline, Calendar date, String story) {
+    public NewsStory() {
+    }
+
+    public NewsStory(String id, String headline, Calendar date, String story) {
         super(id, headline, date);
         this.story = story;
     }
@@ -28,5 +31,22 @@ public class NewsStory extends NewsHeadline {
      */
     public String getStory() {
         return story;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NewsStory)) return false;
+
+        NewsStory newsStory = (NewsStory) o;
+
+        if (!story.equals(newsStory.story)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return story.hashCode();
     }
 }

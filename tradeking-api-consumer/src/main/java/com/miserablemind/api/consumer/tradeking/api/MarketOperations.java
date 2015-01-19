@@ -103,7 +103,7 @@ public interface MarketOperations {
      * @param newsId id of the news article retrieved by news search methods above
      * @return news article object with full story populated in them
      */
-    public NewsHeadline getNewsById(String newsId);
+    public NewsStory getNewsById(String newsId);
 
     /**
      * This call will return the current state of the market, the time of the next state change (if the market is open),

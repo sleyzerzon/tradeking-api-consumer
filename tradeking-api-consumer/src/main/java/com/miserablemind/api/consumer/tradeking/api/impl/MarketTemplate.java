@@ -251,14 +251,12 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
         if (null != interval) {
             parameters.set("interval", String.valueOf(interval));
-            if (interval == TimeSalesInterval.TICK) {
-
-                if (null != countPerPage) {
-                    parameters.set("rpp", String.valueOf(countPerPage));
-                    if (null != offset) parameters.set("index", String.valueOf(offset));
-                }
+            if (interval == TimeSalesInterval.TICK && null != countPerPage) {
+                parameters.set("rpp", String.valueOf(countPerPage));
+                if (null != offset) parameters.set("index", String.valueOf(offset));
             }
         }
+
 
         if (null != startDate) parameters.set("startdate", dateFormat.format(startDate.getTime()));
         if (null != endDate) parameters.set("enddate", dateFormat.format(endDate.getTime()));
