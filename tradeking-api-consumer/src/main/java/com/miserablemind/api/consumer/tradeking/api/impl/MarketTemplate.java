@@ -20,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
@@ -167,13 +166,13 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
         //todo: dates do not work, figure out the format, TK does not like anything
         if (null != startDate) {
-            parameters.set("startdate", dateFormat.format(startDate.getTime()));
+            /*parameters.set("startdate", dateFormat.format(startDate.getTime()));
 
             if (null != endDate) {
                 parameters.set("enddate", dateFormat.format(endDate.getTime()));
             } else {
                 parameters.set("enddate", dateFormat.format(new Date()));
-            }
+            }*/
 
         }
 

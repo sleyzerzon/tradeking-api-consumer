@@ -139,5 +139,29 @@ public class TestObjectsRepository {
             .setTimeOfDay(19, 2, 0)
             .build();
 
+    Calendar newsDate2 = new Calendar.Builder()
+            .setDate(1970, 3, 9)
+            .setTimeZone(TimeZone.getTimeZone("GMT"))
+            .setFields(Calendar.AM_PM, 0)
+            .setTimeOfDay(19, 12, 0)
+            .build();
+
     NewsStory newsStory = new NewsStory("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", newsDate, "This is some very long story");
+    NewsHeadline newsHeadline1 = new NewsHeadline("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", newsDate);
+    NewsHeadline newsHeadline2 = new NewsHeadline("4wefed265647adb9a46977d5d2df", "Second Story", newsDate2);
+    NewsHeadline[] newsList = new NewsHeadline[]{newsHeadline1, newsHeadline2};
+
+    Calendar optionExpiration1 = new Calendar.Builder().setTimeZone(TimeZone.getTimeZone("GMT")).setDate(2015, 0, 9).build();
+    Calendar optionExpiration2 = new Calendar.Builder().setTimeZone(TimeZone.getTimeZone("GMT")).setDate(2015, 0, 17).build();
+    Calendar[] optionExpirationDates = new Calendar[]{optionExpiration1, optionExpiration2};
+
+    Double optionStrikePrice1 = 27.86;
+    Double optionStrikePrice2 = 28.57;
+    Double[] optionStrikePrices = new Double[]{optionStrikePrice1, optionStrikePrice2};
+/*
+    StockQuote stockQuote1 = new StockQuote(109.8, "19:59", 1, 4, 0, "00:00", 0, 1.05, ChangeSign.DOWN, "1.05",110.38,
+            dateLastTrade, timeLastTrade, 5327055164.00,"NASD","NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO",
+            111.39, "0.951 %", ChangeSign.DOWN,110.38, 113.13, 110.21, 112.82, dateOfPriorTradeDay, -2.14, 41403351,
+            Quote.SecurityClass.STOCK, Quote.TradingSession.MARKET,"SMTH" );*/
+
 }

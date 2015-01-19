@@ -1,10 +1,7 @@
 package com.miserablemind.api.consumer.tradeking.api.impl;
 
 
-import com.miserablemind.api.consumer.tradeking.api.domain.market.MarketStatus;
-import com.miserablemind.api.consumer.tradeking.api.domain.market.NewsStory;
-import com.miserablemind.api.consumer.tradeking.api.domain.market.TimeSalesQuote;
-import com.miserablemind.api.consumer.tradeking.api.domain.market.TopListEntry;
+import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.social.ApiException;
@@ -117,7 +114,6 @@ public class MarketTemplateTest extends BaseTemplateTest {
 
         tradeKing.getMarketOperations().getTopList(TopListType.ACTIVE);
         mockServer.verify();
-
     }
 
     @Test
@@ -131,7 +127,6 @@ public class MarketTemplateTest extends BaseTemplateTest {
 
         assertEquals("Dates do not match", newsStory.getDate(), mockData.newsStory.getDate());
         assertEquals("News articles do not match", newsStory, mockData.newsStory);
-
     }
 
     @Test(expected = ApiException.class)
@@ -142,6 +137,136 @@ public class MarketTemplateTest extends BaseTemplateTest {
 
         tradeKing.getMarketOperations().getNewsById("4cacd265647adb9a46977d5d2f8ff559");
         mockServer.verify();
+    }
+
+    @Test
+    public void getNewsList_keywords() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/news/search.json?maxhits=2&keywords=oil%2Cmetals"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/news_list"), MediaType.APPLICATION_JSON));
+
+        NewsHeadline[] newsLists = tradeKing.getMarketOperations().getNewsList(new String[]{"oil", "metals"}, 2);
+        mockServer.verify();
+
+        assertEquals("First News Headline does not match", newsLists[0], mockData.newsHeadline1);
+        assertEquals("Second News Headline does not match", newsLists[1], mockData.newsHeadline2);
+        assertArrayEquals("Headlines do not match", newsLists, mockData.newsList);
+    }
+
+
+    @Test
+    public void getNewsList_ticker() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/news/search.json?symbols=CORP1&maxhits=1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/news_list_single"), MediaType.APPLICATION_JSON));
+
+        NewsHeadline[] newsLists = tradeKing.getMarketOperations().getNewsList("CORP1", 1);
+        mockServer.verify();
+
+        assertEquals("First News Headline does not match", newsLists[0], mockData.newsHeadline1);
+    }
+
+    @Test(expected = ApiException.class)
+    public void getNewsList_errorResponse() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/news/search.json?symbols=CORP1&maxhits=1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+
+        tradeKing.getMarketOperations().getNewsList("CORP1", 1);
+        mockServer.verify();
+    }
+
+    @Test
+    public void getOptionExpirationDates() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/expirations.json?symbol=CORP1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/option_expiration_dates"), MediaType.APPLICATION_JSON));
+
+        Calendar[] expirationDates = tradeKing.getMarketOperations().getOptionExpirationDates("CORP1");
+        mockServer.verify();
+
+        assertArrayEquals("Dates do not match", expirationDates, mockData.optionExpirationDates);
+
+    }
+
+    @Test
+    public void getOptionExpirationDates_single() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/expirations.json?symbol=CORP1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/option_expiration_date_single"), MediaType.APPLICATION_JSON));
+
+        Calendar[] expirationDates = tradeKing.getMarketOperations().getOptionExpirationDates("CORP1");
+        mockServer.verify();
+
+        assertArrayEquals("Dates do not match", expirationDates, new Calendar[]{mockData.optionExpiration1});
+    }
+
+    @Test(expected = ApiException.class)
+    public void getOptionExpirationDates_errorResponse() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/expirations.json?symbol=CORP1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+
+        tradeKing.getMarketOperations().getOptionExpirationDates("CORP1");
+        mockServer.verify();
+    }
+
+
+    @Test
+    public void getOptionStrikePrices() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/strikes.json?symbol=CORP1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/option_strike_prices"), MediaType.APPLICATION_JSON));
+
+        Double[] strikePrices = tradeKing.getMarketOperations().getStrikePrices("CORP1");
+        mockServer.verify();
+
+        assertArrayEquals("Dates do not match", strikePrices, mockData.optionStrikePrices);
+
+    }
+
+    @Test
+    public void getOptionStrikePrices_single() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/strikes.json?symbol=CORP1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/option_strike_price_single"), MediaType.APPLICATION_JSON));
+
+        Double[] strikePrices = tradeKing.getMarketOperations().getStrikePrices("CORP1");
+        mockServer.verify();
+
+        assertArrayEquals("Dates do not match", strikePrices, new Double[]{mockData.optionStrikePrice1});
+    }
+
+    @Test(expected = ApiException.class)
+    public void getOptionStrikePrices_errorResponse() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/strikes.json?symbol=CORP1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+
+        tradeKing.getMarketOperations().getStrikePrices("CORP1");
+        mockServer.verify();
+    }
+
+    @Test
+    public void getQuoteForStocks() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/ext/quotes.json?symbols=CORP1%2CCORP2"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/stock_quotes"), MediaType.APPLICATION_JSON));
+
+        StockQuote[] quotes = tradeKing.getMarketOperations().getQuoteForStocks(new String[]{"CORP1", "CORP2"});
+        mockServer.verify();
+
+    }
+
+    @Test
+    public void getQuoteForStocks_single() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/ext/quotes.json?symbols=CORP1"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/stock_quote_single"), MediaType.APPLICATION_JSON));
+
+        StockQuote quote = tradeKing.getMarketOperations().getQuoteForStock("CORP1");
+        mockServer.verify();
+
     }
 
 
