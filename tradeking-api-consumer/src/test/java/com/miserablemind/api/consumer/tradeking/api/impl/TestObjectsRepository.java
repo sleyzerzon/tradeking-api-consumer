@@ -15,9 +15,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.member.TradeKingUser;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserAccount;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserProfile;
 import com.miserablemind.api.consumer.tradeking.api.domain.watchlist.WatchlistItem;
-
-import java.util.Calendar;
-import java.util.TimeZone;
+import org.joda.time.*;
 
 /**
  * This is the repository for the objects that are mapped from json files in test
@@ -61,29 +59,14 @@ public class TestObjectsRepository {
     AccountsSummary accountsSummary2 = new AccountsSummary(accountId2, balance2, holdingSingle);
 
     //Transaction1
-    Calendar transactionDate1 = new Calendar.Builder()
-            .setDate(2014, 11, 15)
-            .setTimeZone(TimeZone.getTimeZone("GMT"))
-            .setFields(Calendar.HOUR_OF_DAY, 5, Calendar.HOUR, 5)
-            .build();
-
-    Calendar settlementDate1 = new Calendar.Builder()
-            .setDate(2014, 11, 18)
-            .setTimeZone(TimeZone.getTimeZone("GMT"))
-            .setFields(Calendar.HOUR_OF_DAY, 5, Calendar.HOUR, 5)
-            .build();
-
+    DateTime transactionDate1 = new DateTime(2014, 12, 15, 5, 0, 0, 0, DateTimeZone.UTC);
+    DateTime settlementDate1 = new DateTime(2014, 12, 18, 5, 0, 0, 0, DateTimeZone.UTC);
     TransactionSecurity security1 = new TransactionSecurity("800000000", "80000000", "CS", "SMTH2");
     TransactionDetails transactionDetails1 = new TransactionDetails(4.95, "SOMETHING INC-DEL", 0, 2.671, -10, "XCH", 2, 2, 0.08, security1, transactionDate1, settlementDate1, 10, null);
     TradeKingTransaction transaction1 = new TradeKingTransaction(TradeKingTransaction.Type.TRADE, 286.07, transactionDate1, "SOMETHING INC", "SMTH2", transactionDetails1);
 
     //Transaction2
-    Calendar transactionDate2 = new Calendar.Builder()
-            .setDate(2014, 11, 1)
-            .setTimeZone(TimeZone.getTimeZone("GMT"))
-            .setFields(Calendar.HOUR_OF_DAY, 5, Calendar.HOUR, 5)
-            .build();
-
+    DateTime transactionDate2 = new DateTime(2014, 12, 1, 5, 0, 0, 0, DateTimeZone.UTC);
     TransactionSecurity security2 = new TransactionSecurity("300000000", "30000000", "CS", "SMTH1");
     TransactionDetails transactionDetails2 = new TransactionDetails(0, "SOMETHING CO CASH DIV  ON     40 SHS ", 0, 0, 0, "DIV", 0, 2, 0, security2, transactionDate2, null, 10, "Cash Dividend");
     TradeKingTransaction transaction2 = new TradeKingTransaction(TradeKingTransaction.Type.DIVIDEND, 24, transactionDate2, "SOMETHING CO,CASH DIV ON 40 SHS", "SMTH1", transactionDetails2);
@@ -107,61 +90,53 @@ public class TestObjectsRepository {
     /*
     Market
      */
-    Calendar marketStatusDate = new Calendar.Builder().setDate(2015, 0, 4).setTimeOfDay(18, 16, 59, 999).build();
-    MarketStatus marketStatus = new MarketStatus(marketStatusDate, MarketStatus.MarketCondition.CLOSED, MarketStatus.MarketCondition.PRE_OPEN, "08:00:00", "Market is open Monday through Friday 9:30AM to 4:00PM EST", 1420413060);
+    LocalDateTime marketStatusDate = new LocalDateTime(2015, 1, 4, 18, 11, 0, 359);
+    LocalTime nextTime = new LocalTime(8, 0, 0);
+    MarketStatus marketStatus = new MarketStatus(marketStatusDate, MarketStatus.MarketCondition.CLOSED, MarketStatus.MarketCondition.PRE_OPEN, nextTime, "Market is open Monday through Friday 9:30AM to 4:00PM EST", 1420413060);
 
-    Calendar startSalesQuoteTime = new Calendar.Builder()
-            .setDate(2015, 0, 2)
-            .setTimeZone(TimeZone.getTimeZone("GMT"))
-            .setFields(Calendar.AM_PM, 1)
-            .setTimeOfDay(9, 37, 0)
-            .build();
-    Calendar quoteDate = new Calendar.Builder().setDate(2015, 0, 2).setTimeZone(TimeZone.getTimeZone("GMT")).build();
+
+    DateTime startSalesQuoteTime = new DateTime(2015, 1, 2, 9, 37, 0, 0, DateTimeZone.UTC);
+    LocalDate quoteDate = new LocalDate(2015, 1, 2);
     TimeSalesQuote timeSalesQuote1 = new TimeSalesQuote(quoteDate, startSalesQuoteTime, 111.05, 111.05, 53, 111.05, 111.05, 1420191420, 53);
 
-
-    Calendar startSalesQuoteTime2 = new Calendar.Builder()
-            .setDate(2015, 0, 2)
-            .setTimeZone(TimeZone.getTimeZone("GMT"))
-            .setFields(Calendar.AM_PM, 1)
-            .setTimeOfDay(9, 44, 0)
-            .build();
+    DateTime startSalesQuoteTime2 = new DateTime(2015, 1, 2, 9, 44, 0, 0, DateTimeZone.UTC);
     TimeSalesQuote timeSalesQuote2 = new TimeSalesQuote(quoteDate, startSalesQuoteTime2, 110.95, 110.95, 75, 110.95, 110.95, 1420191840, 75);
 
     TopListEntry topListEntry1 = new TopListEntry(68.6600, ChangeSign.UP, 300.0100, "CORP 1", "29.6780 %", 231.3500, 1, "C1", 36744);
     TopListEntry topListEntry2 = new TopListEntry(18.47, ChangeSign.UP, 215.52, "CORP 2", "9.3733 %", 197.05, 2, "C2", 251548);
     TopListEntry[] topList = new TopListEntry[]{topListEntry1, topListEntry2};
 
-    Calendar newsDate = new Calendar.Builder()
-            .setDate(1970, 3, 9)
-            .setTimeZone(TimeZone.getTimeZone("GMT"))
-            .setFields(Calendar.AM_PM, 0)
-            .setTimeOfDay(19, 2, 0)
-            .build();
 
-    Calendar newsDate2 = new Calendar.Builder()
-            .setDate(1970, 3, 9)
-            .setTimeZone(TimeZone.getTimeZone("GMT"))
-            .setFields(Calendar.AM_PM, 0)
-            .setTimeOfDay(19, 12, 0)
-            .build();
+    LocalDateTime newsDate = new LocalDateTime(2000, 4, 9, 14, 2);
+    LocalDateTime newsDate2 = new LocalDateTime(2000, 4, 9, 14, 12);
 
     NewsStory newsStory = new NewsStory("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", newsDate, "This is some very long story");
     NewsHeadline newsHeadline1 = new NewsHeadline("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", newsDate);
     NewsHeadline newsHeadline2 = new NewsHeadline("4wefed265647adb9a46977d5d2df", "Second Story", newsDate2);
     NewsHeadline[] newsList = new NewsHeadline[]{newsHeadline1, newsHeadline2};
 
-    Calendar optionExpiration1 = new Calendar.Builder().setTimeZone(TimeZone.getTimeZone("GMT")).setDate(2015, 0, 9).build();
-    Calendar optionExpiration2 = new Calendar.Builder().setTimeZone(TimeZone.getTimeZone("GMT")).setDate(2015, 0, 17).build();
-    Calendar[] optionExpirationDates = new Calendar[]{optionExpiration1, optionExpiration2};
+    LocalDate optionExpiration1 = new LocalDate(2015, 1, 9);
+    LocalDate optionExpiration2 = new LocalDate(2015, 1, 17);
+
+    LocalDate[] optionExpirationDates = new LocalDate[]{optionExpiration1, optionExpiration2};
 
     Double optionStrikePrice1 = 27.86;
     Double optionStrikePrice2 = 28.57;
     Double[] optionStrikePrices = new Double[]{optionStrikePrice1, optionStrikePrice2};
+
+    // Quotes
+    LocalDate dateLastTrade = new LocalDate(2015, 1, 2);
+    DateTime timeLastTrade = new DateTime(2015, 1, 2, 21, 14, DateTimeZone.UTC);
+    LocalDate dateOfPriorTradeDay = new LocalDate(2014, 12, 31);
 /*
-    StockQuote stockQuote1 = new StockQuote(109.8, "19:59", 1, 4, 0, "00:00", 0, 1.05, ChangeSign.DOWN, "1.05",110.38,
-            dateLastTrade, timeLastTrade, 5327055164.00,"NASD","NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO",
-            111.39, "0.951 %", ChangeSign.DOWN,110.38, 113.13, 110.21, 112.82, dateOfPriorTradeDay, -2.14, 41403351,
-            Quote.SecurityClass.STOCK, Quote.TradingSession.MARKET,"SMTH" );*/
+
+    StockQuote stockQuote1 = new StockQuote(109.8, "19:59", 1, 4, 0, "00:00", 0, 1.05, ChangeSign.DOWN, "1.05", 110.38,
+            dateLastTrade, timeLastTrade, 5327055164.00, "NASD", "NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO",
+            111.39, "0.951 %", ChangeSign.DOWN, 110.38, 113.13, 110.21, 112.82, dateOfPriorTradeDay, -2.14, 41403351,
+            Quote.SecurityClass.STOCK, Quote.TradingSession.MARKET, "SMTH", Quote.TradeCondition.RESUMED, "1420233240",
+            286657, ChangeSign.EQUAL, "edueduduee", 53204626, 109.7549, 119.75, week52HighDate, 70.51, week52LowDate, dateTime,
+            "89", 106.0105, 97.1111, 11.8682, 46848450, 48378740, 50878760, 0.907, 0, "300000000", 0.47, exDividendDate, StockQuote.DividendFrequency.QUARTERLY,
+            lastDividendPayDate, 6.45, 1.88, 1, 105.9210, 97.0085, 111.6870, 5.75, "5,864,840,000", 0.216042, 1.72, 16.96, 52442641);
+*/
 
 }

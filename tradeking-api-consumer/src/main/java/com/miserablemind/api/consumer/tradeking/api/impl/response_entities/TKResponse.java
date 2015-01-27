@@ -12,9 +12,9 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -46,17 +46,13 @@ abstract public class TKResponse {
      * @return Array of objects. The user of this class will cast this to accommodate specif needs
      * @throws Exception
      */
-    protected Object[] extractArray(Class<? extends Object[]> className, LinkedHashMap response, String nestedKey, String dateFormat) throws Exception {
+    protected Object[] extractArray(Class<? extends Object[]> className, LinkedHashMap response, String nestedKey) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new TradeKingModule());
+        mapper.registerModule(new JodaModule());
         mapper.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, true);
         mapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
-
-        if (null != dateFormat) {
-            SimpleDateFormat dateFormatting = new SimpleDateFormat(dateFormat);
-            mapper.setDateFormat(dateFormatting);
-        }
 
         Object nestedEntry = response.get(nestedKey);
 

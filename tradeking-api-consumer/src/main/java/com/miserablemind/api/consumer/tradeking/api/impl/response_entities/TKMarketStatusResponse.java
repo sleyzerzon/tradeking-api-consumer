@@ -12,11 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.MarketStatus;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.LinkedHashMap;
 
 public class TKMarketStatusResponse extends TKResponse {
@@ -33,10 +33,10 @@ public class TKMarketStatusResponse extends TKResponse {
     private String nextStatus;
 
     @JsonIgnore
-    private String changeAt;
+    private LocalTime changeAt;
 
     @JsonIgnore
-    private Calendar date;
+    private LocalDateTime date;
 
     @JsonProperty("message")
     private String message;
@@ -52,12 +52,9 @@ public class TKMarketStatusResponse extends TKResponse {
      */
     @JsonSetter("date")
     public void setDate(String dateResponse) throws Exception {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSSSSS");
-        Date date = dateFormat.parse(dateResponse);
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        this.date = calendar;
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
+        LocalDateTime date = LocalDateTime.parse(dateResponse, formatter);
+        this.date = date;
 
     }
 
@@ -74,7 +71,8 @@ public class TKMarketStatusResponse extends TKResponse {
 
         this.currentStatus = (String) statusResponse.get("current");
         this.nextStatus = (String) statusResponse.get("next");
-        this.changeAt = (String) statusResponse.get("change_at");
+        this.changeAt = LocalTime.parse((String) statusResponse.get("change_at"));
+
 
     }
 

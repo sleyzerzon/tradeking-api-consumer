@@ -8,9 +8,9 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Details about transaction including price, fees, quantities
@@ -27,15 +27,15 @@ public class TransactionDetails extends TradeKingObject {
     private int accountType;
     private double SECFee;
     private TransactionSecurity transactionSecurity;
-    private Calendar tradeDate;
-    private Calendar settlementDate;
+    private DateTime tradeDate;
+    private DateTime settlementDate;
     private int transactionId;
     private String transactionType;
 
     public TransactionDetails() {
     }
 
-    public TransactionDetails(double commission, String description, double fee, double price, double quantity, String source, int side, int accountType, double SECFee, TransactionSecurity transactionSecurity, Calendar tradeDate, Calendar settlementDate, int transactionId, String transactionType) {
+    public TransactionDetails(double commission, String description, double fee, double price, double quantity, String source, int side, int accountType, double SECFee, TransactionSecurity transactionSecurity, DateTime tradeDate, DateTime settlementDate, int transactionId, String transactionType) {
         this.commission = commission;
         this.description = description;
         this.fee = fee;
@@ -129,7 +129,7 @@ public class TransactionDetails extends TradeKingObject {
      *
      * @return Date object. Accurate to the day, which means hours are midnight -05:00
      */
-    public Calendar getTradeDate() {
+    public DateTime getTradeDate() {
         return tradeDate;
     }
 
@@ -138,7 +138,7 @@ public class TransactionDetails extends TradeKingObject {
      *
      * @return Date object. Accurate to the day, which means hours are midnight -05:00
      */
-    public Calendar getSettlementDate() {
+    public DateTime getSettlementDate() {
         return settlementDate;
     }
 

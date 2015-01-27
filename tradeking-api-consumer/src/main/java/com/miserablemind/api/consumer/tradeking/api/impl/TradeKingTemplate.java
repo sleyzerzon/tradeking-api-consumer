@@ -10,6 +10,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.miserablemind.api.consumer.tradeking.api.*;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
@@ -66,7 +67,7 @@ public class TradeKingTemplate extends AbstractOAuth1ApiBinding implements Trade
         mapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, true);
         mapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
         mapper.registerModule(new TradeKingModule());
-
+        mapper.registerModule(new JodaModule());
         converter.setObjectMapper(mapper);
         return converter;
     }

@@ -12,6 +12,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
 import com.miserablemind.api.consumer.tradeking.api.impl.OptionQuoteNotFoundException;
 import com.miserablemind.api.consumer.tradeking.api.impl.TimeSalesInterval;
 import com.miserablemind.api.consumer.tradeking.api.impl.TopListType;
+import org.joda.time.LocalDate;
 
 import java.util.Calendar;
 
@@ -76,7 +77,7 @@ public interface MarketOperations {
      * @param ticker stock symbol
      * @return a list of expiration dates or empty list if none found
      */
-    public Calendar[] getOptionExpirationDates(String ticker);
+    public LocalDate[] getOptionExpirationDates(String ticker);
 
     /**
      * This call will return a listing of the newest news headlines based on the current symbol search.
@@ -94,7 +95,6 @@ public interface MarketOperations {
      * @param limit    limit how many to return
      * @return a list of news article objects, it will not have the story in it. For story see MarketOperations#getNewsById
      */
-    //todo: newsheadline object
     public NewsHeadline[] getNewsList(String[] keywords, int limit);
 
     /**

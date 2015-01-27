@@ -8,8 +8,7 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
-
-import java.util.Calendar;
+import org.joda.time.LocalDateTime;
 
 /**
  * News Headline
@@ -17,12 +16,12 @@ import java.util.Calendar;
 public class NewsHeadline extends TradeKingObject {
     private String id;
     private String headline;
-    private Calendar date;
+    private LocalDateTime date;
 
     public NewsHeadline() {
     }
 
-    public NewsHeadline(String id, String headline, Calendar date) {
+    public NewsHeadline(String id, String headline, LocalDateTime date) {
         this.id = id;
         this.headline = headline;
         this.date = date;
@@ -51,7 +50,7 @@ public class NewsHeadline extends TradeKingObject {
      *
      * @return Calendar Object
      */
-    public Calendar getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 

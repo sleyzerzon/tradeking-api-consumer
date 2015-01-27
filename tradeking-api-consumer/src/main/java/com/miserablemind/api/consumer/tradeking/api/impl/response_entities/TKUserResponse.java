@@ -71,7 +71,7 @@ public class TKUserResponse extends TKResponse {
         boolean resetPassword = userData.get("resetpassword").equals("true");
         boolean resetTradingPassword = userData.get("resettradingpassword").equals("true");
 
-        UserAccount[] accounts = (UserAccount[]) this.extractArray(UserAccount[].class, userData, "account", null);
+        UserAccount[] accounts = (UserAccount[]) this.extractArray(UserAccount[].class, userData, "account");
 
         //User Profile Object
         UserProfile userProfile = new UserProfile();

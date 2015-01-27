@@ -19,7 +19,7 @@ public class TKOptionStrikesResponse extends TKResponse {
 
     @JsonSetter("prices")
     public void setPrices(LinkedHashMap pricesResponse) throws Exception {
-        this.prices = (Double[]) this.extractArray(Double[].class, pricesResponse, "price", null);
+        this.prices = (Double[]) this.extractArray(Double[].class, pricesResponse, "price");
     }
 
     public String getError() {

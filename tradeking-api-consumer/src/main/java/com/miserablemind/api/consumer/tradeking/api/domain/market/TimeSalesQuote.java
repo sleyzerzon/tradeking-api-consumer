@@ -8,16 +8,16 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
-
-import java.util.Calendar;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 /**
  * Time and sales quote data. This is a point at a time that shows momentum of the stock.
  */
 public class TimeSalesQuote extends TradeKingObject {
 
-    private Calendar date;
-    private Calendar intervalStartTime;
+    private LocalDate date;
+    private DateTime intervalStartTime;
     private double highPrice;
     private double lowPrice;
     private int volume;
@@ -30,7 +30,7 @@ public class TimeSalesQuote extends TradeKingObject {
     }
 
 
-    public TimeSalesQuote(Calendar date, Calendar intervalStartTime, double highPrice, double lowPrice, int volume, double lastPrice, double openTradePrice, int timestamp, int cumulativeVolume) {
+    public TimeSalesQuote(LocalDate date, DateTime intervalStartTime, double highPrice, double lowPrice, int volume, double lastPrice, double openTradePrice, int timestamp, int cumulativeVolume) {
         this.date = date;
         this.intervalStartTime = intervalStartTime;
         this.highPrice = highPrice;
@@ -47,7 +47,7 @@ public class TimeSalesQuote extends TradeKingObject {
      *
      * @return Calendar object
      */
-    public Calendar getIntervalStartTime() {
+    public DateTime getIntervalStartTime() {
         return intervalStartTime;
     }
 
@@ -119,7 +119,7 @@ public class TimeSalesQuote extends TradeKingObject {
      *
      * @return Date object
      */
-    public Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

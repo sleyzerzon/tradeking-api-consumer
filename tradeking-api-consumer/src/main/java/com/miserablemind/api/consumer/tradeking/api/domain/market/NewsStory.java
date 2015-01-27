@@ -8,7 +8,7 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 
-import java.util.Calendar;
+import org.joda.time.LocalDateTime;
 
 /**
  * News Headline class with story in it
@@ -19,7 +19,7 @@ public class NewsStory extends NewsHeadline {
     public NewsStory() {
     }
 
-    public NewsStory(String id, String headline, Calendar date, String story) {
+    public NewsStory(String id, String headline, LocalDateTime date, String story) {
         super(id, headline, date);
         this.story = story;
     }

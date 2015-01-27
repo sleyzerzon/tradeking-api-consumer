@@ -20,7 +20,7 @@ public class TKTopListResponse extends TKResponse {
 
     @JsonSetter("quotes")
     public void setQuotes(LinkedHashMap topListResponse) throws Exception {
-        this.topList = (TopListEntry[]) this.extractArray(TopListEntry[].class, topListResponse, "quote", null);
+        this.topList = (TopListEntry[]) this.extractArray(TopListEntry[].class, topListResponse, "quote");
     }
 
 

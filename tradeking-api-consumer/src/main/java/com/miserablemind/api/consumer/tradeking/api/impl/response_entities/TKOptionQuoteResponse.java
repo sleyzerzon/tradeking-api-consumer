@@ -21,7 +21,7 @@ public class TKOptionQuoteResponse extends TKResponse {
 
     @JsonSetter("quotes")
     public void setQuote(LinkedHashMap quotesResponse) throws Exception {
-        this.quotes = (OptionQuote[]) this.extractArray(OptionQuote[].class, quotesResponse, "quote", null);
+        this.quotes = (OptionQuote[]) this.extractArray(OptionQuote[].class, quotesResponse, "quote");
     }
 
     public String getError() {

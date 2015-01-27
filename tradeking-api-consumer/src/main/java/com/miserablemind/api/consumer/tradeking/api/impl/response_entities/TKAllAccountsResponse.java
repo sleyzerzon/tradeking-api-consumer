@@ -29,7 +29,7 @@ public class TKAllAccountsResponse extends TKResponse {
 
     @JsonSetter("accounts")
     public void setAccounts(LinkedHashMap accountsResponse) throws Exception {
-        this.accounts = (AccountsSummary[]) this.extractArray(AccountsSummary[].class, accountsResponse, "accountsummary", null);
+        this.accounts = (AccountsSummary[]) this.extractArray(AccountsSummary[].class, accountsResponse, "accountsummary");
     }
 
 }

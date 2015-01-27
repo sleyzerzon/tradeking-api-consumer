@@ -8,8 +8,7 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
-
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
 
 /**
@@ -19,7 +18,7 @@ public class TradeKingTransaction extends TradeKingObject {
 
     private Type activityType;
     private double amount;
-    private Calendar date;
+    private DateTime date;
     private String description;
     private String symbol;
     private TransactionDetails transactionDetails;
@@ -27,7 +26,7 @@ public class TradeKingTransaction extends TradeKingObject {
     public TradeKingTransaction() {
     }
 
-    public TradeKingTransaction(Type activity, double amount, Calendar date, String description, String symbol, TransactionDetails transactionDetails) {
+    public TradeKingTransaction(Type activity, double amount, DateTime date, String description, String symbol, TransactionDetails transactionDetails) {
         this.activityType = activity;
         this.amount = amount;
         this.date = date;
@@ -59,7 +58,7 @@ public class TradeKingTransaction extends TradeKingObject {
      *
      * @return transaction date
      */
-    public Calendar getDate() {
+    public DateTime getDate() {
         return date;
     }
 
@@ -133,11 +132,10 @@ public class TradeKingTransaction extends TradeKingObject {
 
         if (Double.compare(that.amount, amount) != 0) return false;
         if (activityType != that.activityType) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (symbol != null ? !symbol.equals(that.symbol) : that.symbol != null) return false;
-        if (transactionDetails != null ? !transactionDetails.equals(that.transactionDetails) : that.transactionDetails != null)
-            return false;
+        if (!date.equals(that.date)) return false;
+        if (!description.equals(that.description)) return false;
+        if (!symbol.equals(that.symbol)) return false;
+        if (!transactionDetails.equals(that.transactionDetails)) return false;
 
         return true;
     }
@@ -146,13 +144,13 @@ public class TradeKingTransaction extends TradeKingObject {
     public int hashCode() {
         int result;
         long temp;
-        result = activityType != null ? activityType.hashCode() : 0;
+        result = activityType.hashCode();
         temp = Double.doubleToLongBits(amount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (symbol != null ? symbol.hashCode() : 0);
-        result = 31 * result + (transactionDetails != null ? transactionDetails.hashCode() : 0);
+        result = 31 * result + date.hashCode();
+        result = 31 * result + description.hashCode();
+        result = 31 * result + symbol.hashCode();
+        result = 31 * result + transactionDetails.hashCode();
         return result;
     }
 }

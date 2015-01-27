@@ -9,26 +9,26 @@ package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
 
 
 import com.fasterxml.jackson.annotation.JsonSetter;
+import org.joda.time.LocalDate;
 
-import java.util.Calendar;
 import java.util.LinkedHashMap;
 
 public class TKOptionExpirationsResponse extends TKResponse {
 
     private String error;
 
-    private Calendar[] dates;
+    private LocalDate[] dates;
 
     @JsonSetter("expirationdates")
     public void setDates(LinkedHashMap datesResponse) throws Exception {
-        this.dates = (Calendar[]) this.extractArray(Calendar[].class, datesResponse, "date", null);
+        this.dates = (LocalDate[]) this.extractArray(LocalDate[].class, datesResponse, "date");
     }
 
     public String getError() {
         return error;
     }
 
-    public Calendar[] getDates() {
+    public LocalDate[] getDates() {
         return dates;
     }
 }

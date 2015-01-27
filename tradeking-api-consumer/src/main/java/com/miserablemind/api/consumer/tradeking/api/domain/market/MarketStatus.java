@@ -8,8 +8,9 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -19,10 +20,10 @@ import java.util.NoSuchElementException;
  */
 public class MarketStatus extends TradeKingObject {
 
-    private Calendar date;
+    private LocalDateTime date;
     private MarketCondition currentStatus;
     private MarketCondition nextStatus;
-    private String nextMarketStatusTime;
+    private LocalTime nextMarketStatusTime;
     private String statusMessage;
     private int serverUnixTimeStamp;
 
@@ -31,7 +32,7 @@ public class MarketStatus extends TradeKingObject {
 
     }
 
-    public MarketStatus(Calendar date, MarketCondition currentStatus, MarketCondition nextStatus, String nextMarketStatusTime, String statusMessage, int serverUnixTimeStamp) {
+    public MarketStatus(LocalDateTime date, MarketCondition currentStatus, MarketCondition nextStatus, LocalTime nextMarketStatusTime, String statusMessage, int serverUnixTimeStamp) {
         this.date = date;
         this.currentStatus = currentStatus;
         this.nextStatus = nextStatus;
@@ -42,10 +43,10 @@ public class MarketStatus extends TradeKingObject {
 
     /**
      * Current market date
-     *
+     *        todo: update the docs
      * @return Calendar Object
      */
-    public Calendar getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -72,7 +73,7 @@ public class MarketStatus extends TradeKingObject {
      *
      * @return String time, like "16:00:00"
      */
-    public String getNextMarketStatusTime() {
+    public LocalTime getNextMarketStatusTime() {
         return nextMarketStatusTime;
     }
 

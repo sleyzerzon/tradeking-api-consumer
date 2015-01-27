@@ -2,6 +2,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 
 import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
+import org.joda.time.LocalDate;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.social.ApiException;
@@ -182,7 +183,7 @@ public class MarketTemplateTest extends BaseTemplateTest {
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("market/option_expiration_dates"), MediaType.APPLICATION_JSON));
 
-        Calendar[] expirationDates = tradeKing.getMarketOperations().getOptionExpirationDates("CORP1");
+        LocalDate[] expirationDates = tradeKing.getMarketOperations().getOptionExpirationDates("CORP1");
         mockServer.verify();
 
         assertArrayEquals("Dates do not match", expirationDates, mockData.optionExpirationDates);
@@ -195,10 +196,10 @@ public class MarketTemplateTest extends BaseTemplateTest {
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("market/option_expiration_date_single"), MediaType.APPLICATION_JSON));
 
-        Calendar[] expirationDates = tradeKing.getMarketOperations().getOptionExpirationDates("CORP1");
+        LocalDate[] expirationDates = tradeKing.getMarketOperations().getOptionExpirationDates("CORP1");
         mockServer.verify();
 
-        assertArrayEquals("Dates do not match", expirationDates, new Calendar[]{mockData.optionExpiration1});
+        assertArrayEquals("Dates do not match", expirationDates, new LocalDate[]{mockData.optionExpiration1});
     }
 
     @Test(expected = ApiException.class)

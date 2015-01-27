@@ -8,8 +8,7 @@
 package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Calendar;
+import org.joda.time.LocalDateTime;
 
 
 public class NewsHeadlineMixIn {
@@ -21,5 +20,5 @@ public class NewsHeadlineMixIn {
     private String headline;
 
     @JsonProperty("date")
-    private Calendar date;
+    private LocalDateTime date;
 }

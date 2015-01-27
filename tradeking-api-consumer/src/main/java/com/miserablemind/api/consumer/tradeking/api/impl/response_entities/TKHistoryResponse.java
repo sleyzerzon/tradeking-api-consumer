@@ -28,6 +28,6 @@ public class TKHistoryResponse extends TKResponse {
 
     @JsonSetter("transactions")
     public void setTransactionHistory(LinkedHashMap historyResponse) throws Exception {
-        this.transactionHistory = (TradeKingTransaction[]) this.extractArray(TradeKingTransaction[].class, historyResponse, "transaction", null);
+        this.transactionHistory = (TradeKingTransaction[]) this.extractArray(TradeKingTransaction[].class, historyResponse, "transaction");
     }
 }

@@ -8,16 +8,16 @@
 package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Calendar;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 public class TimeSalesQuoteMixIn {
 
     @JsonProperty("date")
-    Calendar date;
+    LocalDate date;
 
     @JsonProperty("datetime")
-    Calendar intervalStartTime;
+    DateTime intervalStartTime;
 
     @JsonProperty("hi")
     double highPrice;

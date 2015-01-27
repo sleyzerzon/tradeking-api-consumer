@@ -9,10 +9,13 @@ package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.NewsStory;
 import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
-import java.text.SimpleDateFormat;
 import java.util.LinkedHashMap;
 
 public class TKNewsArticleStoryResponse extends TKResponse {
@@ -25,14 +28,18 @@ public class TKNewsArticleStoryResponse extends TKResponse {
     public void setArticle(LinkedHashMap articlesResponse) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
-
-        //messed up, all the news will be 1970 for now
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd HH:mm");
-
-        mapper.setDateFormat(dateFormat);
         mapper.registerModule(new TradeKingModule());
+        mapper.registerModule(new JodaModule());
 
-        this.article = mapper.readValue(mapper.writeValueAsString(articlesResponse), NewsStory.class);
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("MM/dd HH:mm");
+        LocalDateTime date = LocalDateTime.parse((String) articlesResponse.get("date"), formatter);
+
+        this.article = new NewsStory(
+                (String) articlesResponse.get("id"),
+                (String) articlesResponse.get("headline"),
+                date,
+                (String) articlesResponse.get("story")
+        );
     }
 
     public String getError() {

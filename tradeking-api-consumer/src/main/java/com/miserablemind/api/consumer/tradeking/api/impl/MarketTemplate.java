@@ -11,6 +11,7 @@ import com.miserablemind.api.consumer.tradeking.api.MarketOperations;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
 import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.*;
 import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
+import org.joda.time.LocalDate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ApiException;
 import org.springframework.util.LinkedMultiValueMap;
@@ -130,7 +131,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
     }
 
     @Override
-    public Calendar[] getOptionExpirationDates(String ticker) {
+    public LocalDate[] getOptionExpirationDates(String ticker) {
         URI url = this.buildUri(URL_SEARCH_OPTION_DATES, "symbol", ticker);
         ResponseEntity<TKOptionExpirationsResponse> response = this.getRestTemplate().getForEntity(url, TKOptionExpirationsResponse.class);
 
