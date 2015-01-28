@@ -257,6 +257,8 @@ public class MarketTemplateTest extends BaseTemplateTest {
         StockQuote[] quotes = tradeKing.getMarketOperations().getQuoteForStocks(new String[]{"CORP1", "CORP2"});
         mockServer.verify();
 
+        assertArrayEquals("The quotes do not match", quotes, mockData.stockQuotes);
+
     }
 
     @Test
@@ -267,6 +269,8 @@ public class MarketTemplateTest extends BaseTemplateTest {
 
         StockQuote quote = tradeKing.getMarketOperations().getQuoteForStock("CORP1");
         mockServer.verify();
+
+        assertEquals("Quotes do not match", quote, this.mockData.stockQuote1);
 
     }
 

@@ -8,8 +8,10 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
-import java.util.Calendar;
 
 /**
  * Abstract quote class that holds all the data that stocks and options have in common.
@@ -18,18 +20,17 @@ import java.util.Calendar;
 abstract public class Quote extends TradeKingObject {
 
     private double ask;
-    private String askTime;
+    private LocalTime askTime;
     private int askLatestSize;
     private int basis;
     private double bid;
-    private String bidTime;
+    private LocalTime bidTime;
     private int bidLatestSize;
     private double change;
     private ChangeSign changeSign;
     private String changeText;
     private double previousClose;
-    private Calendar dateLastTrade;
-    private Calendar timeLastTrade;
+    private LocalDate dateLastTrade;
     private double dollarValue;
     private String exchangeCode;
     private String exchangeDescription;
@@ -45,7 +46,7 @@ abstract public class Quote extends TradeKingObject {
     private double priorDayHigh;
     private double priorDayLow;
     private double priorDayOpen;
-    private Calendar dateOfPriorTradeDay;
+    private LocalDate dateOfPriorTradeDay;
     private double priorDayChange;
     private long priorDayVolume;
     private SecurityClass securityClass;
@@ -59,16 +60,16 @@ abstract public class Quote extends TradeKingObject {
     private long cumulativeVolume;
     private double volumeWeightedAveragePrice;
     private double week52high;
-    private Calendar week52highDate;
+    private LocalDate week52highDate;
     private double week52low;
-    private Calendar week52lowDate;
-    private Calendar dateTime;
+    private LocalDate week52lowDate;
+    private DateTime dateTime;
     private String quoteConditionCode;
 
     public Quote() {
     }
 
-    public Quote(double ask, String askTime, int askLatestSize, int basis, double bid, String bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, Calendar dateLastTrade, Calendar timeLastTrade, double dollarValue, String exchangeCode, String exchangeDescription, double dayHigh, long volumeLastTrade, double lastPrice, double dayLow, String companyName, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, Calendar dateOfPriorTradeDay, double priorDayChange, long priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, long cumulativeVolume, double volumeWeightedAveragePrice, double week52high, Calendar week52highDate, double week52low, Calendar week52lowDate, Calendar dateTime, String quoteConditionCode) {
+    public Quote(double ask, LocalTime askTime, int askLatestSize, int basis, double bid, LocalTime bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, LocalDate dateLastTrade, double dollarValue, String exchangeCode, String exchangeDescription, double dayHigh, long volumeLastTrade, double lastPrice, double dayLow, String companyName, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, LocalDate dateOfPriorTradeDay, double priorDayChange, long priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, long cumulativeVolume, double volumeWeightedAveragePrice, double week52high, LocalDate week52highDate, double week52low, LocalDate week52lowDate, DateTime dateTime, String quoteConditionCode) {
         this.ask = ask;
         this.askTime = askTime;
         this.askLatestSize = askLatestSize;
@@ -81,7 +82,6 @@ abstract public class Quote extends TradeKingObject {
         this.changeText = changeText;
         this.previousClose = previousClose;
         this.dateLastTrade = dateLastTrade;
-        this.timeLastTrade = timeLastTrade;
         this.dollarValue = dollarValue;
         this.exchangeCode = exchangeCode;
         this.exchangeDescription = exchangeDescription;
@@ -132,7 +132,7 @@ abstract public class Quote extends TradeKingObject {
      *
      * @return String hh:mm time
      */
-    public String getAskTime() {
+    public LocalTime getAskTime() {
         return askTime;
     }
 
@@ -168,7 +168,7 @@ abstract public class Quote extends TradeKingObject {
      *
      * @return String hh:mm time
      */
-    public String getBidTime() {
+    public LocalTime getBidTime() {
         return bidTime;
     }
 
@@ -222,17 +222,8 @@ abstract public class Quote extends TradeKingObject {
      *
      * @return date
      */
-    public Calendar getDateLastTrade() {
+    public LocalDate getDateLastTrade() {
         return dateLastTrade;
-    }
-
-    /**
-     * Trade Date of Prior Last
-     *
-     * @return date
-     */
-    public Calendar getTimeLastTrade() {
-        return timeLastTrade;
     }
 
     /**
@@ -375,7 +366,7 @@ abstract public class Quote extends TradeKingObject {
      *
      * @return Calendar Object
      */
-    public Calendar getDateOfPriorTradeDay() {
+    public LocalDate getDateOfPriorTradeDay() {
         return dateOfPriorTradeDay;
     }
 
@@ -503,7 +494,7 @@ abstract public class Quote extends TradeKingObject {
      *
      * @return calendar object
      */
-    public Calendar getWeek52highDate() {
+    public LocalDate getWeek52highDate() {
         return week52highDate;
     }
 
@@ -523,7 +514,7 @@ abstract public class Quote extends TradeKingObject {
      *
      * @return Calendar object
      */
-    public Calendar getWeek52lowDate() {
+    public LocalDate getWeek52lowDate() {
         return week52lowDate;
     }
 

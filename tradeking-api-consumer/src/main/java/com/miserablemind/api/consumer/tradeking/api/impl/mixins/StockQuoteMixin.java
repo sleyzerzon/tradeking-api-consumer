@@ -9,8 +9,8 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Calendar;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.joda.time.LocalDate;
 
 public class StockQuoteMixin extends QuoteMixIn {
 
@@ -45,13 +45,15 @@ public class StockQuoteMixin extends QuoteMixIn {
     double lastDividend;
 
     @JsonProperty("divexdate")
-    Calendar exDividendDate;
+    @JsonDeserialize(using = SquishedDateDeserializer.class)
+    LocalDate exDividendDate;
 
     @JsonProperty("divfreq")
     char dividendFrequency;
 
     @JsonProperty("divpaydt")
-    Calendar lastDividendPayDate;
+    @JsonDeserialize(using = SquishedDateDeserializer.class)
+    LocalDate lastDividendPayDate;
 
     @JsonProperty("eps")
     double earningsPerShare;

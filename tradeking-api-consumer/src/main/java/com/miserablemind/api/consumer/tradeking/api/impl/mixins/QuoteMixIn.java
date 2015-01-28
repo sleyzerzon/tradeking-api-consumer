@@ -8,21 +8,23 @@
 package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.ChangeSign;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.Quote;
+import org.joda.time.LocalTime;
 
 import java.util.Calendar;
 
 abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
     @JsonProperty("ask_time")
-    String askTime;
+    LocalTime askTime;
 
     @JsonProperty("asksz")
     int askLatestSize;
 
     @JsonProperty("bid_time")
-    String bidTime;
+    LocalTime bidTime;
 
     @JsonProperty("bidsz")
     int bidLatestSize;
@@ -41,9 +43,6 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
     @JsonProperty("date")
     Calendar dateLastTrade;
-
-    @JsonProperty("date_time")
-    Calendar timeLastTrade;
 
     @JsonProperty("dollar_value")
     double dollarValue;
@@ -136,10 +135,12 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
     double week52high;
 
     @JsonProperty("wk52hidate")
+    @JsonDeserialize(using = SquishedDateDeserializer.class)
     Calendar week52highDate;
 
     @JsonProperty("wk52lodate")
-    Calendar week52lowDate;
+    @JsonDeserialize(using = SquishedDateDeserializer.class)
+    Calendar dick52lowDate;
 
     @JsonProperty("wk52lo")
     double week52low;

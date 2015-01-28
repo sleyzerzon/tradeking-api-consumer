@@ -7,7 +7,9 @@
 
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
-import java.util.Calendar;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 /**
  * Detailed Stock Quote
@@ -24,9 +26,9 @@ public class StockQuote extends Quote {
     private Integer tickDirectionSinceLastBid;
     private String CUSIP;
     private double lastDividend;
-    private Calendar exDividendDate;
+    private LocalDate exDividendDate;
     private DividendFrequency dividendFrequency;
-    private Calendar lastDividendPayDate;
+    private LocalDate lastDividendPayDate;
     private double earningsPerShare;
     private double indicatedAnnualDividend;
     private int hasOptions;
@@ -45,8 +47,8 @@ public class StockQuote extends Quote {
         super();
     }
 
-    public StockQuote(double ask, String askTime, int askLatestSize, int basis, double bid, String bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, Calendar dateLastTrade, Calendar timeLastTrade, double dollarValue, String exchangeCode, String exchangeDescription, double dayHigh, int volumeLastTrade, double lastPrice, double dayLow, String companyName, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, Calendar dateOfPriorTradeDay, double priorDayChange, int priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, int cumulativeVolume, double volumeWeightedAveragePrice, double week52high, Calendar week52highDate, double week52low, Calendar week52lowDate, Calendar dateTime, String quoteConditionCode, double averageDailyPrice100, double averageDailyPrice200, double averageDailyPrice50, long averageDailyVolume21, long averageDailyVolume30, long averageDailyVolume90, double beta, int tickDirectionSinceLastBid, String CUSIP, double lastDividend, Calendar exDividendDate, DividendFrequency dividendFrequency, Calendar lastDividendPayDate, double earningsPerShare, double indicatedAnnualDividend, int hasOptions, double priorAverageDailyPrice100, double priorAverageDailyPrice200, double priorAverageDailyPrice50, double bookValuePrice, String sharesOutstanding, double oneYearVolatility, double dividendYield, double priceEarning, long sessionVolume) {
-        super(ask, askTime, askLatestSize, basis, bid, bidTime, bidLatestSize, change, changeSign, changeText, previousClose, dateLastTrade, timeLastTrade, dollarValue, exchangeCode, exchangeDescription, dayHigh, volumeLastTrade, lastPrice, dayLow, companyName, openTradePrice, changePercentage, changePercentageSign, priorDayClose, priorDayHigh, priorDayLow, priorDayOpen, dateOfPriorTradeDay, priorDayChange, priorDayVolume, securityClass, tradingSession, symbol, tradeCondition, timeStamp, tradeCountSinceOpen, tradeDirection, trendOf10LastTicks, cumulativeVolume, volumeWeightedAveragePrice, week52high, week52highDate, week52low, week52lowDate, dateTime, quoteConditionCode);
+    public StockQuote(double ask, LocalTime askTime, int askLatestSize, int basis, double bid, LocalTime bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, LocalDate dateLastTrade, double dollarValue, String exchangeCode, String exchangeDescription, double dayHigh, int volumeLastTrade, double lastPrice, double dayLow, String companyName, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, LocalDate dateOfPriorTradeDay, double priorDayChange, int priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, int cumulativeVolume, double volumeWeightedAveragePrice, double week52high, LocalDate week52highDate, double week52low, LocalDate week52lowDate, DateTime dateTime, String quoteConditionCode, double averageDailyPrice100, double averageDailyPrice200, double averageDailyPrice50, long averageDailyVolume21, long averageDailyVolume30, long averageDailyVolume90, double beta, int tickDirectionSinceLastBid, String CUSIP, double lastDividend, LocalDate exDividendDate, DividendFrequency dividendFrequency, LocalDate lastDividendPayDate, double earningsPerShare, double indicatedAnnualDividend, int hasOptions, double priorAverageDailyPrice100, double priorAverageDailyPrice200, double priorAverageDailyPrice50, double bookValuePrice, String sharesOutstanding, double oneYearVolatility, double dividendYield, double priceEarning, long sessionVolume) {
+        super(ask, askTime, askLatestSize, basis, bid, bidTime, bidLatestSize, change, changeSign, changeText, previousClose, dateLastTrade, dollarValue, exchangeCode, exchangeDescription, dayHigh, volumeLastTrade, lastPrice, dayLow, companyName, openTradePrice, changePercentage, changePercentageSign, priorDayClose, priorDayHigh, priorDayLow, priorDayOpen, dateOfPriorTradeDay, priorDayChange, priorDayVolume, securityClass, tradingSession, symbol, tradeCondition, timeStamp, tradeCountSinceOpen, tradeDirection, trendOf10LastTicks, cumulativeVolume, volumeWeightedAveragePrice, week52high, week52highDate, week52low, week52lowDate, dateTime, quoteConditionCode);
         this.averageDailyPrice100 = averageDailyPrice100;
         this.averageDailyPrice200 = averageDailyPrice200;
         this.averageDailyPrice50 = averageDailyPrice50;
@@ -169,7 +171,7 @@ public class StockQuote extends Quote {
      *
      * @return Calendar Object
      */
-    public Calendar getExDividendDate() {
+    public LocalDate getExDividendDate() {
         return exDividendDate;
     }
 
@@ -187,7 +189,7 @@ public class StockQuote extends Quote {
      *
      * @return Calendar Object
      */
-    public Calendar getLastDividendPayDate() {
+    public LocalDate getLastDividendPayDate() {
         return lastDividendPayDate;
     }
 
@@ -314,5 +316,86 @@ public class StockQuote extends Quote {
         public String toString() {
             return this.value;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StockQuote)) return false;
+
+        StockQuote that = (StockQuote) o;
+
+        if (Double.compare(that.averageDailyPrice100, averageDailyPrice100) != 0) return false;
+        if (Double.compare(that.averageDailyPrice200, averageDailyPrice200) != 0) return false;
+        if (Double.compare(that.averageDailyPrice50, averageDailyPrice50) != 0) return false;
+        if (averageDailyVolume21 != that.averageDailyVolume21) return false;
+        if (averageDailyVolume30 != that.averageDailyVolume30) return false;
+        if (averageDailyVolume90 != that.averageDailyVolume90) return false;
+        if (Double.compare(that.beta, beta) != 0) return false;
+        if (Double.compare(that.bookValuePrice, bookValuePrice) != 0) return false;
+        if (Double.compare(that.earningsPerShare, earningsPerShare) != 0) return false;
+        if (hasOptions != that.hasOptions) return false;
+        if (Double.compare(that.indicatedAnnualDividend, indicatedAnnualDividend) != 0) return false;
+        if (Double.compare(that.lastDividend, lastDividend) != 0) return false;
+        if (Double.compare(that.oneYearVolatility, oneYearVolatility) != 0) return false;
+        if (Double.compare(that.priceEarning, priceEarning) != 0) return false;
+        if (Double.compare(that.priorAverageDailyPrice100, priorAverageDailyPrice100) != 0) return false;
+        if (Double.compare(that.priorAverageDailyPrice200, priorAverageDailyPrice200) != 0) return false;
+        if (Double.compare(that.priorAverageDailyPrice50, priorAverageDailyPrice50) != 0) return false;
+        if (sessionVolume != that.sessionVolume) return false;
+        if (!CUSIP.equals(that.CUSIP)) return false;
+        if (dividendFrequency != that.dividendFrequency) return false;
+        if (!dividendYield.equals(that.dividendYield)) return false;
+        if (!exDividendDate.equals(that.exDividendDate)) return false;
+        if (!lastDividendPayDate.equals(that.lastDividendPayDate)) return false;
+        if (!sharesOutstanding.equals(that.sharesOutstanding)) return false;
+        if (!tickDirectionSinceLastBid.equals(that.tickDirectionSinceLastBid)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(averageDailyPrice100);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(averageDailyPrice200);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(averageDailyPrice50);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (averageDailyVolume21 ^ (averageDailyVolume21 >>> 32));
+        result = 31 * result + (int) (averageDailyVolume30 ^ (averageDailyVolume30 >>> 32));
+        result = 31 * result + (int) (averageDailyVolume90 ^ (averageDailyVolume90 >>> 32));
+        temp = Double.doubleToLongBits(beta);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + tickDirectionSinceLastBid.hashCode();
+        result = 31 * result + CUSIP.hashCode();
+        temp = Double.doubleToLongBits(lastDividend);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + exDividendDate.hashCode();
+        result = 31 * result + dividendFrequency.hashCode();
+        result = 31 * result + lastDividendPayDate.hashCode();
+        temp = Double.doubleToLongBits(earningsPerShare);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(indicatedAnnualDividend);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + hasOptions;
+        temp = Double.doubleToLongBits(priorAverageDailyPrice100);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(priorAverageDailyPrice200);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(priorAverageDailyPrice50);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(bookValuePrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + sharesOutstanding.hashCode();
+        temp = Double.doubleToLongBits(oneYearVolatility);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + dividendYield.hashCode();
+        temp = Double.doubleToLongBits(priceEarning);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (sessionVolume ^ (sessionVolume >>> 32));
+        return result;
     }
 }

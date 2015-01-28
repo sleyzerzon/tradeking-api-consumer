@@ -126,17 +126,32 @@ public class TestObjectsRepository {
 
     // Quotes
     LocalDate dateLastTrade = new LocalDate(2015, 1, 2);
-    DateTime timeLastTrade = new DateTime(2015, 1, 2, 21, 14, DateTimeZone.UTC);
     LocalDate dateOfPriorTradeDay = new LocalDate(2014, 12, 31);
-/*
+    LocalDate week52HighDate = new LocalDate(2014, 11, 25);
+    LocalDate week52LowDate = new LocalDate(2014, 1, 31);
+    DateTime dateTime = new DateTime(2015, 1, 2, 21, 14, DateTimeZone.UTC);
+    LocalDate lastDividendPayDate = new LocalDate(2014, 11, 13);
+    LocalDate exDividendDate = new LocalDate(2014, 11, 6);
+    LocalTime askTime = new LocalTime(19, 59);
+    LocalTime bidTime = new LocalTime(0, 0);
 
-    StockQuote stockQuote1 = new StockQuote(109.8, "19:59", 1, 4, 0, "00:00", 0, 1.05, ChangeSign.DOWN, "1.05", 110.38,
-            dateLastTrade, timeLastTrade, 5327055164.00, "NASD", "NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO",
+
+    StockQuote stockQuote1 = new StockQuote(109.8, askTime, 1, 4, 0, bidTime, 0, 1.05, ChangeSign.DOWN, "1.05", 110.38,
+            dateLastTrade, 5327055164.00, "NASD", "NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO",
             111.39, "0.951 %", ChangeSign.DOWN, 110.38, 113.13, 110.21, 112.82, dateOfPriorTradeDay, -2.14, 41403351,
             Quote.SecurityClass.STOCK, Quote.TradingSession.MARKET, "SMTH", Quote.TradeCondition.RESUMED, "1420233240",
             286657, ChangeSign.EQUAL, "edueduduee", 53204626, 109.7549, 119.75, week52HighDate, 70.51, week52LowDate, dateTime,
-            "89", 106.0105, 97.1111, 11.8682, 46848450, 48378740, 50878760, 0.907, 0, "300000000", 0.47, exDividendDate, StockQuote.DividendFrequency.QUARTERLY,
+            "89", 106.0105, 97.1111, 111.8682, 46848450, 48378740, 50878760, 0.907, 0, "300000000", 0.47, exDividendDate, StockQuote.DividendFrequency.QUARTERLY,
             lastDividendPayDate, 6.45, 1.88, 1, 105.9210, 97.0085, 111.6870, 5.75, "5,864,840,000", 0.216042, 1.72, 16.96, 52442641);
-*/
+
+    StockQuote stockQuote2 = new StockQuote(109.8, askTime, 1, 4, 0, bidTime, 0, 1.05, ChangeSign.DOWN, "1.05", 110.38,
+            dateLastTrade, 5327055164.00, "NASD", "NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO2",
+            111.39, "0.951 %", ChangeSign.DOWN, 110.38, 113.13, 110.21, 112.82, dateOfPriorTradeDay, -2.14, 41403351,
+            Quote.SecurityClass.STOCK, Quote.TradingSession.MARKET, "SMTH2", Quote.TradeCondition.RESUMED, "1420233240",
+            286657, ChangeSign.EQUAL, "edueduduee", 53204626, 109.7549, 119.75, week52HighDate, 70.51, week52LowDate, dateTime,
+            "89", 106.0105, 97.1111, 111.8682, 46848450, 48378740, 50878760, 0.907, 0, "300000000", 0.47, exDividendDate, StockQuote.DividendFrequency.QUARTERLY,
+            lastDividendPayDate, 6.45, 1.88, 1, 105.9210, 97.0085, 111.6870, 5.75, "5,864,840,000", 0.216042, 1.72, 16.96, 52442641);
+
+    StockQuote[] stockQuotes = new StockQuote[]{stockQuote1, stockQuote2};
 
 }
