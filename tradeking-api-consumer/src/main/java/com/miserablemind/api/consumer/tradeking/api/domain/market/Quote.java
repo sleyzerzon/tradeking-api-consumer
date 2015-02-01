@@ -466,8 +466,6 @@ abstract public class Quote extends TradeKingObject {
         return week52high;
     }
 
-    //todo: 70s
-
     /**
      * 52 week high date
      *
@@ -485,8 +483,6 @@ abstract public class Quote extends TradeKingObject {
     public double getWeek52low() {
         return week52low;
     }
-
-    //todo: 70s
 
     /**
      * 52 week low date

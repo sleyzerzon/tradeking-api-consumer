@@ -162,7 +162,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
         if (null != keywords) parameters.set("keywords", this.buildCommaSeparatedParameterValue(keywords));
 
-        //todo: dates do not work, figure out the format, TK does not like anything
+        //dates do not work. TK does not provide documentation for format
         if (null != startDate) {
             /*parameters.set("startdate", dateFormat.format(startDate.getTime()));
 

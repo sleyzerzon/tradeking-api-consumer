@@ -8,8 +8,6 @@
 package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 
-import org.joda.time.LocalDateTime;
-
 /**
  * News Headline class with story in it
  */
@@ -19,7 +17,7 @@ public class NewsStory extends NewsHeadline {
     public NewsStory() {
     }
 
-    public NewsStory(String id, String headline, LocalDateTime date, String story) {
+    public NewsStory(String id, String headline, String date, String story) {
         super(id, headline, date);
         this.story = story;
     }
@@ -37,6 +35,7 @@ public class NewsStory extends NewsHeadline {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof NewsStory)) return false;
+        if (!super.equals(o)) return false;
 
         NewsStory newsStory = (NewsStory) o;
 
@@ -47,6 +46,8 @@ public class NewsStory extends NewsHeadline {
 
     @Override
     public int hashCode() {
-        return story.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + story.hashCode();
+        return result;
     }
 }

@@ -11,8 +11,6 @@ import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 
 import java.util.Arrays;
 
-//todo: remove spring bs for retrieving user info right away
-
 /**
  * Trade King user object, that is usually used to retrieve authenticated user data
  */

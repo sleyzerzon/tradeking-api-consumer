@@ -6,8 +6,6 @@
 
 package com.miserablemind.api.consumer.tradeking.api;
 
-//todo, figure out what gets returned on failures
-
 import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
 import com.miserablemind.api.consumer.tradeking.api.impl.OptionQuoteNotFoundException;
 import com.miserablemind.api.consumer.tradeking.api.impl.TimeSalesInterval;

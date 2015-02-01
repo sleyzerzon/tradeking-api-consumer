@@ -24,6 +24,16 @@ public class WatchlistTemplateTest extends BaseTemplateTest {
         assertArrayEquals("Watch Lists names do not match", watchlistNames, mockData.watchLists);
     }
 
+    @Test
+    public void getAllLists_single_response() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "watchlists.json"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("watchlist/all_lists_single"), MediaType.APPLICATION_JSON));
+        String[] watchlistNames = tradeKing.getWatchlistOperations().getAllLists();
+
+        assertArrayEquals("Watch Lists names do not match", watchlistNames, mockData.watchListsSingle);
+    }
+
     @Test(expected = ApiException.class)
     public void getAllLists_errorResponse() {
         mockServer.expect(requestTo(BaseTemplate.URL_BASE + "watchlists.json"))
@@ -69,9 +79,9 @@ public class WatchlistTemplateTest extends BaseTemplateTest {
 
     @Test
     public void addSymbolsToList() {
-        //todo figure out how to match post vars
         mockServer.expect(requestTo(BaseTemplate.URL_BASE + "watchlists/DEFAULT/symbols.json"))
                 .andExpect(method(POST))
+                .andExpect(content().string("symbols=TCKR1%2CTCKR2"))
                 .andRespond(withSuccess(jsonResource("watchlist/all_lists"), MediaType.APPLICATION_JSON));
 
         String[] watchlistNames = tradeKing.getWatchlistOperations().addSymbolsToList("DEFAULT", new String[]{"TCKR1", "TCKR2"});

@@ -76,6 +76,7 @@ public class TestObjectsRepository {
     WATCH LISTS
      */
     String[] watchLists = new String[]{"DEFAULT", "watch2"};
+    String[] watchListsSingle = new String[]{"DEFAULT"};
     WatchlistItem watchlistItem1 = new WatchlistItem(0, 0, "TCKR1");
     WatchlistItem watchlistItem2 = new WatchlistItem(0, 0, "TCKR2");
 
@@ -107,12 +108,9 @@ public class TestObjectsRepository {
     TopListEntry[] topList = new TopListEntry[]{topListEntry1, topListEntry2};
 
 
-    LocalDateTime newsDate = new LocalDateTime(2000, 4, 9, 14, 2);
-    LocalDateTime newsDate2 = new LocalDateTime(2000, 4, 9, 14, 12);
-
-    NewsStory newsStory = new NewsStory("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", newsDate, "This is some very long story");
-    NewsHeadline newsHeadline1 = new NewsHeadline("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", newsDate);
-    NewsHeadline newsHeadline2 = new NewsHeadline("4wefed265647adb9a46977d5d2df", "Second Story", newsDate2);
+    NewsStory newsStory = new NewsStory("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", "04/09 14:02", "This is some very long story");
+    NewsHeadline newsHeadline1 = new NewsHeadline("4cacd265647adb9a46977d5d2f8ff559", "Eye on Apple and Amazon", "04/09 14:02");
+    NewsHeadline newsHeadline2 = new NewsHeadline("4wefed265647adb9a46977d5d2df", "Second Story", "04/09 14:12");
     NewsHeadline[] newsList = new NewsHeadline[]{newsHeadline1, newsHeadline2};
 
     LocalDate optionExpiration1 = new LocalDate(2015, 1, 9);

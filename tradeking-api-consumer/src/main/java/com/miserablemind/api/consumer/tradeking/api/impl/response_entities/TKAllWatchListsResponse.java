@@ -40,7 +40,6 @@ public class TKAllWatchListsResponse extends TKResponse {
             //we know from condition this is right
             itemList = (ArrayList) list;
         } else {
-            //todo: not covered by test
             itemList.add((LinkedHashMap) watchListsResponse.get("watchlist"));
         }
 

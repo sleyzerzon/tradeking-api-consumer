@@ -78,7 +78,7 @@ public class TopListEntry extends TradeKingObject {
     /**
      * Percentage change from prior day close
      *
-     * @return percent String todo://perhaps double is better
+     * @return percent String
      */
     public String getPercentageChange() {
         return percentageChange;
