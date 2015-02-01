@@ -23,6 +23,7 @@ public class StockQuote extends Quote {
     private long averageDailyVolume30;
     private long averageDailyVolume90;
     private double beta;
+    private String companyName;
     private Integer tickDirectionSinceLastBid;
     private String CUSIP;
     private double lastDividend;
@@ -41,6 +42,7 @@ public class StockQuote extends Quote {
     private Double dividendYield;
     private double priceEarning;
     private long sessionVolume;
+    private double dollarValue;
 
 
     public StockQuote() {
@@ -48,7 +50,7 @@ public class StockQuote extends Quote {
     }
 
     public StockQuote(double ask, LocalTime askTime, int askLatestSize, int basis, double bid, LocalTime bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, LocalDate dateLastTrade, double dollarValue, String exchangeCode, String exchangeDescription, double dayHigh, int volumeLastTrade, double lastPrice, double dayLow, String companyName, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, LocalDate dateOfPriorTradeDay, double priorDayChange, int priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, int cumulativeVolume, double volumeWeightedAveragePrice, double week52high, LocalDate week52highDate, double week52low, LocalDate week52lowDate, DateTime dateTime, String quoteConditionCode, double averageDailyPrice100, double averageDailyPrice200, double averageDailyPrice50, long averageDailyVolume21, long averageDailyVolume30, long averageDailyVolume90, double beta, int tickDirectionSinceLastBid, String CUSIP, double lastDividend, LocalDate exDividendDate, DividendFrequency dividendFrequency, LocalDate lastDividendPayDate, double earningsPerShare, double indicatedAnnualDividend, int hasOptions, double priorAverageDailyPrice100, double priorAverageDailyPrice200, double priorAverageDailyPrice50, double bookValuePrice, String sharesOutstanding, double oneYearVolatility, double dividendYield, double priceEarning, long sessionVolume) {
-        super(ask, askTime, askLatestSize, basis, bid, bidTime, bidLatestSize, change, changeSign, changeText, previousClose, dateLastTrade, dollarValue, exchangeCode, exchangeDescription, dayHigh, volumeLastTrade, lastPrice, dayLow, companyName, openTradePrice, changePercentage, changePercentageSign, priorDayClose, priorDayHigh, priorDayLow, priorDayOpen, dateOfPriorTradeDay, priorDayChange, priorDayVolume, securityClass, tradingSession, symbol, tradeCondition, timeStamp, tradeCountSinceOpen, tradeDirection, trendOf10LastTicks, cumulativeVolume, volumeWeightedAveragePrice, week52high, week52highDate, week52low, week52lowDate, dateTime, quoteConditionCode);
+        super(ask, askTime, askLatestSize, basis, bid, bidTime, bidLatestSize, change, changeSign, changeText, previousClose, dateLastTrade, exchangeCode, exchangeDescription, dayHigh, volumeLastTrade, lastPrice, dayLow, openTradePrice, changePercentage, changePercentageSign, priorDayClose, priorDayHigh, priorDayLow, priorDayOpen, dateOfPriorTradeDay, priorDayChange, priorDayVolume, securityClass, tradingSession, symbol, tradeCondition, timeStamp, tradeCountSinceOpen, tradeDirection, trendOf10LastTicks, cumulativeVolume, volumeWeightedAveragePrice, week52high, week52highDate, week52low, week52lowDate, dateTime, quoteConditionCode);
         this.averageDailyPrice100 = averageDailyPrice100;
         this.averageDailyPrice200 = averageDailyPrice200;
         this.averageDailyPrice50 = averageDailyPrice50;
@@ -74,6 +76,9 @@ public class StockQuote extends Quote {
         this.dividendYield = dividendYield;
         this.priceEarning = priceEarning;
         this.sessionVolume = sessionVolume;
+        this.companyName = companyName;
+        this.dollarValue = dollarValue;
+
     }
 
     /**
@@ -302,6 +307,25 @@ public class StockQuote extends Quote {
     }
 
     /**
+     * Company name
+     *
+     * @return Company name
+     */
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    /**
+     * Total dollar value of shares traded today
+     *
+     * @return dollar figure in standard form, i.e. 3.58616648E8
+     */
+    public double getDollarValue() {
+        return dollarValue;
+    }
+
+
+    /**
      * Indicates the session state of the time when quote was reveived
      */
     public enum DividendFrequency {
@@ -322,6 +346,7 @@ public class StockQuote extends Quote {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof StockQuote)) return false;
+        if (!super.equals(o)) return false;
 
         StockQuote that = (StockQuote) o;
 
@@ -333,6 +358,7 @@ public class StockQuote extends Quote {
         if (averageDailyVolume90 != that.averageDailyVolume90) return false;
         if (Double.compare(that.beta, beta) != 0) return false;
         if (Double.compare(that.bookValuePrice, bookValuePrice) != 0) return false;
+        if (Double.compare(that.dollarValue, dollarValue) != 0) return false;
         if (Double.compare(that.earningsPerShare, earningsPerShare) != 0) return false;
         if (hasOptions != that.hasOptions) return false;
         if (Double.compare(that.indicatedAnnualDividend, indicatedAnnualDividend) != 0) return false;
@@ -344,6 +370,7 @@ public class StockQuote extends Quote {
         if (Double.compare(that.priorAverageDailyPrice50, priorAverageDailyPrice50) != 0) return false;
         if (sessionVolume != that.sessionVolume) return false;
         if (!CUSIP.equals(that.CUSIP)) return false;
+        if (!companyName.equals(that.companyName)) return false;
         if (dividendFrequency != that.dividendFrequency) return false;
         if (!dividendYield.equals(that.dividendYield)) return false;
         if (!exDividendDate.equals(that.exDividendDate)) return false;
@@ -356,10 +383,10 @@ public class StockQuote extends Quote {
 
     @Override
     public int hashCode() {
-        int result;
+        int result = super.hashCode();
         long temp;
         temp = Double.doubleToLongBits(averageDailyPrice100);
-        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(averageDailyPrice200);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(averageDailyPrice50);
@@ -390,12 +417,15 @@ public class StockQuote extends Quote {
         temp = Double.doubleToLongBits(bookValuePrice);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + sharesOutstanding.hashCode();
+        result = 31 * result + companyName.hashCode();
         temp = Double.doubleToLongBits(oneYearVolatility);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + dividendYield.hashCode();
         temp = Double.doubleToLongBits(priceEarning);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (int) (sessionVolume ^ (sessionVolume >>> 32));
+        temp = Double.doubleToLongBits(dollarValue);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
 }

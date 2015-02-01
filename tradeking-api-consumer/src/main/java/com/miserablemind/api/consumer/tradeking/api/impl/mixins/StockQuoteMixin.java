@@ -17,6 +17,9 @@ public class StockQuoteMixin extends QuoteMixIn {
     @JsonProperty("adp_100")
     double averageDailyPrice100;
 
+    @JsonProperty("name")
+    String companyName;
+
     @JsonProperty("adp_200")
     double averageDailyPrice200;
 
@@ -90,5 +93,8 @@ public class StockQuoteMixin extends QuoteMixIn {
 
     @JsonProperty("sessionVolume")
     long sessionVolume;
+
+    @JsonProperty("dollar_value")
+    double dollarValue;
 
 }

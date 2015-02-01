@@ -8,9 +8,9 @@
 package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.OptionQuote;
-
-import java.util.Calendar;
+import org.joda.time.LocalDate;
 
 public class OptionQuoteMixIn extends QuoteMixIn {
 
@@ -21,22 +21,22 @@ public class OptionQuoteMixIn extends QuoteMixIn {
     int daysToExpiration;
 
     @JsonProperty("imp_volatility")
-    private double impliedVolatility;
+    double impliedVolatility;
 
     @JsonProperty("idelta")
-    private double iDelta;
+    double iDelta;
 
     @JsonProperty("igamma")
-    private double iGamma;
+    double iGamma;
 
     @JsonProperty("irho")
-    private double iRho;
+    double iRho;
 
     @JsonProperty("itheta")
-    private double iTheta;
+    double iTheta;
 
     @JsonProperty("ivega")
-    private double iVega;
+    double iVega;
 
     @JsonProperty("issue_desc")
     String fullDescription;
@@ -78,7 +78,8 @@ public class OptionQuoteMixIn extends QuoteMixIn {
     String underlyingSymbol;
 
     @JsonProperty("xdate")
-    Calendar expirationDate;
+    @JsonDeserialize(using = SquishedDateDeserializer.class)
+    LocalDate expirationDate;
 
     @JsonProperty("xday")
     String expirationDay;

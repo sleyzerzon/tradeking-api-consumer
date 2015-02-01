@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.stream.Collectors;
 
 public class TKAllWatchListsResponse extends TKResponse {
 
@@ -26,6 +27,7 @@ public class TKAllWatchListsResponse extends TKResponse {
     }
 
     @JsonSetter("watchlists")
+    @SuppressWarnings("unchecked")
     public void setWatchLists(LinkedHashMap<String, Object> watchListsResponse) throws Exception {
 
         ArrayList<String> resultList = new ArrayList<String>();
@@ -38,10 +40,11 @@ public class TKAllWatchListsResponse extends TKResponse {
             //we know from condition this is right
             itemList = (ArrayList) list;
         } else {
+            //todo: not covered by test
             itemList.add((LinkedHashMap) watchListsResponse.get("watchlist"));
         }
 
-        for (LinkedHashMap<String, String> item : itemList) resultList.add(item.get("id"));
+        resultList.addAll(itemList.stream().map(item -> item.get("id")).collect(Collectors.toList()));
 
         this.watchLists = new String[resultList.size()];
         this.watchLists = resultList.toArray(this.watchLists);

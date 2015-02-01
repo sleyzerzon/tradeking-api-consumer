@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.ChangeSign;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.Quote;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import java.util.Calendar;
@@ -44,9 +46,6 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
     @JsonProperty("date")
     Calendar dateLastTrade;
 
-    @JsonProperty("dollar_value")
-    double dollarValue;
-
     @JsonProperty("exch")
     String exchangeCode;
 
@@ -64,9 +63,6 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
     @JsonProperty("lo")
     double dayLow;
-
-    @JsonProperty("name")
-    String companyName;
 
     @JsonProperty("opn")
     double openPrice;
@@ -136,17 +132,17 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
     @JsonProperty("wk52hidate")
     @JsonDeserialize(using = SquishedDateDeserializer.class)
-    Calendar week52highDate;
+    LocalDate week52highDate;
 
     @JsonProperty("wk52lodate")
     @JsonDeserialize(using = SquishedDateDeserializer.class)
-    Calendar dick52lowDate;
+    LocalDate week52lowDate;
 
     @JsonProperty("wk52lo")
     double week52low;
 
     @JsonProperty("datetime")
-    Calendar dateTime;
+    DateTime dateTime;
 
     @JsonProperty("sesn_vl")
     int sessionVolume;

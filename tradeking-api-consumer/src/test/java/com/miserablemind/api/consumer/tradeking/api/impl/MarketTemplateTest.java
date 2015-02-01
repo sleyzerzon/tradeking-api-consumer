@@ -9,8 +9,7 @@ import org.springframework.social.ApiException;
 
 import java.util.Calendar;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -261,6 +260,16 @@ public class MarketTemplateTest extends BaseTemplateTest {
 
     }
 
+    @Test(expected = ApiException.class)
+    public void getQuoteForStocks_errorResponse() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/ext/quotes.json?symbols=CORP1%2CCORP2"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+
+        StockQuote[] quotes = tradeKing.getMarketOperations().getQuoteForStocks(new String[]{"CORP1", "CORP2"});
+        mockServer.verify();
+    }
+
     @Test
     public void getQuoteForStocks_single() {
         mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/ext/quotes.json?symbols=CORP1"))
@@ -274,5 +283,53 @@ public class MarketTemplateTest extends BaseTemplateTest {
 
     }
 
+    @Test
+    public void getQuoteForOptions_single() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/ext/quotes.json?symbols=CMPN1150320C00100000"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/option_quote_single"), MediaType.APPLICATION_JSON));
+        try {
+            OptionQuote optionQuote = tradeKing.getMarketOperations()
+                    .getQuoteForOption("CMPN1", new LocalDate(2015, 3, 20), OptionQuote.OptionType.CALL, 100);
+            mockServer.verify();
+            assertEquals("Option quotes do not match", optionQuote, this.mockData.optionQuote1);
 
+        } catch (OptionQuoteNotFoundException e) {
+            assertFalse("Option not found exception thrown of existing option", false);
+        }
+    }
+
+    @Test(expected = OptionQuoteNotFoundException.class)
+    public void getQuoteForOptions_errorResponse() throws OptionQuoteNotFoundException {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/ext/quotes.json?symbols=CMPN1150320C00100000"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+        OptionQuote optionQuote = tradeKing.getMarketOperations()
+                .getQuoteForOption("CMPN1", new LocalDate(2015, 3, 20), OptionQuote.OptionType.CALL, 100);
+        mockServer.verify();
+    }
+
+    @Test
+    public void searchOptions_no_dates() {
+
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/search.json?symbol=CMPN1&query=put_call-eq%3Acall+AND+strikeprice-gte%3A90.0+AND+strikeprice-lte%3A100.0"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("market/option_quotes_multiple"), MediaType.APPLICATION_JSON));
+
+        OptionQuote[] quotes = this.tradeKing.getMarketOperations().searchOptions("CMPN1", 90.00, 100.00, OptionQuote.OptionType.CALL, null, null);
+        mockServer.verify();
+
+        assertArrayEquals("Option Qutotes are not equal", quotes, this.mockData.searchOptionQuotes);
+
+    }
+
+    @Test(expected = ApiException.class)
+    public void searchOptions_no_dates_errorResponse() {
+        mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/options/search.json?symbol=CMPN1&query=put_call-eq%3Acall+AND+strikeprice-gte%3A90.0+AND+strikeprice-lte%3A100.0+AND+xdate-gte%3A20150320+AND+xdate-lte%3A20150325"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
+
+        this.tradeKing.getMarketOperations().searchOptions("CMPN1", 90.00, 100.00, OptionQuote.OptionType.CALL, new LocalDate(2015, 3, 20), new LocalDate(2015, 3, 25));
+        mockServer.verify();
+    }
 }

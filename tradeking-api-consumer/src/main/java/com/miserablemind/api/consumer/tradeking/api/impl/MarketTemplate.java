@@ -62,12 +62,11 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
     }
 
     @Override
-    public OptionQuote getQuoteForOption(String ticker, Calendar expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException {
+    public OptionQuote getQuoteForOption(String ticker, LocalDate expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+        String timeString = expirationDate.toString("yyMMdd");
 
         String optionType = (type == OptionQuote.OptionType.CALL) ? "C" : "P";
-        String timeString = dateFormat.format(expirationDate.getTime());
         String paddedPrice = String.format("%08d", (int) (strikePrice * 1000));
 
         String optionSymbol = ticker + timeString + optionType + paddedPrice;
@@ -90,9 +89,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
     }
 
     @Override
-    public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate) {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+    public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, LocalDate startDate, LocalDate endDate) {
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         String queryString = "put_call-eq:" + type;
@@ -102,8 +99,8 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
         if (null != maxStrikePrice) queryString += " AND strikeprice-lte:" + maxStrikePrice;
 
         //Dates
-        if (null != startDate) queryString += " AND xdate-gte:" + dateFormat.format(startDate.getTime());
-        if (null != endDate) queryString += " AND xdate-lte:" + dateFormat.format(endDate.getTime());
+        if (null != startDate) queryString += " AND xdate-gte:" + startDate.toString("yyyyMMdd");
+        if (null != endDate) queryString += " AND xdate-lte:" + endDate.toString("yyyyMMdd");
 
         parameters.set("symbol", ticker);
         parameters.set("query", queryString);

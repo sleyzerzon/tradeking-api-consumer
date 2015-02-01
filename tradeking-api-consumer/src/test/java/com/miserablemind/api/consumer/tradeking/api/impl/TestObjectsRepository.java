@@ -136,16 +136,16 @@ public class TestObjectsRepository {
     LocalTime bidTime = new LocalTime(0, 0);
 
 
-    StockQuote stockQuote1 = new StockQuote(109.8, askTime, 1, 4, 0, bidTime, 0, 1.05, ChangeSign.DOWN, "1.05", 110.38,
-            dateLastTrade, 5327055164.00, "NASD", "NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO",
+    StockQuote stockQuote1 = new StockQuote(109.8, askTime, 1, 4, 0, bidTime, 0, 1.05, ChangeSign.DOWN, "1.0500", 110.38,
+            dateLastTrade, 5327055164.00, "NASD", "NASDAQ", 111.44, 50, 109.33, 107.35, "SOMETHING CO",
             111.39, "0.951 %", ChangeSign.DOWN, 110.38, 113.13, 110.21, 112.82, dateOfPriorTradeDay, -2.14, 41403351,
             Quote.SecurityClass.STOCK, Quote.TradingSession.MARKET, "SMTH", Quote.TradeCondition.RESUMED, "1420233240",
             286657, ChangeSign.EQUAL, "edueduduee", 53204626, 109.7549, 119.75, week52HighDate, 70.51, week52LowDate, dateTime,
             "89", 106.0105, 97.1111, 111.8682, 46848450, 48378740, 50878760, 0.907, 0, "300000000", 0.47, exDividendDate, StockQuote.DividendFrequency.QUARTERLY,
             lastDividendPayDate, 6.45, 1.88, 1, 105.9210, 97.0085, 111.6870, 5.75, "5,864,840,000", 0.216042, 1.72, 16.96, 52442641);
 
-    StockQuote stockQuote2 = new StockQuote(109.8, askTime, 1, 4, 0, bidTime, 0, 1.05, ChangeSign.DOWN, "1.05", 110.38,
-            dateLastTrade, 5327055164.00, "NASD", "NASDAQ", 114.44, 53204626, 109.33, 107.35, "SOMETHING CO2",
+    StockQuote stockQuote2 = new StockQuote(109.8, askTime, 1, 4, 0, bidTime, 0, 1.05, ChangeSign.DOWN, "1.0500", 110.38,
+            dateLastTrade, 5327055164.00, "NASD", "NASDAQ", 111.44, 50, 109.33, 107.35, "SOMETHING CO2",
             111.39, "0.951 %", ChangeSign.DOWN, 110.38, 113.13, 110.21, 112.82, dateOfPriorTradeDay, -2.14, 41403351,
             Quote.SecurityClass.STOCK, Quote.TradingSession.MARKET, "SMTH2", Quote.TradeCondition.RESUMED, "1420233240",
             286657, ChangeSign.EQUAL, "edueduduee", 53204626, 109.7549, 119.75, week52HighDate, 70.51, week52LowDate, dateTime,
@@ -153,5 +153,27 @@ public class TestObjectsRepository {
             lastDividendPayDate, 6.45, 1.88, 1, 105.9210, 97.0085, 111.6870, 5.75, "5,864,840,000", 0.216042, 1.72, 16.96, 52442641);
 
     StockQuote[] stockQuotes = new StockQuote[]{stockQuote1, stockQuote2};
+
+    OptionQuote optionQuote1 = new OptionQuote(11.85, new LocalTime(15, 57), 50, 4, 11.60, new LocalTime(15, 57), 492,
+            0.66, ChangeSign.DOWN, "0.6600", 12.45, new LocalDate(2015, 1, 2), "OPRA", "OPRA - Composite", 12.7, 1, 11.79,
+            10.54, 12.70, "5.301 %", ChangeSign.DOWN, 12.45, 14.25, 12.45, 14.20, new LocalDate(2014, 12, 31), -1.59, 496,
+            Quote.SecurityClass.OPTION, Quote.TradingSession.MARKET, "CMPN1150320C00100000", Quote.TradeCondition.RESUMED, "1420232100", 57,
+            ChangeSign.UP, "eeedduuuuu", 589, 0, 20.35, new LocalDate(2014, 11, 25), 10.50, new LocalDate(2014, 12, 16),
+            new DateTime(2015, 1, 2, 20, 55, 0, DateTimeZone.UTC), "0", 100, 77, "CALL MAR-15 $ 100.00", OptionQuote.OptionDelivery.STANDARD,
+            OptionQuote.OptionStyle.AMERICAN, 0.326106, OptionQuote.OptionClass.STANDARD, "2,458", 10.164716, "2,251", 100, OptionQuote.OptionType.CALL,
+            "CMPN1", 100, "057738170", "CMPN1", new LocalDate(2015, 3, 20), "20", "03", "2015", 0.147170,
+            0.743770, -0.030385, 0.019614, 0.163379);
+
+    OptionQuote optionQuote2 = new OptionQuote(10.85, new LocalTime(15, 50), 50, 4, 10.60, new LocalTime(15, 57), 492,
+            0.66, ChangeSign.DOWN, "0.6600", 12.45, new LocalDate(2015, 1, 2), "OPRA", "OPRA - Composite", 12.7, 1, 11.79,
+            10.54, 12.7, "5.301 %", ChangeSign.DOWN, 12.45, 14.25, 12.45, 14.20, new LocalDate(2014, 12, 31), -1.59, 496,
+            Quote.SecurityClass.OPTION, Quote.TradingSession.MARKET, "CMPN1150320C00095000", Quote.TradeCondition.RESUMED, "1420232100", 57,
+            ChangeSign.UP, "eeedduuuuu", 589, 0, 20.35, new LocalDate(2014, 11, 25), 10.50, new LocalDate(2014, 12, 16),
+            new DateTime(2015, 1, 2, 20, 55, 0, DateTimeZone.UTC), "0", 100, 77, "CALL MAR-15 $ 95.00", OptionQuote.OptionDelivery.STANDARD,
+            OptionQuote.OptionStyle.AMERICAN, 0.326106, OptionQuote.OptionClass.STANDARD, "2,458", 10.164716, "2,251", 100, OptionQuote.OptionType.CALL,
+            "CMPN1", 95, "057738170", "CMPN1", new LocalDate(2015, 3, 20), "20", "03", "2015", 0.147170,
+            0.743770, -0.030385, 0.019614, 0.163379);
+
+    OptionQuote[] searchOptionQuotes = new OptionQuote[]{optionQuote1, optionQuote2};
 
 }

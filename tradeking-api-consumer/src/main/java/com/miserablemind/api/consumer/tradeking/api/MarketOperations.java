@@ -48,7 +48,7 @@ public interface MarketOperations {
      * @return Option Quote if found
      * @throws OptionQuoteNotFoundException thrown if no option with the parameters provided was found
      */
-    public OptionQuote getQuoteForOption(String ticker, Calendar expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException;
+    public OptionQuote getQuoteForOption(String ticker, LocalDate expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException;
 
     /**
      * Search for options by parameters given
@@ -61,7 +61,7 @@ public interface MarketOperations {
      * @param endDate        Date range end or null if any
      * @return a list of option quotes
      */
-    public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, Calendar startDate, Calendar endDate);
+    public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, LocalDate startDate, LocalDate endDate);
 
     /**
      * This call will return the full list of available option strikes for a given symbol

@@ -28,6 +28,7 @@ public class TKWatchlistItemsResponse extends TKResponse {
     }
 
     @JsonSetter("watchlists")
+    @SuppressWarnings("unchecked")
     public void setWatchLists(LinkedHashMap<String, LinkedHashMap> watchListsResponse) throws Exception {
 
         //manually deserialize as we need to un-nest some unnecessary stuff

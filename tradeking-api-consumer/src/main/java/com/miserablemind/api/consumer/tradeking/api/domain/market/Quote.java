@@ -31,14 +31,12 @@ abstract public class Quote extends TradeKingObject {
     private String changeText;
     private double previousClose;
     private LocalDate dateLastTrade;
-    private double dollarValue;
     private String exchangeCode;
     private String exchangeDescription;
     private double dayHigh;
     private long volumeLastTrade;
     private double lastPrice;
     private double dayLow;
-    private String companyName;
     private double openTradePrice;
     private String changePercentage;
     private ChangeSign changePercentageSign;
@@ -69,7 +67,7 @@ abstract public class Quote extends TradeKingObject {
     public Quote() {
     }
 
-    public Quote(double ask, LocalTime askTime, int askLatestSize, int basis, double bid, LocalTime bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, LocalDate dateLastTrade, double dollarValue, String exchangeCode, String exchangeDescription, double dayHigh, long volumeLastTrade, double lastPrice, double dayLow, String companyName, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, LocalDate dateOfPriorTradeDay, double priorDayChange, long priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, long cumulativeVolume, double volumeWeightedAveragePrice, double week52high, LocalDate week52highDate, double week52low, LocalDate week52lowDate, DateTime dateTime, String quoteConditionCode) {
+    public Quote(double ask, LocalTime askTime, int askLatestSize, int basis, double bid, LocalTime bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, LocalDate dateLastTrade, String exchangeCode, String exchangeDescription, double dayHigh, long volumeLastTrade, double lastPrice, double dayLow, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, LocalDate dateOfPriorTradeDay, double priorDayChange, long priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, long cumulativeVolume, double volumeWeightedAveragePrice, double week52high, LocalDate week52highDate, double week52low, LocalDate week52lowDate, DateTime dateTime, String quoteConditionCode) {
         this.ask = ask;
         this.askTime = askTime;
         this.askLatestSize = askLatestSize;
@@ -82,14 +80,12 @@ abstract public class Quote extends TradeKingObject {
         this.changeText = changeText;
         this.previousClose = previousClose;
         this.dateLastTrade = dateLastTrade;
-        this.dollarValue = dollarValue;
         this.exchangeCode = exchangeCode;
         this.exchangeDescription = exchangeDescription;
         this.dayHigh = dayHigh;
         this.volumeLastTrade = volumeLastTrade;
         this.lastPrice = lastPrice;
         this.dayLow = dayLow;
-        this.companyName = companyName;
         this.openTradePrice = openTradePrice;
         this.changePercentage = changePercentage;
         this.changePercentageSign = changePercentageSign;
@@ -227,15 +223,6 @@ abstract public class Quote extends TradeKingObject {
     }
 
     /**
-     * Total dollar value of shares traded today
-     *
-     * @return dollar figure in standard form, i.e. 3.58616648E8
-     */
-    public double getDollarValue() {
-        return dollarValue;
-    }
-
-    /**
      * Exchange Code of quote provider
      *
      * @return exchange code
@@ -289,14 +276,6 @@ abstract public class Quote extends TradeKingObject {
         return dayLow;
     }
 
-    /**
-     * Company name
-     *
-     * @return Company name
-     */
-    public String getCompanyName() {
-        return companyName;
-    }
 
     /**
      * Open trade price
@@ -516,6 +495,128 @@ abstract public class Quote extends TradeKingObject {
      */
     public LocalDate getWeek52lowDate() {
         return week52lowDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Quote)) return false;
+
+        Quote quote = (Quote) o;
+
+        if (Double.compare(quote.ask, ask) != 0) return false;
+        if (askLatestSize != quote.askLatestSize) return false;
+        if (basis != quote.basis) return false;
+        if (Double.compare(quote.bid, bid) != 0) return false;
+        if (bidLatestSize != quote.bidLatestSize) return false;
+        if (Double.compare(quote.change, change) != 0) return false;
+        if (cumulativeVolume != quote.cumulativeVolume) return false;
+        if (Double.compare(quote.dayHigh, dayHigh) != 0) return false;
+        if (Double.compare(quote.dayLow, dayLow) != 0) return false;
+        if (Double.compare(quote.lastPrice, lastPrice) != 0) return false;
+        if (Double.compare(quote.openTradePrice, openTradePrice) != 0) return false;
+        if (Double.compare(quote.previousClose, previousClose) != 0) return false;
+        if (Double.compare(quote.priorDayChange, priorDayChange) != 0) return false;
+        if (Double.compare(quote.priorDayClose, priorDayClose) != 0) return false;
+        if (Double.compare(quote.priorDayHigh, priorDayHigh) != 0) return false;
+        if (Double.compare(quote.priorDayLow, priorDayLow) != 0) return false;
+        if (Double.compare(quote.priorDayOpen, priorDayOpen) != 0) return false;
+        if (priorDayVolume != quote.priorDayVolume) return false;
+        if (tradeCountSinceOpen != quote.tradeCountSinceOpen) return false;
+        if (volumeLastTrade != quote.volumeLastTrade) return false;
+        if (Double.compare(quote.volumeWeightedAveragePrice, volumeWeightedAveragePrice) != 0) return false;
+        if (Double.compare(quote.week52high, week52high) != 0) return false;
+        if (Double.compare(quote.week52low, week52low) != 0) return false;
+        if (!askTime.equals(quote.askTime)) return false;
+        if (!bidTime.equals(quote.bidTime)) return false;
+        if (!changePercentage.equals(quote.changePercentage)) return false;
+        if (changePercentageSign != quote.changePercentageSign) return false;
+        if (changeSign != quote.changeSign) return false;
+        if (!changeText.equals(quote.changeText)) return false;
+        if (!dateLastTrade.equals(quote.dateLastTrade)) return false;
+        if (!dateOfPriorTradeDay.equals(quote.dateOfPriorTradeDay)) return false;
+        if (!dateTime.equals(quote.dateTime)) return false;
+        if (!exchangeCode.equals(quote.exchangeCode)) return false;
+        if (!exchangeDescription.equals(quote.exchangeDescription)) return false;
+        if (!quoteConditionCode.equals(quote.quoteConditionCode)) return false;
+        if (securityClass != quote.securityClass) return false;
+        if (!symbol.equals(quote.symbol)) return false;
+        if (!timeStamp.equals(quote.timeStamp)) return false;
+        if (tradeCondition != quote.tradeCondition) return false;
+        if (tradeDirection != quote.tradeDirection) return false;
+        if (tradingSession != quote.tradingSession) return false;
+        if (!trendOf10LastTicks.equals(quote.trendOf10LastTicks)) return false;
+        if (!week52highDate.equals(quote.week52highDate)) return false;
+        if (!week52lowDate.equals(quote.week52lowDate)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(ask);
+        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + askTime.hashCode();
+        result = 31 * result + askLatestSize;
+        result = 31 * result + basis;
+        temp = Double.doubleToLongBits(bid);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + bidTime.hashCode();
+        result = 31 * result + bidLatestSize;
+        temp = Double.doubleToLongBits(change);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + changeSign.hashCode();
+        result = 31 * result + changeText.hashCode();
+        temp = Double.doubleToLongBits(previousClose);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + dateLastTrade.hashCode();
+        result = 31 * result + exchangeCode.hashCode();
+        result = 31 * result + exchangeDescription.hashCode();
+        temp = Double.doubleToLongBits(dayHigh);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (volumeLastTrade ^ (volumeLastTrade >>> 32));
+        temp = Double.doubleToLongBits(lastPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(dayLow);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(openTradePrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + changePercentage.hashCode();
+        result = 31 * result + changePercentageSign.hashCode();
+        temp = Double.doubleToLongBits(priorDayClose);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(priorDayHigh);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(priorDayLow);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(priorDayOpen);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + dateOfPriorTradeDay.hashCode();
+        temp = Double.doubleToLongBits(priorDayChange);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (priorDayVolume ^ (priorDayVolume >>> 32));
+        result = 31 * result + securityClass.hashCode();
+        result = 31 * result + tradingSession.hashCode();
+        result = 31 * result + symbol.hashCode();
+        result = 31 * result + tradeCondition.hashCode();
+        result = 31 * result + timeStamp.hashCode();
+        result = 31 * result + tradeCountSinceOpen;
+        result = 31 * result + tradeDirection.hashCode();
+        result = 31 * result + trendOf10LastTicks.hashCode();
+        result = 31 * result + (int) (cumulativeVolume ^ (cumulativeVolume >>> 32));
+        temp = Double.doubleToLongBits(volumeWeightedAveragePrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(week52high);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + week52highDate.hashCode();
+        temp = Double.doubleToLongBits(week52low);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + week52lowDate.hashCode();
+        result = 31 * result + dateTime.hashCode();
+        result = 31 * result + quoteConditionCode.hashCode();
+        return result;
     }
 
     /**
