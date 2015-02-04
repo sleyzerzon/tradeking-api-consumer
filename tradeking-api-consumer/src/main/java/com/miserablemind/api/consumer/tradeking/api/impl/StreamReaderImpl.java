@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ScheduledFuture;
@@ -53,9 +54,9 @@ class StreamReaderImpl implements StreamReader {
             int character;
             do {
                 character = this.reader.read();
-                if (character == -1) {
-                    continue;
-                }
+
+                if (character == -1) continue;
+
                 stringBuilder.append(Character.toChars(character));
 
                 if (character == 125 // current character }
@@ -71,8 +72,9 @@ class StreamReaderImpl implements StreamReader {
             } while (character != -1);
 
             String streamEntry = stringBuilder.toString();
-
-            this.queue.add(streamEntry);
+            if (!Objects.equals(streamEntry, "")) {
+                this.queue.add(streamEntry);
+            }
 
         } catch (IOException e) {
             if (this.open.get()) {

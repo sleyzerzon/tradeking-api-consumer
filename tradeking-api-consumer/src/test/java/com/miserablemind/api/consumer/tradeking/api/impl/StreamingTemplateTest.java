@@ -59,7 +59,7 @@ public class StreamingTemplateTest extends BaseTemplateTest {
 
         mockServer.verify();
 
-        queryForStatus("Quote", tradeAssertionPassed);
+        queryForStatus("Trade", tradeAssertionPassed);
 
     }
 
@@ -75,11 +75,12 @@ public class StreamingTemplateTest extends BaseTemplateTest {
 
             if (null == varToCheck) {
                 timesQueried++;
-                Thread.sleep(200);
+                Thread.sleep(20);
             } else if (varToCheck) {
                 break;
             } else {
                 assertFalse("Stream " + description + " do not match", true);
+                break;
             }
 
         }
