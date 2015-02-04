@@ -174,4 +174,7 @@ public class TestObjectsRepository {
 
     OptionQuote[] searchOptionQuotes = new OptionQuote[]{optionQuote1, optionQuote2};
 
+    //Streaming
+    StreamQuoteEvent streamQuote = new StreamQuoteEvent(528.5, 5, 528.22, 3, null, new DateTime(2015, 2, 3, 22, 13, 43, 0, DateTimeZone.UTC), "Direct Edge X Exchange", "Regular, two-sided open quote automated", "CMPN1", 1423001623);
+    StreamTradeEvent streamTrade = new StreamTradeEvent("CMPN1", "Direct Edge X Exchange", 528.5, 300, 2032727, 528.351, new DateTime(2015, 2, 3, 22, 13, 32, 0, DateTimeZone.UTC), 1423001612, "57,16,10");
 }

@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class StreamingTemplate extends BaseTemplate implements StreamingOperations {
 
-    private static final String URL_STREAM_QUOTES_TRADES = "https://stream.tradeking.com/v1/market/quotes.json";
+    public static final String URL_STREAM_QUOTES_TRADES = "https://stream.tradeking.com/v1/market/quotes.json";
 
     StreamingTemplate(RestTemplate restTemplate) {
         super(restTemplate);

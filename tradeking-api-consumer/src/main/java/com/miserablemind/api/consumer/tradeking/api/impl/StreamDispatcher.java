@@ -8,6 +8,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.miserablemind.api.consumer.tradeking.api.StreamListener;
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.StreamQuoteEvent;
@@ -46,6 +47,7 @@ class StreamDispatcher implements Runnable {
         this.listeners = listeners;
         pool = Executors.newCachedThreadPool();
         objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JodaModule());
 
         objectMapper.addMixInAnnotations(TradeKingObject.class, TradeKingKObjectMixIn.class);
         objectMapper.addMixInAnnotations(StreamQuoteEvent.class, StreamQuoteMixIn.class);

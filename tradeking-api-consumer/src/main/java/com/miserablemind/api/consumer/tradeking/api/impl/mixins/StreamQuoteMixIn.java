@@ -8,8 +8,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
 @JsonRootName("quote")
 public class StreamQuoteMixIn {
@@ -30,7 +29,7 @@ public class StreamQuoteMixIn {
     Integer bidTick;
 
     @JsonProperty("datetime")
-    Calendar dateTime;
+    DateTime dateTime;
 
     @JsonProperty("exch")
     String exchangeCode;

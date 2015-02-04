@@ -8,8 +8,7 @@ package com.miserablemind.api.consumer.tradeking.api.domain.market;
 
 
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
-
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
 /**
  * TK API allows to subscribe to streams, one of them is Quotes
@@ -22,7 +21,7 @@ public class StreamQuoteEvent extends TradeKingObject {
     private double bidPrice;
     private long bidLatestSizeHundreds;
     private Integer bidTick;
-    private Calendar dateTime;
+    private DateTime dateTime;
     private String exchangeCode;
     private String conditionCode;
     private String symbol;
@@ -31,7 +30,7 @@ public class StreamQuoteEvent extends TradeKingObject {
     public StreamQuoteEvent() {
     }
 
-    public StreamQuoteEvent(double askPrice, long askLatestSizeHundreds, double bidPrice, long bidLatestSize, Integer bidTick, Calendar dateTime, String exchangeCode, String conditionCode, String symbol, int timeStamp) {
+    public StreamQuoteEvent(double askPrice, long askLatestSizeHundreds, double bidPrice, long bidLatestSize, Integer bidTick, DateTime dateTime, String exchangeCode, String conditionCode, String symbol, int timeStamp) {
         this.askPrice = askPrice;
         this.askLatestSizeHundreds = askLatestSizeHundreds;
         this.bidPrice = bidPrice;
@@ -93,9 +92,9 @@ public class StreamQuoteEvent extends TradeKingObject {
     /**
      * Date and time of the quote
      *
-     * @return Date object
+     * @return DateTime object
      */
-    public Calendar getDateTime() {
+    public DateTime getDateTime() {
         return dateTime;
     }
 
@@ -133,5 +132,45 @@ public class StreamQuoteEvent extends TradeKingObject {
      */
     public int getTimeStamp() {
         return timeStamp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StreamQuoteEvent)) return false;
+
+        StreamQuoteEvent that = (StreamQuoteEvent) o;
+
+        if (askLatestSizeHundreds != that.askLatestSizeHundreds) return false;
+        if (Double.compare(that.askPrice, askPrice) != 0) return false;
+        if (bidLatestSizeHundreds != that.bidLatestSizeHundreds) return false;
+        if (Double.compare(that.bidPrice, bidPrice) != 0) return false;
+        if (timeStamp != that.timeStamp) return false;
+        if (bidTick != null ? !bidTick.equals(that.bidTick) : that.bidTick != null) return false;
+        if (!conditionCode.equals(that.conditionCode)) return false;
+        if (!dateTime.equals(that.dateTime)) return false;
+        if (!exchangeCode.equals(that.exchangeCode)) return false;
+        if (!symbol.equals(that.symbol)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(askPrice);
+        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (askLatestSizeHundreds ^ (askLatestSizeHundreds >>> 32));
+        temp = Double.doubleToLongBits(bidPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (bidLatestSizeHundreds ^ (bidLatestSizeHundreds >>> 32));
+        result = 31 * result + (bidTick != null ? bidTick.hashCode() : 0);
+        result = 31 * result + dateTime.hashCode();
+        result = 31 * result + exchangeCode.hashCode();
+        result = 31 * result + conditionCode.hashCode();
+        result = 31 * result + symbol.hashCode();
+        result = 31 * result + timeStamp;
+        return result;
     }
 }

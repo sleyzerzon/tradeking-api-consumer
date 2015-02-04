@@ -2,8 +2,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
 
 /*
@@ -34,7 +33,7 @@ public class StreamTradeMixIn extends TradeKingKObjectMixIn {
     double volumeWeightedAveragePrice;
 
     @JsonProperty("datetime")
-    Calendar dateTime;
+    DateTime dateTime;
 
     @JsonProperty("tcond")
     String tradeCondition;

@@ -53,6 +53,9 @@ class StreamReaderImpl implements StreamReader {
             int character;
             do {
                 character = this.reader.read();
+                if (character == -1) {
+                    continue;
+                }
                 stringBuilder.append(Character.toChars(character));
 
                 if (character == 125 // current character }
