@@ -174,7 +174,7 @@ public class StockQuote extends Quote {
     /**
      * Ex-dividend date of div
      *
-     * @return Calendar Object
+     * @return LocalDate Object
      */
     public LocalDate getExDividendDate() {
         return exDividendDate;
@@ -192,7 +192,7 @@ public class StockQuote extends Quote {
     /**
      * Ex-dividend date of div
      *
-     * @return Calendar Object
+     * @return LocalDate Object
      */
     public LocalDate getLastDividendPayDate() {
         return lastDividendPayDate;

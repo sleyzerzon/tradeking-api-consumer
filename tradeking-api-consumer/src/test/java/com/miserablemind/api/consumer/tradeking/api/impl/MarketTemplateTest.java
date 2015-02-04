@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.social.ApiException;
 
-import java.util.Calendar;
-
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -56,12 +54,10 @@ public class MarketTemplateTest extends BaseTemplateTest {
 
     @Test
     public void getDataPoints_MultiDay() {
-        Calendar startDate = new Calendar.Builder().setDate(2014, 11, 15).build();
-        Calendar endDate = new Calendar.Builder().setDate(2014, 11, 20).build();
         mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/timesales.json?symbols=TCKR&interval=5min&startdate=2014-12-15&enddate=2014-12-20"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("market/time_sales_quotes"), MediaType.APPLICATION_JSON));
-        TimeSalesQuote[] points = tradeKing.getMarketOperations().getDataPoints("TCKR", startDate, endDate, TimeSalesInterval.MINUTES_5);
+        TimeSalesQuote[] points = tradeKing.getMarketOperations().getDataPoints("TCKR", new LocalDate(2014, 12, 15), new LocalDate(2014, 12, 20), TimeSalesInterval.MINUTES_5);
 
         mockServer.verify();
         assertEquals("First Quote Interval Start Time is Not Equal to mock's", points[0].getIntervalStartTime(), mockData.timeSalesQuote1.getIntervalStartTime());

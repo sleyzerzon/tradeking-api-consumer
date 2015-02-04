@@ -343,7 +343,7 @@ abstract public class Quote extends TradeKingObject {
     /**
      * Trade Date of Prior Last
      *
-     * @return Calendar Object
+     * @return LocalDate Object
      */
     public LocalDate getDateOfPriorTradeDay() {
         return dateOfPriorTradeDay;
@@ -469,7 +469,7 @@ abstract public class Quote extends TradeKingObject {
     /**
      * 52 week high date
      *
-     * @return calendar object
+     * @return LocalDate object
      */
     public LocalDate getWeek52highDate() {
         return week52highDate;
@@ -478,7 +478,7 @@ abstract public class Quote extends TradeKingObject {
     /**
      * 52 week low
      *
-     * @return Calendar object
+     * @return Dollar value
      */
     public double getWeek52low() {
         return week52low;
@@ -487,7 +487,7 @@ abstract public class Quote extends TradeKingObject {
     /**
      * 52 week low date
      *
-     * @return Calendar object
+     * @return LocalDate object
      */
     public LocalDate getWeek52lowDate() {
         return week52lowDate;

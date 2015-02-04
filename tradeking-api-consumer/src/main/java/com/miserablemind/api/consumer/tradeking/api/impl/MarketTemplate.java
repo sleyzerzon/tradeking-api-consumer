@@ -20,7 +20,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
@@ -150,12 +149,9 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
     }
 
 
-    protected NewsHeadline[] getNewsList(String[] tickers, Integer limit, String[] keywords, Calendar startDate, Calendar endDate) {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+    protected NewsHeadline[] getNewsList(String[] tickers, Integer limit, String[] keywords, LocalDate startDate, LocalDate endDate) {
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
-
 
         if (null != tickers) parameters.set("symbols", this.buildCommaSeparatedParameterValue(tickers));
         if (null != limit) parameters.set("maxhits", String.valueOf(limit));
@@ -231,14 +227,14 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
     //multiday
     @Override
-    public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesInterval interval) {
+    public TimeSalesQuote[] getDataPoints(String ticker, LocalDate startDate, LocalDate endDate, TimeSalesInterval interval) {
         return this.getDataPoints(ticker, interval, null, null, startDate, endDate);
     }
 
 
     // there is no universal usage of this one, see overloaded methods
     protected TimeSalesQuote[] getDataPoints(String ticker, TimeSalesInterval interval, Integer countPerPage,
-                                             Integer offset, Calendar startDate, Calendar endDate) {
+                                             Integer offset, LocalDate startDate, LocalDate endDate) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -255,8 +251,8 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
         }
 
 
-        if (null != startDate) parameters.set("startdate", dateFormat.format(startDate.getTime()));
-        if (null != endDate) parameters.set("enddate", dateFormat.format(endDate.getTime()));
+        if (null != startDate) parameters.set("startdate", startDate.toString());
+        if (null != endDate) parameters.set("enddate", endDate.toString());
 
         URI url = this.buildUri(URL_DATA_POINTS, parameters);
 

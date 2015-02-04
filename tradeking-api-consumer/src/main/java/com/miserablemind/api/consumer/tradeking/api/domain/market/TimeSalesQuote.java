@@ -45,7 +45,7 @@ public class TimeSalesQuote extends TradeKingObject {
     /**
      * Date and time
      *
-     * @return Calendar object
+     * @return DateTime object
      */
     public DateTime getIntervalStartTime() {
         return intervalStartTime;

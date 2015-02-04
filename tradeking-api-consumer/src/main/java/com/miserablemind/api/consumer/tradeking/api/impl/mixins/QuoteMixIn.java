@@ -15,8 +15,6 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
-import java.util.Calendar;
-
 abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
 
     @JsonProperty("ask_time")
@@ -44,7 +42,7 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
     double previousClose;
 
     @JsonProperty("date")
-    Calendar dateLastTrade;
+    LocalDate dateLastTrade;
 
     @JsonProperty("exch")
     String exchangeCode;
@@ -86,7 +84,7 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
     double priorDayLow;
 
     @JsonProperty("pr_date")
-    Calendar dateOfPriorTradeDay;
+    LocalDate dateOfPriorTradeDay;
 
     @JsonProperty("popn")
     double priorDayOpen;
@@ -110,7 +108,7 @@ abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
     Quote.TradeCondition tradeCondition;
 
     @JsonProperty("timestamp")
-    Calendar timeStamp;
+    String timeStamp;
 
     @JsonProperty("tr_num")
     int tradeCountSinceOpen;

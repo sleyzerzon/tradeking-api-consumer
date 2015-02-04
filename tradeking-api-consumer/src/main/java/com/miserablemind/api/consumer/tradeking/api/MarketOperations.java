@@ -12,7 +12,6 @@ import com.miserablemind.api.consumer.tradeking.api.impl.TimeSalesInterval;
 import com.miserablemind.api.consumer.tradeking.api.impl.TopListType;
 import org.joda.time.LocalDate;
 
-import java.util.Calendar;
 
 /**
  * Sub-api for market operations. This is the core of api that provides financial data.
@@ -140,6 +139,6 @@ public interface MarketOperations {
      * @param interval  time interval between 2 data points
      * @return data points for the stock
      */
-    public TimeSalesQuote[] getDataPoints(String ticker, Calendar startDate, Calendar endDate, TimeSalesInterval interval);
+    public TimeSalesQuote[] getDataPoints(String ticker, LocalDate startDate, LocalDate endDate, TimeSalesInterval interval);
 
 }

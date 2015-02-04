@@ -217,7 +217,7 @@ public class OptionQuote extends Quote {
     /**
      * Expiration date of option in the format of (YYYYMMDD)
      *
-     * @return Calendar Object
+     * @return LocalDate Object
      */
     public LocalDate getExpirationDate() {
         return expirationDate;

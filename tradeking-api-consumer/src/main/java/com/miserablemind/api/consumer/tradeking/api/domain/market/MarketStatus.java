@@ -43,8 +43,8 @@ public class MarketStatus extends TradeKingObject {
 
     /**
      * Current market date
-     *        todo: update the docs
-     * @return Calendar Object
+     *
+     * @return LocalDateTime Object
      */
     public LocalDateTime getDate() {
         return date;

@@ -47,7 +47,7 @@ public class NewsHeadline extends TradeKingObject {
     /**
      * Date and time the article was published
      *
-     * @return Calendar Object
+     * @return String Date In a format of "04/11 10:00"
      */
     public String getDate() {
         return date;
