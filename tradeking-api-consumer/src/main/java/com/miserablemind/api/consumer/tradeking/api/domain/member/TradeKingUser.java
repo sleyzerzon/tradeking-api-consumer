@@ -1,6 +1,6 @@
 /*
  * Miserable Mind | Laurynas Rimkus | Twitter: @lrimkus
- * http://www.miserablemind.com
+ * http://www.miserablemind.com | Twitter: @lrimkus
  * The MIT License (MIT)
  */
 
