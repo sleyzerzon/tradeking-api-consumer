@@ -52,10 +52,13 @@ class StreamReaderImpl implements StreamReader {
             StringBuilder stringBuilder = new StringBuilder();
 
             int character;
+            int quotationCount = 0;
             do {
                 character = this.reader.read();
 
-                if (character == -1) continue;
+                if (character == -1 || character == 10) continue; //if carriage
+                if (character == 32 && quotationCount % 2 == 0) continue;   //if space not in a value
+                if (character == 34) quotationCount++;   //increment quotation
 
                 stringBuilder.append(Character.toChars(character));
 
