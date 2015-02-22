@@ -8,9 +8,9 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 public class BaseTemplateTest {
 
-    protected MockRestServiceServer mockServer;
-    protected TradeKingTemplate tradeKing;
-    protected TestObjectsRepository mockData;
+    MockRestServiceServer mockServer;
+    TradeKingTemplate tradeKing;
+    TestObjectsRepository mockData;
 
     @Before
     public void setup() {
@@ -19,7 +19,7 @@ public class BaseTemplateTest {
         mockData = new TestObjectsRepository();
     }
 
-    protected Resource jsonResource(String filename) {
+    Resource jsonResource(String filename) {
         return new ClassPathResource(filename + ".json", getClass());
     }
 

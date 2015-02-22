@@ -186,6 +186,7 @@ public class TransactionDetails extends TradeKingObject {
      *
      * @param description description fed by Jackson
      */
+    @SuppressWarnings("unchecked")
     public void setDescription(Object description) {
         if (description.getClass() == String.class) {
             this.description = (String) description;

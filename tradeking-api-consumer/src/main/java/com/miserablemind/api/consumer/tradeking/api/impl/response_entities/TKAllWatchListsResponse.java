@@ -28,13 +28,13 @@ public class TKAllWatchListsResponse extends TKResponse {
 
     @JsonSetter("watchlists")
     @SuppressWarnings("unchecked")
-    public void setWatchLists(LinkedHashMap<String, Object> watchListsResponse) throws Exception {
+    public void setWatchLists(LinkedHashMap<String, Object> watchListsResponse) {
 
-        ArrayList<String> resultList = new ArrayList<String>();
+        ArrayList<String> resultList = new ArrayList<>();
 
         Object list = watchListsResponse.get("watchlist");
 
-        ArrayList<LinkedHashMap<String, String>> itemList = new ArrayList<LinkedHashMap<String, String>>();
+        ArrayList<LinkedHashMap<String, String>> itemList = new ArrayList<>();
 
         if (list.getClass() == ArrayList.class) {
             //we know from condition this is right

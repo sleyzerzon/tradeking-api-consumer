@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 abstract class ThreadedStreamConsumer extends Thread implements Stream {
 
-    private AtomicBoolean open;
+    private final AtomicBoolean open;
 
     private StreamReader streamReader;
 
@@ -76,7 +76,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 
     protected abstract StreamReader getStreamReader() throws StreamCreationException;
 
-    protected void sleepBeforeRetry(long timeToSleep) {
+    void sleepBeforeRetry(long timeToSleep) {
         try {
             Thread.sleep(timeToSleep);
         } catch (InterruptedException e) {
@@ -84,9 +84,9 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
         }
     }
 
-    static final long HTTP_ERROR_SLEEP_MAX = 320000;
+    private static final long HTTP_ERROR_SLEEP_MAX = 320000;
 
-    static final long NETWORK_ERROR_SLEEP_MAX = 16000;
+    private static final long NETWORK_ERROR_SLEEP_MAX = 16000;
 
     private static final long MIN_WAIT = 250;
 

@@ -14,7 +14,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.watchlist.WatchlistIt
 public interface WatchlistOperations {
 
     /**
-     * This will retrieve a list of watchlists for the authenticated user.
+     * This will retrieve a list of Watch List for the authenticated user.
      *
      * @return a list of Strings that represent watchlist names
      */
@@ -41,7 +41,7 @@ public interface WatchlistOperations {
      *
      * @param watchlistName the name of the watchlist to add tickers to
      * @param tickers       a list of tickers to add
-     * @return list of names of the watchlists
+     * @return list of names of the Watch Lists
      */
     public String[] addSymbolsToList(String watchlistName, String[] tickers);
 
@@ -54,7 +54,7 @@ public interface WatchlistOperations {
     public void deleteSymbolFromList(String watchlistName, String[] tickers);
 
     /**
-     * This will get watchilist items
+     * This will get Watch List items
      *
      * @param watchlistName the name of watchlist to get items for
      * @return a list of watchlist items

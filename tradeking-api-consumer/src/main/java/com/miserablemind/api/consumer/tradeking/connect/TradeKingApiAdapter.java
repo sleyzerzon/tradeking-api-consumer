@@ -14,7 +14,7 @@ import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfileBuilder;
 
-public class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
+class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
     @Override
     public boolean test(TradeKingOperations api) {
         try {

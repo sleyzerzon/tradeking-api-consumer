@@ -15,7 +15,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
-abstract public class QuoteMixIn extends TradeKingKObjectMixIn {
+abstract class QuoteMixIn extends TradeKingKObjectMixIn {
 
     @JsonProperty("ask_time")
     LocalTime askTime;

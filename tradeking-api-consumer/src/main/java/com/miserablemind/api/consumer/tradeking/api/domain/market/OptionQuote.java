@@ -387,7 +387,7 @@ public class OptionQuote extends Quote {
      */
     public enum OptionType {
         CALL("call"), PUT("put");
-        private String value;
+        private final String value;
 
         OptionType(String value) {
             this.value = value;
@@ -404,7 +404,7 @@ public class OptionQuote extends Quote {
      */
     public enum OptionStyle {
         AMERICAN("A"), EUROPEAN("E");
-        private String value;
+        private final String value;
 
         OptionStyle(String value) {
             this.value = value;
@@ -421,7 +421,7 @@ public class OptionQuote extends Quote {
      */
     public enum OptionClass {
         STANDARD("0"), LEAP("1"), SHORT_TERM("2");
-        private String value;
+        private final String value;
 
         OptionClass(String value) {
             this.value = value;
@@ -438,7 +438,7 @@ public class OptionQuote extends Quote {
      */
     public enum OptionDelivery {
         STANDARD("S"), NON_STANDARD("N"), UNSPECIFIED("X");
-        private String value;
+        private final String value;
 
         OptionDelivery(String value) {
             this.value = value;

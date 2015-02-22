@@ -16,7 +16,7 @@ import java.util.Map;
  */
 abstract public class TradeKingObject {
 
-    private Map<String, Object> extraData = new HashMap<String, Object>();
+    private final Map<String, Object> extraData = new HashMap<>();
 
     /**
      * Adds all the additional values to an extraData instance var that do not have a field in the class.
@@ -27,6 +27,15 @@ abstract public class TradeKingObject {
      */
     public void add(String key, Object value) {
         extraData.put(key, value);
+    }
+
+    /**
+     * Gets all the extra data that was not mapped to object's instance variables
+     *
+     * @return Map of the key values
+     */
+    public Map<String, Object> getExtraData() {
+        return this.extraData;
     }
 
 }

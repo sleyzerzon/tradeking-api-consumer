@@ -64,10 +64,10 @@ abstract public class Quote extends TradeKingObject {
     private DateTime dateTime;
     private String quoteConditionCode;
 
-    public Quote() {
+    Quote() {
     }
 
-    public Quote(double ask, LocalTime askTime, int askLatestSize, int basis, double bid, LocalTime bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, LocalDate dateLastTrade, String exchangeCode, String exchangeDescription, double dayHigh, long volumeLastTrade, double lastPrice, double dayLow, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, LocalDate dateOfPriorTradeDay, double priorDayChange, long priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, long cumulativeVolume, double volumeWeightedAveragePrice, double week52high, LocalDate week52highDate, double week52low, LocalDate week52lowDate, DateTime dateTime, String quoteConditionCode) {
+    Quote(double ask, LocalTime askTime, int askLatestSize, int basis, double bid, LocalTime bidTime, int bidLatestSize, double change, ChangeSign changeSign, String changeText, double previousClose, LocalDate dateLastTrade, String exchangeCode, String exchangeDescription, double dayHigh, long volumeLastTrade, double lastPrice, double dayLow, double openTradePrice, String changePercentage, ChangeSign changePercentageSign, double priorDayClose, double priorDayHigh, double priorDayLow, double priorDayOpen, LocalDate dateOfPriorTradeDay, double priorDayChange, long priorDayVolume, SecurityClass securityClass, TradingSession tradingSession, String symbol, TradeCondition tradeCondition, String timeStamp, int tradeCountSinceOpen, ChangeSign tradeDirection, String trendOf10LastTicks, long cumulativeVolume, double volumeWeightedAveragePrice, double week52high, LocalDate week52highDate, double week52low, LocalDate week52lowDate, DateTime dateTime, String quoteConditionCode) {
         this.ask = ask;
         this.askTime = askTime;
         this.askLatestSize = askLatestSize;
@@ -620,7 +620,7 @@ abstract public class Quote extends TradeKingObject {
      */
     public enum SecurityClass {
         STOCK("0"), OPTION("1");
-        private String value;
+        private final String value;
 
         SecurityClass(String value) {
             this.value = value;
@@ -635,7 +635,7 @@ abstract public class Quote extends TradeKingObject {
 
     public enum TradeCondition {
         HALTED("H"), RESUMED("R");
-        private String value;
+        private final String value;
 
         TradeCondition(String value) {
             this.value = value;
@@ -652,7 +652,7 @@ abstract public class Quote extends TradeKingObject {
      */
     public enum TradingSession {
         MARKET("regular"), PRE_MARKET("pre"), POST_MARKET("post");
-        private String value;
+        private final String value;
 
         TradingSession(String value) {
             this.value = value;

@@ -10,7 +10,6 @@ package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.MarketStatus;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -48,13 +47,11 @@ public class TKMarketStatusResponse extends TKResponse {
      * Deserializer does not understand the milliseconds, need to do it manually here
      *
      * @param dateResponse a String date from Json
-     * @throws Exception
      */
     @JsonSetter("date")
     public void setDate(String dateResponse) throws Exception {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-        LocalDateTime date = LocalDateTime.parse(dateResponse, formatter);
-        this.date = date;
+        this.date = LocalDateTime.parse(dateResponse, formatter);
 
     }
 
@@ -62,18 +59,12 @@ public class TKMarketStatusResponse extends TKResponse {
      * This needs an explicit setter to unwrap the values from inside of "status" object
      *
      * @param statusResponse value from deserializer, in this case object "status" as a HashMap
-     * @throws Exception
      */
     @JsonSetter("status")
-    public void setAccounts(LinkedHashMap statusResponse) throws Exception {
-
-        ObjectMapper mapper = new ObjectMapper();
-
+    public void setAccounts(LinkedHashMap statusResponse) {
         this.currentStatus = (String) statusResponse.get("current");
         this.nextStatus = (String) statusResponse.get("next");
         this.changeAt = LocalTime.parse((String) statusResponse.get("change_at"));
-
-
     }
 
     public String getError() {

@@ -33,9 +33,9 @@ class StreamDispatcher implements Runnable {
 
     private final List<StreamListener> listeners;
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-    private AtomicBoolean active;
+    private final AtomicBoolean active;
 
     private final Queue<String> queue;
 

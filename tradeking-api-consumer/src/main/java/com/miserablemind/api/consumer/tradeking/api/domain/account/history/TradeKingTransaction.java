@@ -94,7 +94,7 @@ public class TradeKingTransaction extends TradeKingObject {
      */
     public enum Type {
         ALL("All"), TRADE("Trade"), DIVIDEND("Dividend"), BOOK_KEEPING("Bookkeeping"), INTEREST("Interest");
-        private String value;
+        private final String value;
 
         Type(String value) {
             this.value = value;
@@ -111,7 +111,7 @@ public class TradeKingTransaction extends TradeKingObject {
      */
     public enum Range {
         ALL("all"), TODAY("today"), CURRENT_WEEK("current_week"), CURRENT_MONTH("current_month"), LAST_MONTH("last_month");
-        private String value;
+        private final String value;
 
         Range(String value) {
             this.value = value;

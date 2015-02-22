@@ -8,11 +8,11 @@ import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
 
 import java.io.IOException;
 
-public class AccountHoldingsEntryDeserializer extends JsonDeserializer<AccountHoldingEntry[]> {
+class AccountHoldingsEntryDeserializer extends JsonDeserializer<AccountHoldingEntry[]> {
 
 
     @Override
-    public AccountHoldingEntry[] deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public AccountHoldingEntry[] deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
         AccountHoldingEntry[] entriesList;
 

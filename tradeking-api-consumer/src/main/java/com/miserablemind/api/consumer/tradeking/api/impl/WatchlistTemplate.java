@@ -52,7 +52,7 @@ public class WatchlistTemplate extends BaseTemplate implements WatchlistOperatio
         Assert.notNull(tickers);
 
         URI url = this.buildUri(URL_WATCHLIST_LIST);
-        MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
+        MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<>();
         requestObject.add("id", watchlistName);
         requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
 
@@ -73,7 +73,7 @@ public class WatchlistTemplate extends BaseTemplate implements WatchlistOperatio
     @Override
     public String[] addSymbolsToList(String watchlistName, String[] tickers) {
         URI url = this.buildUri(String.format(URL_WATCHLIST_LIST_EDIT, watchlistName));
-        MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<String, Object>();
+        MultiValueMap<String, Object> requestObject = new LinkedMultiValueMap<>();
         requestObject.add("symbols", this.buildCommaSeparatedParameterValue(tickers));
 
         ResponseEntity<TKAllWatchListsResponse> response = this.getRestTemplate().postForEntity(url, requestObject, TKAllWatchListsResponse.class);

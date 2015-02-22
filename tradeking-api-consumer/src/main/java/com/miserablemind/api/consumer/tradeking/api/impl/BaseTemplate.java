@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BaseTemplate {
+class BaseTemplate {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     BaseTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -27,16 +27,16 @@ public class BaseTemplate {
 
     public static final String URL_BASE = "https://api.tradeking.com/v1/";
 
-    protected RestTemplate getRestTemplate() {
+    RestTemplate getRestTemplate() {
         return this.restTemplate;
     }
 
-    protected String buildCommaSeparatedParameterValue(String[] parameterValueList) {
+    String buildCommaSeparatedParameterValue(String[] parameterValueList) {
 
         if (null == parameterValueList) return "";
 
         StringBuilder builder = new StringBuilder();
-        List<String> parameters = new ArrayList<String>(Arrays.asList(parameterValueList));
+        List<String> parameters = new ArrayList<>(Arrays.asList(parameterValueList));
         builder.append(parameters.remove(0));
         for (String parameter : parameters) {
             builder.append(",");
@@ -45,21 +45,21 @@ public class BaseTemplate {
         return builder.toString();
     }
 
-    protected URI buildUri(String path) {
+    URI buildUri(String path) {
         return this.buildUri(path, EMPTY_PARAMETERS);
     }
 
-    protected URI buildUri(String path, String parameterName, String parameterValue) {
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+    URI buildUri(String path, String parameterName, String parameterValue) {
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.set(parameterName, parameterValue);
         return this.buildUri(path, parameters);
     }
 
-    protected URI buildUri(String path, MultiValueMap<String, String> parameters) {
+    URI buildUri(String path, MultiValueMap<String, String> parameters) {
         return URIBuilder.fromUri(URL_BASE + path).queryParams(parameters).build();
     }
 
-    private static final LinkedMultiValueMap<String, String> EMPTY_PARAMETERS = new LinkedMultiValueMap<String, String>();
+    private static final LinkedMultiValueMap<String, String> EMPTY_PARAMETERS = new LinkedMultiValueMap<>();
 
 
 }

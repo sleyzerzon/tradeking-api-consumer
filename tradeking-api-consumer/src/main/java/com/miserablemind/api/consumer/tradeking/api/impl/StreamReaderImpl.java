@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 class StreamReaderImpl implements StreamReader {
 
-    private AtomicBoolean open;
+    private final AtomicBoolean open;
 
     private final InputStream inputStream;
 

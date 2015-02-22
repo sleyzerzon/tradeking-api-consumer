@@ -68,7 +68,7 @@ public class AccountTemplate extends BaseTemplate implements AccountOperations {
 
     @Override
     public TradeKingTransaction[] getTransactionsHistory(String accountId, TradeKingTransaction.Range range, TradeKingTransaction.Type type) {
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
         parameters.set("range", range.toString());
         parameters.set("transactions", type.toString());
 

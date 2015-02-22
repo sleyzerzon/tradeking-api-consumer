@@ -11,11 +11,11 @@ import java.io.IOException;
 /**
  * For dates like 20151123
  */
-public class SquishedDateDeserializer extends JsonDeserializer<LocalDate> {
+class SquishedDateDeserializer extends JsonDeserializer<LocalDate> {
 
 
     @Override
-    public LocalDate deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public LocalDate deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
         String textDate = jsonParser.getText();
         return new LocalDate(

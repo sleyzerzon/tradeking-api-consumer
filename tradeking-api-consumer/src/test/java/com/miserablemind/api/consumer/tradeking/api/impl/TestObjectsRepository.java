@@ -26,12 +26,12 @@ public class TestObjectsRepository {
     /*
       Account Template Data
      */
-    String accountId = "TestAccount1";
-    Cash cash = new Cash(0.0, 9.83, 10.98, 0.0, 0.0, 10.98, 0.0, 0.0, 0.0);
-    BuyingPower buyingPower = new BuyingPower(26.63, 100, 26.63, 26.63, 53.26, 53.26);
-    Securities securities = new Securities(0.0, 26.48, 0.0, 0.0, 0.0, 26.48, 26.48);
+    final String accountId = "TestAccount1";
+    final Cash cash = new Cash(0.0, 9.83, 10.98, 0.0, 0.0, 10.98, 0.0, 0.0, 0.0);
+    final BuyingPower buyingPower = new BuyingPower(26.63, 100, 26.63, 26.63, 53.26, 53.26);
+    final Securities securities = new Securities(0.0, 26.48, 0.0, 0.0, 0.0, 26.48, 26.48);
 
-    AccountHoldingEntry accountHoldingEntry1 = new AccountHoldingEntry(AccountHoldingEntry.HoldingType.MARGIN_LONG, 906.87,
+    private final AccountHoldingEntry accountHoldingEntry1 = new AccountHoldingEntry(AccountHoldingEntry.HoldingType.MARGIN_LONG, 906.87,
             new HoldingDisplayData("Margin", "Stock", "$.00", "$906.87", "SOMETHING 1 CO", "$28.34", "$113,3.00", "-$9.00", 40, "SMTH1"),
             2267.129999999999,
             new FinancialInstrument("300000000", "SOMETHING 1 CO", 0, "CS", "SMTH1"),
@@ -39,7 +39,7 @@ public class TestObjectsRepository {
             new HoldingsQuote(0, 28.34), 0
     );
 
-    AccountHoldingEntry accountHoldingEntry2 = new AccountHoldingEntry(AccountHoldingEntry.HoldingType.MARGIN_LONG, 580.71,
+    private final AccountHoldingEntry accountHoldingEntry2 = new AccountHoldingEntry(AccountHoldingEntry.HoldingType.MARGIN_LONG, 580.71,
             new HoldingDisplayData("Margin", "Stock", "$.00", "$580.71", "SOMETHING2 CO", "$348.94", "$593.98", "$124.61", 2, "SMTH2"),
             12.26999999999953,
             new FinancialInstrument("6000L0000", "SOMETHING2 CO", 0, "CS", "SMTH2"),

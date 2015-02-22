@@ -21,9 +21,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @JsonRootName("response")
-abstract public class TKResponse {
+abstract class TKResponse {
 
-    private Map<String, Object> extraData = new HashMap<String, Object>();
+    private final Map<String, Object> extraData = new HashMap<>();
 
     /**
      * All the extra information that is not captured by instance variables of TKResponse children
@@ -37,6 +37,15 @@ abstract public class TKResponse {
     }
 
     /**
+     * Gets all the extra data that was not mapped to object's instance variables
+     *
+     * @return Map of the key values
+     */
+    public Map<String, Object> getExtraData() {
+        return this.extraData;
+    }
+
+    /**
      * For arrays of objects TK returns an array when multiple, but if only one object found, it is not wrapped in array.
      * This method deserializes and wraps that object to array
      *
@@ -46,7 +55,7 @@ abstract public class TKResponse {
      * @return Array of objects. The user of this class will cast this to accommodate specif needs
      * @throws Exception
      */
-    protected Object[] extractArray(Class<? extends Object[]> className, LinkedHashMap response, String nestedKey) throws Exception {
+    Object[] extractArray(Class<? extends Object[]> className, LinkedHashMap response, String nestedKey) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new TradeKingModule());

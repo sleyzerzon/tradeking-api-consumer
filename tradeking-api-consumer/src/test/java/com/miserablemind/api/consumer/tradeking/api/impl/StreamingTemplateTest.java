@@ -16,8 +16,8 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 public class StreamingTemplateTest extends BaseTemplateTest {
 
-    Boolean quoteAssertionPassed = null;
-    Boolean tradeAssertionPassed = null;
+    private Boolean quoteAssertionPassed = null;
+    private Boolean tradeAssertionPassed = null;
 
     @Test
     public void quotesAndTradesStream_testQuote() throws InterruptedException {

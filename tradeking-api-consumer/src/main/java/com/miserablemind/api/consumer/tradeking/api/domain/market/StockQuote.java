@@ -330,7 +330,7 @@ public class StockQuote extends Quote {
      */
     public enum DividendFrequency {
         ANNUAL("A"), SEMI_ANNUAL("S"), QUARTERLY("Q"), MONTHLY("M"), NOT_SET("N");
-        private String value;
+        private final String value;
 
         DividendFrequency(String value) {
             this.value = value;

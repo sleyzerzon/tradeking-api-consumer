@@ -29,12 +29,12 @@ public class TKWatchlistItemsResponse extends TKResponse {
 
     @JsonSetter("watchlists")
     @SuppressWarnings("unchecked")
-    public void setWatchLists(LinkedHashMap<String, LinkedHashMap> watchListsResponse) throws Exception {
+    public void setWatchLists(LinkedHashMap<String, LinkedHashMap> watchListsResponse)  {
 
         //manually deserialize as we need to un-nest some unnecessary stuff
         if (null == watchListsResponse.get("watchlist")) return;
 
-        ArrayList<LinkedHashMap> items = new ArrayList<LinkedHashMap>();
+        ArrayList<LinkedHashMap> items = new ArrayList<>();
 
         Object itemsContainer = watchListsResponse.get("watchlist").get("watchlistitem");
 
@@ -46,7 +46,7 @@ public class TKWatchlistItemsResponse extends TKResponse {
             items.add((LinkedHashMap) watchListsResponse.get("watchlist").get("watchlistitem"));
         }
 
-        ArrayList<WatchlistItem> resultList = new ArrayList<WatchlistItem>();
+        ArrayList<WatchlistItem> resultList = new ArrayList<>();
 
         for (Object item : items) {
 

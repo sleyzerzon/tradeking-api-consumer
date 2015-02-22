@@ -262,7 +262,7 @@ public class MarketTemplateTest extends BaseTemplateTest {
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
 
-        StockQuote[] quotes = tradeKing.getMarketOperations().getQuoteForStocks(new String[]{"CORP1", "CORP2"});
+        tradeKing.getMarketOperations().getQuoteForStocks(new String[]{"CORP1", "CORP2"});
         mockServer.verify();
     }
 
@@ -300,7 +300,7 @@ public class MarketTemplateTest extends BaseTemplateTest {
         mockServer.expect(requestTo(BaseTemplate.URL_BASE + "market/ext/quotes.json?symbols=CMPN1150320C00100000"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("error_response"), MediaType.APPLICATION_JSON));
-        OptionQuote optionQuote = tradeKing.getMarketOperations()
+        tradeKing.getMarketOperations()
                 .getQuoteForOption("CMPN1", new LocalDate(2015, 3, 20), OptionQuote.OptionType.CALL, 100);
         mockServer.verify();
     }

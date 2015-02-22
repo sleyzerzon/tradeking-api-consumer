@@ -102,9 +102,9 @@ public class MarketStatus extends TradeKingObject {
 
         PRE_OPEN("pre"), OPEN("open"), AFTER_MARKET("after"), CLOSED("closed");
 
-        private String name;
+        private final String name;
 
-        private static final Map<String, MarketCondition> map = new HashMap<String, MarketCondition>();
+        private static final Map<String, MarketCondition> map = new HashMap<>();
 
         static {
             for (MarketCondition type : MarketCondition.values()) {

@@ -19,7 +19,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.text.SimpleDateFormat;
 
 public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
@@ -149,7 +148,7 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
     }
 
 
-    protected NewsHeadline[] getNewsList(String[] tickers, Integer limit, String[] keywords, LocalDate startDate, LocalDate endDate) {
+    NewsHeadline[] getNewsList(String[] tickers, Integer limit, String[] keywords, LocalDate startDate, LocalDate endDate) {
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 
@@ -159,16 +158,16 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
         if (null != keywords) parameters.set("keywords", this.buildCommaSeparatedParameterValue(keywords));
 
         //dates do not work. TK does not provide documentation for format
-        if (null != startDate) {
-            /*parameters.set("startdate", dateFormat.format(startDate.getTime()));
+      /*  if (null != startDate) {
+            parameters.set("startdate", dateFormat.format(startDate.getTime()));
 
             if (null != endDate) {
                 parameters.set("enddate", dateFormat.format(endDate.getTime()));
             } else {
                 parameters.set("enddate", dateFormat.format(new Date()));
-            }*/
+            }
 
-        }
+        }*/
 
         URI url = this.buildUri(URL_SEARCH_NEWS, parameters);
         ResponseEntity<TKNewsArticlesSearchResponse> response = this.getRestTemplate().getForEntity(url, TKNewsArticlesSearchResponse.class);
@@ -233,10 +232,8 @@ public class MarketTemplate extends BaseTemplate implements MarketOperations {
 
 
     // there is no universal usage of this one, see overloaded methods
-    protected TimeSalesQuote[] getDataPoints(String ticker, TimeSalesInterval interval, Integer countPerPage,
-                                             Integer offset, LocalDate startDate, LocalDate endDate) {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    TimeSalesQuote[] getDataPoints(String ticker, TimeSalesInterval interval, Integer countPerPage,
+                                   Integer offset, LocalDate startDate, LocalDate endDate) {
 
         MultiValueMap<String, String> parameters = new LinkedMultiValueMap<>();
 
