@@ -49,10 +49,9 @@ public class TKMarketStatusResponse extends TKResponse {
      * @param dateResponse a String date from Json
      */
     @JsonSetter("date")
-    public void setDate(String dateResponse) throws Exception {
+    public void setDate(String dateResponse) {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
         this.date = LocalDateTime.parse(dateResponse, formatter);
-
     }
 
     /**

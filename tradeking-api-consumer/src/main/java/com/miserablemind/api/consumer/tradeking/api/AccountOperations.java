@@ -43,6 +43,8 @@ public interface AccountOperations {
      * This call will return account activity for the accountId. This call supports optional date range or transaction type filters.
      *
      * @param accountId id of the account the history is retrieved for
+     * @param range     a range of time to get history for
+     * @param type      kind of transaction
      * @return a list of transaction objects
      */
     public TradeKingTransaction[] getTransactionsHistory(String accountId, TradeKingTransaction.Range range, TradeKingTransaction.Type type);

@@ -34,7 +34,7 @@ public class BuyingPower extends TradeKingObject {
     }
 
     /**
-     * Cash available for withdrawal (cash & margin accounts only, n/a for retirement accounts)
+     * Cash available for withdrawal (cash and margin accounts only, n/a for retirement accounts)
      *
      * @return dollar figure of cash available for withdrawal
      */

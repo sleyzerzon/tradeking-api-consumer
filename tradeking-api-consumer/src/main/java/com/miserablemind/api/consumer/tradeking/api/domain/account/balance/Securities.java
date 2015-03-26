@@ -90,7 +90,7 @@ public class Securities extends TradeKingObject {
     }
 
     /**
-     * Total market value (stock & option)
+     * Total market value (stock and option)
      *
      * @return dollar figure
      */

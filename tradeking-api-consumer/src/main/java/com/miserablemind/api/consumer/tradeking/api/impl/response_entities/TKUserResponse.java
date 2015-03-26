@@ -60,6 +60,9 @@ public class TKUserResponse extends TKResponse {
     /**
      * For User Profile TradeKing returns an array instead of some sensible normal object
      * The getter methods get it from the List that is turned into hash map for faster access.
+     *
+     * @param userData data fed in my deserializer
+     * @throws Exception if cannot deserialize data
      */
     @SuppressWarnings("unchecked")
     @JsonSetter("userdata")
