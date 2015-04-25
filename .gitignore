@@ -2,7 +2,7 @@
 *.iml
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-
+build.sh
 # Package Files #
 *.jar
 *.war

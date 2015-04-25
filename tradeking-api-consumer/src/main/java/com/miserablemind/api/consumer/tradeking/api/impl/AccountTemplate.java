@@ -11,10 +11,10 @@ import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Accou
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.holdings.AccountHoldings;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.AccountsSummary;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKAccountBalanceResponse;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKAccountHoldingsResponse;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKAllAccountsResponse;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKHistoryResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKAccountBalanceResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKAccountHoldingsResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKAllAccountsResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKHistoryResponse;
 import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ApiException;
@@ -52,7 +52,7 @@ public class AccountTemplate extends BaseTemplate implements AccountOperations {
     public AccountBalance getAccountBalance(String accountId) {
         URI url = this.buildUri(String.format(URL_ACCOUNT_BALANCES, accountId));
         ResponseEntity<TKAccountBalanceResponse> response = this.getRestTemplate().getForEntity(url, TKAccountBalanceResponse.class);
-        if (!response.getBody().getError().equals("Success"))
+        if (!"Success".equals(response.getBody().getError()))
             throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
         return response.getBody().getAccountBalance();
     }
@@ -61,7 +61,7 @@ public class AccountTemplate extends BaseTemplate implements AccountOperations {
     public AccountHoldings getAccountHoldings(String accountId) {
         URI url = this.buildUri(String.format(URL_ACCOUNT_HOLDINGS, accountId));
         ResponseEntity<TKAccountHoldingsResponse> response = this.getRestTemplate().getForEntity(url, TKAccountHoldingsResponse.class);
-        if (!response.getBody().getError().equals("Success"))
+        if (!"Success".equals(response.getBody().getError()))
             throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
         return response.getBody().getAccountHoldings();
     }

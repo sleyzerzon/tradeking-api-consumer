@@ -5,7 +5,7 @@
  */
 
 
-package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
+package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -17,8 +17,11 @@ import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TKUserResponse extends TKResponse {
+
+    public static final String FIELD_VALUE = "value";
 
     enum UserProfileKeys {
 
@@ -66,68 +69,68 @@ public class TKUserResponse extends TKResponse {
      */
     @SuppressWarnings("unchecked")
     @JsonSetter("userdata")
-    public void deserializeUserData(LinkedHashMap<String, Object> userData) throws Exception {
+    public void deserializeUserData(Map<String, Object> userData) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new TradeKingModule());
 
-        boolean isDisabled = userData.get("disabled").equals("true");
-        boolean resetPassword = userData.get("resetpassword").equals("true");
-        boolean resetTradingPassword = userData.get("resettradingpassword").equals("true");
+        boolean isDisabled = "true".equals(userData.get("disabled"));
+        boolean resetPassword = "true".equals(userData.get("resetpassword"));
+        boolean resetTradingPassword = "true".equals(userData.get("resettradingpassword"));
 
         UserAccount[] accounts = (UserAccount[]) this.extractArray(UserAccount[].class, userData, "account");
 
         //User Profile Object
         UserProfile userProfile = new UserProfile();
 
-        LinkedHashMap<String, ArrayList> data = (LinkedHashMap<String, ArrayList>) userData.get("userprofile");
+        Map<String, ArrayList> data = (LinkedHashMap<String, ArrayList>) userData.get("userprofile");
         ArrayList<LinkedHashMap<String, String>> entry = (ArrayList<LinkedHashMap<String, String>>) data.get("entry");
 
-        for (LinkedHashMap<String, String> entryLine : entry) {
+        for (Map<String, String> entryLine : entry) {
             UserProfileKeys key = UserProfileKeys.fromString(entryLine.get("name"));
 
             //catch all
             if (null == key) {
-                userProfile.add(entryLine.get("name"), entryLine.get("value"));
+                userProfile.add(entryLine.get("name"), entryLine.get(FIELD_VALUE));
                 continue;
             }
 
             switch (key) {
                 case AGREEMENT_FDIC:
-                    userProfile.setFDICAgreement(entryLine.get("value"));
+                    userProfile.setFDICAgreement(entryLine.get(FIELD_VALUE));
                     break;
                 case DASHBOARD_COLLAPSED:
-                    userProfile.setAccountSummaryDashboardCollapsed(entryLine.get("value"));
+                    userProfile.setAccountSummaryDashboardCollapsed(entryLine.get(FIELD_VALUE));
                     break;
                 case EMAIL_ADDRESS:
-                    userProfile.setEmailAddress(entryLine.get("value"));
+                    userProfile.setEmailAddress(entryLine.get(FIELD_VALUE));
                     break;
                 case UUID:
-                    userProfile.setUUID(entryLine.get("value"));
+                    userProfile.setUUID(entryLine.get(FIELD_VALUE));
                     break;
                 case FDIC_PAPER:
-                    userProfile.setFDICPaper(entryLine.get("value"));
+                    userProfile.setFDICPaper(entryLine.get(FIELD_VALUE));
                     break;
                 case FIRST_NAME:
-                    userProfile.setFirstName(entryLine.get("value"));
+                    userProfile.setFirstName(entryLine.get(FIELD_VALUE));
                     break;
                 case GAINS_KEEPER:
-                    userProfile.setGainsKeeper(entryLine.get("value").equals("Y"));
+                    userProfile.setGainsKeeper("Y".equals(entryLine.get(FIELD_VALUE)));
                     break;
                 case LAST_NAME:
-                    userProfile.setLasName(entryLine.get("value"));
+                    userProfile.setLasName(entryLine.get(FIELD_VALUE));
                     break;
                 case NEW_MESSAGE:
-                    userProfile.setHasMewMessage(entryLine.get("value").equals("Y"));
+                    userProfile.setHasMewMessage("Y".equals(entryLine.get(FIELD_VALUE)));
                     break;
                 case REAL_TIME_STOCK_QUOTE:
-                    userProfile.setRealTimeStockQuote(entryLine.get("value").equals("Y"));
+                    userProfile.setRealTimeStockQuote("Y".equals(entryLine.get(FIELD_VALUE)));
                     break;
                 case USE_TRADING_PASSWORD:
-                    userProfile.setTradingPasswordUsed(entryLine.get("value").equals("Y"));
+                    userProfile.setTradingPasswordUsed("Y".equals(entryLine.get(FIELD_VALUE)));
                     break;
                 default:
-                    userProfile.add(entryLine.get("name"), entryLine.get("value"));
+                    userProfile.add(entryLine.get("name"), entryLine.get(FIELD_VALUE));
             }
         }
 

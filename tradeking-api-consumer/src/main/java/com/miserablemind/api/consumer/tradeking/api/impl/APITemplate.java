@@ -8,8 +8,8 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 import com.miserablemind.api.consumer.tradeking.api.APIOperations;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.TradeKingUser;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKApiVersionResponse;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKUserResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKApiVersionResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKUserResponse;
 import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ApiException;
@@ -42,7 +42,7 @@ public class APITemplate extends BaseTemplate implements APIOperations {
     public TradeKingUser getCurrentUser() {
         URI url = this.buildUri(URL_PROFILE);
         ResponseEntity<TKUserResponse> response = this.getRestTemplate().getForEntity(url, TKUserResponse.class);
-        if (!response.getBody().getError().equals("Success"))
+        if (response.getBody().getError() == null || !response.getBody().getError().equals("Success"))
             throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
         return response.getBody().getUserData();

@@ -5,7 +5,7 @@
  */
 
 
-package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
+package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;

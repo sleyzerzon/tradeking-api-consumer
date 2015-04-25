@@ -8,8 +8,8 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 import com.miserablemind.api.consumer.tradeking.api.WatchlistOperations;
 import com.miserablemind.api.consumer.tradeking.api.domain.watchlist.WatchlistItem;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKAllWatchListsResponse;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.TKWatchlistItemsResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKAllWatchListsResponse;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.TKWatchlistItemsResponse;
 import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.ApiException;

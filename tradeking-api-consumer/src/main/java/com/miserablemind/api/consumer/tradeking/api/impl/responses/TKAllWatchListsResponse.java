@@ -3,7 +3,7 @@
  * http://www.miserablemind.com | Twitter: @lrimkus
  * The MIT License (MIT)
  */
-package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
+package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 

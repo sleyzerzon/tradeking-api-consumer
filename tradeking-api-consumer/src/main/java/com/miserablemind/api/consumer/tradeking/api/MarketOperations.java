@@ -24,7 +24,7 @@ public interface MarketOperations {
      * @param ticker String symbol of the quote
      * @return StockQuote object
      */
-    public StockQuote getQuoteForStock(String ticker);
+    StockQuote getQuoteForStock(String ticker);
 
     /**
      * This call will return quotes for  multiple  symbols.
@@ -33,7 +33,7 @@ public interface MarketOperations {
      * @return list of stock quotes
      */
 
-    public StockQuote[] getQuoteForStocks(String[] tickers);
+    StockQuote[] getQuoteForStocks(String[] tickers);
 
     /**
      * Gets Option quote for the stock with a provided expiration date and strike price
@@ -45,7 +45,7 @@ public interface MarketOperations {
      * @return Option Quote if found
      * @throws OptionQuoteNotFoundException thrown if no option with the parameters provided was found
      */
-    public OptionQuote getQuoteForOption(String ticker, LocalDate expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException;
+    OptionQuote getQuoteForOption(String ticker, LocalDate expirationDate, OptionQuote.OptionType type, double strikePrice) throws OptionQuoteNotFoundException;
 
     /**
      * Search for options by parameters given
@@ -58,7 +58,7 @@ public interface MarketOperations {
      * @param endDate        Date range end or null if any
      * @return a list of option quotes
      */
-    public OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, LocalDate startDate, LocalDate endDate);
+    OptionQuote[] searchOptions(String ticker, Double minStrikePrice, Double maxStrikePrice, OptionQuote.OptionType type, LocalDate startDate, LocalDate endDate);
 
     /**
      * This call will return the full list of available option strikes for a given symbol
@@ -66,7 +66,7 @@ public interface MarketOperations {
      * @param ticker stock symbol
      * @return returns a list of strike prices or empty list if none found
      */
-    public Double[] getStrikePrices(String ticker);
+    Double[] getStrikePrices(String ticker);
 
     /**
      * This call will return the full list of available option expiration dates for a given symbol.
@@ -74,7 +74,7 @@ public interface MarketOperations {
      * @param ticker stock symbol
      * @return a list of expiration dates or empty list if none found
      */
-    public LocalDate[] getOptionExpirationDates(String ticker);
+    LocalDate[] getOptionExpirationDates(String ticker);
 
     /**
      * This call will return a listing of the newest news headlines based on the current symbol search.
@@ -83,7 +83,7 @@ public interface MarketOperations {
      * @param limit  limit how many to return
      * @return a list of news article objects, it will not have the story in it. For story see MarketOperations#getNewsById
      */
-    public NewsHeadline[] getNewsList(String ticker, int limit);
+    NewsHeadline[] getNewsList(String ticker, int limit);
 
     /**
      * This call will return a listing of the newest news headlines based on the current keyword search.
@@ -92,7 +92,7 @@ public interface MarketOperations {
      * @param limit    limit how many to return
      * @return a list of news article objects, it will not have the story in it. For story see MarketOperations#getNewsById
      */
-    public NewsHeadline[] getNewsList(String[] keywords, int limit);
+    NewsHeadline[] getNewsList(String[] keywords, int limit);
 
     /**
      * Gets a news article by newsId with a full story in it
@@ -100,7 +100,7 @@ public interface MarketOperations {
      * @param newsId id of the news article retrieved by news search methods above
      * @return news article object with full story populated in them
      */
-    public NewsStory getNewsById(String newsId);
+    NewsStory getNewsById(String newsId);
 
     /**
      * This call will return the current state of the market, the time of the next state change (if the market is open),
@@ -108,7 +108,7 @@ public interface MarketOperations {
      *
      * @return Market Status object
      */
-    public MarketStatus getMarketStatus();
+    MarketStatus getMarketStatus();
 
     /**
      * This call will return a ranked list based on the list type specified.
@@ -116,7 +116,7 @@ public interface MarketOperations {
      * @param listType List type
      * @return list of top stocks for the type
      */
-    public TopListEntry[] getTopList(TopListType listType);
+    TopListEntry[] getTopList(TopListType listType);
 
     /**
      * This call will return time and sales quote data based on a symbol passed as a  parameter. It assumes the interval
@@ -127,7 +127,7 @@ public interface MarketOperations {
      * @param perPage    entries per page
      * @return data points for the stock
      */
-    public TimeSalesQuote[] getDataPoints(String ticker, int pageNumber, int perPage);
+    TimeSalesQuote[] getDataPoints(String ticker, int pageNumber, int perPage);
 
     /**
      * This call will return time and sales quote data based on a symbol passed as a  parameter.
@@ -139,6 +139,6 @@ public interface MarketOperations {
      * @param interval  time interval between 2 data points
      * @return data points for the stock
      */
-    public TimeSalesQuote[] getDataPoints(String ticker, LocalDate startDate, LocalDate endDate, TimeSalesInterval interval);
+    TimeSalesQuote[] getDataPoints(String ticker, LocalDate startDate, LocalDate endDate, TimeSalesInterval interval);
 
 }

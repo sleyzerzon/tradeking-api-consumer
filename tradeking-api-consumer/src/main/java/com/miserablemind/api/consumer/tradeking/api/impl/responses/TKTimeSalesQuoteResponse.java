@@ -5,29 +5,31 @@
  */
 
 
-package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
+package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import com.miserablemind.api.consumer.tradeking.api.domain.market.StockQuote;
+import com.miserablemind.api.consumer.tradeking.api.domain.market.TimeSalesQuote;
 
 import java.util.LinkedHashMap;
 
-public class TKStockQuoteResponse extends TKResponse {
+public class TKTimeSalesQuoteResponse extends TKResponse {
 
     private String error;
 
-    private StockQuote[] quotes;
+    private TimeSalesQuote[] quotes;
 
     @JsonSetter("quotes")
     public void setQuote(LinkedHashMap quotesResponse) throws Exception {
-        this.quotes = (StockQuote[]) this.extractArray(StockQuote[].class, quotesResponse, "quote");
+        this.quotes = (TimeSalesQuote[]) this.extractArray(TimeSalesQuote[].class, quotesResponse, "quote");
     }
 
     public String getError() {
         return error;
     }
 
-    public StockQuote[] getQuotes() {
+    public TimeSalesQuote[] getQuotes() {
         return quotes;
     }
+
+
 }

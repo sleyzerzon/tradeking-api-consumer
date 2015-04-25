@@ -18,7 +18,7 @@ public interface WatchlistOperations {
      *
      * @return a list of Strings that represent watchlist names
      */
-    public String[] getAllLists();
+    String[] getAllLists();
 
     /**
      * This will create a watchlist with the specified id (name) for the authenticated user.
@@ -27,14 +27,14 @@ public interface WatchlistOperations {
      * @param tickers       symbols of the stock to add to watchlist. At least one ticker must be provided.
      * @return new list of watchlist names, including the new one if it was added successfully
      */
-    public String[] addList(String watchlistName, String[] tickers);
+    String[] addList(String watchlistName, String[] tickers);
 
     /**
      * This will delete the watchlist with the name provided
      *
      * @param watchlistName name of the watchlist to delete
      */
-    public void deleteListById(String watchlistName);
+    void deleteListById(String watchlistName);
 
     /**
      * This will add the symbols in the form parameters to the watchlist with the name provided.
@@ -43,7 +43,7 @@ public interface WatchlistOperations {
      * @param tickers       a list of tickers to add
      * @return list of names of the Watch Lists
      */
-    public String[] addSymbolsToList(String watchlistName, String[] tickers);
+    String[] addSymbolsToList(String watchlistName, String[] tickers);
 
     /**
      * This will delete the symbols provided for the watchlist
@@ -51,7 +51,7 @@ public interface WatchlistOperations {
      * @param watchlistName the name of the watchlist to remove tickers from
      * @param tickers       ticker to remove from the watchlist
      */
-    public void deleteSymbolFromList(String watchlistName, String[] tickers);
+    void deleteSymbolFromList(String watchlistName, String[] tickers);
 
     /**
      * This will get Watch List items
@@ -59,5 +59,5 @@ public interface WatchlistOperations {
      * @param watchlistName the name of watchlist to get items for
      * @return a list of watchlist items
      */
-    public WatchlistItem[] getItems(String watchlistName);
+    WatchlistItem[] getItems(String watchlistName);
 }

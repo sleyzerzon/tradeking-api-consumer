@@ -19,13 +19,13 @@ public interface APIOperations {
      *
      * @return a String with api version
      */
-    public String getAPIVersion();
+    String getAPIVersion();
 
     /**
      * Gets the connected user that is authorized to use the api
      *
      * @return User object
      */
-    public TradeKingUser getCurrentUser();
+    TradeKingUser getCurrentUser();
 
 }

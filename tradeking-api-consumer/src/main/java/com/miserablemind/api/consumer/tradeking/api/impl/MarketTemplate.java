@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 import com.miserablemind.api.consumer.tradeking.api.MarketOperations;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.*;
-import com.miserablemind.api.consumer.tradeking.api.impl.response_entities.*;
+import com.miserablemind.api.consumer.tradeking.api.impl.responses.*;
 import com.miserablemind.api.consumer.tradeking.connect.TradeKingServiceProvider;
 import org.joda.time.LocalDate;
 import org.springframework.http.ResponseEntity;

@@ -5,7 +5,7 @@
  */
 
 
-package com.miserablemind.api.consumer.tradeking.api.impl.response_entities;
+package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -17,7 +17,6 @@ import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @JsonRootName("response")
@@ -55,7 +54,7 @@ abstract class TKResponse {
      * @return Array of objects. The user of this class will cast this to accommodate specif needs
      * @throws Exception
      */
-    Object[] extractArray(Class<? extends Object[]> className, LinkedHashMap response, String nestedKey) throws Exception {
+    Object[] extractArray(Class<? extends Object[]> className, Map response, String nestedKey) throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new TradeKingModule());

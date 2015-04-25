@@ -9,7 +9,6 @@ package com.miserablemind.api.consumer.tradeking.connect;
 
 import com.miserablemind.api.consumer.tradeking.api.TradeKingOperations;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserProfile;
-import org.springframework.social.ApiException;
 import org.springframework.social.connect.ApiAdapter;
 import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfileBuilder;
@@ -17,13 +16,7 @@ import org.springframework.social.connect.UserProfileBuilder;
 class TradeKingApiAdapter implements ApiAdapter<TradeKingOperations> {
     @Override
     public boolean test(TradeKingOperations api) {
-        try {
-            //let's not test to save some time
-            // api.getAPIOperations().getCurrentUser();
-            return true;
-        } catch (ApiException e) {
-            return false;
-        }
+        return true;
     }
 
     @Override
