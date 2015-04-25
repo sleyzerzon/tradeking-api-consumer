@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.BuyingPower;
-import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Cash;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.CashData;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Securities;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionDetails;
@@ -52,7 +52,7 @@ public class TradeKingModule extends SimpleModule {
         context.setMixInAnnotations(TransactionDetails.class, TransactionDetailsMixIn.class);
         context.setMixInAnnotations(TransactionSecurity.class, TransactionSecurityMixIn.class);
         context.setMixInAnnotations(UserAccount.class, UserAccountMixIn.class);
-        context.setMixInAnnotations(Cash.class, CashMixIn.class);
+        context.setMixInAnnotations(CashData.class, CashMixIn.class);
         context.setMixInAnnotations(NewsHeadline.class, NewsHeadlineMixIn.class);
         context.setMixInAnnotations(NewsStory.class, NewsStoryMixIn.class);
         context.setMixInAnnotations(TopListEntry.class, TopListEntryMixIn.class);

@@ -9,7 +9,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.BuyingPower;
-import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Cash;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.CashData;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Securities;
 
 public class AccountBalanceMixIn extends TradeKingKObjectMixIn {
@@ -36,7 +36,7 @@ public class AccountBalanceMixIn extends TradeKingKObjectMixIn {
     double maintenanceExcess;
 
     @JsonProperty("money")
-    Cash cashSummary;
+    CashData cashSummary;
 
     @JsonProperty("securities")
     Securities securitiesSummary;

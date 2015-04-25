@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,9 +53,9 @@ abstract class TKResponse {
      * @param response  response from TK
      * @param nestedKey Nesting array key
      * @return Array of objects. The user of this class will cast this to accommodate specif needs
-     * @throws Exception
+     * @throws IOException in case json processing fails
      */
-    Object[] extractArray(Class<? extends Object[]> className, Map response, String nestedKey) throws Exception {
+    Object[] extractArray(Class<? extends Object[]> className, Map response, String nestedKey) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new TradeKingModule());

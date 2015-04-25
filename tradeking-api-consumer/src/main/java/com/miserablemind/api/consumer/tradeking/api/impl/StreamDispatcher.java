@@ -61,6 +61,7 @@ class StreamDispatcher implements Runnable {
      * Keeps polling the queue. If it finds something,
      * it tries to figure out the type of the entry and dispatches it for processing
      */
+    @Override
     public void run() {
         while (active.get()) {
 

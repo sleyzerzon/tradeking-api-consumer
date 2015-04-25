@@ -21,13 +21,13 @@ public class AccountBalance extends TradeKingObject {
     private double fedCall;
     private double houseCall;
     private double maintenanceExcess;
-    private Cash cashSummary;
+    private CashData cashSummary;
     private Securities securitiesSummary;
 
     public AccountBalance() {
     }
 
-    public AccountBalance(String accountId, double accountValue, double backOfficeHouseExcess, BuyingPower buyingPowerSummary, double fedCall, double houseCall, double maintenanceExcess, Cash cashSummary, Securities securitiesSummary) {
+    public AccountBalance(String accountId, double accountValue, double backOfficeHouseExcess, BuyingPower buyingPowerSummary, double fedCall, double houseCall, double maintenanceExcess, CashData cashSummary, Securities securitiesSummary) {
         this.accountId = accountId;
         this.accountValue = accountValue;
         this.backOfficeHouseExcess = backOfficeHouseExcess;
@@ -109,7 +109,7 @@ public class AccountBalance extends TradeKingObject {
      *
      * @return Cash Object
      */
-    public Cash getCashSummary() {
+    public CashData getCashSummary() {
         return cashSummary;
     }
 

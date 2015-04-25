@@ -15,8 +15,8 @@ import com.miserablemind.api.consumer.tradeking.api.domain.member.UserAccount;
 import com.miserablemind.api.consumer.tradeking.api.domain.member.UserProfile;
 import com.miserablemind.api.consumer.tradeking.api.impl.TradeKingModule;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TKUserResponse extends TKResponse {
@@ -83,8 +83,8 @@ public class TKUserResponse extends TKResponse {
         //User Profile Object
         UserProfile userProfile = new UserProfile();
 
-        Map<String, ArrayList> data = (LinkedHashMap<String, ArrayList>) userData.get("userprofile");
-        ArrayList<LinkedHashMap<String, String>> entry = (ArrayList<LinkedHashMap<String, String>>) data.get("entry");
+        Map<String, List> data = (LinkedHashMap<String, List>) userData.get("userprofile");
+        List<Map<String, String>> entry = (List<Map<String, String>>) data.get("entry");
 
         for (Map<String, String> entryLine : entry) {
             UserProfileKeys key = UserProfileKeys.fromString(entryLine.get("name"));

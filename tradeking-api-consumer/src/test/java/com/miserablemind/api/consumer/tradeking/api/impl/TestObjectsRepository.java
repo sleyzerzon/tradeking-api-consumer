@@ -3,7 +3,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl;
 
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.AccountBalance;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.BuyingPower;
-import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Cash;
+import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.CashData;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.balance.Securities;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TradeKingTransaction;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.history.TransactionDetails;
@@ -26,8 +26,8 @@ public class TestObjectsRepository {
     /*
       Account Template Data
      */
-    final String accountId = "TestAccount1";
-    final Cash cash = new Cash(0.0, 9.83, 10.98, 0.0, 0.0, 10.98, 0.0, 0.0, 0.0);
+    final static String accountId = "TestAccount1";
+    final CashData cash = new CashData(0.0, 9.83, 10.98, 0.0, 0.0, 10.98, 0.0, 0.0, 0.0);
     final BuyingPower buyingPower = new BuyingPower(26.63, 100, 26.63, 26.63, 53.26, 53.26);
     final Securities securities = new Securities(0.0, 26.48, 0.0, 0.0, 0.0, 26.48, 26.48);
 

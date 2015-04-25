@@ -56,19 +56,20 @@ class StreamReaderImpl implements StreamReader {
             do {
                 character = this.reader.read();
 
-                if (character == -1 || character == 10) continue; //if carriage
-                if (character == 32 && quotationCount % 2 == 0) continue;   //if space not in a value
+                //if carriage or space is not in the value
+                if ((character == -1 || character == 10) || (character == 32 && quotationCount % 2 == 0)) {
+                    continue;
+                }
+
                 if (character == 34) quotationCount++;   //increment quotation
 
                 stringBuilder.append(Character.toChars(character));
 
-                if (character == 125 // current character }
+                // current character }
+                if (character == 125
                         &&
-                        (
-                                (stringBuilder.length() >= 2 && stringBuilder.charAt(stringBuilder.length() - 2) == 125)  //previous character }
-                                        ||
-                                        (stringBuilder.toString().equals("{\"status\":\"connected\"}")) // initial "connected" message
-                        )
+                        //previous character curly brace close character or initial "connected" message
+                        ((stringBuilder.length() >= 2 && stringBuilder.charAt(stringBuilder.length() - 2) == 125) || ("{\"status\":\"connected\"}".equals(stringBuilder.toString())))
                         ) {
                     break;
                 }

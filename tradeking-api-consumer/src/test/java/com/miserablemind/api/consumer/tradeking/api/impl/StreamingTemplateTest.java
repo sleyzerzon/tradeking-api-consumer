@@ -71,17 +71,17 @@ public class StreamingTemplateTest extends BaseTemplateTest {
 
             if (timesQueried > 100) {
                 assertFalse("Timeout checking the " + description + " match", true);
-                break;
+                return;
             }
 
             if (null == varToCheck) {
                 timesQueried++;
                 Thread.sleep(20);
             } else if (varToCheck) {
-                break;
+                return;
             } else {
                 assertFalse("Stream " + description + " do not match", true);
-                break;
+                return;
             }
 
         }

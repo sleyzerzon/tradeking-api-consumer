@@ -10,7 +10,7 @@ package com.miserablemind.api.consumer.tradeking.api.domain.account.history;
 import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Details about transaction including price, fees, quantities
@@ -191,7 +191,7 @@ public class TransactionDetails extends TradeKingObject {
         if (description.getClass() == String.class) {
             this.description = (String) description;
         } else {
-            ArrayList<String> descriptionList = (ArrayList<String>) description;
+            List<String> descriptionList = (List<String>) description;
             StringBuilder stringDescription = new StringBuilder();
             for (String descriptionPart : descriptionList) {
                 stringDescription.append(descriptionPart).append(" ");

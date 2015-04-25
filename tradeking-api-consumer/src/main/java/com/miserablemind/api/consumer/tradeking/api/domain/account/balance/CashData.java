@@ -12,7 +12,7 @@ import com.miserablemind.api.consumer.tradeking.api.domain.TradeKingObject;
 /**
  * Holds data about cash in the account
  */
-public class Cash extends TradeKingObject {
+public class CashData extends TradeKingObject {
 
     private double accruedInterest;
     private double cash;
@@ -24,10 +24,10 @@ public class Cash extends TradeKingObject {
     private double unsettledFunds;
     private double yield;
 
-    public Cash() {
+    public CashData() {
     }
 
-    public Cash(double accruedInterest, double cash, double marginBalance, double cashAvailable, double moneyMarketFund, double total, double unclearedDeposits, double unsettledFunds, double yield) {
+    public CashData(double accruedInterest, double cash, double marginBalance, double cashAvailable, double moneyMarketFund, double total, double unclearedDeposits, double unsettledFunds, double yield) {
         this.accruedInterest = accruedInterest;
         this.cash = cash;
         this.marginBalance = marginBalance;
@@ -123,9 +123,9 @@ public class Cash extends TradeKingObject {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Cash)) return false;
+        if (!(o instanceof CashData)) return false;
 
-        Cash cash1 = (Cash) o;
+        CashData cash1 = (CashData) o;
 
         if (Double.compare(cash1.accruedInterest, accruedInterest) != 0) return false;
         if (Double.compare(cash1.cash, cash) != 0) return false;

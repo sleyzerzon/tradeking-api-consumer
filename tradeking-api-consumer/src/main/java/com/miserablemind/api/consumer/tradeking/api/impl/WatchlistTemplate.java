@@ -98,7 +98,7 @@ public class WatchlistTemplate extends BaseTemplate implements WatchlistOperatio
 
         ResponseEntity<TKWatchlistItemsResponse> response = this.getRestTemplate().getForEntity(url, TKWatchlistItemsResponse.class);
 
-        if (response.getBody().getError() != null && !response.getBody().getError().equals("Success"))
+        if (response.getBody().getError() != null && !"Success".equals(response.getBody().getError()))
             throw new ApiException(TradeKingServiceProvider.PROVIDER_ID, response.getBody().getError());
 
         return response.getBody().getWatchListItems();
