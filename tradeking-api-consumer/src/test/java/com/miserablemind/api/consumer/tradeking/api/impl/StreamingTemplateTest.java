@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.springframework.http.HttpMethod.POST;
@@ -27,7 +28,7 @@ public class StreamingTemplateTest extends BaseTemplateTest {
                 .andExpect(content().string("symbols=CMPN1"))
                 .andRespond(withSuccess(jsonResource("market/stream_quote"), MediaType.APPLICATION_JSON));
 
-        ArrayList<StreamListener> listeners = new ArrayList<>();
+        List<StreamListener> listeners = new ArrayList<>();
         listeners.add(new TestListener());
 
         Stream stream = tradeKing.getStreamingOperations().quotesAndTradesStream(listeners, new String[]{"CMPN1"});
@@ -50,7 +51,7 @@ public class StreamingTemplateTest extends BaseTemplateTest {
                 .andExpect(content().string("symbols=CMPN1"))
                 .andRespond(withSuccess(jsonResource("market/stream_trade"), MediaType.APPLICATION_JSON));
 
-        ArrayList<StreamListener> listeners = new ArrayList<>();
+        List<StreamListener> listeners = new ArrayList<>();
         listeners.add(new TestListener());
 
         tradeKing.getStreamingOperations().quotesAndTradesStream(listeners, new String[]{"CMPN1"});

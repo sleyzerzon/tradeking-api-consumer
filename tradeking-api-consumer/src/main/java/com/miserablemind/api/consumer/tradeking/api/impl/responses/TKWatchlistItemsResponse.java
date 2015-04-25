@@ -11,6 +11,8 @@ import com.miserablemind.api.consumer.tradeking.api.domain.watchlist.WatchlistIt
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class TKWatchlistItemsResponse extends TKResponse {
@@ -29,12 +31,12 @@ public class TKWatchlistItemsResponse extends TKResponse {
 
     @JsonSetter("watchlists")
     @SuppressWarnings("unchecked")
-    public void setWatchLists(LinkedHashMap<String, LinkedHashMap> watchListsResponse)  {
+    public void setWatchLists(Map<String, LinkedHashMap> watchListsResponse) {
 
         //manually deserialize as we need to un-nest some unnecessary stuff
         if (null == watchListsResponse.get("watchlist")) return;
 
-        ArrayList<LinkedHashMap> items = new ArrayList<>();
+        List<LinkedHashMap> items = new ArrayList<>();
 
         Object itemsContainer = watchListsResponse.get("watchlist").get("watchlistitem");
 
@@ -46,14 +48,14 @@ public class TKWatchlistItemsResponse extends TKResponse {
             items.add((LinkedHashMap) watchListsResponse.get("watchlist").get("watchlistitem"));
         }
 
-        ArrayList<WatchlistItem> resultList = new ArrayList<>();
+        List<WatchlistItem> resultList = new ArrayList<>();
 
         for (Object item : items) {
 
-            LinkedHashMap itemEntries = (LinkedHashMap) item;
+            Map itemEntries = (LinkedHashMap) item;
             double costBasis = Double.parseDouble((String) itemEntries.get("costbasis"));
             double quantity = Double.parseDouble((String) itemEntries.get("qty"));
-            LinkedHashMap instrument = (LinkedHashMap) itemEntries.get("instrument");
+            Map instrument = (LinkedHashMap) itemEntries.get("instrument");
             String ticker = (String) instrument.get("sym");
 
             WatchlistItem itemObject = new WatchlistItem(costBasis, quantity, ticker);

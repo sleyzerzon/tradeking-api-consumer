@@ -11,7 +11,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import org.joda.time.LocalDate;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TKOptionExpirationsResponse extends TKResponse {
 
@@ -20,7 +20,7 @@ public class TKOptionExpirationsResponse extends TKResponse {
     private LocalDate[] dates;
 
     @JsonSetter("expirationdates")
-    public void setDates(LinkedHashMap datesResponse) throws Exception {
+    public void setDates(Map datesResponse) throws Exception {
         this.dates = (LocalDate[]) this.extractArray(LocalDate[].class, datesResponse, "date");
     }
 

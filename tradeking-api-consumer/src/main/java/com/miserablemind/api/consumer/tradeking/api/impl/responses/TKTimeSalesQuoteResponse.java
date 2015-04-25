@@ -10,7 +10,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.TimeSalesQuote;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TKTimeSalesQuoteResponse extends TKResponse {
 
@@ -19,7 +19,7 @@ public class TKTimeSalesQuoteResponse extends TKResponse {
     private TimeSalesQuote[] quotes;
 
     @JsonSetter("quotes")
-    public void setQuote(LinkedHashMap quotesResponse) throws Exception {
+    public void setQuote(Map quotesResponse) throws Exception {
         this.quotes = (TimeSalesQuote[]) this.extractArray(TimeSalesQuote[].class, quotesResponse, "quote");
     }
 

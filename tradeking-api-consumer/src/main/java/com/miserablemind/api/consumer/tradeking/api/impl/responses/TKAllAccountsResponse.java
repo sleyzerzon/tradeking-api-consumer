@@ -11,7 +11,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.api.consumer.tradeking.api.domain.account.summary.AccountsSummary;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TKAllAccountsResponse extends TKResponse {
 
@@ -28,7 +28,7 @@ public class TKAllAccountsResponse extends TKResponse {
     }
 
     @JsonSetter("accounts")
-    public void setAccounts(LinkedHashMap accountsResponse) throws Exception {
+    public void setAccounts(Map accountsResponse) throws Exception {
         this.accounts = (AccountsSummary[]) this.extractArray(AccountsSummary[].class, accountsResponse, "accountsummary");
     }
 

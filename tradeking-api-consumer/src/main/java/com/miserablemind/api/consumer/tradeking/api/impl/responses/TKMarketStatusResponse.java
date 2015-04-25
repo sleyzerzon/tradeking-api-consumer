@@ -16,7 +16,7 @@ import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TKMarketStatusResponse extends TKResponse {
 
@@ -60,7 +60,7 @@ public class TKMarketStatusResponse extends TKResponse {
      * @param statusResponse value from deserializer, in this case object "status" as a HashMap
      */
     @JsonSetter("status")
-    public void setAccounts(LinkedHashMap statusResponse) {
+    public void setAccounts(Map statusResponse) {
         this.currentStatus = (String) statusResponse.get("current");
         this.nextStatus = (String) statusResponse.get("next");
         this.changeAt = LocalTime.parse((String) statusResponse.get("change_at"));

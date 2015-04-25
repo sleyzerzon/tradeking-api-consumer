@@ -10,7 +10,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.TopListEntry;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TKTopListResponse extends TKResponse {
 
@@ -19,7 +19,7 @@ public class TKTopListResponse extends TKResponse {
     private TopListEntry[] topList;
 
     @JsonSetter("quotes")
-    public void setQuotes(LinkedHashMap topListResponse) throws Exception {
+    public void setQuotes(Map topListResponse) throws Exception {
         this.topList = (TopListEntry[]) this.extractArray(TopListEntry[].class, topListResponse, "quote");
     }
 

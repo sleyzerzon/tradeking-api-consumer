@@ -11,7 +11,7 @@ package com.miserablemind.api.consumer.tradeking.api.impl.responses;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.miserablemind.api.consumer.tradeking.api.domain.market.NewsHeadline;
 
-import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class TKNewsArticlesSearchResponse extends TKResponse {
 
@@ -20,7 +20,7 @@ public class TKNewsArticlesSearchResponse extends TKResponse {
     private NewsHeadline[] articles;
 
     @JsonSetter("articles")
-    public void setArticles(LinkedHashMap articlesResponse) throws Exception {
+    public void setArticles(Map articlesResponse) throws Exception {
         this.articles = (NewsHeadline[]) this.extractArray(NewsHeadline[].class, articlesResponse, "article");
     }
 
